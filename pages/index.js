@@ -12,6 +12,7 @@ export default class extends Component {
     return (
       <Layout title="首页">
         <Button type="primary">hello world</Button>
+        <h1>nihao</h1>
       </Layout>
     );
   }
