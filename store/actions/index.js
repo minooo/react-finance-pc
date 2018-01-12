@@ -1,17 +1,3 @@
-import { CALL_API } from "@utils";
-
-// 异步动作生成函数
-const requestTypes = ["_REQUEST", "_SUCCESS", "_FAIL"];
-function createRequestTypes(base) {
-  return requestTypes.map(item => base + item);
-}
-
-// 请求一次
-export const FETCH_ONCE = "FETCH_ONCE";
-export const fetchOnce = () => ({
-  type: FETCH_ONCE
-});
-
 // 首页
 // 获取首页数据
 export const HOME = "HOME";

@@ -10,21 +10,21 @@
         "start": "cross-env NODE_ENV=production node server.js",
         "analyze": "cross-env ANALYZE=1 next build",
         "css": "npm run css:build && npm run css:clean",
-        "css:build": "webpack --config webpack-handle-css.js --progress --color",
-        "css:clean": "rimraf static/styles/antd_mobile_min.js static/styles/app_min.js",
-        "css:dev": "webpack --config webpack-handle-css.js --watch --progress --color"
+        "css:build":
+            "webpack --config webpack-handle-css.js --progress --color",
+        "css:clean":
+            "rimraf static/styles/antd_mobile_min.js static/styles/app_min.js",
+        "css:dev":
+            "webpack --config webpack-handle-css.js --watch --progress --color",
+        "fix": "./node_modules/.bin/eslint --fix ./pages ./components ./store ./utils",
+        "lint": "./node_modules/.bin/eslint ./pages ./components ./store ./utils"
     },
-    "pre-commit": [ "fix", "lint" ],
+    "pre-commit": ["fix", "lint"],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/minooo/react-ssr.git"
     },
-    "keywords": [
-        "react",
-        "next",
-        "redux",
-        "antd-mobile"
-    ],
+    "keywords": ["react", "next", "redux", "antd-mobile"],
     "author": "minooo",
     "license": "ISC",
     "bugs": {
@@ -77,6 +77,7 @@
         "less-loader": "^4.0.5",
         "node-sass": "^4.7.2",
         "postcss-loader": "^2.0.9",
+        "pre-commit": "^1.2.2",
         "sass-loader": "^6.0.6",
         "style-loader": "^0.19.1",
         "url-loader": "^0.6.2"
