@@ -31,7 +31,7 @@ const config = [
 export default () => (
   <div
     style={{ position: "relative", zIndex: 5 }}
-    className="flex h110 ai-stretch bg-white border-top-shadow"
+    className="flex h110 ai-ActiveLinkstretch bg-white border-top-shadow"
   >
     {config.map(item => <ActiveLink key={uuid()} {...item} />)}
   </div>
