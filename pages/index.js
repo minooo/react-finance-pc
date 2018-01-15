@@ -76,6 +76,7 @@ export default class extends Component {
     const { typeList, RankingList } = this.state;
     return (
       <Layout title="首页">
+<<<<<<< HEAD
         <div className="flex box jc-between bg-white">
           {typeList &&
             typeList.length > 0 &&
@@ -87,6 +88,12 @@ export default class extends Component {
               <HomeRankingList RankingList={RankingList} />
             )}
         </div>
+=======
+        <Button type="primary">hello world</Button>
+        <div>test2</div>
+        <h1>nihao</h1>
+        <h1>nihao2</h1>
+>>>>>>> aad721077f8c1a9bca36af2d571bbda72ba04f53
       </Layout>
     );
   }
