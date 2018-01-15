@@ -3,6 +3,7 @@
 
 ## 注意事项
 - 本架构在每次提交时，都会对js文件进行 eslint 检测，如果检测通不过，则无法提交，所以请严格执行，本架构采用的语法规则。
+- 辅助UI库，[antd 组件](https://ant.design/docs/react/introduce-cn)
 
 ## 本项目分支管理策略
 1. master主分支只能拉取，不能推送
