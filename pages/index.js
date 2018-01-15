@@ -14,6 +14,7 @@ export default class extends Component {
         <Button type="primary">hello world</Button>
         <div>test2</div>
         <h1>nihao</h1>
+        <h1>nihao2</h1>
       </Layout>
     );
   }
