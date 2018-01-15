@@ -81,7 +81,12 @@ export default class extends Component {
             typeList.length > 0 &&
             typeList.map(item => <HomeType key={uuid()} item={item} />)}
         </div>
-        <HomeRankingList RankingList={RankingList} />
+        <div>
+          {RankingList &&
+            RankingList.list.length > 0 && (
+              <HomeRankingList RankingList={RankingList} />
+            )}
+        </div>
       </Layout>
     );
   }
