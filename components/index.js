@@ -11,4 +11,3 @@ export { default as AlertBg } from "./0-13-AlertBg";
 // home
 export { default as HomeType } from "./1-01-Type";
 export { default as HomeRankingList } from "./1-02-RankingList";
-
