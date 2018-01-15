@@ -1,19 +1,19 @@
 import uuid from "uuid/v4";
 
-export default ({ RankingList }) => (
+export default ({ rankingList }) => (
   <div className="box flex flex jc-end c333">
     <div
       className="pl20 pr30 pt20 bg-white font14"
       style={{ width: "310px", height: "485px" }}
     >
       <div className="flex jc-between mb30">
-        <div>{RankingList.type}</div>
+        <div>{rankingList.type}</div>
         <div>
-          <span className="mr15">{RankingList.new}</span>
-          <span>{RankingList.hot}</span>
+          <span className="mr15">{rankingList.new}</span>
+          <span>{rankingList.hot}</span>
         </div>
       </div>
-      {RankingList.list.map(item => (
+      {rankingList.list.map(item => (
         <div key={uuid()} className="flex mb15">
           <div>
             <img

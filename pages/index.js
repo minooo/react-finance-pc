@@ -34,7 +34,7 @@ export default class extends Component {
         img: "https://dummyimage.com/100x100"
       }
     ],
-    RankingList: {
+    rankingList: {
       type: "急速贷排行榜",
       new: "最新",
       hot: "最热",
@@ -73,7 +73,7 @@ export default class extends Component {
     }
   };
   render() {
-    const { typeList, RankingList } = this.state;
+    const { typeList, rankingList } = this.state;
     return (
       <Layout title="首页">
         <div className="flex box jc-between bg-white">
@@ -82,9 +82,9 @@ export default class extends Component {
             typeList.map(item => <HomeType key={uuid()} item={item} />)}
         </div>
         <div>
-          {RankingList &&
-            RankingList.list.length > 0 && (
-              <HomeRankingList RankingList={RankingList} />
+          {rankingList &&
+            rankingList.list.length > 0 && (
+              <HomeRankingList rankingList={rankingList} />
             )}
         </div>
       </Layout>
