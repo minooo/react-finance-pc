@@ -1,15 +1,17 @@
 import Head from "next/head";
 import React from "react";
+import { Nav } from "@components"
 
 export default class extends React.Component {
   componentDidMount() {}
   render() {
     const { title, children } = this.props;
     return (
-      <div className="bg-body">
+      <div className="bg-white">
         <Head>
           <title>{title}</title>
         </Head>
+        <Nav />
         {children}
       </div>
     );
