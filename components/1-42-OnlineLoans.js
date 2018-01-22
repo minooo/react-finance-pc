@@ -18,9 +18,7 @@ export default ({ rankingList, onlineLoans }) => (
             <Carousel autoplay >
               {onlineLoans.carouselList &&
                 onlineLoans.carouselList.length > 0 && (
-                  onlineLoans.carouselList.map((src) => {
-                    return <img src={src} alt="" />
-                  })
+                  onlineLoans.carouselList.map((src) => <img src={src} alt="" />)
                 )}
             </Carousel>
           </div>
