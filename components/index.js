@@ -7,3 +7,6 @@ export { default as Nav } from "./0-04-Nav";
 export { default as ErrorFetch } from "./0-06-ErrorFetch";
 export { default as MultiColorIco } from "./0-10-MultiColorIco";
 export { default as AlertBg } from "./0-13-AlertBg";
+
+// home
+export { default as HomeType } from "./1-00-Type";

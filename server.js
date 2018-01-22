@@ -65,6 +65,11 @@ app.prepare().then(() => {
   const server = new Koa();
 
   server.use(router.get("/", ctx => renderAndCache(ctx, "/index")));
+  server.use(router.get("/loan", ctx => renderAndCache(ctx, "/1-loan/1-home")));
+  server.use(router.get("/card", ctx => renderAndCache(ctx, "/2-card/1-home")));
+  server.use(router.get("/new", ctx => renderAndCache(ctx, "/3-new/1-home")));
+  server.use(router.get("/downloadApp", ctx => renderAndCache(ctx, "/downloadApp")));
+  server.use(router.get("/login", ctx => renderAndCache(ctx, "/4-me/1-login")));
 
   server.use(async ctx => {
     await handle(ctx.req, ctx.res);

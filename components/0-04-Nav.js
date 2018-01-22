@@ -1,38 +1,49 @@
-import { ActiveLink } from "@components";
+import { ActiveLink, WrapLink } from "@components";
 import uuid from "uuid/v4";
 
 const config = [
   {
-    ico: "i-home",
     text: "首页",
     href: "/index",
     as: "/"
   },
   {
-    ico: "i-loan",
-    text: "贷款",
+    text: "贷款超市",
     href: "/1-loan/1-home",
     as: "/loan"
   },
   {
-    ico: "i-card",
-    text: "信用卡",
+    text: "办信用卡",
     href: "/2-card/1-home",
     as: "/card"
   },
   {
-    ico: "i-user",
-    text: "我的",
-    href: "/3-me/1-home",
-    as: "/me"
+    text: "资讯",
+    href: "/3-new/1-home",
+    as: "/new"
+  },
+  {
+    text: "APP下载",
+    href: "/downloadApp",
+    as: "/downloadApp"
   }
 ];
 
 export default () => (
   <div
     style={{ position: "relative", zIndex: 5 }}
-    className="flex h110 ai-stretch bg-white border-top-shadow"
+    className="flex jc-between h64"
   >
-    {config.map(item => <ActiveLink key={uuid()} {...item} />)}
+    <div className="flex">
+      <WrapLink style={{ width: "140px", height: "60px" }} className="ml30 mr30">
+        <img
+          src="http://dummyimage.com/140x60"
+          alt=""
+          className="w-100 h-100"
+        />
+      </WrapLink>
+      {config.map(item => <ActiveLink key={uuid()} {...item} />)}
+    </div>
+    <ActiveLink text="登陆" href="/4-me/1-login" as="/login" />
   </div>
 );

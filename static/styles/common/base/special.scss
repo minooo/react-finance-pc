@@ -1,0 +1,24 @@
+// common
+.nav-active {
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #4c8dfc;
+}
+.nav-default {
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+
+// home
+.home-carousel {
+  .slick-track {
+    height: 160px;
+    overflow: hidden;
+  }
+}
+.home-slide {
+  width: 100vw;
+  text-align: center;
+  height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
