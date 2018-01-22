@@ -10,3 +10,7 @@ export { default as AlertBg } from "./0-13-AlertBg";
 
 // home
 export { default as HomeType } from "./1-00-Type";
+export { default as HomeRankingList } from "./1-41-RankingList";
+export { default as HomeOnlineLoans } from "./1-42-OnlineLoans";
+export { default as HomeCityselection } from "./1-43-Cityselection";
+
