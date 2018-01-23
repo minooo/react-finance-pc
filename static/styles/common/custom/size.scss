@@ -1,6 +1,6 @@
 // scss 语法参考 http://www.w3cplus.com/sassguide/syntax.html
 // 公用的间距样式
-// 通用的padding margin值 从0.05rem到0.3rem 步进为5
+// 通用的padding margin值 从5px到30px 步进为5
 @for $i from 1 through 6 {
     .ptb#{$i * 5}, .pt#{$i * 5} {
         padding-top: $i * 5 * 1px

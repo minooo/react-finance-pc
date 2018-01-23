@@ -10,3 +10,5 @@ export { default as AlertBg } from "./0-13-AlertBg";
 
 // home
 export { default as HomeType } from "./1-00-Type";
+export { default as HomeTop } from "./1-01-Top";
+export { default as HomeForm } from "./1-02-Form";
