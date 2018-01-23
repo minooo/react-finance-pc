@@ -25,7 +25,7 @@ export default class extends React.Component {
     const { type } = this.state
     return (
       <div
-        className="plr20 pt20 bg-white font14"
+        className="plr20 pt20 bg-white font14 home-shdow-mid"
         style={{ height: "520px" }}
       >
         <div className="flex jc-between ai-center">
@@ -36,13 +36,13 @@ export default class extends React.Component {
             <Btn onClick={this.handClickHot} con={<span className={`ml5 pointer ${type === "hot" ? "c-main" : "c333"}`}>{rankingList.hot}</span>} />
           </div>
         </div>
-        <div className="h20 mb10 home-loan-list" />
-
+        <div className="h20 mb10 home-loanlist-bg" />
         {rankingList.list.map(item => (
           <WrapLink key={uuid()}>
-            <div className="flex mb10 pl10 pt20 pb15 pr20 h100" style={{ width: "300px" }}>
+            <div className="flex mb10 pl10 pt20 pb15 pr20 h100 home-loanlist-hover pointer" style={{ width: "300px" }}>
               <div>
                 <img
+                  className="w66 h66"
                   src={item.img}
                   alt=""
                 />
@@ -66,7 +66,6 @@ export default class extends React.Component {
         ))
         }
       </div>
-
     )
   }
 }

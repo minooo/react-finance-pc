@@ -32,18 +32,13 @@ const config = [
 export default () => (
   <div
     style={{ position: "relative", zIndex: 5 }}
-    className="flex jc-between h64"
+    className="flex jc-between ai-center h80 box"
   >
+    <WrapLink style={{ width: "140px", height: "60px" }}>
+      <img src="http://dummyimage.com/140x60" alt="" className="w-100 h-100" />
+    </WrapLink>
     <div className="flex">
-      <WrapLink style={{ width: "140px", height: "60px" }} className="ml30 mr30">
-        <img
-          src="http://dummyimage.com/140x60"
-          alt=""
-          className="w-100 h-100"
-        />
-      </WrapLink>
       {config.map(item => <ActiveLink key={uuid()} {...item} />)}
     </div>
-    <ActiveLink text="登陆" href="/4-me/1-login" as="/login" />
   </div>
 );
