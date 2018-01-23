@@ -79,13 +79,13 @@ $color-list: (
 }
 
 input::placeholder {
-  color: #999;
+  color: #999!important;
 }
 input:disabled {
-  background: none;
-  color: #4c8dfc;
+  background: none!important;
+  color: #4c8dfc!important;
 }
 
 a:hover {
-  color: #4c8dfc;
+  color: #4c8dfc!important;
 }

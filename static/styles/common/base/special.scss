@@ -9,16 +9,75 @@
 }
 
 // home
+.home-top-city-bg {
+  background: url('../../images/home_top_bg.png') 0 center no-repeat;
+}
+.hom-top-code {
+  &:before, &:after {
+    position: absolute;
+    right: 10px;
+    content: '';
+    border: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+  }
+  &:before {
+    z-index: 10;
+    top: 25px;
+  }
+  &:after {
+    z-index: 50;
+    top: 26px;
+  }
+
+}
+.home-shdow-sm {
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+.home-show-mid {
+  box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+}
+.home-form {
+  position: absolute;
+  z-index: 10;
+  top: 50px;
+  left: 50%;
+  margin-left: -600px;
+}
+.home-type-position {
+  position: absolute;
+  z-index: 10;
+  width: 1200px;
+  left: 50%;
+  margin-left: -600px;
+  bottom: -170px;
+}
+.home-type-hover:hover {
+  transform: translateY(-20px);
+}
 .home-carousel {
   .slick-track {
-    height: 160px;
+    height: 600px;
     overflow: hidden;
+  }
+  .slick-dots {
+    bottom: 140px;
+    li button {
+      height: 6px;
+    }
   }
 }
 .home-slide {
   width: 100vw;
   text-align: center;
-  height: 160px;
-  background: #364d79;
+  height: 600px;
+  background: #4c8dfc;
   overflow: hidden;
+}
+.home-sendcode-disable button {
+  background: #999;
+  border: 1px solid #999;
+  &:hover {
+    background: #999;
+    border: 1px solid #999;
+  }
 }
