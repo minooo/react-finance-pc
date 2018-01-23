@@ -37,16 +37,14 @@ export default class extends PureComponent {
       );
     }
     return (
-      <div
+      <button
         onClick={this.onClick}
-        tabIndex="0"
-        role="button"
-        onKeyDown={this.onClick}
         className={className}
         style={style}
+        {...rest}
       >
         {children}
-      </div>
+      </button>
     );
   }
 }

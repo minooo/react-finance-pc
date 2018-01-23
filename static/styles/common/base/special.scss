@@ -7,7 +7,19 @@
   border-top: 3px solid #fff;
   border-bottom: 3px solid #fff;
 }
-
+.img-bg {
+  background-color: #f3f3f3;
+  background-image: url("../../images/logo_bg.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.more-link {
+  color: #333;
+  &:hover {
+    color: #4c8dfc;
+  }
+}
 // home
 .home-top-city-bg {
   background: url("../../images/home_top_bg.png") 0 center no-repeat;
@@ -31,7 +43,7 @@
   }
 }
 .home-shdow-sm {
-  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
 }
 .home-shdow-mid {
   box-shadow: 2px 4px 25px 0px rgba(0, 0, 0, 0.15);
@@ -80,4 +92,7 @@
     background: #999;
     border: 1px solid #999;
   }
+}
+.home-new-link {
+  background: url("../../images/home_new_tip.png") 0 center no-repeat;
 }
