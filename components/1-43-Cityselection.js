@@ -1,5 +1,5 @@
-import { HomeRankingList, WrapLink } from "@components";
 import uuid from "uuid/v4";
+import { HomeRankingList, WrapLink } from "@components";
 
 export default ({ citySelection, rankingList }) => (
   <div className="flex box">
@@ -11,7 +11,7 @@ export default ({ citySelection, rankingList }) => (
       </div>
       <div className="flex jc-between">
         <div className="font20 bold">{citySelection.type}</div>
-        <WrapLink className="font16 pointer">更多</WrapLink>
+        <WrapLink href="/1-loan/1-home" as="/loan" className="font16 more-link">更多</WrapLink>
       </div>
       <div className="flex mt20">
         <WrapLink href="/" as="/" className="plr30 img-bg c333" style={{ width: "345px", height: "474xp", paddingTop: "50px" }}>

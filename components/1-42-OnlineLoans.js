@@ -1,8 +1,7 @@
-import { HomeRankingList, Btn, WrapLink } from "@components";
-import { Carousel, Icon } from "antd"
-import uuid from "uuid/v4";
 import React from "react";
-
+import uuid from "uuid/v4";
+import { Carousel, Icon } from "antd"
+import { HomeRankingList, Btn, WrapLink } from "@components";
 
 export default class extends React.Component {
   state = { isOver: false };
@@ -14,7 +13,7 @@ export default class extends React.Component {
     const { isOver } = this.state
     return (
       <div className="box flex">
-        <div className="mt20 pt25 pl20 pr15 c333 mb20 bg-white home-shdow-mid relative" style={{ width: "860px", height: "480px" }}>
+        <div className="mt20 flex column pt25 pl20 pr15 c333 mb20 bg-white home-shdow-mid relative" style={{ width: "860px", height: "480px" }}>
           <div className="home-loan-top">
             <div className="home-loantop-text font14 h20 bold" style={{ width: "200px" }}>
               ONLINE EXTREME LOAN
@@ -40,7 +39,7 @@ export default class extends React.Component {
               )}
             </div>
           </div>
-          <div className="flex">
+          <div className="flex overflow-h">
             <div className="pr30">
               <div className="mb20 overflow-h" style={{ width: "200px", height: "125px" }}>
                 <Carousel autoplay >
@@ -52,14 +51,14 @@ export default class extends React.Component {
                 </Carousel>
               </div>
               <div className="text-center mb20">
-                <div className="font16 mb10 lh100 text-overflow-1">{onlineLoans.num}</div>
-                <div className="font12 lh100 text-overflow-1 bold">{onlineLoans.type2}</div>
+                <div className="font16 mb10 lh100 text-overflow-1 bold">{onlineLoans.num}</div>
+                <div className="font12 lh120 text-overflow-1">{onlineLoans.type2}</div>
               </div>
               <div className="flex jc-center mb20">
                 <Btn con={<span className="block font18 c-white lh150 pointer">免费申请</span>} className="flex jc-center ai-center bg-main r12 h36" style={{ width: "140px" }} />
               </div>
-              <div className="text-center lh120 font14 mb20">
-                <p>APP下载，享专属优惠</p>
+              <div className="text-center lh100 font14 mb20">
+                APP下载，享专属优惠
               </div>
               <div className="flex jc-between ai-center">
                 <div className="w80 h116 img-bg">
@@ -75,7 +74,7 @@ export default class extends React.Component {
                 onlineLoans.list &&
                 onlineLoans.list.length > 0 &&
                 onlineLoans.list.map((item) => (
-                  <WrapLink key={uuid()} className="text-left">
+                  <WrapLink href="/index" as="/" key={uuid()} className="text-left">
                     <div className="flex mb10 pl10 pt20 pb15 pr15 home-loanlist-hover h100 pointer" style={{ width: "295px" }}>
                       <div className="h66 w66 img-bg">
                         <img
@@ -92,7 +91,7 @@ export default class extends React.Component {
                           <div className="lh120 text-overflow-1">申请</div>
                           <div className="font12 c-second lh120 text-overflow-1">{item.content}</div>
                         </div>
-                        <div className="flex ai-center">
+                        <div className="flex ai-center c999">
                           <Icon type="right" style={{ fontSize: 14 }} />
                         </div>
                       </div>

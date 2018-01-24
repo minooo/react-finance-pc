@@ -1,6 +1,6 @@
+import React from "react";
 import uuid from "uuid/v4";
 import { Icon } from "antd";
-import React from "react";
 import { Btn, WrapLink } from "@components";
 
 export default class extends React.Component {
@@ -37,7 +37,7 @@ export default class extends React.Component {
         </div>
         <div className={`h20 mb10 ${loantype === "city" ? "home-loancity-bg" : "home-loanlist-bg"}`} />
         {list && list.length > 0 && list.map(item => (
-          <WrapLink key={uuid()} className="text-left">
+          <WrapLink href="/index" as="/" key={uuid()} className="text-left">
             <div className="flex mb10 pl10 pt20 pb15 pr20 h100 home-loanlist-hover pointer" style={{ width: "300px" }}>
               <div className="w66 h66 img-bg">
                 <img
@@ -56,7 +56,7 @@ export default class extends React.Component {
                   </div>
                   <div className="font12 lh120 text-overflow-1">{item.content}</div>
                 </div>
-                <div className="flex ai-center">
+                <div className="flex ai-center c999">
                   <Icon type="right" style={{ fontSize: 14 }} />
                 </div>
               </div>
