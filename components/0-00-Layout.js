@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import { Nav, HomeTop } from "@components"
+import { Nav, HomeTop, Foot } from "@components"
 
 export default class extends React.Component {
   componentDidMount() {}
@@ -14,6 +14,7 @@ export default class extends React.Component {
         <HomeTop />
         <Nav />
         {children}
+        <Foot />
       </div>
     );
   }

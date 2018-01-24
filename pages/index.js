@@ -12,7 +12,6 @@ import {
   HomeCardLink,
   HomeHotCard,
   HomeHotNew,
-  Foot
 } from "@components";
 
 @reduxPage
@@ -307,7 +306,6 @@ export default class extends Component {
           </div>
         </div>
         <div style={{ height: "140px" }} />
-        <Foot />
       </Layout>
     );
   }
