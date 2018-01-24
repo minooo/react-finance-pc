@@ -48,7 +48,6 @@ export default () => (
     style={{
       height: "236px",
       backgroundColor: "#404040",
-      minWidth: "1200px",
       paddingTop: "40px"
     }}
     className="w-100"
