@@ -83,10 +83,7 @@ export default class extends Component {
     const { Option } = Select;
     const { Search } = Input;
     return (
-      <div
-        style={{ width: "320px", height: "390px" }}
-        className="bg-white home-shdow-mid home-form plr30"
-      >
+      <div>
         <div className="font22 c333 ptb20 text-center">快速申请贷款</div>
         <Input
           placeholder="请输入姓名"
