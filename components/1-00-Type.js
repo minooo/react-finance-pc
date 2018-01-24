@@ -3,7 +3,7 @@ import { WrapLink } from "@components";
 export default ({ item }) => (
   <WrapLink
     style={{ width: "220px", height: "260px" }}
-    className="flex column ai-center home-show-mid bg-white transition home-type-hover"
+    className="flex column ai-center home-shdow-mid bg-white transition home-type-hover"
     href="/1-loan/1-home"
     as={`/loan?type=${0}`}
   >

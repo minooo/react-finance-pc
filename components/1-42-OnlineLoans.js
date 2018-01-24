@@ -5,40 +5,39 @@ import React from "react";
 
 
 export default class extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handOver = this.handOver.bind(this)
-    this.handOut = this.handOut.bind(this)
-    this.state = { isOver: false };
-  }
-
-  handOver() {
-    this.setState({
-      isOver: true
-    })
-  }
-  handOut() {
-    this.setState({
-      isOver: false
-    })
+  state = { isOver: false };
+  handChangeOver = () => {
+    this.setState(pre => ({ isOver: !pre.isOver }))
   }
   render() {
     const { rankingList, onlineLoans } = this.props
     const { isOver } = this.state
     return (
-      <div className="box flex" style={{ marginBottom: "100px" }}>
-        <div className="mt20 pt25 pl20 pr15 c333 mb20 bg-white home-shdow-mid  relative" style={{ width: "860px", height: "480px" }}>
+      <div className="box flex">
+        <div className="mt20 pt25 pl20 pr15 c333 mb20 bg-white home-shdow-mid relative" style={{ width: "860px", height: "480px" }}>
           <div className="home-loan-top">
-            <div className="home-loantop-text font14 h20" style={{ width: "200px" }}>
+            <div className="home-loantop-text font14 h20 bold" style={{ width: "200px" }}>
               ONLINE EXTREME LOAN
             </div>
           </div>
           <div className="flex jc-between mb20">
-            <div className="font20 c333 lh100">{onlineLoans.type}</div>
-            <div className="flex ai-center relative pointer" onMouseEnter={this.handOver} onMouseLeave={this.handOut}>
+            <div className="font20 c333 lh100 bold">{onlineLoans.type}</div>
+            <div className="flex ai-center relative pointer" onMouseEnter={this.handChangeOver} onMouseLeave={this.handChangeOver}>
               <span className="pr10 font16 le100">扫码进入手机版</span>
               <Icon type="qrcode" style={{ fontSize: 22 }} />
-              {isOver ? <img className="home-online-pctop w110 absolute" src="https://dummyimage.com/110x110" alt="" style={{ top: "32px", left: "16px" }} /> : null}
+              {isOver && (
+                <div
+                  style={{
+                    position: "absolute",
+                    zIndex: 10,
+                    top: "32px",
+                    left: "16px"
+                  }}
+                  className="w110 h110 bg-white ptb5 plr5 home-shdow-sm r2"
+                >
+                  <img src="http://dummyimage.com/100x100" alt="" />
+                </div>
+              )}
             </div>
           </div>
           <div className="flex">
@@ -46,14 +45,15 @@ export default class extends React.Component {
               <div className="mb20 overflow-h" style={{ width: "200px", height: "125px" }}>
                 <Carousel autoplay >
                   {onlineLoans.carouselList &&
+                    onlineLoans.carouselList &&
                     onlineLoans.carouselList.length > 0 && (
                       onlineLoans.carouselList.map((src) => <img className="pointer" key={uuid()} src={src} alt="" />)
                     )}
                 </Carousel>
               </div>
               <div className="text-center mb20">
-                <div className="font16 mb10 lh100">{onlineLoans.num}</div>
-                <div className="font12 lh100">{onlineLoans.type2}</div>
+                <div className="font16 mb10 lh100 text-overflow-1">{onlineLoans.num}</div>
+                <div className="font12 lh100 text-overflow-1 bold">{onlineLoans.type2}</div>
               </div>
               <div className="flex jc-center mb20">
                 <Btn con={<span className="block font18 c-white lh150 pointer">免费申请</span>} className="flex jc-center ai-center bg-main r12 h36" style={{ width: "140px" }} />
@@ -62,44 +62,50 @@ export default class extends React.Component {
                 <p>APP下载，享专属优惠</p>
               </div>
               <div className="flex jc-between ai-center">
-                <img src="https://dummyimage.com/80x115" style={{ width: "80px", height: "115px" }} alt="" />
-                <img src="https://dummyimage.com/90x90" alt="" style={{ width: "90px", height: "90px" }} />
+                <div className="w80 h116 img-bg">
+                  <img src="../static/images/home_loah_phone.png" className="w-100 h-100" alt="" />
+                </div>
+                <div className="w90 h90 img-bg">
+                  <img src="../static/images/home_loah_ qrcode.png" alt="" className="w-100 h-100" />
+                </div>
               </div>
             </div>
             <div className="flex wrap pl5">
-              {onlineLoans.list.map((item) => (
-                <WrapLink key={uuid()}>
-                  <div className="flex mb10 pl10 pt20 pb15 pr15 home-loanlist-hover h100 pointer" style={{ width: "295px" }}>
-                    <div>
-                      <img
-                        className="h66 w66"
-                        src={item.img}
-                        alt=""
-                      />
-                    </div>
-                    <div className="flex equal jc-between pl15">
-                      <div className="flex column jc-between c333 font12">
-                        <div className="flex font16 lh100">
-                          {item.title}
+              {onlineLoans &&
+                onlineLoans.list &&
+                onlineLoans.list.length > 0 &&
+                onlineLoans.list.map((item) => (
+                  <WrapLink key={uuid()} className="text-left">
+                    <div className="flex mb10 pl10 pt20 pb15 pr15 home-loanlist-hover h100 pointer" style={{ width: "295px" }}>
+                      <div className="h66 w66 img-bg">
+                        <img
+                          className="w-100 h-100"
+                          src={item.img}
+                          alt=""
+                        />
+                      </div>
+                      <div className="flex equal jc-between pl15">
+                        <div className="flex column jc-between c333 font12">
+                          <div className="flex font16 lh120 bold text-overflow-1">
+                            {item.title}
+                          </div>
+                          <div className="lh120 text-overflow-1">申请</div>
+                          <div className="font12 c-second lh120 text-overflow-1">{item.content}</div>
                         </div>
-                        <div className="lh100">申请</div>
-                        <div className="font12 c-second lh100">{item.content}</div>
-                      </div>
-                      <div className="flex ai-center">
-                        <Icon type="right" style={{ fontSize: 14 }} />
+                        <div className="flex ai-center">
+                          <Icon type="right" style={{ fontSize: 14 }} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </WrapLink>
-              ))}
+                  </WrapLink>
+                ))}
             </div>
           </div>
         </div>
-        <div>
-          {rankingList &&
-            rankingList.list.length > 0 && (
-              <HomeRankingList rankingList={rankingList} />
-            )}
+        <div className="equal">
+          {rankingList && (
+            <HomeRankingList rankingList={rankingList} />
+          )}
         </div>
       </div>
     )
