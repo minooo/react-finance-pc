@@ -5,9 +5,9 @@ import { Nav, HomeTop } from "@components"
 export default class extends React.Component {
   componentDidMount() {}
   render() {
-    const { title, children } = this.props;
+    const { title, children, ...rest } = this.props;
     return (
-      <div className="bg-white">
+      <div className="bg-white" {...rest} >
         <Head>
           <title>{title}</title>
         </Head>
