@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Input, Select, Button, message } from "antd";
 import { isMobile, isName } from "@utils";
 
@@ -13,7 +13,7 @@ export default class extends Component {
     isSendCode: true
   };
   componentWillUnmount() {
-    clearInterval(this.tick)
+    clearInterval(this.tick);
   }
   onSwitch = () => {
     this.setState(pre => ({ isOnOver: !pre.isOnOver }));
@@ -36,23 +36,29 @@ export default class extends Component {
   };
   onSendCode = () => {
     const { mobile, isSendCode } = this.state;
-    if (!isSendCode) return
+    if (!isSendCode) return;
     if (!isMobile(mobile)) {
       message.error("您的手机号格式有误，请检查。");
       return;
     }
-    this.setState(() => ({ tickNum: 60, isSendCode: false }), () => {
-      // 发送验证码接口调用
+    this.setState(
+      () => ({ tickNum: 60, isSendCode: false }),
+      () => {
+        // 发送验证码接口调用
 
-      this.tick = setInterval(() => {
-        this.setState(pre => ({ tickNum: pre.tickNum - 1 }), () => {
-          if (this.state.tickNum === 0) {
-            this.setState(() => ({ tickNum: 60, isSendCode: true }))
-            clearInterval(this.tick)
-          }
-        })
-      }, 1000)
-    })
+        this.tick = setInterval(() => {
+          this.setState(
+            pre => ({ tickNum: pre.tickNum - 1 }),
+            () => {
+              if (this.state.tickNum === 0) {
+                this.setState(() => ({ tickNum: 60, isSendCode: true }));
+                clearInterval(this.tick);
+              }
+            }
+          );
+        }, 1000);
+      }
+    );
   };
   applyLoan = () => {
     const { name, money, mobile, loanType, code } = this.state;
@@ -76,14 +82,14 @@ export default class extends Component {
       message.error("请输入您的验证码。");
       return;
     }
-    console.info(name, money, mobile, loanType, code)
+    console.info(name, money, mobile, loanType, code);
   };
   render() {
     const { name, money, mobile, code, tickNum, isSendCode } = this.state;
     const { Option } = Select;
     const { Search } = Input;
     return (
-      <div>
+      <Fragment>
         <div className="font22 c333 ptb20 text-center">快速申请贷款</div>
         <Input
           placeholder="请输入姓名"
@@ -138,7 +144,7 @@ export default class extends Component {
         >
           立即申请
         </Button>
-      </div>
+      </Fragment>
     );
   }
 }

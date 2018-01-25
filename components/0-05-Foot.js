@@ -48,11 +48,10 @@ export default () => (
     style={{
       height: "236px",
       backgroundColor: "#404040",
-      paddingTop: "40px"
     }}
     className="w-100"
   >
-    <div className="box">
+    <div style={{ backgroundColor: "#404040", paddingTop: "40px" }} className="box">
       <div className="flex jc-between">
         <div
           style={{ width: "210px" }}
@@ -64,6 +63,7 @@ export default () => (
               href={item.href}
               as={item.as}
               key={uuid()}
+              style={{ maxWidth: "100%" }}
             >
               {item.text}
             </WrapLink>
@@ -99,5 +99,5 @@ export default () => (
         Copyright&nbsp;2018&nbsp;&nbsp;河南晨隆金融服务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;豫ICP备13439999号-2
       </div>
     </div>
-  </div>
+  </div >
 );
