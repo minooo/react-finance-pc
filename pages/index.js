@@ -323,7 +323,6 @@ export default class extends Component {
           </div>
         </div>
 
-        {/* 优惠活动/热门卡片 */}
         <div style={{ height: "225px" }} />
         {/* 在线极速贷款 */}
         <HomeOnlineLoans rankingList={rankingList} onlineLoans={onlineLoans} />
