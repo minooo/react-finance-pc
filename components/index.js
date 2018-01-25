@@ -8,6 +8,7 @@ export { default as ErrorFetch } from "./0-06-ErrorFetch";
 export { default as MultiColorIco } from "./0-10-MultiColorIco";
 export { default as AlertBg } from "./0-13-AlertBg";
 export { default as Foot } from "./0-05-Foot";
+
 // home
 export { default as HomeType } from "./1-00-Type";
 export { default as HomeRankingList } from "./1-41-RankingList";
@@ -20,3 +21,7 @@ export { default as HomeCoupon } from "./1-03-Coupon";
 export { default as HomeCardLink } from "./1-04-CardLink";
 export { default as HomeHotCard } from "./1-05-HotCard";
 export { default as HomeHotNew } from "./1-06-HotNew";
+
+// loan
+export { default as LoanSelect } from "./2-00-Select";
+export { default as LoanCityFilter } from "./2-01-CityFilter";
