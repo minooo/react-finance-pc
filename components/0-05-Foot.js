@@ -48,11 +48,10 @@ export default () => (
     style={{
       height: "236px",
       backgroundColor: "#404040",
-      paddingTop: "40px"
     }}
     className="w-100"
   >
-    <div className="box">
+    <div style={{ backgroundColor: "#404040", paddingTop: "40px" }} className="box">
       <div className="flex jc-between">
         <div
           style={{ width: "210px" }}
