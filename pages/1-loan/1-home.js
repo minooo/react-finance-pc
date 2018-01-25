@@ -13,7 +13,7 @@ export default class extends Component {
         icoActive: "loan-tab-one-active"
       },
       { title: "极速贷", ico: "loan-tab-two", icoActive: "loan-tab-two-active" }
-    ],
+    ]
   };
   onSwitchLoan = index => {
     this.setState({ tabFocus: index });
@@ -62,9 +62,7 @@ export default class extends Component {
               <span className="c999 font16">贷款超市</span>
             </div>
             <div className="flex plr20">
-              <div className="equal plr20">
-123
-              </div>
+              <div className="equal plr20">123</div>
               <div
                 style={{ width: "290px" }}
                 className="ml20 plr20 pb20 loan-border"
