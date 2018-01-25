@@ -13,7 +13,10 @@ export default class extends React.Component {
     const { isOver } = this.state
     return (
       <div className="box flex">
-        <div className="mt20 flex column pt25 pl20 pr15 c333 mb20 bg-white home-shdow-mid relative" style={{ width: "860px", height: "480px" }}>
+        <div
+          className="mt20 flex column pt25 pl20 pr15 c333 mb20 bg-white home-shdow-mid relative"
+          style={{ width: "860px", height: "480px" }}
+        >
           <div className="home-loan-top">
             <div className="home-loantop-text font14 h20 bold" style={{ width: "200px" }}>
               ONLINE EXTREME LOAN
@@ -55,7 +58,11 @@ export default class extends React.Component {
                 <div className="font12 lh120 text-overflow-1">{onlineLoans.type2}</div>
               </div>
               <div className="flex jc-center mb20">
-                <Btn con={<span className="block font18 c-white lh150 pointer">免费申请</span>} className="flex jc-center ai-center bg-main r12 h36" style={{ width: "140px" }} />
+                <Btn
+                  con={<span className="block font18 c-white lh150 pointer">免费申请</span>}
+                  className="flex jc-center ai-center bg-main r12 h36"
+                  style={{ width: "140px" }}
+                />
               </div>
               <div className="text-center lh100 font14 mb20">
                 APP下载，享专属优惠

@@ -60,7 +60,7 @@ export default () => (
         >
           {config.map(item => (
             <WrapLink
-              className="font14 c-white lh100 mb15"
+              className="font14 c-white lh100 mb15 block"
               href={item.href}
               as={item.as}
               key={uuid()}
