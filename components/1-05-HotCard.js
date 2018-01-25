@@ -5,7 +5,7 @@ export default ({ item, index }) => (
   <WrapLink
     style={{ width: "170px" }}
     className={`flex column ai-center ${
-      index !== 0 && index % 3 === 0 ? "" : "mr20"
+      (index + 1) % 4 === 0 ? "" : "mr20"
     } ${index < 4 ? "mb30" : ""}`}
     href="/index"
     as="/"

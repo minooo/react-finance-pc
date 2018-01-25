@@ -13,13 +13,147 @@ import {
   HomeCoupon,
   HomeCardLink,
   HomeHotCard,
-  HomeHotNew,
+  HomeHotNew
 } from "@components";
 
 @reduxPage
 @connect(({ home }) => ({ home }))
 export default class extends Component {
   state = {
+    typeList: [
+      {
+        title: "标题1",
+        caption: "副标题",
+        img: "http://dummyimage.com/100x100"
+      },
+      {
+        title: "标题1",
+        caption: "副标题",
+        img: "http://dummyimage.com/100x100"
+      },
+      {
+        title: "标题1",
+        caption: "副标题",
+        img: "http://dummyimage.com/100x100"
+      },
+      {
+        title: "标题1",
+        caption: "副标题",
+        img: "http://dummyimage.com/100x200"
+      },
+      {
+        title: "标题1",
+        caption: "副标题",
+        img: "http://dummyimage.com/500x600"
+      }
+    ],
+    coupons: [
+      {
+        img: "http://dummyimage.com/224x140",
+        link: "http://www.baidu.com"
+      },
+      {
+        img: "http://dummyimage.com/224x140",
+        link: "http://www.baidu.com"
+      },
+      {
+        img: "http://dummyimage.com/224x140",
+        link: "http://www.baidu.com"
+      }
+    ],
+    cardTypes: [
+      { title: "车主卡", id: 21 },
+      { title: "商旅卡", id: 22 },
+      { title: "标准卡", id: 23 },
+      { title: "网络联名卡", id: 24 },
+      { title: "这个受到法律框架按时灯笼裤飞机啊受到法律框架", id: 24 }
+    ],
+    cardTypeFocus: 0,
+    hotCards: [
+      {
+        img: "http://dummyimage.com/170x106",
+        title: "标题路过",
+        caption: "二级标题路过",
+        applyNum: 100,
+        id: 123
+      },
+      {
+        img: "http://dummyimage.com/170x106",
+        title: "标题路过",
+        caption: "二级标题路过",
+        applyNum: 100,
+        id: 123
+      },
+      {
+        img: "http://dummyimage.com/170x106",
+        title: "标题路过",
+        caption: "二级标题路过",
+        applyNum: 100,
+        id: 123
+      },
+      {
+        img: "http://dummyimage.com/170x106",
+        title: "标题路过",
+        caption: "二级标题路过",
+        applyNum: 100,
+        id: 123
+      },
+      {
+        img: "http://dummyimage.com/170x106",
+        title: "标题路过",
+        caption: "二级标题路过",
+        applyNum: 100,
+        id: 123
+      },
+      {
+        img: "",
+        title: "标题路过",
+        caption: "二级标题路过",
+        applyNum: 100,
+        id: 123
+      }
+    ],
+    hotNews: [
+      {
+        img: "http://dummyimage.com/224x140",
+        list: [
+          { title: "个人信用贷款有哪些好处", id: 1 },
+          { title: "个人信用贷款有哪些好处", id: 1 },
+          { title: "个人信用贷款有哪些好处", id: 1 }
+        ]
+      },
+      {
+        img: "http://dummyimage.com/224x140",
+        list: [
+          { title: "个人信用贷款有哪些好处", id: 1 },
+          { title: "个人信用贷款有哪些好处", id: 1 },
+          { title: "个人信用贷款有哪些好处", id: 1 }
+        ]
+      },
+      {
+        img: "http://dummyimage.com/224x140",
+        list: [
+          { title: "个人信用贷款有哪些好处", id: 1 },
+          { title: "个人信用贷款有哪些好处", id: 1 },
+          { title: "个人信用贷款有哪些好处", id: 1 }
+        ]
+      }
+    ],
+    newsRank: [
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 },
+      { title: "个人信用贷款有哪些好处", id: 1 }
+    ],
     rankingList: {
       type: "急速贷排行榜",
       new: "最新",
@@ -86,7 +220,7 @@ export default class extends Component {
         "https://dummyimage.com/200x125",
         "https://dummyimage.com/200x125",
         "https://dummyimage.com/200x125",
-        "https://dummyimage.com/200x125",
+        "https://dummyimage.com/200x125"
       ],
       list: [
         {
@@ -159,143 +293,18 @@ export default class extends Component {
     this.setState(() => ({ cardTypeFocus: index }));
   };
   render() {
-    const { rankingList } = this.state;
-    const { onlineLoans } = this.state;
-    const { citySelection } = this.state;
-    const typeList = [
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/100x100"
-      },
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/100x100"
-      },
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/100x100"
-      },
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/100x200"
-      },
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/500x600"
-      }
-    ]
-    const coupons = [
-      {
-        img: "http://dummyimage.com/224x140",
-        link: "http://www.baidu.com"
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        link: "http://www.baidu.com"
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        link: "http://www.baidu.com"
-      }
-    ]
-    const cardTypes = [
-      { title: "车主卡", id: 21 },
-      { title: "商旅卡", id: 22 },
-      { title: "标准卡", id: 23 },
-      { title: "网络联名卡", id: 24 },
-      { title: "这个受到法律框架按时灯笼裤飞机啊受到法律框架", id: 24 }
-    ]
-    const cardTypeFocus = 0
-    const hotCards = [
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      }
-    ]
-    const hotNews = [
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      }
-    ]
-    const newsRank = [
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 }
-    ]
+    const {
+      rankingList,
+      onlineLoans,
+      citySelection,
+      typeList,
+      coupons,
+      cardTypes,
+      cardTypeFocus,
+      hotCards,
+      hotNews,
+      newsRank
+    } = this.state;
 
     return (
       <Layout title="首页">
@@ -328,7 +337,10 @@ export default class extends Component {
         <HomeOnlineLoans rankingList={rankingList} onlineLoans={onlineLoans} />
         <div style={{ height: "100px" }} />
         {/* 同城贷款贷款 */}
-        <HomeCityselection citySelection={citySelection} rankingList={rankingList} />
+        <HomeCityselection
+          citySelection={citySelection}
+          rankingList={rankingList}
+        />
         <div style={{ height: "140px" }} />
         {/* 优惠活动 */}
         <div style={{ height: "580px" }} className="box flex">
@@ -390,7 +402,7 @@ export default class extends Component {
                     <div
                       key={uuid()}
                       style={{ width: "170px" }}
-                      className={index !== 0 && index % 3 === 0 ? "" : "mr20"}
+                      className={(index + 1) % 4 === 0 ? "" : "mr20"}
                     />
                   );
                 })}
@@ -410,7 +422,8 @@ export default class extends Component {
                 href="/card"
                 as="/2-card/1-home"
                 className="font16 mt5 more-link"
-              >更多
+              >
+                更多
               </WrapLink>
             </div>
             <div className="flex jc-between">
@@ -441,7 +454,7 @@ export default class extends Component {
           </div>
         </div>
         <div style={{ height: "140px" }} />
-      </Layout >
-    )
+      </Layout>
+    );
   }
 }
