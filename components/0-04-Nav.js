@@ -30,15 +30,21 @@ const config = [
 ];
 
 export default () => (
-  <div
-    style={{ position: "relative", zIndex: 5 }}
-    className="flex jc-between ai-center h80 box"
-  >
-    <WrapLink style={{ width: "140px", height: "60px" }}>
-      <img src="http://dummyimage.com/140x60" alt="" className="w-100 h-100" />
-    </WrapLink>
-    <div className="flex">
-      {config.map(item => <ActiveLink key={uuid()} {...item} />)}
+  <div className="bg-white">
+    <div
+      style={{ position: "relative", zIndex: 5 }}
+      className="flex jc-between ai-center h80 box"
+    >
+      <WrapLink style={{ width: "140px", height: "60px" }}>
+        <img
+          src="http://dummyimage.com/140x60"
+          alt=""
+          className="w-100 h-100"
+        />
+      </WrapLink>
+      <div className="flex">
+        {config.map(item => <ActiveLink key={uuid()} {...item} />)}
+      </div>
     </div>
   </div>
 );

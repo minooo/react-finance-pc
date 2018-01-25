@@ -9,8 +9,8 @@ export default class extends Component {
   render() {
     const { isOnOver } = this.state;
     return (
-      <div style={{ background: "#f8f8f8" }}>
-        <div className="box h30 flex jc-between ai-center relative hom-top-code">
+      <div className="bg-body">
+        <div className="box h30 flex jc-between ai-center relative hom-top-code bg-body">
           {isOnOver && (
             <div
               style={{
