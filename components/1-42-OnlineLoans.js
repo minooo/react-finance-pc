@@ -69,13 +69,13 @@ export default class extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="flex wrap pl5">
+            <div className="flex equal wrap pl5">
               {onlineLoans &&
                 onlineLoans.list &&
                 onlineLoans.list.length > 0 &&
                 onlineLoans.list.map((item) => (
-                  <WrapLink href="/index" as="/" key={uuid()} className="text-left">
-                    <div className="flex mb10 pl10 pt20 pb15 pr15 home-loanlist-hover h100 pointer" style={{ width: "295px" }}>
+                  <WrapLink href="/index" as="/" key={uuid()} style={{ width: "50%" }} className="block">
+                    <div className="flex mb10 pl10 pt20 pb15 pr15 home-loanlist-hover h100 pointer">
                       <div className="h66 w66 img-bg">
                         <img
                           className="w-100 h-100"

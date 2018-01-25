@@ -14,14 +14,14 @@ export default ({ citySelection, rankingList }) => (
         <WrapLink href="/1-loan/1-home" as="/loan" className="font16 more-link">更多</WrapLink>
       </div>
       <div className="flex mt20">
-        <WrapLink href="/" as="/" className="plr30 img-bg c333" style={{ width: "345px", height: "472xp", paddingTop: "50px" }}>
+        <WrapLink href="/" as="/" className="plr30 img-bg c333 block" style={{ width: "345px", height: "472xp", paddingTop: "50px" }}>
           <div className="font26 mb20 lh120 text-overflow-1 bold c333">{citySelection.header.title}</div>
           <div className="font14 lh150 text-overflow-2 c333">{citySelection.header.content}</div>
         </WrapLink>
         <div className="flex wrap equal">
           {citySelection.list &&
             citySelection.list.length > 0 && citySelection.list.map((item) => (
-              <WrapLink key={uuid()} href="/index" as="/" className="plr25 pt30 img-bg c333 block" style={{ width: "236px", height: "236px" }}>
+              <WrapLink key={uuid()} href="/index" as="/" className="plr25 pt30 img-bg c333 block" style={{ width: "50%", height: "236px" }}>
                 <div className="font26 mb20 lh120 text-overflow-1 bold c333">{item.title}</div>
                 <div className="font14 lh150 text-overflow-2 c333">{item.content}</div>
               </WrapLink>
