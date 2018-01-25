@@ -11,7 +11,7 @@ import {
   HomeCoupon,
   HomeCardLink,
   HomeHotCard,
-  HomeHotNew
+  HomeHotNew,
 } from "@components";
 
 @reduxPage
@@ -170,7 +170,12 @@ export default class extends Component {
       <Layout title="首页">
         {/* 申请贷款/轮播图/贷款类型 */}
         <div className="relative">
-          <HomeForm />
+          <div
+            style={{ width: "320px", height: "390px" }}
+            className="bg-white home-shdow-mid home-form plr30"
+          >
+            <HomeForm />
+          </div>
           <Carousel className="home-carousel" autoplay>
             <div>
               <h3 className="home-slide">aaa</h3>
@@ -280,7 +285,7 @@ export default class extends Component {
             </div>
           </div>
           <div style={{ width: "280px" }}>
-            <div className="font20 bold pt25 pb15">优惠活动</div>
+            <div className="font20 bold pt25 pb15">资讯排行</div>
             {newsRank &&
               newsRank.length > 0 &&
               newsRank.slice(0, 8).map((item, index) => (

@@ -1,66 +1,80 @@
 import React, { Component } from "react";
-import Head from "next/head";
-
-const echarts = require("../../static/scripts/echarts.min.js");
+import uuid from "uuid/v4";
+import { Icon } from "antd";
+import { Layout, Btn, WrapLink, HomeForm } from "@components";
 
 export default class extends Component {
-  state = {};
-  componentDidMount() {
-    this.initCharts(this.option);
-  }
-  initCharts = opt => {
-    echarts.init(this.echartBox).setOption(opt);
-  };
-  option = {
-    series: [
+  state = {
+    tabFocus: 0,
+    tabTypes: [
       {
-        name: "访问来源",
-        type: "pie",
-        radius: ["100%", "75%"],
-        avoidLabelOverlap: false,
-        label: {
-          normal: {
-            show: false,
-            position: "center"
-          },
-          emphasis: {
-            show: true,
-            textStyle: {
-              fontSize: "30",
-              fontWeight: "bold"
-            }
-          }
-        },
-        itemStyle: {
-          borderColor: "#fff",
-          borderWidth: 4
-        },
-        labelLine: {
-          normal: {
-            show: false
-          }
-        },
-        data: [
-          { value: 335, name: "直接访问" },
-          { value: 310, name: "邮件营销" },
-          { value: 234, name: "联盟广告" },
-          { value: 135, name: "视频广告" },
-          { value: 1548, name: "搜索引擎" }
-        ]
-      }
-    ]
+        title: "同城贷",
+        ico: "loan-tab-one",
+        icoActive: "loan-tab-one-active"
+      },
+      { title: "极速贷", ico: "loan-tab-two", icoActive: "loan-tab-two-active" }
+    ],
+  };
+  onSwitchLoan = index => {
+    this.setState({ tabFocus: index });
   };
   render() {
+    const { tabFocus, tabTypes } = this.state;
     return (
-      <div className="bg-white">
-        <Head>
-          <title>手动阀</title>
-        </Head>
-        <div
-          style={{ width: "600px", height: "400px" }}
-          ref={ele => (this.echartBox = ele)}
-        />
-      </div>
+      <Layout title="贷款超市" style={{ backgroundColor: "#f8f8f8" }}>
+        <div style={{ height: "300px", backgroundColor: "#6bb0ff" }}>
+          <div
+            style={{ backgroundColor: "#6bb0ff" }}
+            className="box h-100 loan-banner-bg"
+          />
+        </div>
+        <div style={{ marginTop: "-134px" }} className="box">
+          <div className="flex ai-end">
+            {tabTypes.map((item, index) => (
+              <Btn
+                key={uuid()}
+                ver
+                style={{ width: "300px", borderRadius: "10px 10px 0 0" }}
+                btnClass={`${
+                  tabFocus === index ? "bg-white h64" : "bg-main h50"
+                } mr10`}
+                con={
+                  <div
+                    className={`${
+                      tabFocus === index
+                        ? `${item.icoActive} c-main`
+                        : `${item.ico} c-white`
+                    } pl30 font24`}
+                  >
+                    {item.title}
+                  </div>
+                }
+                onClick={() => this.onSwitchLoan(index)}
+              />
+            ))}
+          </div>
+          <div className="bg-white">
+            <div className="h70 flex ai-center plr20">
+              <WrapLink href="/" as="/" className="c333 font16">
+                首页
+              </WrapLink>
+              <Icon type="right" className="plr5" />
+              <span className="c999 font16">贷款超市</span>
+            </div>
+            <div className="flex plr20">
+              <div className="equal plr20">
+123
+              </div>
+              <div
+                style={{ width: "290px" }}
+                className="ml20 plr20 pb20 loan-border"
+              >
+                <HomeForm />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Layout>
     );
   }
 }
