@@ -85,6 +85,14 @@
   background: #4c8dfc;
   overflow: hidden;
 }
+.home-loanlist-bg{
+  background-image:url("../../images/home_loan_bg.png");
+  background-size:cover;
+}
+.home-loancity-bg{
+  background-image:url("../../images/home_loan_city_bg.png");
+  background-size:cover;
+}
 .home-sendcode-disable button {
   background: #999;
   border: 1px solid #999;
@@ -93,6 +101,26 @@
     border: 1px solid #999;
   }
 }
+.home-loanlist-hover:hover{
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.06);
+}
+.home-loan-top{
+  position: absolute;
+  top:-18px;
+  left: 20px;
+  width: 242px;
+  height: 18px;
+  border-left: 2px solid #95743d;
+  border-top: 2px solid #95743d;
+  .home-loantop-text{
+    position: absolute;
+    left: 250px;
+    top:-12px;
+    color: #95743d;
+    font-style: italic;
+  }
+}
+
 .home-new-link {
   background: url("../../images/home_new_tip.png") 0 center no-repeat;
 }

@@ -5,6 +5,8 @@ import uuid from "uuid/v4";
 import reduxPage from "@reduxPage";
 import {
   Layout,
+  HomeOnlineLoans,
+  HomeCityselection,
   HomeType,
   HomeForm,
   WrapLink,
@@ -18,7 +20,149 @@ import {
 @connect(({ home }) => ({ home }))
 export default class extends Component {
   state = {
-    typeList: [
+    rankingList: {
+      type: "急速贷排行榜",
+      new: "最新",
+      hot: "最热",
+      list: [
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        }
+      ],
+      newlist: [
+        {
+          title: "newlist拍拍贷",
+          number: "newlist2013人申请",
+          content: "newlist",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "newlist",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3newlist",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "newlist",
+          img: "https://dummyimage.com/68x68"
+        }
+      ]
+    },
+    onlineLoans: {
+      type: "在线极速贷",
+      num: "拍拍贷",
+      type2: "最高可借20万，当天放款",
+      qrcode: "https://dummyimage.com/22x22",
+      carouselList: [
+        "https://dummyimage.com/200x125",
+        "https://dummyimage.com/200x125",
+        "https://dummyimage.com/200x125",
+        "https://dummyimage.com/200x125",
+      ],
+      list: [
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        },
+        {
+          title: "拍拍贷",
+          number: "2013人申请",
+          content: "3分钟申请,2小时审核,秒过",
+          img: "https://dummyimage.com/68x68"
+        }
+      ]
+    },
+    citySelection: {
+      type: "同城精选贷款",
+      header: {
+        title: "车抵贷",
+        content: "不限车龄,评估价九成批款，材料简单"
+      },
+      list: [
+        {
+          title: "车抵贷",
+          content: "不限车龄,评估价九成批款，材料简单"
+        },
+        {
+          title: "车抵贷",
+          content: "不限车龄,评估价九成批款，材料简单"
+        },
+
+        {
+          title: "车抵贷",
+          content: "不限车龄,评估价九成批款，材料简单"
+        },
+
+        {
+          title: "车抵贷",
+          content: "不限车龄,评估价九成批款，材料简单"
+        }
+      ]
+    }
+  };
+  onCardTypeClick = (id, index) => {
+    this.setState(() => ({ cardTypeFocus: index }));
+  };
+  render() {
+    const { rankingList } = this.state;
+    const { onlineLoans } = this.state;
+    const { citySelection } = this.state;
+    const typeList = [
       {
         title: "标题1",
         caption: "副标题",
@@ -44,8 +188,8 @@ export default class extends Component {
         caption: "副标题",
         img: "http://dummyimage.com/500x600"
       }
-    ],
-    coupons: [
+    ]
+    const coupons = [
       {
         img: "http://dummyimage.com/224x140",
         link: "http://www.baidu.com"
@@ -58,16 +202,16 @@ export default class extends Component {
         img: "http://dummyimage.com/224x140",
         link: "http://www.baidu.com"
       }
-    ],
-    cardTypes: [
+    ]
+    const cardTypes = [
       { title: "车主卡", id: 21 },
       { title: "商旅卡", id: 22 },
       { title: "标准卡", id: 23 },
       { title: "网络联名卡", id: 24 },
       { title: "这个受到法律框架按时灯笼裤飞机啊受到法律框架", id: 24 }
-    ],
-    cardTypeFocus: 0,
-    hotCards: [
+    ]
+    const cardTypeFocus = 0
+    const hotCards = [
       {
         img: "http://dummyimage.com/170x106",
         title: "标题路过",
@@ -110,8 +254,8 @@ export default class extends Component {
         applyNum: 100,
         id: 123
       }
-    ],
-    hotNews: [
+    ]
+    const hotNews = [
       {
         img: "http://dummyimage.com/224x140",
         list: [
@@ -136,8 +280,8 @@ export default class extends Component {
           { title: "个人信用贷款有哪些好处", id: 1 }
         ]
       }
-    ],
-    newsRank: [
+    ]
+    const newsRank = [
       { title: "个人信用贷款有哪些好处", id: 1 },
       { title: "个人信用贷款有哪些好处", id: 1 },
       { title: "个人信用贷款有哪些好处", id: 1 },
@@ -152,20 +296,7 @@ export default class extends Component {
       { title: "个人信用贷款有哪些好处", id: 1 },
       { title: "个人信用贷款有哪些好处", id: 1 }
     ]
-  };
-  onCardTypeClick = (id, index) => {
-    this.setState(() => ({ cardTypeFocus: index }));
-  };
-  render() {
-    const {
-      typeList,
-      coupons,
-      cardTypes,
-      cardTypeFocus,
-      hotCards,
-      hotNews,
-      newsRank
-    } = this.state;
+
     return (
       <Layout title="首页">
         {/* 申请贷款/轮播图/贷款类型 */}
@@ -194,6 +325,13 @@ export default class extends Component {
 
         {/* 优惠活动/热门卡片 */}
         <div style={{ height: "225px" }} />
+        {/* 在线极速贷款 */}
+        <HomeOnlineLoans rankingList={rankingList} onlineLoans={onlineLoans} />
+        <div style={{ height: "100px" }} />
+        {/* 同城贷款贷款 */}
+        <HomeCityselection citySelection={citySelection} rankingList={rankingList} />
+        <div style={{ height: "140px" }} />
+        {/* 优惠活动 */}
         <div style={{ height: "580px" }} className="box flex">
           <div
             style={{ width: "266px" }}
@@ -260,7 +398,6 @@ export default class extends Component {
             </div>
           </div>
         </div>
-
         {/* 热门资讯/资讯排行 */}
         <div style={{ height: "140px" }} />
         <div
@@ -274,8 +411,7 @@ export default class extends Component {
                 href="/card"
                 as="/2-card/1-home"
                 className="font16 mt5 more-link"
-              >
-                更多
+              >更多
               </WrapLink>
             </div>
             <div className="flex jc-between">
@@ -306,7 +442,7 @@ export default class extends Component {
           </div>
         </div>
         <div style={{ height: "140px" }} />
-      </Layout>
-    );
+      </Layout >
+    )
   }
 }
