@@ -7,3 +7,12 @@
 .ant-input-search-button {
   font-size: 12px;
 }
+.ant-pagination-item-active:focus a, .ant-pagination-item-active:hover a {
+  color: #fff;
+}
+.ant-pagination-item-active {
+  background: #4c8dfc;
+  a {
+    color: #fff;
+  }
+}

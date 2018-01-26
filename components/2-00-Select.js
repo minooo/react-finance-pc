@@ -5,7 +5,7 @@ import { Select } from "antd"
 const { Option } = Select
 export default ({ title, options, onSelectChange, type }) => (
   <Fragment>
-    <div className="w80 font14 c666">{title}</div>
+    <div className="w80 font14 c999">{title}</div>
     <Select
       defaultValue={options[0].id}
       className="w120 mb10 mt10"
