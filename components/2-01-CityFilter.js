@@ -5,8 +5,8 @@ import { Btn } from "@components";
 export default ({ cityFilters, onCityChoice, state }) => (
   <Fragment>
     {cityFilters.map(item => (
-      <div key={uuid()} className="flex mb25">
-        <div className="w80 font14 c999 equal-no">{item.title}</div>
+      <div key={uuid()} className="flex mb25 pl20">
+        <div className="font14 c999 equal-no pr20">{item.title}</div>
         <div className="flex wrap">
           {item.list &&
             item.list.length > 0 &&

@@ -60,32 +60,28 @@ $color-list: (
 }
 
 .border-top {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #f2f2f2;
 }
 
 .border-bottom {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #f2f2f2;
   &:last-child {
     border-bottom: none;
   }
 }
 
 .border-bottom-one {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #f2f2f2;
 }
 
 .border-right {
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #f2f2f2;
 }
 
 input::placeholder {
   color: #999!important;
 }
-input:disabled {
-  background: none!important;
-  color: #4c8dfc!important;
-}
 
 a:hover {
-  color: #4c8dfc!important;
+  color: #4c8dfc;
 }
