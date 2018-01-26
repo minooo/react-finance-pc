@@ -199,7 +199,7 @@ export default class extends Component {
           img: "https://dummyimage.com/68x68"
         }
       ],
-      newlist: [
+      othList: [
         {
           title: "newlist拍拍贷",
           number: "newlist2013人申请",
