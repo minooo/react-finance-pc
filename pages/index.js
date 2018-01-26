@@ -316,6 +316,7 @@ export default class extends Component {
   onCardTypeClick = (id, index) => {
     this.setState(() => ({ cardTypeFocus: index }));
   };
+
   render() {
     const {
       rankingList,
@@ -327,7 +328,7 @@ export default class extends Component {
       cardTypeFocus,
       hotCards,
       hotNews,
-      newsRank
+      newsRank,
     } = this.state;
 
     return (
