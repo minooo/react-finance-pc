@@ -77,12 +77,10 @@ export default class extends Component {
           {/* 核心块 */}
           <div className="flex">
             {/* 左边 资讯列表 */}
-            <div
-              style={{ paddingLeft: "50px" }}
-              className="equal pr30 bg-white"
-            >
+
+            <div className="equal pr30 bg-white">
               {/* 分类选项 */}
-              <div className="h114 flex ai-center">
+              <div className="pl30 h114 flex ai-center">
                 {NewTypes &&
                   NewTypes.length &&
                   NewTypes.map((item, index) => (
@@ -95,7 +93,7 @@ export default class extends Component {
                     />
                   ))}
               </div>
-              <div className="pt20">
+              <div style={{ paddingLeft: "50px" }} className="pt20">
                 {newList &&
                   newList.length > 0 &&
                   newList.map(item => <NewList key={uuid()} item={item} />)}

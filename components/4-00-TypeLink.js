@@ -11,7 +11,7 @@ export default ({ item, index, newTypeFocus, onNewTypeClick }) => (
           newTypeFocus === index ? "c-white" : "c-main"
         } text-center font14 text-overflow-one lh100`}
       >
-        {item.title.length > 5 ? `${item.title.substr(0, 5)}...` : item.title}
+        {item.title}
       </span>
     }
     onClick={() => onNewTypeClick(item.id, index)}
