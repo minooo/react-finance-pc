@@ -12,7 +12,6 @@ export { default as Foot } from "./0-05-Foot";
 export { default as Ranking } from "./0-14-Ranking.js";
 // home
 export { default as HomeType } from "./1-00-Type";
-export { default as HomeRankingList } from "./1-41-RankingList";
 export { default as HomeOnlineLoans } from "./1-42-OnlineLoans";
 export { default as HomeCityselection } from "./1-43-Cityselection";
 export { default as HomeRankListItem } from "./1-44-RankListItem";

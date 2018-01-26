@@ -213,14 +213,14 @@ export default class extends Component {
                 style={{ width: "300px", borderRadius: "10px 10px 0 0" }}
                 btnClass={`${
                   tabFocus === index ? "bg-white h64" : "bg-main h50"
-                } mr10`}
+                  } mr10`}
                 con={
                   <div
                     className={`${
                       tabFocus === index
                         ? `${item.icoActive} c-main`
                         : `${item.ico} c-white`
-                    } pl30 font24`}
+                      } pl30 font24`}
                   >
                     {item.title}
                   </div>
@@ -274,17 +274,17 @@ export default class extends Component {
                       )}
                   </Fragment>
                 ) : (
-                  <Fragment>
-                    {soonFilters &&
-                      soonFilters.length > 0 && (
-                        <LoanCityFilter
-                          cityFilters={soonFilters}
-                          onCityChoice={this.onCityChoice}
-                          state={this.state}
-                        />
-                      )}
-                  </Fragment>
-                )}
+                    <Fragment>
+                      {soonFilters &&
+                        soonFilters.length > 0 && (
+                          <LoanCityFilter
+                            cityFilters={soonFilters}
+                            onCityChoice={this.onCityChoice}
+                            state={this.state}
+                          />
+                        )}
+                    </Fragment>
+                  )}
 
                 {/* 排序tab */}
                 <div
@@ -300,7 +300,7 @@ export default class extends Component {
                           <span
                             className={`${
                               sortFilterFocus === index ? "c-main" : "c333"
-                            } font16`}
+                              } font16`}
                           >
                             {item.title}
                           </span>
@@ -331,6 +331,19 @@ export default class extends Component {
               <div style={{ width: "290px" }}>
                 <div className="plr20 pb20 loan-border">
                   <HomeForm />
+                </div>
+                <div className="h40" />
+                <div className="loan-border pb25 pt30 plr30">
+                  <div className="font18 c333 text-center mb25 lh120">APP下载，享专属优惠</div>
+                  <div className="flex jc-around ai-center mb20">
+                    <div className="w70" style={{ height: "130px" }}>
+                      <img src="../../static/images/foot_app.png" className="w-100" alt="" />
+                    </div>
+                    <div className="w100 h100">
+                      <img src="../../static/images/foot_code.png" className="w-100" alt="" />
+                    </div>
+                  </div>
+                  <div className="c-main font14 text-center lh120">最高可借20万,当天放款</div>
                 </div>
               </div>
             </div>

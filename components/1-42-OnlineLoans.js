@@ -1,14 +1,15 @@
 import React from "react";
 import uuid from "uuid/v4";
 import { Carousel, Icon } from "antd"
-import { HomeRankingList, Btn, WrapLink, HomeRankListItem } from "@components";
+import { Ranking, Btn, WrapLink, HomeRankListItem } from "@components";
 
 export default class extends React.Component {
   state = {
     isOver: false,
     title: this.props.onlineLoans.carouselList[0].title,
     content: this.props.onlineLoans.carouselList[0].content,
-    href: this.props.onlineLoans.carouselList[0].href
+    href: this.props.onlineLoans.carouselList[0].href,
+    ranktype: "new"
   };
 
   handChangeOver = () => {
@@ -22,10 +23,21 @@ export default class extends React.Component {
       href: list[current].href
     }))
   }
-
+  OnChangeLoahType = (type) => {
+    if (type === "hot") {
+      this.setState(() => ({
+        ranktype: type,
+      }));
+    } else {
+      this.setState(() => ({
+        ranktype: type,
+      }));
+    }
+  }
   render() {
     const { rankingList, onlineLoans } = this.props
-    const { isOver, title, content, href } = this.state
+    const { isOver, title, content, href, ranktype } = this.state
+    const list = ranktype === "new" ? this.props.rankingList.list : this.props.rankingList.newlist
     return (
       <div className="box flex">
         <div
@@ -52,7 +64,9 @@ export default class extends React.Component {
                   }}
                   className="w110 h110 bg-white ptb5 plr5 home-shdow-sm r2"
                 >
-                  <img src="http://dummyimage.com/100x100" alt="" />
+                  <div className="w100 h100">
+                    <img src="../static/images/foot_code.png" alt="" className="w-100 h-100" />
+                  </div>
                 </div>
               )}
             </div>
@@ -88,10 +102,10 @@ export default class extends React.Component {
               </div>
               <div className="flex jc-between ai-center">
                 <div className="w80 h116 img-bg">
-                  <img src="../static/images/home_loah_phone.png" className="w-100 h-100" alt="" />
+                  <img src="../static/images/foot_app.png" className="w-100 h-100" alt="" />
                 </div>
                 <div className="w90 h90 img-bg">
-                  <img src="../static/images/home_loah_ qrcode.png" alt="" className="w-100 h-100" />
+                  <img src="../static/images/foot_code.png" alt="" className="w-100 h-100" />
                 </div>
               </div>
             </div>
@@ -108,9 +122,18 @@ export default class extends React.Component {
           </div>
         </div>
         <div className="equal z-index10">
-          {rankingList && (
-            <HomeRankingList rankingList={rankingList} />
-          )}
+          <div
+            className="plr20 pt20 bg-white font14 home-shdow-mid"
+            style={{ height: "520px" }}
+          >
+            <Ranking OnChangeLoahType={this.OnChangeLoahType} title="极速贷排行榜" bg="home-loanlist-bg" ranktype={ranktype} />
+            {rankingList && (
+              list &&
+              list.length > 0 &&
+              list.map(item => <HomeRankListItem key={uuid()} item={item} isrank="true" />)
+            )}
+          </div>
+
         </div>
       </div>
     )
