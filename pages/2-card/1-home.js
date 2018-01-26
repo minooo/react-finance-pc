@@ -4,7 +4,6 @@ import { Icon, Pagination } from "antd";
 import {
   Layout,
   WrapLink,
-  HomeForm,
   LoanCityFilter,
   CardList
 } from "@components";
@@ -164,7 +163,7 @@ export default class extends Component {
               {/* 右半拉，申请贷款以及app广告位 */}
               <div style={{ width: "290px" }}>
                 <div className="plr20 pb20 loan-border">
-                  <HomeForm />
+                  信用卡排行榜
                 </div>
               </div>
             </div>
