@@ -1,6 +1,5 @@
 import React from "react";
-import uuid from "uuid/v4";
-import { Btn, HomeRankListItem } from "@components";
+import { Btn } from "@components";
 
 export default class extends React.Component {
   state = { ranktype: "new" };
@@ -16,7 +15,7 @@ export default class extends React.Component {
     }
   }
   render() {
-    const { loantype } = this.props;
+    const { loantype, children } = this.props;
     const { ranktype } = this.state;
     const list = ranktype === "new" ? this.props.rankingList.list : this.props.rankingList.newlist
     return (
@@ -56,10 +55,12 @@ export default class extends React.Component {
           className={`h20 mb10 ${
             loantype === "city" ? "home-loancity-bg" : "home-loanlist-bg"}`}
         />
+
         {
           list &&
           list.length > 0 &&
-          list.map(item => <HomeRankListItem key={uuid()} item={item} isrank="true" />)}
+          list.map(item => <children item={item} />)
+        }
       </div>
     );
   }
