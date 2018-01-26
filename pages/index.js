@@ -72,8 +72,8 @@ export default class extends Component {
     hotCards: [
       {
         img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
+        title: "这个受到法律框架按时灯笼裤飞机啊受到法律框架",
+        caption: "这个受到法律框架按时灯笼裤飞机啊受到法律框架",
         applyNum: 100,
         id: 123
       },
@@ -114,30 +114,48 @@ export default class extends Component {
       }
     ],
     hotNews: [
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      }
+      [
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        }
+      ],
+      [
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        }
+      ],
+      [
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        }
+      ]
     ],
     newsRank: [
       { title: "个人信用贷款有哪些好处", id: 1 },
@@ -435,7 +453,9 @@ export default class extends Component {
             <div className="flex jc-between">
               {hotNews &&
                 hotNews.length > 0 &&
-                hotNews.map(item => <HomeHotNew key={uuid()} item={item} />)}
+                hotNews.map((item, index) => (
+                  <HomeHotNew key={uuid()} item={item} index={index} />
+                ))}
             </div>
           </div>
           <div style={{ width: "280px" }}>
