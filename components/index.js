@@ -8,7 +8,7 @@ export { default as ErrorFetch } from "./0-06-ErrorFetch";
 export { default as MultiColorIco } from "./0-10-MultiColorIco";
 export { default as AlertBg } from "./0-13-AlertBg";
 export { default as Foot } from "./0-05-Foot";
-
+export { default as Ranking } from "./0-14-Ranking.js";
 // home
 export { default as HomeType } from "./1-00-Type";
 export { default as HomeRankingList } from "./1-41-RankingList";
