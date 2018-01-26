@@ -72,8 +72,8 @@ export default class extends Component {
     hotCards: [
       {
         img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
+        title: "这个受到法律框架按时灯笼裤飞机啊受到法律框架",
+        caption: "这个受到法律框架按时灯笼裤飞机啊受到法律框架",
         applyNum: 100,
         id: 123
       },
@@ -114,30 +114,48 @@ export default class extends Component {
       }
     ],
     hotNews: [
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        list: [
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 },
-          { title: "个人信用贷款有哪些好处", id: 1 }
-        ]
-      }
+      [
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        }
+      ],
+      [
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        }
+      ],
+      [
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        },
+        {
+          title: "个人信用贷款有哪些好处",
+          id: 1
+        }
+      ]
     ],
     newsRank: [
       { title: "个人信用贷款有哪些好处", id: 1 },
@@ -155,9 +173,6 @@ export default class extends Component {
       { title: "个人信用贷款有哪些好处", id: 1 }
     ],
     rankingList: {
-      type: "急速贷排行榜",
-      new: "最新",
-      hot: "最热",
       list: [
         {
           title: "拍拍贷",
@@ -212,61 +227,66 @@ export default class extends Component {
       ]
     },
     onlineLoans: {
-      type: "在线极速贷",
-      num: "拍拍贷",
-      type2: "最高可借20万，当天放款",
-      qrcode: "https://dummyimage.com/22x22",
       carouselList: [
-        "https://dummyimage.com/200x125",
-        "https://dummyimage.com/200x125",
-        "https://dummyimage.com/200x125",
-        "https://dummyimage.com/200x125"
+        {
+          img: "https://dummyimage.com/200x125",
+          title: "拍拍贷1",
+          content: "最高可借20万，当天放款1",
+          href: "/1-loan"
+        },
+        {
+          img: "https://dummyimage.com/200x125",
+          title: "拍拍贷2",
+          content: "最高可借20万，当天放款2",
+          href: "/1-loan"
+        },
+        {
+          img: "https://dummyimage.com/200x125",
+          title: "拍拍贷3",
+          content: "最高可借20万，当天放款3",
+          href: "/1-loan"
+        }
       ],
       list: [
         {
           title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
+          number: "3分钟申请,2小时审核,秒过",
+          content: "2013人",
           img: "https://dummyimage.com/68x68"
         },
         {
           title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
+          number: "3分钟申请,2小时审核,秒过",
+          content: "2013人",
           img: "https://dummyimage.com/68x68"
         },
         {
           title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
+          number: "3分钟申请,2小时审核,秒过",
+          content: "2013人",
           img: "https://dummyimage.com/68x68"
         },
         {
           title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
+          number: "3分钟申请,2小时审核,秒过",
+          content: "2013人",
           img: "https://dummyimage.com/68x68"
         },
         {
           title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
+          number: "3分钟申请,2小时审核,秒过",
+          content: "2013人",
           img: "https://dummyimage.com/68x68"
         },
         {
           title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
+          number: "3分钟申请,2小时审核,秒过",
+          content: "2013人",
           img: "https://dummyimage.com/68x68"
         }
       ]
     },
     citySelection: {
-      type: "同城精选贷款",
-      header: {
-        title: "车抵贷",
-        content: "不限车龄,评估价九成批款，材料简单"
-      },
       list: [
         {
           title: "车抵贷",
@@ -282,6 +302,10 @@ export default class extends Component {
           content: "不限车龄,评估价九成批款，材料简单"
         },
 
+        {
+          title: "车抵贷",
+          content: "不限车龄,评估价九成批款，材料简单"
+        },
         {
           title: "车抵贷",
           content: "不限车龄,评估价九成批款，材料简单"
@@ -429,7 +453,9 @@ export default class extends Component {
             <div className="flex jc-between">
               {hotNews &&
                 hotNews.length > 0 &&
-                hotNews.map(item => <HomeHotNew key={uuid()} item={item} />)}
+                hotNews.map((item, index) => (
+                  <HomeHotNew key={uuid()} item={item} index={index} />
+                ))}
             </div>
           </div>
           <div style={{ width: "280px" }}>
