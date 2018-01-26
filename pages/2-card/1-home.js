@@ -1,137 +1,129 @@
-import React, { Component } from "react";
-import { connect } from "react-redux"
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 import uuid from "uuid/v4";
-import { Icon, Pagination } from "antd";
-import { http } from "@utils"
-import { getCardsHome } from "@actions"
-import reduxPage from "@reduxPage"
+import { Icon, Pagination, message } from "antd";
+import { http } from "@utils";
+import { getCardsHome } from "@actions";
+import reduxPage from "@reduxPage";
 import {
   Layout,
   WrapLink,
   LoanCityFilter,
-  CardList
+  CardList,
+  ErrorFetch,
+  LoadingFetch
 } from "@components";
 
-const util = require("util")
+const util = require("util");
 @reduxPage
 @connect(({ cardsHome }) => ({ cardsHome }))
-
 export default class extends Component {
   static async getInitialProps(ctx) {
     // err req res pathname query asPath isServer
-    const { store, isServer } = ctx
+    const { store, isServer } = ctx;
 
     if (!store.getState().cardsHome) {
       try {
-        const cardHomeFetch = await http.get("card/index", null, isServer)
-        const cardHomeData = cardHomeFetch.data
-        store.dispatch(getCardsHome(cardHomeData))
+        const cardHomeFetch = await http.get("card/index", null, isServer);
+        const cardHomeData = cardHomeFetch.data;
+        store.dispatch(getCardsHome(cardHomeData));
       } catch (error) {
-        const err = util.inspect(error)
-        return { err }
+        const err = util.inspect(error);
+        return { err };
       }
     }
-    return null
+    return null;
   }
   /* eslint-disable */
   state = {
-    soon_moneyFocus: 0,
-    soon_dateFocus: 0,
-    soon_typeFocus: 0,
-    soon_applyFocus: 0,
-    soon_getFocus: 0,
-    soonFilters: [
-      {
-        title: "贷款金额",
-        key: "soon_money",
-        list: [
-          { id: 0, title: "金额不限" },
-          { id: 1, title: "100-5000" },
-          { id: 2, title: "5000-1万" },
-          { id: 3, title: "1万-5万" },
-          { id: 4, title: "5万以上" }
-        ]
-      },
-      {
-        title: "贷款期限",
-        key: "soon_date",
-        list: [
-          { id: 0, title: "期限不限" },
-          { id: 1, title: "1-3个月" },
-          { id: 2, title: "3-6个月" },
-          { id: 3, title: "6-12个月" },
-          { id: 4, title: "12个月以上" }
-        ]
-      },
-      {
-        title: "贷款类型",
-        key: "soon_type",
-        list: [
-          { id: 0, title: "芝麻分贷款" },
-          { id: 1, title: "手机贷款" },
-          { id: 2, title: "信用卡贷款" },
-          { id: 3, title: "实名制贷款" },
-          { id: 4, title: "工薪贷" }
-        ]
-      },
-      {
-        title: "申请资质",
-        key: "soon_apply",
-        list: [
-          { id: 0, title: "名下有车" },
-          { id: 1, title: "名下有房" },
-          { id: 2, title: "有信用卡" },
-          { id: 3, title: "有社保" },
-          { id: 4, title: "有网购账号" }
-        ]
-      },
-      {
-        title: "下款周期",
-        key: "soon_get",
-        list: [
-          { id: 0, title: "当天下款" },
-          { id: 1, title: "两日下款" },
-          { id: 2, title: "一周下款" }
-        ]
-      }
-    ],
-    searchList: [
-      {
-        title: "贷款产品标题贷款产品标题贷款产品标题贷款产品标题",
-        img: "http://dummyimage.com/106x66",
-        caption: "这是一些次要说明",
-        grade: "白金卡",
-        maxMoney: "10000000",
-        cardType: "人民币",
-        payMethod: "终身免年费",
-        applyNum: "22451",
-        link: "http://www.baidu.com"
-      },
-      {
-        title: "贷款产品标题贷款产品标题贷款产品标题贷款产品标题",
-        img: "http://dummyimage.com/106x66",
-        caption: "这是一些次要说明",
-        grade: "白金卡",
-        maxMoney: "10000000",
-        cardType: "人民币",
-        payMethod: "终身免年费",
-        applyNum: "22451",
-        link: "http://www.baidu.com"
-      }
-    ]
+    bankFocus: 0,
+    categoryFocus: 0,
+    levelFocus: 0,
+    yearFee_policyFocus: 0,
+    currencyFocus: 0,
+    hasSearched: false,
+    isFetch: false,
+    fetchParam: {},
+    searchList: null,
+    searchCount: null
   };
   /* eslint-enable */
   onCardChoice = (key, id, index) => {
-    this.setState(() => ({ [`${key}Focus`]: index }));
+    this.setState(
+      pre => ({
+        [`${key}Focus`]: index,
+        isFetch: true,
+        fetchParam: { ...pre.fetchParam, [key]: id }
+      }),
+      () => {
+        const { fetchParam } = this.state;
+        http
+          .get("card/list", fetchParam)
+          .then(response => {
+            // 这里的判断条件根据具体的接口情况而调整
+            this.setState(() => ({ isFetch: false, hasSearched: true }));
+            if (response.code === 200 && response.success) {
+              const searchList =
+                response.data &&
+                response.data.lists &&
+                response.data.lists.cards;
+              const searchCount =
+                response.data &&
+                response.data.lists &&
+                response.data.lists.count;
+              this.setState(() => ({ searchList, searchCount }));
+            } else {
+              message.error(
+                response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
+              );
+            }
+          })
+          .catch(err => {
+            message.error("网络错误，请稍后再试！");
+            console.info(err);
+          });
+      }
+    );
   };
-  onPageChange = (page, pageSize) => {
-    console.info(page, pageSize);
+  onPageChange = page => {
+    this.setState(
+      () => ({ isFetch: true }),
+      () => {
+        const { fetchParam } = this.state;
+        http
+          .get("card/list", { ...fetchParam, page })
+          .then(response => {
+            // 这里的判断条件根据具体的接口情况而调整
+            this.setState(() => ({ isFetch: false, hasSearched: true }));
+            if (response.code === 200 && response.success) {
+              const searchList =
+                response.data &&
+                response.data.lists &&
+                response.data.lists.cards;
+              this.setState(() => ({ searchList }));
+            } else {
+              message.error(
+                response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
+              );
+            }
+          })
+          .catch(err => {
+            message.error("网络错误，请稍后再试！");
+            console.info(err);
+          });
+      }
+    );
   };
   render() {
-    const { searchList, soonFilters } = this.state;
+    const { searchList, hasSearched, searchCount, isFetch } = this.state;
+    const { cardsHome, err } = this.props;
+    if (err) {
+      return <ErrorFetch err={err} />;
+    }
     return (
       <Layout title="贷款超市" style={{ backgroundColor: "#f8f8f8" }}>
         {/* banner */}
+        {isFetch && <LoadingFetch />}
         <div style={{ height: "300px", backgroundColor: "#6bb0ff" }}>
           <div
             style={{ backgroundColor: "#6bb0ff" }}
@@ -154,10 +146,11 @@ export default class extends Component {
               {/* 左半拉，产品筛选以及列表 */}
               <div className="equal plr20 overflow-h">
                 {/* 筛选条件 */}
-                {soonFilters &&
-                  soonFilters.length > 0 && (
+                {cardsHome &&
+                  cardsHome.cardFilters &&
+                  cardsHome.cardFilters.length > 0 && (
                     <LoanCityFilter
-                      cityFilters={soonFilters}
+                      cityFilters={cardsHome.cardFilters}
                       onCityChoice={this.onCardChoice}
                       state={this.state}
                     />
@@ -166,29 +159,76 @@ export default class extends Component {
                   className="flex jc-center font14 bold ai-center h50"
                   style={{ backgroundColor: "#f6f6f6" }}
                 >
-                  {searchList && searchList.length > 0
-                    ? `一共为您找到${searchList.length}款产品`
-                    : "sorry~没有找到符合您筛选条件的信用卡，您可以看看以下精选热门卡"}
+                  {hasSearched ? (
+                    searchCount > 0 ? (
+                      <Fragment>
+                        一共为您找到
+                        <span className="c-main plr5">{searchCount}</span>款产品
+                      </Fragment>
+                    ) : (
+                      `orry~没有找到符合您筛选条件的信用卡。${
+                        cardsHome &&
+                        cardsHome.recommends &&
+                        cardsHome.recommends.length > 0
+                          ? "您可以看看以下精选热门卡"
+                          : ""
+                      }`
+                    )
+                  ) : cardsHome &&
+                  cardsHome.lists &&
+                  cardsHome.lists.count > 0 ? (
+                    <Fragment>
+                      一共为您找到
+                      <span className="c-main plr5">
+                        {cardsHome.lists.count}
+                      </span>款产品
+                    </Fragment>
+                  ) : (
+                    "sorry~暂无产品"
+                  )}
                 </div>
-                {searchList &&
-                  searchList.length > 0 &&
-                  searchList.map(item => <CardList key={uuid()} item={item} />)}
+                {/* 满足以下条件时，出现推荐列表 */}
+                {hasSearched &&
+                  !(searchCount > 0) &&
+                  cardsHome &&
+                  cardsHome.recommends &&
+                  cardsHome.recommends.length > 0 &&
+                  cardsHome.recommends.map(item => (
+                    <CardList key={uuid()} item={item} />
+                  ))}
+                {cardsHome &&
+                  cardsHome.lists &&
+                  cardsHome.lists.cards &&
+                  cardsHome.lists.cards.length > 0 &&
+                  (hasSearched
+                    ? searchList &&
+                      searchList.length > 0 &&
+                      searchList.map(item => (
+                        <CardList key={uuid()} item={item} />
+                      ))
+                    : cardsHome.lists.cards.map(item => (
+                        <CardList key={uuid()} item={item} />
+                      )))}
                 <div className="pb30 flex jc-center">
                   <Pagination
                     hideOnSinglePage
                     className="pt30"
                     defaultCurrent={1}
                     defaultPageSize={10}
-                    total={searchList.length}
+                    total={
+                      hasSearched
+                        ? searchCount
+                        : cardsHome && cardsHome.lists && cardsHome.lists.count
+                          ? cardsHome.lists.count
+                          : 1
+                    }
                     onChange={this.onPageChange}
                   />
                 </div>
               </div>
               {/* 右半拉，申请贷款以及app广告位 */}
               <div style={{ width: "290px" }}>
-                <div className="plr20 pb20 loan-border">
-                  信用卡排行榜
-                </div>
+                <div className="plr20 pb20 loan-border">信用卡排行榜</div>
               </div>
             </div>
           </div>
