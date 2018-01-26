@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux"
 import uuid from "uuid/v4";
 import { Icon, Pagination } from "antd";
+import { http } from "@utils"
+import { getCardsHome } from "@actions"
+import reduxPage from "@reduxPage"
 import {
   Layout,
   WrapLink,
@@ -8,7 +12,27 @@ import {
   CardList
 } from "@components";
 
+const util = require("util")
+@reduxPage
+@connect(({ cardsHome }) => ({ cardsHome }))
+
 export default class extends Component {
+  static async getInitialProps(ctx) {
+    // err req res pathname query asPath isServer
+    const { store, isServer } = ctx
+
+    if (!store.getState().cardsHome) {
+      try {
+        const cardHomeFetch = await http.get("card/index", null, isServer)
+        const cardHomeData = cardHomeFetch.data
+        store.dispatch(getCardsHome(cardHomeData))
+      } catch (error) {
+        const err = util.inspect(error)
+        return { err }
+      }
+    }
+    return null
+  }
   /* eslint-disable */
   state = {
     soon_moneyFocus: 0,
