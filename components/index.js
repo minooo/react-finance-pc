@@ -14,7 +14,8 @@ export { default as HomeType } from "./1-00-Type";
 export { default as HomeRankingList } from "./1-41-RankingList";
 export { default as HomeOnlineLoans } from "./1-42-OnlineLoans";
 export { default as HomeCityselection } from "./1-43-Cityselection";
-
+export { default as HomeRankListItem } from "./1-44-RankListItem";
+export { default as HomeCityListItem } from "./1-45-CityListItem.js";
 export { default as HomeTop } from "./1-01-Top";
 export { default as HomeForm } from "./1-02-Form";
 export { default as HomeCoupon } from "./1-03-Coupon";
