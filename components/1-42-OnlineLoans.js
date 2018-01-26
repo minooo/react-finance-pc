@@ -73,17 +73,17 @@ export default class extends React.Component {
               </div>
               <div className="text-center mb20">
                 <div className="font16 mb10 lh100 text-overflow-1 bold">{title}</div>
-                <div className="font12 lh120 text-overflow-1">{content}</div>
+                <div className="font14 lh120 text-overflow-1">{content}</div>
               </div>
               <div className="flex jc-center mb20">
                 <Btn
                   con={<span className="block font18 c-white lh150 pointer">免费申请</span>}
-                  className="flex jc-center ai-center bg-main r12 h36"
+                  className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm"
                   style={{ width: "140px" }}
                   href={href}
                 />
               </div>
-              <div className="text-center lh100 font14 mb20">
+              <div className="text-center lh150 font14 mb15">
                 APP下载，享专属优惠
               </div>
               <div className="flex jc-between ai-center">

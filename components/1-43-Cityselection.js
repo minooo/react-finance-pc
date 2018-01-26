@@ -20,7 +20,6 @@ export default ({ citySelection, rankingList }) => {
             <div className="font26 mb20 lh120 text-overflow-1 bold c333">{list.title}</div>
             <div className="font14 lh150 text-overflow-2 c333">{list.content}</div>
           </WrapLink>
-
           <div className="equal flex wrap">
             {citySelection.list &&
               citySelection.list.length > 0 && citySelection.list.map((item, index) => (
