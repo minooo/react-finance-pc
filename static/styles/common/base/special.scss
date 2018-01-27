@@ -85,13 +85,13 @@
   background: #4c8dfc;
   overflow: hidden;
 }
-.home-loanlist-bg{
-  background-image:url("../../images/home_loan_bg.png");
-  background-size:cover;
+.home-loanlist-bg {
+  background-image: url("../../images/home_loan_bg.png");
+  background-size: cover;
 }
-.home-loancity-bg{
-  background-image:url("../../images/home_loan_city_bg.png");
-  background-size:cover;
+.home-loancity-bg {
+  background-image: url("../../images/home_loan_city_bg.png");
+  background-size: cover;
 }
 .home-sendcode-disable button {
   background: #999;
@@ -101,21 +101,21 @@
     border: 1px solid #999;
   }
 }
-.home-loanlist-hover:hover{
+.home-loanlist-hover:hover {
   box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.06);
 }
-.home-loan-top{
+.home-loan-top {
   position: absolute;
-  top:-18px;
+  top: -18px;
   left: 20px;
   width: 242px;
   height: 18px;
   border-left: 2px solid #95743d;
   border-top: 2px solid #95743d;
-  .home-loantop-text{
+  .home-loantop-text {
     position: absolute;
     left: 250px;
-    top:-12px;
+    top: -12px;
     color: #95743d;
     font-style: italic;
   }
@@ -167,4 +167,38 @@
 .loan-list-hover:hover {
   box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
+}
+//new
+.new-active {
+  background-color: #4c8dfc;
+  box-shadow: 0px 3px 12px 0px rgba(76, 141, 252, 0.7);
+}
+.new-default {
+  background-color: rgba(76, 141, 252, 0.2);
+}
+.new-shadow {
+  transition: box-shadow 1s;
+  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.35);
+}
+.new-browse {
+  background: url("../../images/nwe_newlist_browse.png") left no-repeat;
+}
+.new-list-active {
+  background-color: #f8f8f8;
+  transition: box-shadow 3s;
+  transition: background-color 3s;
+  &:hover {
+    color: #4c8dfc;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 18px 0px rgba(76, 141, 252, 0.12);
+  }
+  &:hover .new-shadow {
+    box-shadow: none;
+  }
+  &:hover .new-color {
+    color: #4c8dfc;
+  }
+  &:hover .new-browse {
+    background: url("../../images/nwe_newlist_browse1.png") left no-repeat;
+  }
 }
