@@ -213,14 +213,14 @@ export default class extends Component {
                 style={{ width: "300px", borderRadius: "10px 10px 0 0" }}
                 btnClass={`${
                   tabFocus === index ? "bg-white h64" : "bg-main h50"
-                  } mr10`}
+                } mr10`}
                 con={
                   <div
                     className={`${
                       tabFocus === index
                         ? `${item.icoActive} c-main`
                         : `${item.ico} c-white`
-                      } pl30 font24`}
+                    } pl30 font24`}
                   >
                     {item.title}
                   </div>
@@ -274,17 +274,17 @@ export default class extends Component {
                       )}
                   </Fragment>
                 ) : (
-                    <Fragment>
-                      {soonFilters &&
+                  <Fragment>
+                    {soonFilters &&
                         soonFilters.length > 0 && (
-                          <LoanCityFilter
-                            cityFilters={soonFilters}
-                            onCityChoice={this.onCityChoice}
-                            state={this.state}
-                          />
-                        )}
-                    </Fragment>
-                  )}
+                        <LoanCityFilter
+                          cityFilters={soonFilters}
+                          onCityChoice={this.onCityChoice}
+                          state={this.state}
+                        />
+                      )}
+                  </Fragment>
+                )}
 
                 {/* 排序tab */}
                 <div
@@ -300,7 +300,7 @@ export default class extends Component {
                           <span
                             className={`${
                               sortFilterFocus === index ? "c-main" : "c333"
-                              } font16`}
+                            } font16`}
                           >
                             {item.title}
                           </span>
