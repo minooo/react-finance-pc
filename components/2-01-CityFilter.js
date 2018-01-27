@@ -20,7 +20,7 @@ export default ({ cityFilters, onCityChoice, state }) => (
                       state[`${item.key}Focus`] === i ? "c-main" : "c333"
                     } font14`}
                   >
-                    {x.title}
+                    {x && (x.name || x.title)}
                   </span>
                 }
                 onClick={() => onCityChoice(item.key, x.id, i)}

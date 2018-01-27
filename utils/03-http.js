@@ -18,7 +18,7 @@ const callApi = (url, method, data, isServer = false, options = {}) => {
     Object.assign(
       {},
       {
-        baseURL: isServer ? "http://jr.duduapp.net/api/" : "/api/",
+        baseURL: isServer ? "http://jr.duduapp.net/web/" : "/web/",
         url,
         method,
         params: method === "get" ? data : {}, // 添加在请求URL后面的参数

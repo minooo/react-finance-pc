@@ -131,6 +131,18 @@ export const addDefault = (fromArr, toArr) => {
   return toArr;
 };
 
+// 针对card loan 的 filter数据重构
+export const addFilter = (initObj, toArr) => {
+  const arr = []
+  toArr.forEach((item) => {
+    const { key } = item
+    const list = initObj[key]
+    const newList = item.list.concat(list)
+    arr.push({ ...item, list: newList })
+  })
+  return arr
+}
+
 export const imgUrl = str => {
   if (!str) return "";
   if (str.indexOf("http") !== -1) {

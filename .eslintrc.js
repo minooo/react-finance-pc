@@ -49,7 +49,7 @@ module.exports = {
   // https://eslint.org/docs/rules/
   // 0 1 2 -> off warn error
   rules: {
-    indent: ["error", 2, { SwitchCase: 1 }],
+    indent: 0,
     "linebreak-style": ["error", "unix"],
     "no-console": ["error", { allow: ["warn", "error", "info"] }],
     quotes: ["error", "double"],
@@ -65,11 +65,12 @@ module.exports = {
     "no-nested-ternary": "off", // 习惯了在jsx语法各种三元操作了。。。
 
     "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
-    "react/jsx-indent": ["error", 2],
+    "react/jsx-indent": 0,
     "react/jsx-indent-props": ["error", 2],
     "react/prop-types": 0,
     "react/no-danger": "off",
     "react/react-in-jsx-scope": 0,
+
 
     "jsx-a11y/anchor-is-valid": [
       "error",
