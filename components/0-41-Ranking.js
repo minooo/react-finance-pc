@@ -5,8 +5,8 @@ export default class extends Component {
   state = {
     isNew: true
   };
-  onSwitch = () => {
-    this.setState(pre => ({ isNew: !pre.isNew }));
+  onSwitch = (v) => {
+    this.setState(() => ({ isNew: v === "isNew" }));
   };
   render() {
     const { title, bg, list, othList } = this.props;
@@ -17,7 +17,7 @@ export default class extends Component {
           <div className="font22 c333 lh100 bold">{title}</div>
           <div className="font16 c666 flex">
             <Btn
-              onClick={this.onSwitch}
+              onClick={() => this.onSwitch("isNew")}
               con={
                 <span className={`mr5 pointer ${isNew ? "c-main" : "c333"}`}>
                   最新
