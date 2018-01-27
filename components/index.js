@@ -32,5 +32,5 @@ export { default as LoanList } from "./2-02-List";
 export { default as CardList } from "./3-00-List";
 
 // new
-export { default as NewTypeLink } from "./4-00-TypeLink";
-export { default as NewList } from "./4-01-NewList";
+export { default as NewTypeLink } from "./4-21-TypeLink";
+export { default as NewList } from "./4-22-NewList";
