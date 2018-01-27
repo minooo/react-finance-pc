@@ -133,15 +133,9 @@ export default class extends Component {
             className="plr20 pt20 bg-white font14 home-shdow-mid"
             style={{ height: "520px" }}
           >
-            {/* <Ranking OnChangeLoahType={this.OnChangeLoahType} title="极速贷排行榜" bg="home-loanlist-bg" ranktype={ranktype} />
-            {rankingList && (
-              list &&
-              list.length > 0 &&
-              list.map(item => <HomeRankListItem key={uuid()} item={item} isrank="true" />)
-            )} */}
             <Ranking
-              title="同城贷排行榜"
-              bg="home-loancity-bg"
+              title="急速贷排行榜"
+              bg="home-loanlist-bg"
               list={
                 <Fragment>
                   {rankingList.list.map(item => (
