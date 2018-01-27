@@ -24,8 +24,8 @@ const config = [
   },
   {
     text: "关于我们",
-    href: "/",
-    as: "/"
+    href: "/about",
+    as: "/about"
   },
   {
     text: "联系我们",

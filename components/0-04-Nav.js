@@ -23,6 +23,11 @@ const config = [
     as: "/new"
   },
   {
+    text: "关于我们",
+    href: "/about",
+    as: "/about"
+  },
+  {
     text: "APP下载",
     href: "/downloadApp",
     as: "/downloadApp"
