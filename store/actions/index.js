@@ -29,19 +29,18 @@ export const getLoansFilter = payload => ({
 });
 
 // 信用卡
-// 信用卡首页数据
 export const CARDS_HOME = "CARDS_HOME";
 export const getCardsHome = payload => ({
   type: CARDS_HOME,
   payload
 });
 
-// 信用卡过滤条件
-export const CARDS_FILTER = "CARDS_FILTER";
-export const getCardsFilter = payload => ({
-  type: CARDS_FILTER,
+// 新闻资讯
+export const NEWS_HOME = "NEWS_HOME";
+export const getNewsHome = payload => ({
+  type: NEWS_HOME,
   payload
-});
+})
 
 // 个人中心
 // 获取用户信息
