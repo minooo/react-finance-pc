@@ -196,7 +196,7 @@ export default class extends Component {
                   newsHome.hot &&
                   newsHome.hot.list &&
                   newsHome.hot.list.length > 0 &&
-                  newsHome.hot.list.map((item, index) => (
+                  newsHome.hot.list.slice(0, 9).map((item, index) => (
                     <WrapLink
                       key={uuid()}
                       href="/"
