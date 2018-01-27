@@ -16,7 +16,8 @@ export {
   delCookie,
   getUrlLastStr,
   isIDNumber,
-  isName
+  isName,
+  addFilter
 } from "./01-common";
 export { default as cache } from "./02-cache";
 export { default as http } from "./03-http";

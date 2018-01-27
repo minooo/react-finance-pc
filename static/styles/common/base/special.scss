@@ -120,6 +120,25 @@
     font-style: italic;
   }
 }
+.home-citybg-big{
+  background-image: url("../../images/home_citylbg_0.jpg");
+  background-size: cover;
+}
+
+.home-citybg-0{
+  background-image: url("../../images/home_citylbg_1.jpg");
+  background-size: cover;
+}
+.home-citybg-1{
+  background-color: #f5f1ff;
+}
+.home-citybg-2{
+  background-color: #ddf3ff;
+}
+.home-citybg-3{
+  background-image: url("../../images/home_citylbg_4.jpg");
+  background-size: cover;
+}
 
 .home-new-link {
   background: url("../../images/home_new_tip.png") 0 center no-repeat;
@@ -144,6 +163,7 @@
 .loan-border {
   border: 1px solid #f2f2f2;
 }
+
 .loan-list-hover:hover {
   box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
