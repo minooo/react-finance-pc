@@ -41,6 +41,7 @@ export default class extends Component {
     levelFocus: 0,
     yearFee_policyFocus: 0,
     currencyFocus: 0,
+    currentPage: 1,
     hasSearched: false,
     isFetch: false,
     fetchParam: {},
@@ -53,7 +54,8 @@ export default class extends Component {
       pre => ({
         [`${key}Focus`]: index,
         isFetch: true,
-        fetchParam: { ...pre.fetchParam, [key]: id }
+        fetchParam: { ...pre.fetchParam, [key]: id },
+        currentPage: 1,
       }),
       () => {
         const { fetchParam } = this.state;
@@ -87,7 +89,7 @@ export default class extends Component {
   };
   onPageChange = page => {
     this.setState(
-      () => ({ isFetch: true }),
+      () => ({ isFetch: true, currentPage: page }),
       () => {
         const { fetchParam } = this.state;
         http
@@ -100,7 +102,11 @@ export default class extends Component {
                 response.data &&
                 response.data.lists &&
                 response.data.lists.cards;
-              this.setState(() => ({ searchList }));
+              const searchCount =
+                response.data &&
+                response.data.lists &&
+                response.data.lists.count;
+              this.setState(() => ({ searchList, searchCount }));
             } else {
               message.error(
                 response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
@@ -115,7 +121,7 @@ export default class extends Component {
     );
   };
   render() {
-    const { searchList, hasSearched, searchCount, isFetch } = this.state;
+    const { searchList, hasSearched, searchCount, isFetch, currentPage } = this.state;
     const { cardsHome, err } = this.props;
     if (err) {
       return <ErrorFetch err={err} />;
@@ -213,7 +219,7 @@ export default class extends Component {
                   <Pagination
                     hideOnSinglePage
                     className="pt30"
-                    defaultCurrent={1}
+                    current={currentPage}
                     defaultPageSize={10}
                     total={
                       hasSearched
