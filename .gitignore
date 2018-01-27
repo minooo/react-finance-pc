@@ -8,8 +8,8 @@ yarn-error.log*
 .next/
 outCDN
 package-lock.json
-/static/*
-!/static/common
+/static/styles/*
+!/static/styles/common
 
 # Runtime data
 pids
