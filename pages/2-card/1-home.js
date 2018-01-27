@@ -11,7 +11,9 @@ import {
   LoanCityFilter,
   CardList,
   ErrorFetch,
-  LoadingFetch
+  LoadingFetch,
+  Ranking,
+  CardRank
 } from "@components";
 
 const util = require("util");
@@ -172,26 +174,26 @@ export default class extends Component {
                         <span className="c-main plr5">{searchCount}</span>款产品
                       </Fragment>
                     ) : (
-                      `orry~没有找到符合您筛选条件的信用卡。${
+                        `orry~没有找到符合您筛选条件的信用卡。${
                         cardsHome &&
-                        cardsHome.recommends &&
-                        cardsHome.recommends.length > 0
+                          cardsHome.recommends &&
+                          cardsHome.recommends.length > 0
                           ? "您可以看看以下精选热门卡"
                           : ""
-                      }`
-                    )
+                        }`
+                      )
                   ) : cardsHome &&
-                  cardsHome.lists &&
-                  cardsHome.lists.count > 0 ? (
-                    <Fragment>
-                      一共为您找到
-                      <span className="c-main plr5">
-                        {cardsHome.lists.count}
-                      </span>款产品
-                    </Fragment>
-                  ) : (
-                    "sorry~暂无产品"
-                  )}
+                    cardsHome.lists &&
+                    cardsHome.lists.count > 0 ? (
+                        <Fragment>
+                          一共为您找到
+                          <span className="c-main plr5">
+                            {cardsHome.lists.count}
+                          </span>款产品
+                        </Fragment>
+                      ) : (
+                        "sorry~暂无产品"
+                      )}
                 </div>
                 {/* 满足以下条件时，出现推荐列表 */}
                 {hasSearched &&
@@ -208,13 +210,13 @@ export default class extends Component {
                   cardsHome.lists.cards.length > 0 &&
                   (hasSearched
                     ? searchList &&
-                      searchList.length > 0 &&
-                      searchList.map(item => (
-                        <CardList key={uuid()} item={item} />
-                      ))
+                    searchList.length > 0 &&
+                    searchList.map(item => (
+                      <CardList key={uuid()} item={item} />
+                    ))
                     : cardsHome.lists.cards.map(item => (
-                        <CardList key={uuid()} item={item} />
-                      )))}
+                      <CardList key={uuid()} item={item} />
+                    )))}
                 <div className="pb30 flex jc-center">
                   <Pagination
                     hideOnSinglePage
@@ -233,13 +235,34 @@ export default class extends Component {
                 </div>
               </div>
               {/* 右半拉，申请贷款以及app广告位 */}
-              <div style={{ width: "290px" }}>
-                <div className="plr20 pb20 loan-border">信用卡排行榜</div>
+              <div style={{ width: "310px" }}>
+                <div className="loan-border ptb20 plr20">
+                  <Ranking
+                    title="信用卡排行榜"
+                    bg="card-cardlist-bg"
+                    list={cardsHome &&
+                      cardsHome.new &&
+                      cardsHome.new.cards
+                      && cardsHome.new.cards.length > 0
+                      && cardsHome.new.cards.map((item, index) => (
+                        <CardRank item={item} index={index} />
+                      ))}
+                    othList={
+                      cardsHome &&
+                      cardsHome.hot &&
+                      cardsHome.hot.cards
+                      && cardsHome.hot.cards.length > 0
+                      && cardsHome.hot.cards.map((item, index) => (
+                        <CardRank item={item} index={index} />
+                      ))
+                    }
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </Layout>
+      </Layout >
     );
   }
 }
