@@ -55,7 +55,7 @@ export default class extends Component {
         [`${key}Focus`]: index,
         isFetch: true,
         fetchParam: { ...pre.fetchParam, [key]: id },
-        currentPage: 1,
+        currentPage: 1
       }),
       () => {
         const { fetchParam } = this.state;
@@ -121,7 +121,13 @@ export default class extends Component {
     );
   };
   render() {
-    const { searchList, hasSearched, searchCount, isFetch, currentPage } = this.state;
+    const {
+      searchList,
+      hasSearched,
+      searchCount,
+      isFetch,
+      currentPage
+    } = this.state;
     const { cardsHome, err } = this.props;
     if (err) {
       return <ErrorFetch err={err} />;
@@ -175,7 +181,8 @@ export default class extends Component {
                       `orry~没有找到符合您筛选条件的信用卡。${
                         cardsHome &&
                         cardsHome.recommends &&
-                        cardsHome.recommends.length > 0
+                        cardsHome.recommends.cards &&
+                        cardsHome.recommends.cards.length > 0
                           ? "您可以看看以下精选热门卡"
                           : ""
                       }`
@@ -198,8 +205,9 @@ export default class extends Component {
                   !(searchCount > 0) &&
                   cardsHome &&
                   cardsHome.recommends &&
-                  cardsHome.recommends.length > 0 &&
-                  cardsHome.recommends.map(item => (
+                  cardsHome.recommends.cards &&
+                  cardsHome.recommends.cards.length > 0 &&
+                  cardsHome.recommends.cards.map(item => (
                     <CardList key={uuid()} item={item} />
                   ))}
                 {cardsHome &&
