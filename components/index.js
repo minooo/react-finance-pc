@@ -9,7 +9,7 @@ export { default as LoadingFetch } from "./0-07-LoadingFetch";
 export { default as MultiColorIco } from "./0-10-MultiColorIco";
 export { default as AlertBg } from "./0-13-AlertBg";
 export { default as Foot } from "./0-05-Foot";
-export { default as Ranking } from "./0-14-Ranking.js";
+export { default as Ranking } from "./0-41-Ranking.js";
 // home
 export { default as HomeType } from "./1-00-Type";
 export { default as HomeOnlineLoans } from "./1-42-OnlineLoans";
