@@ -21,10 +21,9 @@ export const getMySearch = payload => ({
 });
 
 // 贷款
-// 贷款过滤条件
-export const LOANS_FILTER = "LOANS_FILTER";
-export const getLoansFilter = payload => ({
-  type: LOANS_FILTER,
+export const LOANS_HOME = "LOANS_HOME";
+export const getLoansHome = payload => ({
+  type: LOANS_HOME,
   payload
 });
 

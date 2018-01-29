@@ -36,7 +36,6 @@ export const isAndroid = () => /(Android)/i.test(navigator.userAgent);
 export const setTitle = title => {
   document.title = title;
   if (isIOS() && !window.__wxjs_is_wkwebview) { // eslint-disable-line
-    // eslint-disable-line
     const i = document.createElement("iframe");
     i.src = "/favicon.ico";
     i.style.display = "none";
@@ -133,15 +132,15 @@ export const addDefault = (fromArr, toArr) => {
 
 // 针对card loan 的 filter数据重构
 export const addFilter = (initObj, toArr) => {
-  const arr = []
-  toArr.forEach((item) => {
-    const { key } = item
-    const list = initObj[key]
-    const newList = item.list.concat(list)
-    arr.push({ ...item, list: newList })
-  })
-  return arr
-}
+  const arr = [];
+  toArr.forEach(item => {
+    const { key } = item;
+    const list = initObj[key];
+    const newList = item.list.concat(list);
+    arr.push({ ...item, list: newList });
+  });
+  return arr;
+};
 
 export const imgUrl = str => {
   if (!str) return "";
@@ -181,4 +180,19 @@ export const getUrlLastStr = pathStr => {
   const parts = pathStr.split("/");
   const param = parts.pop() || parts.pop();
   return param;
+};
+
+// 处理 ["11d", "12d", "15m"] 为对应的天数，月数
+export const arrToDateString = arr => {
+  const len = arr.length;
+  if (!arr || len === 0) {
+    return "不存在";
+  }
+  const first =
+    arr[0].slice(0, -1) + (arr[0].substr(-1, 1) === "d" ? "天" : "月");
+  const last = arr[len - 1].slice(0, -1) + (arr[len - 1].substr(-1, 1) === "d" ? "天" : "月");
+  if (len === 1) {
+    return first;
+  }
+  return `${first}-${last}`;
 };

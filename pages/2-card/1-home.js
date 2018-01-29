@@ -135,7 +135,7 @@ export default class extends Component {
       return <ErrorFetch err={err} />;
     }
     return (
-      <Layout title="贷款超市" style={{ backgroundColor: "#f8f8f8" }}>
+      <Layout title="办信用卡" style={{ backgroundColor: "#f8f8f8" }}>
         {/* banner */}
         {isFetch && <LoadingFetch />}
         <div style={{ height: "300px", backgroundColor: "#6bb0ff" }}>
@@ -180,27 +180,27 @@ export default class extends Component {
                         <span className="c-main plr5">{searchCount}</span>款产品
                       </Fragment>
                     ) : (
-                        `orry~没有找到符合您筛选条件的信用卡。${
+                      `orry~没有找到符合您筛选条件的信用卡。${
                         cardsHome &&
                         cardsHome.recommends &&
                         cardsHome.recommends.cards &&
                         cardsHome.recommends.cards.length > 0
                           ? "您可以看看以下精选热门卡"
                           : ""
-                        }`
-                      )
+                      }`
+                    )
                   ) : cardsHome &&
-                    cardsHome.lists &&
-                    cardsHome.lists.count > 0 ? (
-                        <Fragment>
-                          一共为您找到
-                          <span className="c-main plr5">
-                            {cardsHome.lists.count}
-                          </span>款产品
-                        </Fragment>
-                      ) : (
-                        "sorry~暂无产品"
-                      )}
+                  cardsHome.lists &&
+                  cardsHome.lists.count > 0 ? (
+                    <Fragment>
+                      一共为您找到
+                      <span className="c-main plr5">
+                        {cardsHome.lists.count}
+                      </span>款产品
+                    </Fragment>
+                  ) : (
+                    "sorry~暂无产品"
+                  )}
                 </div>
                 {/* 满足以下条件时，出现推荐列表 */}
                 {hasSearched &&
@@ -218,13 +218,13 @@ export default class extends Component {
                   cardsHome.lists.cards.length > 0 &&
                   (hasSearched
                     ? searchList &&
-                    searchList.length > 0 &&
-                    searchList.map(item => (
-                      <CardList key={uuid()} item={item} />
-                    ))
+                      searchList.length > 0 &&
+                      searchList.map(item => (
+                        <CardList key={uuid()} item={item} />
+                      ))
                     : cardsHome.lists.cards.map(item => (
-                      <CardList key={uuid()} item={item} />
-                    )))}
+                        <CardList key={uuid()} item={item} />
+                      )))}
                 <div className="pb30 flex jc-center">
                   <Pagination
                     hideOnSinglePage
@@ -234,7 +234,7 @@ export default class extends Component {
                     total={
                       hasSearched
                         ? searchCount
-                        : cardsHome && cardsHome.lists && cardsHome.lists.count
+                        : cardsHome && cardsHome.lists && cardsHome.lists.count > 0
                           ? cardsHome.lists.count
                           : 1
                     }
@@ -248,20 +248,22 @@ export default class extends Component {
                   <Ranking
                     title="信用卡排行榜"
                     bg="card-cardlist-bg"
-                    list={cardsHome &&
+                    list={
+                      cardsHome &&
                       cardsHome.new &&
-                      cardsHome.new.cards
-                      && cardsHome.new.cards.length > 0
-                      && cardsHome.new.cards.map((item, index) => (
-                        <CardRank item={item} index={index} />
-                      ))}
+                      cardsHome.new.cards &&
+                      cardsHome.new.cards.length > 0 &&
+                      cardsHome.new.cards.map((item, index) => (
+                        <CardRank key={uuid()} item={item} index={index} />
+                      ))
+                    }
                     othList={
                       cardsHome &&
                       cardsHome.hot &&
-                      cardsHome.hot.cards
-                      && cardsHome.hot.cards.length > 0
-                      && cardsHome.hot.cards.map((item, index) => (
-                        <CardRank item={item} index={index} />
+                      cardsHome.hot.cards &&
+                      cardsHome.hot.cards.length > 0 &&
+                      cardsHome.hot.cards.map((item, index) => (
+                        <CardRank key={uuid()} item={item} index={index} />
                       ))
                     }
                   />
@@ -270,7 +272,7 @@ export default class extends Component {
             </div>
           </div>
         </div>
-      </Layout >
+      </Layout>
     );
   }
 }
