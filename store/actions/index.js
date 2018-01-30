@@ -20,13 +20,18 @@ export const getMySearch = payload => ({
   payload
 });
 
-// 贷款
-// 贷款过滤条件
-export const LOANS_FILTER = "LOANS_FILTER";
-export const getLoansFilter = payload => ({
-  type: LOANS_FILTER,
+// 贷款同城
+export const LOANS_HOME = "LOANS_HOME";
+export const getLoansHome = payload => ({
+  type: LOANS_HOME,
   payload
 });
+// 贷款极速
+export const LOANS_SPEED_HOME = "LOANS_SPEED_HOME"
+export const getLoansSpeedHome = payload => ({
+  type: LOANS_SPEED_HOME,
+  payload
+})
 
 // 信用卡
 export const CARDS_HOME = "CARDS_HOME";

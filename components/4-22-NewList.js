@@ -3,8 +3,8 @@ import { WrapLink } from "@components";
 export default ({ item }) => (
   <WrapLink
     style={{ marginBottom: "40px" }}
-    href="/"
-    as="/"
+    href={`/3-new/2-detail?id=${item.id}`}
+    as={`/new/${item.id}`}
     className="flex c333 pr20 new-list-active"
   >
     <div
