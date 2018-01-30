@@ -153,7 +153,7 @@ export default class extends Component {
                 首页
               </WrapLink>
               <Icon type="right" className="plr5" />
-              <span className="c999 font16">贷款超市</span>
+              <span className="c999 font16">办信用卡</span>
             </div>
             {/* 核心块 */}
             <div className="flex pr20">

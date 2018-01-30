@@ -55,7 +55,7 @@ export const clipPrice = item => {
   const str = num.toFixed(2);
 
   if (!re.test(item)) {
-    throw new Error("传入的参数为非法数字，请检查！");
+    console.info(item, "传入的参数为非法数字，请检查！");
   }
 
   if (str.substr(-1) !== "0") {
@@ -108,8 +108,8 @@ export const getSomeFromArr = (arr, num) => {
 };
 
 // search 转为 obj
-export const searchToObj = () => {
-  const { search } = window.location;
+export const searchToObj = (path) => {
+  const { search } = !path ? window.location : { search: path.slice(path.indexOf("?")) };
   const obj = {};
   if (!search || search.length < 1) return null;
   const arr = search.slice(1).split("&");
