@@ -5,6 +5,7 @@ const LRUCache = require("lru-cache");
 
 const port = parseInt(process.env.PORT, 10) || 8868;
 const dev = process.env.NODE_ENV !== "production";
+const test = process.env.NODE_TEST === "test"
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -23,7 +24,7 @@ function getCacheKey(ctx) {
 }
 
 function renderAndCache(ctx, pagePath, noCache, queryParams = null) {
-  if (dev) ssrCache.reset();
+  if (dev || test) ssrCache.reset()
   if (noCache === "noCache") {
     return app
       .renderToHTML(ctx.req, ctx.res, pagePath, queryParams)
