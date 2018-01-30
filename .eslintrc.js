@@ -56,7 +56,7 @@ module.exports = {
     semi: 0,
     curly: 0,
     camelcase: 0,
-    "max-len": ["error", 200],
+    "max-len": ["error", 300],
     "comma-dangle": 0,
     "arrow-parens": 0,
     "object-curly-newline": 0,
