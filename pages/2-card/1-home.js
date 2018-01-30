@@ -182,9 +182,9 @@ export default class extends Component {
                     ) : (
                         `orry~没有找到符合您筛选条件的信用卡。${
                         cardsHome &&
-                        cardsHome.recommends &&
-                        cardsHome.recommends.cards &&
-                        cardsHome.recommends.cards.length > 0
+                          cardsHome.recommends &&
+                          cardsHome.recommends.cards &&
+                          cardsHome.recommends.cards.length > 0
                           ? "您可以看看以下精选热门卡"
                           : ""
                         }`
@@ -253,7 +253,7 @@ export default class extends Component {
                       cardsHome.new.cards
                       && cardsHome.new.cards.length > 0
                       && cardsHome.new.cards.map((item, index) => (
-                        <CardRank item={item} index={index} />
+                        <CardRank key={uuid()} item={item} index={index} />
                       ))}
                     othList={
                       cardsHome &&
@@ -261,7 +261,7 @@ export default class extends Component {
                       cardsHome.hot.cards
                       && cardsHome.hot.cards.length > 0
                       && cardsHome.hot.cards.map((item, index) => (
-                        <CardRank item={item} index={index} />
+                        <CardRank key={uuid()} item={item} index={index} />
                       ))
                     }
                   />

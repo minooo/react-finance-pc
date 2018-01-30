@@ -70,6 +70,7 @@ app.prepare().then(() => {
   server.use(router.get("/new", ctx => renderAndCache(ctx, "/3-new/1-home")));
   server.use(router.get("/downloadApp", ctx => renderAndCache(ctx, "/downloadApp")));
   server.use(router.get("/login", ctx => renderAndCache(ctx, "/4-me/1-login")));
+  server.use(router.get("/about", ctx => renderAndCache(ctx, "/about")));
 
   server.use(async ctx => {
     await handle(ctx.req, ctx.res);
