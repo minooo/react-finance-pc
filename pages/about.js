@@ -222,11 +222,10 @@ export default class extends Component {
             </TweenOne>
             <QueueAnim
               type="left"
-              leaveReverse
               ease={["easeOutCubic", "easeInCubic"]}
               key={uuid()}
               style={{ height: "378px", right: "-37px" }}
-              className="flex column jc-between relative"
+              className="relative"
             >
               <div key={uuid()} className="about-culture-list  vision">
                 <div>企业愿景</div>
