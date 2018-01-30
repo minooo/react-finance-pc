@@ -311,14 +311,9 @@ export default class extends Component {
                       ) : (
                           `orry~没有找到符合您筛选条件的产品。${
                           loansHome &&
-<<<<<<< HEAD
-                            loansHome.recommend &&
-                            loansHome.recommend.length > 0
-=======
                           loansHome.recommend &&
                           loansHome.recommend.list &&
                           loansHome.recommend.list.length > 0
->>>>>>> 9a3bfd7141774f267a649abe9f86c39cc88af37b
                             ? "您可以看看以下精选贷款产品"
                             : ""
                           }`
