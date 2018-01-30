@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import Head from "next/head";
+import { Layout } from "@components"
 
 const echarts = require("../../static/scripts/echarts.min.js");
 
 export default class extends Component {
+  static getInitialProps({ query: { id } }) {
+    return { id };
+  }
   state = {};
   componentDidMount() {
     this.initCharts(this.option);
@@ -51,16 +54,15 @@ export default class extends Component {
     ]
   };
   render() {
+    const { id } = this.props
     return (
-      <div className="bg-white">
-        <Head>
-          <title>手动阀</title>
-        </Head>
+      <Layout title="登陆">
+        您当前访问的产品id是：{id}
         <div
           style={{ width: "600px", height: "400px" }}
           ref={ele => (this.echartBox = ele)}
         />
-      </div>
+      </Layout>
     );
   }
 }
