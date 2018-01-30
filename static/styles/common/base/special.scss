@@ -120,22 +120,22 @@
     font-style: italic;
   }
 }
-.home-citybg-big{
+.home-citybg-big {
   background-image: url("../../images/home_citylbg_0.jpg");
   background-size: cover;
 }
 
-.home-citybg-0{
+.home-citybg-0 {
   background-image: url("../../images/home_citylbg_1.jpg");
   background-size: cover;
 }
-.home-citybg-1{
+.home-citybg-1 {
   background-color: #f5f1ff;
 }
-.home-citybg-2{
+.home-citybg-2 {
   background-color: #ddf3ff;
 }
-.home-citybg-3{
+.home-citybg-3 {
   background-image: url("../../images/home_citylbg_4.jpg");
   background-size: cover;
 }
@@ -170,12 +170,12 @@
 }
 //card
 
-.card-cardlist-bg{
+.card-cardlist-bg {
   background-image: url("../../images/card_rank_bg.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
-.bg-999{
+.bg-999 {
   background-color: #999;
 }
 //new
@@ -215,4 +215,130 @@
 //about
 .about-banner-bg {
   background: url("../../images/about_banner_bg.jpg") center top no-repeat;
+}
+.about-title-bg {
+  background: url("../../images/about_title_bg.png") center center no-repeat;
+}
+// 业务模式
+.about-title-businessbg {
+  background: url("../../images/about_title_businessbg.png") center center
+    no-repeat;
+}
+.about_business_bg {
+  height: 766px;
+  background: url("../../images/about_business_bg.jpg") top no-repeat;
+}
+.about_business-title {
+  font-size: 24px;
+  color: #fff;
+  font-weight: bold;
+  border-left: 6px solid #fff;
+  line-height: 100%;
+  padding-left: 15px;
+  letter-spacing: 1px;
+}
+.about-business-two {
+  height: 230px;
+  margin-bottom: 40px;
+  padding: 30px;
+  background: url("../../images/about_business_two.jpg") no-repeat;
+}
+.about-business-three {
+  height: 230px;
+  padding: 30px;
+  background: url("../../images/about_business_three.jpg") no-repeat;
+}
+// 公司文化
+.about-culture-title {
+  background: url("../../images/about_culture_title.png") no-repeat;
+  letter-spacing: 2px;
+  color: #f9f8f8;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 92px;
+  margin: 0 auto;
+}
+.about-culture-list {
+  text-align: right;
+  height: 74px;
+  padding-top: 5px;
+  padding-right: 118px;
+  margin-bottom:28px;
+  div {
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #4c8dfc;
+    font-weight: bold;
+    line-height: 100%;
+    margin-bottom: 21px;
+  }
+  p {
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #bbbbbb;
+    line-height: 100%;
+  }
+}
+.vision {
+  background: url("../../images/about_culture_vision.png") right no-repeat;
+}
+.mission {
+  background: url("../../images/about_culture_mission.png") right no-repeat;
+}
+.idea {
+  background: url("../../images/about_culture_idea.png") right no-repeat;
+}
+.value {
+  background: url("../../images/about_culture_value.png") right no-repeat;
+}
+// 联系我们
+.about-contact-title {
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: #333333;
+  font-weight: bold;
+  text-align: center;
+  background: url("../../images/about_contact_title.png") center center
+    no-repeat;
+}
+.about-contact-list {
+  width: 378px;
+  div {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #4c8dfc;
+    line-height: 100%;
+    margin-bottom: 30px;
+  }
+  p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #999999;
+    line-height: 100%;
+  }
+  a {
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #999999;
+    line-height: 100%;
+  }
+}
+.about-contact-bg {
+  width: 630px;
+  height: 527px;
+  padding-bottom: 25px;
+  background: url("../../images/about_contact_bg.jpg") no-repeat;
+  p {
+    width: 563px;
+    line-height: 30px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #ffffff;
+  }
+  a {
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #ffffff;
+  }
 }

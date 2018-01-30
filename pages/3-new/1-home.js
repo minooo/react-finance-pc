@@ -56,8 +56,12 @@ export default class extends Component {
       }),
       () => {
         const { typeId, currentPage } = this.state;
-        const { newsHome } = this.props
-        const id = typeId || (newsHome && newsHome.type && newsHome.type[0] ? newsHome.type[0].id : null)
+        const { newsHome } = this.props;
+        const id =
+          typeId ||
+          (newsHome && newsHome.type && newsHome.type[0]
+            ? newsHome.type[0].id
+            : null);
         this.fetchData(id, currentPage);
       }
     );
