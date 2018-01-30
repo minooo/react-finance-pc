@@ -170,12 +170,12 @@
 }
 //card
 
-.card-cardlist-bg{
+.card-cardlist-bg {
   background-image: url("../../images/card_rank_bg.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
-.bg-999{
+.bg-999 {
   background-color: #999;
 }
 //new
@@ -316,6 +316,12 @@
     color: #999999;
     line-height: 100%;
   }
+  a {
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #999999;
+    line-height: 100%;
+  }
 }
 .about-contact-bg {
   width: 630px;
@@ -325,6 +331,11 @@
   p {
     width: 563px;
     line-height: 30px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #ffffff;
+  }
+  a {
     font-size: 18px;
     letter-spacing: 1px;
     color: #ffffff;

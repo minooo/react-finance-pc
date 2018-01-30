@@ -120,7 +120,9 @@ export default class extends Component {
               >
                 <img
                   key={uuid()}
+                  style={{ width: "500px", height: "250px" }}
                   src="/static/images/about_business_one.jpg"
+                  className="img-bg"
                   alt=""
                 />
                 <div
@@ -286,7 +288,13 @@ export default class extends Component {
                 </div>
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>在线咨询</div>
-                  <p key={uuid()}>QQ:506340225</p>
+                  <a
+                    key={uuid()}
+                    style={{ target: "_blank" }}
+                    href="http://wpa.qq.com/msgrd?v=3&uin=506340225&site=qq&menu=yes"
+                  >
+                    QQ:506340225
+                  </a>
                 </div>
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>公司地址</div>
@@ -300,7 +308,14 @@ export default class extends Component {
                 className="about-contact-bg flex jc-center ai-end r2"
               >
                 <p key={uuid()}>
-                  市场合作：如果有商务合作、市场合作、品牌合作、渠道合作、流量合作等需求，请联系QQ：506340225
+                  市场合作：如果有商务合作、市场合作、品牌合作、渠道合作、流量合作等需求，请联系
+                  <a
+                    key={uuid()}
+                    style={{ target: "_blank" }}
+                    href="http://wpa.qq.com/msgrd?v=3&uin=506340225&site=qq&menu=yes"
+                  >
+                    QQ:506340225
+                  </a>
                   点击号码即可申请加入
                   我们会在两个自然工作日内尽快与您联系。为提高合作效率，不接受电话来访，客服热线无法转接。感谢您的配合!
                 </p>
