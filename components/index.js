@@ -30,7 +30,7 @@ export { default as LoanList } from "./2-02-List";
 
 // card
 export { default as CardList } from "./3-00-List";
-
+export { default as CardRank } from "./2-41-Rank";
 // new
 export { default as NewTypeLink } from "./4-21-TypeLink";
 export { default as NewList } from "./4-22-NewList";

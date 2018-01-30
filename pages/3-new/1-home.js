@@ -55,8 +55,10 @@ export default class extends Component {
         currentPage: 1
       }),
       () => {
-        const { typeId } = this.state;
-        this.fetchData(typeId);
+        const { typeId, currentPage } = this.state;
+        const { newsHome } = this.props
+        const id = typeId || (newsHome && newsHome.type && newsHome.type[0] ? newsHome.type[0].id : null)
+        this.fetchData(id, currentPage);
       }
     );
   };
@@ -67,14 +69,14 @@ export default class extends Component {
         currentPage: page
       }),
       () => {
-        const { typeId } = this.state;
-        this.fetchData(typeId);
+        const { typeId, currentPage } = this.state;
+        this.fetchData(typeId, currentPage);
       }
     );
   };
-  fetchData = id => {
+  fetchData = (id, page) => {
     http
-      .get("information/list", { type: id })
+      .get("information/list", { type: id, page })
       .then(response => {
         // 这里的判断条件根据具体的接口情况而调整
         this.setState(() => ({ isFetch: false, hasSearched: true }));
@@ -196,7 +198,7 @@ export default class extends Component {
                   newsHome.hot &&
                   newsHome.hot.list &&
                   newsHome.hot.list.length > 0 &&
-                  newsHome.hot.list.map((item, index) => (
+                  newsHome.hot.list.slice(0, 9).map((item, index) => (
                     <WrapLink
                       key={uuid()}
                       href="/"
