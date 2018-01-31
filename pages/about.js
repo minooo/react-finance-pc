@@ -51,12 +51,10 @@ export default class extends Component {
               }}
               className=" r2"
             >
-              <img
+              <div
                 key={uuid()}
-                src="/static/images/about_intro.jpg"
                 style={{ bottom: "-30px", right: "-30px" }}
-                className="relative"
-                alt=""
+                className="relative about-intro"
               />
             </TweenOne>
             <QueueAnim
@@ -118,13 +116,7 @@ export default class extends Component {
                 }}
                 style={{ width: "500px", height: "500px" }}
               >
-                <img
-                  key={uuid()}
-                  style={{ width: "500px", height: "250px" }}
-                  src="/static/images/about_business_one.jpg"
-                  className="img-bg"
-                  alt=""
-                />
+                <div key={uuid()} className="about-business-one" />
                 <div
                   key={uuid()}
                   style={{ height: "250px" }}
@@ -222,11 +214,10 @@ export default class extends Component {
             </TweenOne>
             <QueueAnim
               type="left"
-              leaveReverse
               ease={["easeOutCubic", "easeInCubic"]}
               key={uuid()}
               style={{ height: "378px", right: "-37px" }}
-              className="flex column jc-between relative"
+              className="relative"
             >
               <div key={uuid()} className="about-culture-list  vision">
                 <div>企业愿景</div>
@@ -246,13 +237,11 @@ export default class extends Component {
               </div>
             </QueueAnim>
           </OverPack>
-          <div key={uuid()} style={{ width: "860px" }}>
-            <img
-              key={uuid()}
-              src="/static/images/about_culture_bg.jpg"
-              alt=""
-            />
-          </div>
+          <div
+            key={uuid()}
+            style={{ width: "860px" }}
+            className="about-culture-bg"
+          />
         </div>
         {/* 联系我们 */}
         <div style={{ height: "844px" }}>
