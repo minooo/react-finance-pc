@@ -1,7 +1,7 @@
 import { Icon } from "antd";
 import { WrapLink } from "@components";
 
-export default ({ item, isrank }) => (
+export default ({ item, isrank, isRight }) => (
   <WrapLink href="/index" as="/" className="block">
     <div
       className={`flex mb10 pl10 pt20 pb15 ${isrank ? "pr20" : "pr15"} h100 home-loanlist-hover pointer`}
@@ -21,9 +21,13 @@ export default ({ item, isrank }) => (
             {item.content}
           </div>
         </div>
-        <div className="flex ai-center c999">
-          <Icon type="right" style={{ fontSize: 14 }} />
-        </div>
+        {
+          isRight ?
+          <div className="flex ai-center c999">
+            <Icon type="right" style={{ fontSize: 14 }} />
+          </div> : null
+        }
+
       </div>
     </div>
   </WrapLink>

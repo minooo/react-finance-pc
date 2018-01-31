@@ -388,14 +388,14 @@ export default class extends Component {
                   <div className="flex jc-around ai-center mb20">
                     <div className="w70" style={{ height: "130px" }}>
                       <img
-                        src="../../static/images/foot_app.png"
+                        src="/static/images/foot_app.png"
                         className="w-100"
                         alt=""
                       />
                     </div>
                     <div className="w100 h100">
                       <img
-                        src="../../static/images/foot_code.png"
+                        src="/static/images/foot_code.png"
                         className="w-100"
                         alt=""
                       />

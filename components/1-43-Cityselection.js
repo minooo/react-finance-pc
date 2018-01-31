@@ -61,14 +61,14 @@ export default ({ citySelection, rankingList }) => (
           list={
             <Fragment>
               {rankingList.list.map(item => (
-                <HomeRankListItem key={uuid()} item={item} isrank />
+                <HomeRankListItem key={uuid()} item={item} isrank isRight="true" />
               ))}
             </Fragment>
           }
           othList={
             <Fragment>
               {rankingList.othList.map(item => (
-                <HomeRankListItem key={uuid()} item={item} isrank />
+                <HomeRankListItem key={uuid()} item={item} isrank isRight="true" />
               ))}
             </Fragment>
           }

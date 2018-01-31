@@ -55,7 +55,7 @@ export default class extends Component {
                 >
                   <div className="w100 h100">
                     <img
-                      src="../static/images/foot_code.png"
+                      src="/static/images/foot_code.png"
                       alt=""
                       className="w-100 h-100"
                     />
@@ -102,14 +102,14 @@ export default class extends Component {
               <div className="flex jc-between ai-center">
                 <div className="w80 h116 img-bg">
                   <img
-                    src="../static/images/foot_app.png"
+                    src="/static/images/foot_app.png"
                     className="w-100 h-100"
                     alt=""
                   />
                 </div>
                 <div className="w90 h90 img-bg">
                   <img
-                    src="../static/images/foot_code.png"
+                    src="/static/images/foot_code.png"
                     alt=""
                     className="w-100 h-100"
                   />
@@ -122,7 +122,7 @@ export default class extends Component {
                 onlineLoans.list.length > 0 &&
                 onlineLoans.list.map(item => (
                   <div style={{ width: "50%" }} key={uuid()}>
-                    <HomeRankListItem item={item} isrank={false} />
+                    <HomeRankListItem item={item} isrank={false} isRight="true" />
                   </div>
                 ))}
             </div>
@@ -139,14 +139,14 @@ export default class extends Component {
               list={
                 <Fragment>
                   {rankingList.list.map(item => (
-                    <HomeRankListItem key={uuid()} item={item} isrank />
+                    <HomeRankListItem key={uuid()} item={item} isRight="true" isrank />
                   ))}
                 </Fragment>
               }
               othList={
                 <Fragment>
                   {rankingList.othList.map(item => (
-                    <HomeRankListItem key={uuid()} item={item} isrank />
+                    <HomeRankListItem key={uuid()} item={item} isRight="true" isrank />
                   ))}
                 </Fragment>
               }
