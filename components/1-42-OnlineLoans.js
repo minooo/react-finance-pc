@@ -53,13 +53,7 @@ export default class extends Component {
                   }}
                   className="w110 h110 bg-white ptb5 plr5 home-shdow-sm r2"
                 >
-                  <div className="w100 h100">
-                    <img
-                      src="../static/images/foot_code.png"
-                      alt=""
-                      className="w-100 h-100"
-                    />
-                  </div>
+                  <div className="w100 h100 code-bg" />
                 </div>
               )}
             </div>
@@ -112,20 +106,8 @@ export default class extends Component {
                 APP下载，享专属优惠
               </div>
               <div className="flex jc-between ai-center">
-                <div className="w80 h116 img-bg">
-                  <img
-                    src="../static/images/foot_app.png"
-                    className="w-100 h-100"
-                    alt=""
-                  />
-                </div>
-                <div className="w90 h90 img-bg">
-                  <img
-                    src="../static/images/foot_code.png"
-                    alt=""
-                    className="w-100 h-100"
-                  />
-                </div>
+                <div className="w80 h116 app-bg" />
+                <div className="w90 h90 code-bg" />
               </div>
             </div>
             <div className="flex equal wrap pl5">

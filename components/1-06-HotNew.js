@@ -3,13 +3,10 @@ import { WrapLink } from "@components";
 
 export default ({ item, index }) => (
   <div style={{ width: "224px" }}>
-    <div style={{ height: "140px" }} className="img-bg home-shdow-sm mb10">
-      <img
-        src={`/static/images/home_hotnew_${index}.png`}
-        className="w-100 h-100"
-        alt=""
-      />
-    </div>
+    <div
+      style={{ height: "140px" }}
+      className={`home-shdow-sm mb10 home-hotnew-bg${index}`}
+    />
     {item &&
       item.length > 0 &&
       item.map(n => (
