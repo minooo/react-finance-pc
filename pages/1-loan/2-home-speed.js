@@ -27,7 +27,11 @@ export default class extends Component {
 
     if (!store.getState().loansSpeedHome) {
       try {
-        const loansHomeFetch = await http.get("loans/index/topspeed", null, isServer);
+        const loansHomeFetch = await http.get(
+          "loans/index/topspeed",
+          null,
+          isServer
+        );
         const loansHomeData = loansHomeFetch.data;
         store.dispatch(getLoansSpeedHome(loansHomeData));
       } catch (error) {
@@ -60,7 +64,7 @@ export default class extends Component {
         icoActive: "loan-tab-one-active"
       },
       { title: "极速贷", ico: "loan-tab-two", icoActive: "loan-tab-two-active" }
-    ],
+    ]
   };
   /* eslint-enable */
   onCityChoice = (key, id, index) => {
@@ -151,7 +155,7 @@ export default class extends Component {
       hasCitySearched,
       searchCityList,
       searchCityCount,
-      currentSearchPage,
+      currentSearchPage
     } = this.state;
     const { loansSpeedHome, err } = this.props;
     if (err) {
@@ -200,7 +204,11 @@ export default class extends Component {
                 首页
               </WrapLink>
               <Icon type="right" className="plr5" />
-              <WrapLink href="/1-loan/1-home" as="/loan" className="c333 font16">
+              <WrapLink
+                href="/1-loan/1-home"
+                as="/loan"
+                className="c333 font16"
+              >
                 贷款超市
               </WrapLink>
               <Icon type="right" className="plr5" />
@@ -336,20 +344,8 @@ export default class extends Component {
                     APP下载，享专属优惠
                   </div>
                   <div className="flex jc-around ai-center mb20">
-                    <div className="w70" style={{ height: "130px" }}>
-                      <img
-                        src="../../static/images/foot_app.png"
-                        className="w-100"
-                        alt=""
-                      />
-                    </div>
-                    <div className="w100 h100">
-                      <img
-                        src="../../static/images/foot_code.png"
-                        className="w-100"
-                        alt=""
-                      />
-                    </div>
+                    <div className="w70 app-bg" style={{ height: "130px" }} />
+                    <div className="w100 h100 code-bg" />
                   </div>
                   <div className="c-main font14 text-center lh120">
                     最高可借20万,当天放款

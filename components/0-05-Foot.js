@@ -47,11 +47,14 @@ export default () => (
   <div
     style={{
       height: "236px",
-      backgroundColor: "#404040",
+      backgroundColor: "#404040"
     }}
     className="w-100"
   >
-    <div style={{ backgroundColor: "#404040", paddingTop: "40px" }} className="box">
+    <div
+      style={{ backgroundColor: "#404040", paddingTop: "40px" }}
+      className="box"
+    >
       <div className="flex jc-between">
         <div
           style={{ width: "210px" }}
@@ -71,23 +74,21 @@ export default () => (
         </div>
         <div style={{ width: "815px" }} className="flex jc-between">
           <div className="flex ai-center">
-            <img src="/static/images/foot_app.png" alt="" />
+            <div style={{ height: "132px" }} className=" w72 app-bg" />
             <div className="font14 ml20 c-white">
               <div className="mb10">嘟嘟e融APP</div>
-              <WrapLink>
-                立即下载&nbsp;&gt;
-              </WrapLink>
+              <WrapLink>立即下载&nbsp;&gt;</WrapLink>
             </div>
           </div>
           <div className="flex ai-center">
-            <img src="/static/images/foot_code.png" alt="" />
+            <div className="w110 h110 code-bg" />
             <div className="font14 ml20 c-white">
               <div className="mb10">嘟嘟e融公众号</div>
               <div>扫码进入&nbsp;&gt;</div>
             </div>
           </div>
           <div className="flex ai-center">
-            <img src="/static/images/foot_code.png" alt="" />
+            <div className="w110 h110 code-bg" />
             <div className="font14 ml20 c-white">
               <div className="mb10">嘟嘟e融手机版</div>
               <div>扫码进入&nbsp;&gt;</div>
@@ -99,5 +100,5 @@ export default () => (
         Copyright&nbsp;2018&nbsp;&nbsp;河南晨隆金融服务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;豫ICP备13439999号-2
       </div>
     </div>
-  </div >
+  </div>
 );
