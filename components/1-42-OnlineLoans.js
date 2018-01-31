@@ -60,40 +60,6 @@ export default class extends Component {
           </div>
           <div className="flex overflow-h">
             <div className="pr30">
-<<<<<<< HEAD
-              <div
-                className="mb20 overflow-h"
-                style={{ width: "200px", height: "125px" }}
-              >
-                <Carousel autoplay afterChange={this.afterChange}>
-                  {onlineLoans.carouselList.map(({ img, href }) => (
-                    <WrapLink href={href} key={uuid()}>
-                      <img className="pointer" src={img} alt="" />
-                    </WrapLink>
-                  ))}
-                </Carousel>
-              </div>
-              <div className="text-center mb20">
-                <div className="font16 mb10 lh100 text-overflow-1 bold">
-                  {onlineLoans.carouselList[focus].title}
-                </div>
-                <div className="font14 lh120 text-overflow-1">
-                  {onlineLoans.carouselList[focus].content}
-                </div>
-              </div>
-              <div className="flex jc-center mb20">
-                <Btn
-                  con={
-                    <span className="block font18 c-white lh150 pointer">
-                      免费申请
-                    </span>
-                  }
-                  className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm"
-                  style={{ width: "140px" }}
-                  href={onlineLoans.carouselList[focus].href}
-                />
-              </div>
-=======
               {onlineLoans.pop &&
                 onlineLoans.pop.list &&
                 onlineLoans.pop.list.length > 0 && (
@@ -136,7 +102,6 @@ export default class extends Component {
                     </div>
                   </Fragment>
                 )}
->>>>>>> master
               <div className="text-center lh150 font14 mb15">
                 APP下载，享专属优惠
               </div>
