@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import uuid from "uuid/v4";
 import {
   Ranking,
@@ -29,24 +28,25 @@ export default ({ citySelection, rankingList }) => (
       </div>
       <div className="flex mt20">
         <WrapLink
-          href="/"
-          as="/"
+          href="/1-loan/1-home"
+          as="/loan"
           className="plr30 img-bg c333 block home-citybg-big"
           style={{ width: "345px", height: "472xp", paddingTop: "50px" }}
         >
           <div className="font26 mb20 lh120 text-overflow-1 bold c333">
-            {citySelection.list[0].title}
+            {citySelection.length > 0 && citySelection[0].name}
           </div>
           <div className="font14 lh150 text-overflow-2 c333">
-            {citySelection.list[0].content}
+            {citySelection.length > 0 && citySelection[0].description}
           </div>
         </WrapLink>
         <div className="equal flex wrap">
-          {citySelection.list
-            .slice(1, 5)
-            .map((item, index) => (
-              <HomeCityListItem key={uuid()} index={index} item={item} />
-            ))}
+          {citySelection.length > 0 &&
+            citySelection
+              .slice(1, 5)
+              .map((item, index) => (
+                <HomeCityListItem key={uuid()} index={index} item={item} />
+              ))}
         </div>
       </div>
     </div>
@@ -59,18 +59,20 @@ export default ({ citySelection, rankingList }) => (
           title="同城贷排行榜"
           bg="home-loancity-bg"
           list={
-            <Fragment>
-              {rankingList.list.map(item => (
-                <HomeRankListItem key={uuid()} item={item} isrank />
-              ))}
-            </Fragment>
+            rankingList.new &&
+            rankingList.new.list &&
+            rankingList.new.list.length > 0 &&
+            rankingList.new.list.map(item => (
+              <HomeRankListItem key={uuid()} item={item} isrank />
+            ))
           }
           othList={
-            <Fragment>
-              {rankingList.othList.map(item => (
-                <HomeRankListItem key={uuid()} item={item} isrank />
-              ))}
-            </Fragment>
+            rankingList.hot &&
+            rankingList.hot.list &&
+            rankingList.hot.list.length > 0 &&
+            rankingList.hot.list.map(item => (
+              <HomeRankListItem key={uuid()} item={item} isrank />
+            ))
           }
         />
       </div>
