@@ -62,7 +62,7 @@ export default class extends Component {
         icoActive: "loan-tab-one-active"
       },
       { title: "极速贷", ico: "loan-tab-two", icoActive: "loan-tab-two-active" }
-    ],
+    ]
   };
   /* eslint-enable */
   onSelectChange = (key, id) => {
@@ -177,7 +177,7 @@ export default class extends Component {
       searchCityCount,
       currentSearchPage,
       money_section,
-      timelimit,
+      timelimit
     } = this.state;
     const { loansHome, err } = this.props;
     if (err) {
@@ -386,20 +386,8 @@ export default class extends Component {
                     APP下载，享专属优惠
                   </div>
                   <div className="flex jc-around ai-center mb20">
-                    <div className="w70" style={{ height: "130px" }}>
-                      <img
-                        src="../../static/images/foot_app.png"
-                        className="w-100"
-                        alt=""
-                      />
-                    </div>
-                    <div className="w100 h100">
-                      <img
-                        src="../../static/images/foot_code.png"
-                        className="w-100"
-                        alt=""
-                      />
-                    </div>
+                    <div className="w70 app-bg" style={{ height: "130px" }} />
+                    <div className="w100 h100 code-bg" />
                   </div>
                   <div className="c-main font14 text-center lh120">
                     最高可借20万,当天放款
