@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Carousel } from "antd";
+import { Carousel, message } from "antd";
 import uuid from "uuid/v4";
 import { http } from "@utils";
 import { getHome } from "@actions";
@@ -14,9 +14,10 @@ import {
   WrapLink,
   HomeCoupon,
   HomeCardLink,
-  HomeHotCard,
+  HomeHotCardBox,
   HomeHotNew,
-  ErrorFetch
+  ErrorFetch,
+  LoadingFetch
 } from "@components";
 
 const util = require("util");
@@ -40,6 +41,11 @@ export default class extends Component {
     return { asPath };
   }
   state = {
+    cardTypeFocus: 0,
+    hasSearched: false,
+    isFetch: false,
+    typeId: null,
+    cardList: null,
     coupons: [
       {
         img: "http://dummyimage.com/224x140",
@@ -53,25 +59,55 @@ export default class extends Component {
         img: "http://dummyimage.com/224x140",
         link: "http://www.baidu.com"
       }
-    ],
+    ]
   };
   onCardTypeClick = (id, index) => {
     // card/list?category=1
-    this.setState(() => ({ cardTypeFocus: index }));
+    this.setState(
+      () => ({ cardTypeFocus: index, typeId: id, isFetch: true }),
+      () => {
+        const { typeId } = this.state;
+        const id = typeId;
+        this.fetchData(id);
+      }
+    );
   };
-
+  fetchData = id => {
+    http
+      .get("card/list", { category: id, limit: 8 })
+      .then(response => {
+        // 这里的判断条件根据具体的接口情况而调整
+        this.setState(() => ({ isFetch: false, hasSearched: true }));
+        if (response.code === 200 && response.success) {
+          const cardList =
+            response.data && response.data.lists && response.data.lists.cards;
+          this.setState(() => ({ cardList }));
+        } else {
+          message.error(
+            response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
+          );
+        }
+      })
+      .catch(err => {
+        message.error("网络错误，请稍后再试！");
+        console.info(err);
+      });
+  };
   render() {
     const {
       coupons,
       cardTypeFocus,
+      cardList,
+      hasSearched,
+      isFetch
     } = this.state;
-
     const { home, err } = this.props;
     if (err) {
       return <ErrorFetch err={err} />;
     }
     return (
       <Layout title="首页">
+        {isFetch && <LoadingFetch />}
         {/* 申请贷款/轮播图/贷款类型 */}
         <div className="relative">
           <div
@@ -170,24 +206,21 @@ export default class extends Component {
                 home.cards &&
                 home.cards.cards &&
                 home.cards.cards.length > 0 &&
-                Array(...Array(8)).map((item, index) => {
-                  if (home.cards.cards[index]) {
-                    return (
-                      <HomeHotCard
-                        key={uuid()}
-                        item={home.cards.cards[index]}
-                        index={index}
-                      />
-                    );
-                  }
-                  return (
-                    <div
-                      key={uuid()}
-                      style={{ width: "170px" }}
-                      className={(index + 1) % 4 === 0 ? "" : "mr20"}
-                    />
-                  );
-                })}
+                (hasSearched ? (
+                  cardList &&
+                  cardList.length > 0 && <HomeHotCardBox item={cardList} />
+                ) : (
+                  <HomeHotCardBox item={home.cards.cards} />
+                ))}
+              {hasSearched &&
+                (!cardList || cardList.length === 0) && (
+                  <div
+                    className="flex jc-center font14 bold ai-center h50"
+                    style={{ backgroundColor: "#f6f6f6" }}
+                  >
+                    orry~暂无数据。
+                  </div>
+                )}
             </div>
           </div>
         </div>
