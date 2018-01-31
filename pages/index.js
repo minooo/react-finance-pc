@@ -40,6 +40,7 @@ export default class extends Component {
     return { asPath };
   }
   state = {
+    cardTypeFocus: 0,
     coupons: [
       {
         img: "http://dummyimage.com/224x140",
