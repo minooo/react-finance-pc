@@ -4,8 +4,8 @@ export default ({ item, index }) => (
   <WrapLink
     style={{ width: "220px", height: "260px" }}
     className="flex column ai-center home-shdow-mid bg-white transition home-type-hover"
-    href={`/1-loan/2-home-speed?typeloan=${item.id}`}
-    as={`/loan/speed?typelooan=${item.id}`}
+    href="/1-loan/2-home-speed"
+    as={`/loan/speed?typeloan=${item.id}&typeloanfocus=${index + 1}`}
   >
     <div className="font24 c333 bold text-overflow-1 mt25 mt10">
       {item.name}

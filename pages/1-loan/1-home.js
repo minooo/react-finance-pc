@@ -3,7 +3,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import uuid from "uuid/v4";
 import { Icon, Pagination, message } from "antd";
-import { http } from "@utils";
+import { http, searchToObj } from "@utils";
 import { getLoansHome } from "@actions";
 import reduxPage from "@reduxPage";
 import {
@@ -65,6 +65,16 @@ export default class extends Component {
     ]
   };
   /* eslint-enable */
+  componentDidMount() {
+    // 针对首页点击某个分类过来，应该做的数据转化。
+    const { asPath } = this.props
+    const query = searchToObj(asPath)
+    if (query.typeloan) {
+      const id = +query.typeloan
+      const index = +query.typeloanfocus
+      this.onCityChoice("type", id, index)
+    }
+  }
   onSelectChange = (key, id) => {
     this.setState(
       pre => ({
