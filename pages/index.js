@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Carousel } from "antd";
 import uuid from "uuid/v4";
+import { http } from "@utils";
+import { getHome } from "@actions";
 import reduxPage from "@reduxPage";
 import {
   Layout,
@@ -13,40 +15,31 @@ import {
   HomeCoupon,
   HomeCardLink,
   HomeHotCard,
-  HomeHotNew
+  HomeHotNew,
+  ErrorFetch
 } from "@components";
 
+const util = require("util");
 @reduxPage
 @connect(({ home }) => ({ home }))
 export default class extends Component {
-  state = {
-    typeList: [
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/100x100"
-      },
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/100x100"
-      },
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/100x100"
-      },
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/100x200"
-      },
-      {
-        title: "标题1",
-        caption: "副标题",
-        img: "http://dummyimage.com/500x600"
+  static async getInitialProps(ctx) {
+    // err req res pathname query asPath isServer
+    const { store, isServer, asPath } = ctx;
+
+    if (!store.getState().home) {
+      try {
+        const homeFetch = await http.get("home", null, isServer);
+        const homeData = homeFetch.data;
+        store.dispatch(getHome(homeData));
+      } catch (error) {
+        const err = util.inspect(error);
+        return { err };
       }
-    ],
+    }
+    return { asPath };
+  }
+  state = {
     coupons: [
       {
         img: "http://dummyimage.com/224x140",
@@ -61,276 +54,22 @@ export default class extends Component {
         link: "http://www.baidu.com"
       }
     ],
-    cardTypes: [
-      { title: "车主卡", id: 21 },
-      { title: "商旅卡", id: 22 },
-      { title: "标准卡", id: 23 },
-      { title: "网络联名卡", id: 24 },
-      { title: "这个受到法律框架按时灯笼裤飞机啊受到法律框架", id: 24 }
-    ],
-    cardTypeFocus: 0,
-    hotCards: [
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "这个受到法律框架按时灯笼裤飞机啊受到法律框架",
-        caption: "这个受到法律框架按时灯笼裤飞机啊受到法律框架",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "http://dummyimage.com/170x106",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      },
-      {
-        img: "",
-        title: "标题路过",
-        caption: "二级标题路过",
-        applyNum: 100,
-        id: 123
-      }
-    ],
-    hotNews: [
-      [
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        },
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        },
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        }
-      ],
-      [
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        },
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        },
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        }
-      ],
-      [
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        },
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        },
-        {
-          title: "个人信用贷款有哪些好处",
-          id: 1
-        }
-      ]
-    ],
-    newsRank: [
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 },
-      { title: "个人信用贷款有哪些好处", id: 1 }
-    ],
-    rankingList: {
-      list: [
-        {
-          title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "2013人申请",
-          content: "3分钟申请,2小时审核,秒过",
-          img: "https://dummyimage.com/68x68"
-        }
-      ],
-      othList: [
-        {
-          title: "newlist拍拍贷",
-          number: "newlist2013人申请",
-          content: "newlist",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "2013人申请",
-          content: "newlist",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "2013人申请",
-          content: "3newlist",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "2013人申请",
-          content: "newlist",
-          img: "https://dummyimage.com/68x68"
-        }
-      ]
-    },
-    onlineLoans: {
-      carouselList: [
-        {
-          img: "https://dummyimage.com/200x125",
-          title: "拍拍贷1",
-          content: "最高可借20万，当天放款1",
-          href: "/1-loan"
-        },
-        {
-          img: "https://dummyimage.com/200x125",
-          title: "拍拍贷2",
-          content: "最高可借20万，当天放款2",
-          href: "/1-loan"
-        },
-        {
-          img: "https://dummyimage.com/200x125",
-          title: "拍拍贷3",
-          content: "最高可借20万，当天放款3",
-          href: "/1-loan"
-        }
-      ],
-      list: [
-        {
-          title: "拍拍贷",
-          number: "3分钟申请,2小时审核,秒过",
-          content: "2013人",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "3分钟申请,2小时审核,秒过",
-          content: "2013人",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "3分钟申请,2小时审核,秒过",
-          content: "2013人",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "3分钟申请,2小时审核,秒过",
-          content: "2013人",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "3分钟申请,2小时审核,秒过",
-          content: "2013人",
-          img: "https://dummyimage.com/68x68"
-        },
-        {
-          title: "拍拍贷",
-          number: "3分钟申请,2小时审核,秒过",
-          content: "2013人",
-          img: "https://dummyimage.com/68x68"
-        }
-      ]
-    },
-    citySelection: {
-      list: [
-        {
-          title: "车抵贷",
-          content: "不限车龄,评估价九成批款，材料简单"
-        },
-        {
-          title: "车抵贷",
-          content: "不限车龄,评估价九成批款，材料简单"
-        },
-
-        {
-          title: "车抵贷",
-          content: "不限车龄,评估价九成批款，材料简单"
-        },
-
-        {
-          title: "车抵贷",
-          content: "不限车龄,评估价九成批款，材料简单"
-        },
-        {
-          title: "车抵贷",
-          content: "不限车龄,评估价九成批款，材料简单"
-        }
-      ]
-    }
   };
   onCardTypeClick = (id, index) => {
+    // card/list?category=1
     this.setState(() => ({ cardTypeFocus: index }));
   };
 
   render() {
     const {
-      rankingList,
-      onlineLoans,
-      citySelection,
-      typeList,
       coupons,
-      cardTypes,
       cardTypeFocus,
-      hotCards,
-      hotNews,
-      newsRank,
     } = this.state;
 
+    const { home, err } = this.props;
+    if (err) {
+      return <ErrorFetch err={err} />;
+    }
     return (
       <Layout title="首页">
         {/* 申请贷款/轮播图/贷款类型 */}
@@ -353,19 +92,33 @@ export default class extends Component {
             </div>
           </Carousel>
           <div className="flex jc-between home-type-position">
-            {typeList.map(item => <HomeType key={uuid()} item={item} />)}
+            {home &&
+              home.top_speed_loans_type &&
+              home.top_speed_loans_type.length > 0 &&
+              home.top_speed_loans_type.map((item, index) => (
+                <HomeType key={uuid()} item={item} index={index} />
+              ))}
           </div>
         </div>
 
         <div style={{ height: "225px" }} />
         {/* 在线极速贷款 */}
-        <HomeOnlineLoans rankingList={rankingList} onlineLoans={onlineLoans} />
+        {home &&
+          home.top_speed_loans && (
+            <HomeOnlineLoans onlineLoans={home.top_speed_loans} />
+          )}
+
         <div style={{ height: "100px" }} />
         {/* 同城贷款贷款 */}
-        <HomeCityselection
-          citySelection={citySelection}
-          rankingList={rankingList}
-        />
+        {home &&
+          home.common_city_loans_type &&
+          home.common_city_loans && (
+            <HomeCityselection
+              citySelection={home.common_city_loans_type}
+              rankingList={home.common_city_loans}
+            />
+          )}
+
         <div style={{ height: "140px" }} />
         {/* 优惠活动 */}
         <div style={{ height: "580px" }} className="box flex">
@@ -374,9 +127,10 @@ export default class extends Component {
             className="flex column ai-center mr20 home-shdow-mid"
           >
             <div className="font20 bold pt20 pb15">优惠活动</div>
-            {coupons &&
-              coupons.length > 0 &&
-              coupons.map((item, index) => (
+            {home &&
+              home.special_offer &&
+              home.special_offer.length > 0 &&
+              home.special_offer.map((item, index) => (
                 <HomeCoupon
                   key={uuid()}
                   item={item}
@@ -397,28 +151,31 @@ export default class extends Component {
               </WrapLink>
             </div>
             <div className="flex ptb15 mb5">
-              {cardTypes &&
-                cardTypes.length &&
-                cardTypes.map((item, index) => (
+              {home &&
+                home.card_types &&
+                home.card_types.length > 0 &&
+                home.card_types.map((item, index) => (
                   <HomeCardLink
                     key={uuid()}
                     item={item}
                     index={index}
-                    len={cardTypes.length - 1}
+                    len={home.card_types.length - 1}
                     cardTypeFocus={cardTypeFocus}
                     onCardTypeClick={this.onCardTypeClick}
                   />
                 ))}
             </div>
             <div className="plr20 flex wrap jc-between">
-              {hotCards &&
-                hotCards.length &&
+              {home &&
+                home.cards &&
+                home.cards.cards &&
+                home.cards.cards.length > 0 &&
                 Array(...Array(8)).map((item, index) => {
-                  if (hotCards[index]) {
+                  if (home.cards.cards[index]) {
                     return (
                       <HomeHotCard
                         key={uuid()}
-                        item={hotCards[index]}
+                        item={home.cards.cards[index]}
                         index={index}
                       />
                     );
@@ -444,30 +201,32 @@ export default class extends Component {
             <div className="flex jc-between pt25 pb15">
               <div className="font20 bold">热门资讯</div>
               <WrapLink
-                href="/card"
-                as="/2-card/1-home"
+                href="/3-new/1-home"
+                as="/new"
                 className="font16 mt5 more-link"
               >
                 更多
               </WrapLink>
             </div>
             <div className="flex jc-between">
-              {hotNews &&
-                hotNews.length > 0 &&
-                hotNews.map((item, index) => (
+              {home &&
+                home.new_information &&
+                home.new_information.length > 0 &&
+                home.new_information.map((item, index) => (
                   <HomeHotNew key={uuid()} item={item} index={index} />
                 ))}
             </div>
           </div>
           <div style={{ width: "280px" }}>
             <div className="font20 bold pt25 pb15">资讯排行</div>
-            {newsRank &&
-              newsRank.length > 0 &&
-              newsRank.slice(0, 8).map((item, index) => (
+            {home &&
+              home.hot_information &&
+              home.hot_information.length > 0 &&
+              home.hot_information.slice(0, 8).map((item, index) => (
                 <WrapLink
                   key={uuid()}
-                  href="/"
-                  as="/"
+                  href={`/3-new/2-detail?id=${item.id}`}
+                  as={`/new/${item.id}`}
                   style={{ marginBottom: "13px" }}
                   className="font14 c333 text-overflow-one block"
                   title={item.title}
