@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import uuid from "uuid/v4";
 import { Carousel, Icon } from "antd";
-import { Ranking, Btn, WrapLink, HomeRankListItem } from "@components";
+import { Ranking, WrapLink, HomeRankListItem } from "@components";
 
 export default class extends Component {
   state = {
@@ -18,7 +18,7 @@ export default class extends Component {
     }));
   };
   render() {
-    const { rankingList, onlineLoans } = this.props;
+    const { onlineLoans } = this.props;
     const { isOver, focus } = this.state;
     return (
       <div className="box flex">
@@ -60,6 +60,7 @@ export default class extends Component {
           </div>
           <div className="flex overflow-h">
             <div className="pr30">
+<<<<<<< HEAD
               <div
                 className="mb20 overflow-h"
                 style={{ width: "200px", height: "125px" }}
@@ -92,6 +93,50 @@ export default class extends Component {
                   href={onlineLoans.carouselList[focus].href}
                 />
               </div>
+=======
+              {onlineLoans.pop &&
+                onlineLoans.pop.list &&
+                onlineLoans.pop.list.length > 0 && (
+                  <Fragment>
+                    <div
+                      className="mb20 overflow-h"
+                      style={{ width: "200px", height: "125px" }}
+                    >
+                      <Carousel autoplay afterChange={this.afterChange}>
+                        {onlineLoans.pop.list.map(item => (
+                          <WrapLink
+                            key={uuid()}
+                            href={`/1-loan/3-detail?id=${item.id}`}
+                            as={`/loan/${item.id}`}
+                          >
+                            <img className="pointer" src={item.thumb} alt="" />
+                          </WrapLink>
+                        ))}
+                      </Carousel>
+                    </div>
+                    <div className="text-center mb20">
+                      <div className="font16 mb10 lh100 text-overflow-1 bold">
+                        {onlineLoans.pop.list[focus].name}
+                      </div>
+                      <div className="font14 lh120 text-overflow-1">
+                        {onlineLoans.pop.list[focus].description}
+                      </div>
+                    </div>
+                    <div className="flex jc-center mb20">
+                      <WrapLink
+                        style={{ width: "140px" }}
+                        className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
+                        href={`/1-loan/3-detail?id=${
+                          onlineLoans.pop.list[focus].id
+                        }`}
+                        as={`/loan/${onlineLoans.pop.list[focus].id}`}
+                      >
+                        <span className="c-white">免费申请</span>
+                      </WrapLink>
+                    </div>
+                  </Fragment>
+                )}
+>>>>>>> master
               <div className="text-center lh150 font14 mb15">
                 APP下载，享专属优惠
               </div>
@@ -101,10 +146,10 @@ export default class extends Component {
               </div>
             </div>
             <div className="flex equal wrap pl5">
-              {onlineLoans &&
-                onlineLoans.list &&
-                onlineLoans.list.length > 0 &&
-                onlineLoans.list.map(item => (
+              {onlineLoans.default &&
+                onlineLoans.default.list &&
+                onlineLoans.default.list.length > 0 &&
+                onlineLoans.default.list.map(item => (
                   <div style={{ width: "50%" }} key={uuid()}>
                     <HomeRankListItem item={item} isrank={false} />
                   </div>
@@ -121,18 +166,20 @@ export default class extends Component {
               title="急速贷排行榜"
               bg="home-loanlist-bg"
               list={
-                <Fragment>
-                  {rankingList.list.map(item => (
-                    <HomeRankListItem key={uuid()} item={item} isrank />
-                  ))}
-                </Fragment>
+                onlineLoans.new &&
+                onlineLoans.new.list &&
+                onlineLoans.new.list.length > 0 &&
+                onlineLoans.new.list.map(item => (
+                  <HomeRankListItem key={uuid()} item={item} isrank />
+                ))
               }
               othList={
-                <Fragment>
-                  {rankingList.othList.map(item => (
-                    <HomeRankListItem key={uuid()} item={item} isrank />
-                  ))}
-                </Fragment>
+                onlineLoans.heat &&
+                onlineLoans.heat.list &&
+                onlineLoans.heat.list.length > 0 &&
+                onlineLoans.heat.list.map(item => (
+                  <HomeRankListItem key={uuid()} item={item} isrank />
+                ))
               }
             />
           </div>

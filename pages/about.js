@@ -9,7 +9,7 @@ export default class extends Component {
   state = {};
   render() {
     return (
-      <Layout title="关于我们" style={{ backgroundColor: "#fff" }}>
+      <Layout title="关于我们" className="bg-white overflow-h">
         {/* banan */}
         <div
           style={{ height: "300px", backgroundColor: "#88bdff" }}

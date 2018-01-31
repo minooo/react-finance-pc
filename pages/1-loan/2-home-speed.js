@@ -272,7 +272,8 @@ export default class extends Component {
                         `orry~没有找到符合您筛选条件的产品。${
                           loansSpeedHome &&
                           loansSpeedHome.recommend &&
-                          loansSpeedHome.recommend.length > 0
+                          loansSpeedHome.recommend.list &&
+                          loansSpeedHome.recommend.list.length > 0
                             ? "您可以看看以下精选贷款产品"
                             : ""
                         }`
@@ -296,8 +297,9 @@ export default class extends Component {
                   !(searchCityCount > 0) &&
                   loansSpeedHome &&
                   loansSpeedHome.recommend &&
-                  loansSpeedHome.recommend.length > 0 &&
-                  loansSpeedHome.recommend.map(item => (
+                  loansSpeedHome.recommend.list &&
+                  loansSpeedHome.recommend.list.length > 0 &&
+                  loansSpeedHome.recommend.list.map(item => (
                     <LoanList key={uuid()} item={item} />
                   ))}
                 {loansSpeedHome &&

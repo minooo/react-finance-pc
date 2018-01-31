@@ -4,8 +4,8 @@ import { clipBigNum, arrToDateString } from "@utils";
 
 export default ({ item }) => (
   <WrapLink
-    href="/"
-    as="/"
+    href={`/1-loan/3-detail?id=${item.id}`}
+    as={`/loan/${item.id}`}
     style={{ height: "126px" }}
     className="flex ai-center plr20 border-bottom transition loan-list-hover bg-white"
   >
