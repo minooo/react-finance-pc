@@ -110,12 +110,16 @@ export default class extends Component {
           </div>
         </div>
         <div className="box">
-          <div className="h80 font16 c333 flex ai-center">
-            <WrapLink href="/" as="/" className="c333">首页</WrapLink>
-            <Icon type="right" className="plr5 font14" />
-            <span>贷款超市</span>
-            <Icon type="right" className="plr5 font14" />
-            {isSpeed ? <span className="c999">极速贷贷款详情页</span> : <span className="c999">同城贷贷款详情页</span>}
+          <div className="h70 flex ai-center crumbs-ico-bg">
+            <WrapLink href="/" as="/" className="c333 font16">
+              首页
+            </WrapLink>
+            <div className="crumbs-ico-right-bg ml10 mr10" />
+            <WrapLink href="/1-loan/1-home" as="/loan" className="c333 font16">
+              贷款超市
+            </WrapLink>
+            <div className="crumbs-ico-right-bg ml10 mr10" />
+            <span className="c999 font16">贷款详情</span>
           </div>
           {/* 核心块 */}
           <div className="flex box">
