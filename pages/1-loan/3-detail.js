@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Icon, Input } from "antd";
+import uuid from "uuid/v4";
 import { Layout, WrapLink, HomeRankListItem } from "@components"
 
 const echarts = require("../../static/scripts/echarts.min.js");
@@ -10,7 +11,7 @@ export default class extends Component {
   }
   state = {
     name: "钱多多",
-    isSpeed: true,
+    isSpeed: false,
     type: "法人贷款",
     interest_rate: 3,
     payment_method: "等额本息",
@@ -98,6 +99,16 @@ export default class extends Component {
     const { recommend, hot_classify, max, min, name, img, isSpeed, type, interest_rate, payment_method, apply_num } = this.state
     return (
       <Layout title="登陆" style={{ backgroundColor: "#f8f8f8" }}>
+        {/* banner */}
+        <div style={{ height: "300px", backgroundColor: "#6bb0ff" }}>
+          <div
+            style={{ backgroundColor: "#6bb0ff", paddingLeft: "170px", paddingTop: "110px" }}
+            className="box h-100 loan-banner-bg"
+          >
+            <div className="font44 bold c-white loandetail-banner-textshadow lh100 mb20">贷款超市</div>
+            <div className="font22 c-inverse lh100" style={{ fontWeight: "200" }}>LOAN SUPERMARKET</div>
+          </div>
+        </div>
         <div className="box">
           <div className="h80 font16 c333 flex ai-center">
             <WrapLink href="/" as="/" className="c333">首页</WrapLink>
@@ -116,12 +127,12 @@ export default class extends Component {
                     <img className="w-100 h-100" src={img} alt="" />
                   </div>
                   <div className="pl15">
-                    <div className="flex mb15 mt5">
+                    <div className="flex mb15">
                       <div className="l120 font20 bold mr10">{name}</div>
                       <div className="c-second font14 plr10 flex ai-center" style={{ backgroundColor: "#ffebe4" }}>{type}</div>
                     </div>
                     <div className="lh100 font16 c999">
-                      {isSpeed ? <span>信用卡极速贷款</span> : <span>同城贷款</span>}最快30分钟下款！
+                      {isSpeed ? <span>信用卡极速贷款</span> : <span>同城贷款</span>}，最快30分钟下款！
                     </div>
                   </div>
                 </div>
@@ -147,7 +158,7 @@ export default class extends Component {
                   {/* canvs表区域 */}
                   <div className="flex jc-center" style={{ marginTop: "45px" }}>
                     <div>
-                      <Input className="font18" style={{ backgroundColor: "#f5f5f5" }} addonBefore="贷款金额:" addonAfter="元" />
+                      <Input className="font16 no-outline" style={{ backgroundColor: "#f5f5f5", border: "none", outline: "none" }} addonBefore="贷款金额:" addonAfter="元" />
                       <div className="pl10 font16">金额范围{min}~{max}</div>
                     </div>
 
@@ -303,7 +314,7 @@ export default class extends Component {
                     hot_classify &&
                     hot_classify.length > 0 &&
                     hot_classify.map((itme) =>
-                      <WrapLink href="/loan" as="/loan" className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot">{itme}</WrapLink>
+                      <WrapLink key={uuid()} href="/loan" as="/loan" className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot">{itme}</WrapLink>
                     )
                   }
 
@@ -341,7 +352,7 @@ export default class extends Component {
                     {recommend &&
                       recommend.length > 0 &&
                       recommend.map((item) =>
-                        <HomeRankListItem item={item} isrank="true" />
+                        <HomeRankListItem key={uuid()} item={item} isrank="true" />
                       )}
                   </div>
               }
@@ -349,7 +360,7 @@ export default class extends Component {
             </div>
           </div>
         </div>
-      </Layout>
+      </Layout >
     );
   }
 }
