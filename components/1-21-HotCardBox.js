@@ -1,7 +1,7 @@
 import uuid from "uuid/v4";
 import { HomeHotCard } from "@components";
 
-export default ({ items = [] }) =>
+export default ({ items }) =>
   Array(...Array(8)).map((item, index) => {
     if (items[index]) {
       return <HomeHotCard key={uuid()} item={items[index]} index={index} />;

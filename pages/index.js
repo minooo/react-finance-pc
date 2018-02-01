@@ -208,9 +208,9 @@ export default class extends Component {
                 home.cards.cards.length > 0 &&
                 (hasSearched ? (
                   cardList &&
-                  cardList.length > 0 && <HomeHotCardBox item={cardList} />
+                  cardList.length > 0 && <HomeHotCardBox items={cardList} />
                 ) : (
-                  <HomeHotCardBox item={home.cards.cards} />
+                  <HomeHotCardBox items={home.cards.cards} />
                 ))}
               {hasSearched &&
                 (!cardList || cardList.length === 0) && (
