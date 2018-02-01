@@ -116,7 +116,7 @@ export default class extends Component {
                 onlineLoans.default.list.length > 0 &&
                 onlineLoans.default.list.map(item => (
                   <div style={{ width: "50%" }} key={uuid()}>
-                    <HomeRankListItem item={item} isrank={false} />
+                    <HomeRankListItem item={item} isrank={false} isRight="true" />
                   </div>
                 ))}
             </div>
@@ -135,7 +135,7 @@ export default class extends Component {
                 onlineLoans.new.list &&
                 onlineLoans.new.list.length > 0 &&
                 onlineLoans.new.list.map(item => (
-                  <HomeRankListItem key={uuid()} item={item} isrank />
+                  <HomeRankListItem key={uuid()} item={item} isrank isRight="true" />
                 ))
               }
               othList={
@@ -143,7 +143,7 @@ export default class extends Component {
                 onlineLoans.heat.list &&
                 onlineLoans.heat.list.length > 0 &&
                 onlineLoans.heat.list.map(item => (
-                  <HomeRankListItem key={uuid()} item={item} isrank />
+                  <HomeRankListItem key={uuid()} item={item} isrank isRight="true" />
                 ))
               }
             />

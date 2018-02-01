@@ -27,19 +27,22 @@ export default ({ citySelection, rankingList }) => (
         </WrapLink>
       </div>
       <div className="flex mt20">
-        <WrapLink
-          href="/1-loan/1-home"
-          as="/loan"
-          className="plr30 img-bg c333 block home-citybg-big"
-          style={{ width: "345px", height: "472xp", paddingTop: "50px" }}
-        >
-          <div className="font26 mb20 lh120 text-overflow-1 bold c333">
-            {citySelection.length > 0 && citySelection[0].name}
-          </div>
-          <div className="font14 lh150 text-overflow-2 c333">
-            {citySelection.length > 0 && citySelection[0].description}
-          </div>
-        </WrapLink>
+        {citySelection[0] && (
+          <WrapLink
+            href="/1-loan/1-home"
+            as={`/loan?typeloan=${citySelection[0].id}&typeloanfocus=1`}
+            className="plr30 img-bg c333 block home-citybg-big"
+            style={{ width: "345px", height: "472xp", paddingTop: "50px" }}
+          >
+            <div className="font26 mb20 lh120 text-overflow-1 bold c333">
+              {citySelection[0].name}
+            </div>
+            <div className="font14 lh150 text-overflow-2 c333">
+              {citySelection[0].description}
+            </div>
+          </WrapLink>
+        )}
+
         <div className="equal flex wrap">
           {citySelection.length > 0 &&
             citySelection
