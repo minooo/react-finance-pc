@@ -67,8 +67,7 @@ export default class extends Component {
       () => ({ cardTypeFocus: index, typeId: id, isFetch: true }),
       () => {
         const { typeId } = this.state;
-        const id = typeId;
-        this.fetchData(id);
+        this.fetchData(typeId);
       }
     );
   };
