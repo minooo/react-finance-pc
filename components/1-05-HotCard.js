@@ -16,8 +16,18 @@ export default ({ item, index }) => (
       style={{ maxWidth: "100%" }}
       className="h54 flex column ai-center jc-center"
     >
-      <div style={{ maxWidth: "100%" }} className="font14 bold text-overflow-one c333">{item.name}</div>
-      <div style={{ maxWidth: "100%" }} className="font12 text-overflow-one c666">{item.description}</div>
+      <div
+        style={{ maxWidth: "100%" }}
+        className="font14 bold text-overflow-one c333"
+      >
+        {item.name}
+      </div>
+      <div
+        style={{ maxWidth: "100%" }}
+        className="font12 text-overflow-one c666"
+      >
+        {item.description}
+      </div>
     </div>
     <Button type="primary" className="w120 h30 r2 font14 mb5">
       免费申请

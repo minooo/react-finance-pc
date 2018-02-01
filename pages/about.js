@@ -90,7 +90,7 @@ export default class extends Component {
           </div>
         </OverPack>
         {/* 业务模式 */}
-        <div key={uuid()} className="about_business_bg">
+        <div key={uuid()} className="about-business-bg">
           <OverPack key={uuid()} className=" box">
             <TweenOne
               key={uuid()}
@@ -122,7 +122,7 @@ export default class extends Component {
                   style={{ height: "250px" }}
                   className=" plr30 ptb30 bg-main"
                 >
-                  <div key={uuid()} className="about_business-title mb25">
+                  <div key={uuid()} className="about-business-title mb25">
                     业务模式
                   </div>
                   <p
@@ -148,7 +148,7 @@ export default class extends Component {
                   <div
                     key={uuid()}
                     style={{ marginBottom: "70px" }}
-                    className="about_business-title"
+                    className="about-business-title"
                   >
                     嘟嘟e融宗旨
                   </div>
@@ -173,7 +173,7 @@ export default class extends Component {
                   <div
                     key={uuid()}
                     style={{ marginBottom: "67px" }}
-                    className="about_business-title"
+                    className="about-business-title"
                   >
                     嘟嘟e融目标
                   </div>
@@ -219,19 +219,19 @@ export default class extends Component {
               style={{ height: "378px", right: "-37px" }}
               className="relative"
             >
-              <div key={uuid()} className="about-culture-list  vision">
+              <div key={uuid()} className="about-culture-list  about-icon-vision">
                 <div>企业愿景</div>
                 <p>打造中国最安全、最快捷、最方便的金融信息服务平台</p>
               </div>
-              <div key={uuid()} className="about-culture-list mission">
+              <div key={uuid()} className="about-culture-list about-icon-mission">
                 <div>公司使命</div>
                 <p>对员工负责 、对客户负责、对社会负责</p>
               </div>
-              <div key={uuid()} className="about-culture-list idea">
+              <div key={uuid()} className="about-culture-list about-icon-idea">
                 <div>经营理念</div>
                 <p>让中小微城市的贷款从这里开始简单</p>
               </div>
-              <div key={uuid()} className="about-culture-list value">
+              <div key={uuid()} className="about-culture-list about-icon-value">
                 <div>核心价值观</div>
                 <p>以团队精神追求目标，为客户创造最大价值</p>
               </div>
