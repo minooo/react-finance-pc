@@ -44,7 +44,6 @@ export default class extends Component {
     cardTypeFocus: 0,
     hasSearched: false,
     isFetch: false,
-    typeId: null,
     cardList: null,
     coupons: [
       {
@@ -64,10 +63,9 @@ export default class extends Component {
   onCardTypeClick = (id, index) => {
     // card/list?category=1
     this.setState(
-      () => ({ cardTypeFocus: index, typeId: id, isFetch: true }),
+      () => ({ cardTypeFocus: index, isFetch: true }),
       () => {
-        const { typeId } = this.state;
-        this.fetchData(typeId);
+        this.fetchData(id);
       }
     );
   };
