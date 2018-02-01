@@ -22,34 +22,34 @@ export default class extends Component {
     hot_classify: ["房产抵押货", "车辆抵押货", "无担保贷", "公积金贷", "法人贷"],
     recommend: [
       {
-        title: "拍拍贷",
-        number: "2013人申请",
-        content: "3分钟申请,2小时审核,秒过",
-        img: "https://dummyimage.com/68x68"
+        name: "拍拍贷",
+        apply_num: "2013人申请",
+        description: "3分钟申请,2小时审核,秒过",
+        thumb: "https://dummyimage.com/68x68"
       },
       {
-        title: "拍拍贷",
-        number: "2013人申请",
-        content: "3分钟申请,2小时审核,秒过",
-        img: "https://dummyimage.com/68x68"
+        name: "拍拍贷",
+        apply_num: "2013人申请",
+        description: "3分钟申请,2小时审核,秒过",
+        thumb: "https://dummyimage.com/68x68"
       },
       {
-        title: "拍拍贷",
-        number: "2013人申请",
-        content: "3分钟申请,2小时审核,秒过",
-        img: "https://dummyimage.com/68x68"
+        name: "拍拍贷",
+        apply_num: "2013人申请",
+        description: "3分钟申请,2小时审核,秒过",
+        thumb: "https://dummyimage.com/68x68"
       },
       {
-        title: "拍拍贷",
-        number: "2013人申请",
-        content: "3分钟申请,2小时审核,秒过",
-        img: "https://dummyimage.com/68x68"
+        name: "拍拍贷",
+        apply_num: "2013人申请",
+        description: "3分钟申请,2小时审核,秒过",
+        thumb: "https://dummyimage.com/68x68"
       },
       {
-        title: "拍拍贷",
-        number: "2013人申请",
-        content: "3分钟申请,2小时审核,秒过",
-        img: "https://dummyimage.com/68x68"
+        name: "拍拍贷",
+        apply_num: "2013人申请",
+        description: "3分钟申请,2小时审核,秒过",
+        thumb: "https://dummyimage.com/68x68"
       }
     ]
   };

@@ -20,6 +20,14 @@
     color: #4c8dfc;
   }
 }
+.app-bg {
+  background: url("../../images/foot_app.png") no-repeat;
+  background-size: contain;
+}
+.code-bg {
+  background: url("../../images/foot_code.png") no-repeat;
+  background-size: contain;
+}
 // home
 .home-top-city-bg {
   background: url("../../images/home_top_bg.png") 0 center no-repeat;
@@ -139,7 +147,15 @@
   background-image: url("../../images/home_citylbg_4.jpg");
   background-size: cover;
 }
-
+.home-hotnew-bg0 {
+  background-image: url("../../images/home_hotnew_0.png");
+}
+.home-hotnew-bg1 {
+  background-image: url("../../images/home_hotnew_1.png");
+}
+.home-hotnew-bg2 {
+  background-image: url("../../images/home_hotnew_2.png");
+}
 .home-new-link {
   background: url("../../images/home_new_tip.png") 0 center no-repeat;
 }
@@ -256,6 +272,12 @@
 .about-title-bg {
   background: url("../../images/about_title_bg.png") center center no-repeat;
 }
+.about-intro {
+  width: 520px;
+  height: 325px;
+  background: url("../../images/about_intro.jpg") no-repeat;
+}
+
 // 业务模式
 .about-title-businessbg {
   background: url("../../images/about_title_businessbg.png") center center
@@ -264,6 +286,11 @@
 .about_business_bg {
   height: 766px;
   background: url("../../images/about_business_bg.jpg") top no-repeat;
+}
+.about-business-one {
+  width: 500px;
+  height: 250px;
+  background: url("../../images/about_business_one.jpg") no-repeat;
 }
 .about_business-title {
   font-size: 24px;
@@ -300,7 +327,7 @@
   height: 74px;
   padding-top: 5px;
   padding-right: 118px;
-  margin-bottom:28px;
+  margin-bottom: 28px;
   div {
     font-size: 20px;
     letter-spacing: 1px;
@@ -327,6 +354,9 @@
 }
 .value {
   background: url("../../images/about_culture_value.png") right no-repeat;
+}
+.about-culture-bg {
+  background: url("../../images/about_culture_bg.jpg")  no-repeat;
 }
 // 联系我们
 .about-contact-title {
