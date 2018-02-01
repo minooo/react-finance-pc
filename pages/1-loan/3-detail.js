@@ -11,7 +11,7 @@ export default class extends Component {
   }
   state = {
     name: "钱多多",
-    isSpeed: false,
+    isSpeed: true,
     type: "法人贷款",
     interest_rate: 3,
     payment_method: "等额本息",
