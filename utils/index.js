@@ -18,6 +18,7 @@ export {
   isIDNumber,
   isName,
   addFilter,
+  strTostr,
   arrToDateString
 } from "./01-common";
 export { default as cache } from "./02-cache";
