@@ -28,6 +28,17 @@
   background: url("../../images/foot_code.png") no-repeat;
   background-size: contain;
 }
+.crumbs-ico-bg {
+  padding-left: 45px;
+  background: url("../../images/home_ico.png") 20px center no-repeat;
+}
+
+.crumbs-ico-right-bg {
+  width: 5px;
+  height: 8px;
+  background: url("../../images/right_ico.png") 0 0 no-repeat;
+}
+
 // home
 .home-top-city-bg {
   background: url("../../images/home_top_bg.png") 0 center no-repeat;
@@ -283,7 +294,7 @@
   background: url("../../images/about_title_businessbg.png") center center
     no-repeat;
 }
-.about_business_bg {
+.about-business-bg {
   height: 766px;
   background: url("../../images/about_business_bg.jpg") top no-repeat;
 }
@@ -292,7 +303,7 @@
   height: 250px;
   background: url("../../images/about_business_one.jpg") no-repeat;
 }
-.about_business-title {
+.about-business-title {
   font-size: 24px;
   color: #fff;
   font-weight: bold;
@@ -343,16 +354,16 @@
     line-height: 100%;
   }
 }
-.vision {
+.about-icon-vision {
   background: url("../../images/about_culture_vision.png") right no-repeat;
 }
-.mission {
+.about-icon-mission {
   background: url("../../images/about_culture_mission.png") right no-repeat;
 }
-.idea {
+.about-icon-idea {
   background: url("../../images/about_culture_idea.png") right no-repeat;
 }
-.value {
+.about-icon-value {
   background: url("../../images/about_culture_value.png") right no-repeat;
 }
 .about-culture-bg {

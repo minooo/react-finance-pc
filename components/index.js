@@ -22,7 +22,7 @@ export { default as HomeCoupon } from "./1-03-Coupon";
 export { default as HomeCardLink } from "./1-04-CardLink";
 export { default as HomeHotCard } from "./1-05-HotCard";
 export { default as HomeHotNew } from "./1-06-HotNew";
-
+export { default as HomeHotCardBox } from "./1-21-HotCardBox.js";
 // loan
 export { default as LoanSelect } from "./2-00-Select";
 export { default as LoanCityFilter } from "./2-01-CityFilter";
