@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { Icon, Input, Select } from "antd";
 import uuid from "uuid/v4";
-import { http } from "@utils";
+import {
+  http,
+  strTostr,
+  arrToDateString,
+  arrToArr,
+  clipBigNum,
+  fee
+} from "@utils";
 import { Layout, WrapLink, HomeRankListItem, ErrorFetch } from "@components";
 
 const echarts = require("../../static/scripts/echarts.min.js");
@@ -20,14 +27,14 @@ export default class extends Component {
   }
   state = {
     selectValue: null,
+    moneyVal: null,
+    finalMoney: null,
 
     isSpeed: false,
     interest_rate: 3,
     payment_method: "等额本息",
     apply_num: 7869,
     img: "http://dummyimage.com/70x70",
-    min: "200",
-    max: "20000",
     hot_classify: [
       "房产抵押货",
       "车辆抵押货",
@@ -69,13 +76,62 @@ export default class extends Component {
     ]
   };
   componentDidMount() {
-    this.initCharts(this.option);
+    const { data: { loan: { sum_start, timelimit, interest_rate } } } = this.props;
+    this.myChart = echarts.init(this.echartBox)
+
+    if (sum_start && timelimit && interest_rate) {
+      const initTatal = fee(
+        sum_start,
+        interest_rate,
+        arrToArr(timelimit)[0],
+      )
+      const initFee = fee(
+        sum_start,
+        interest_rate,
+        arrToArr(timelimit)[0],
+        1
+      )
+      this.myChart.setOption(this.setMyOption(initFee, initTatal))
+    }
   }
-  onSelectChange = () => {};
-  initCharts = opt => {
-    echarts.init(this.echartBox).setOption(opt);
-  }
-  option = {
+  onSelectChange = selectValue => {
+    const { data: { loan: { sum_start, interest_rate } } } = this.props;
+    const { finalMoney } = this.state
+    const initTatal = fee(
+      finalMoney || sum_start,
+      interest_rate,
+      selectValue
+    )
+    const initFee = fee(
+      finalMoney || sum_start,
+      interest_rate,
+      selectValue,
+      1
+    )
+    this.myChart.setOption(this.setMyOption(initFee, initTatal))
+    this.setState(() => ({ selectValue }));
+  };
+  onMoneyChange = e => {
+    const { value } = e.target;
+    const reg = /^([1-9][0-9]*)?$/;
+    if (reg.test(value)) {
+      this.setState(() => ({ moneyVal: value }));
+    }
+  };
+  onMoneyBlur = e => {
+    const { data: { loan: { sum_start, sum_end } } } = this.props;
+    const { value } = e.target;
+    let finalVal;
+    finalVal = +value;
+    if (+value > sum_end) {
+      finalVal = +sum_end;
+    }
+    if (+value < sum_start) {
+      finalVal = +sum_start;
+    }
+    this.setState(() => ({ finalMoney: finalVal, moneyVal: finalVal }));
+  };
+  setMyOption = (fee, total) => ({
     color: ["#ff764c", "#7eaeff"],
     series: [
       {
@@ -85,7 +141,7 @@ export default class extends Component {
         avoidLabelOverlap: false,
         itemStyle: {
           borderColor: "#fff",
-          borderWidth: 4,
+          borderWidth: 4
         },
         label: {
           normal: {
@@ -107,25 +163,25 @@ export default class extends Component {
         },
         silent: true,
         data: [
-          { value: 2345, name: "利息和费用", color: "yellow" },
-          { value: 10000, name: "到账金额" }
+          { value: fee, name: "利息和费用", color: "yellow" },
+          { value: total, name: "到账金额" }
         ]
       }
     ]
-  };
+  })
   render() {
     const {
       recommend,
       hot_classify,
-      max,
-      min,
       img,
       isSpeed,
       interest_rate,
       payment_method,
       apply_num,
 
-      selectValue
+      selectValue,
+      moneyVal,
+      finalMoney
     } = this.state;
     const { data, err } = this.props;
     const { Option } = Select;
@@ -234,16 +290,27 @@ export default class extends Component {
                   </div>
                   {/* canvs表区域 */}
                   <div className="flex jc-center" style={{ marginTop: "45px" }}>
-                    <div>
+                    <div style={{ marginRight: "65px" }}>
                       <Input
                         className="font16 no-outline"
                         style={{ width: "234px" }}
+                        maxLength="9"
                         addonBefore="贷款金额:"
                         addonAfter="元"
+                        value={
+                          moneyVal || (data && data.loan && data.loan.sum_start)
+                        }
+                        onChange={this.onMoneyChange}
+                        onBlur={this.onMoneyBlur}
                       />
-                      <div className="pl10 font16">
-                        金额范围{min}~{max}
-                      </div>
+                      {data &&
+                        data.loan && (
+                          <div className="font16 c666 text-center mt15">
+                            金额范围：{clipBigNum(data.loan.sum_start)}-{clipBigNum(
+                              data.loan.sum_end
+                            )}
+                          </div>
+                        )}
                     </div>
                     <div>
                       {data &&
@@ -251,33 +318,80 @@ export default class extends Component {
                         data.loan.timelimit &&
                         data.loan.timelimit.length > 0 && (
                           <Select
-                            value={selectValue || (data.loan.timelimit[0].num + data.loan.timelimit[0].type)}
+                            value={
+                              selectValue || arrToArr(data.loan.timelimit)[0]
+                            }
                             onChange={this.onSelectChange}
                             style={{ width: "234px" }}
                           >
-                            {data.loan.timelimit.map(item => (
-                              <Option key={uuid()} value={item.num + item.type}>
-                                {item.num}
+                            {arrToArr(data.loan.timelimit).map(item => (
+                              <Option key={uuid()} value={item}>
+                                {strTostr(item)}
                               </Option>
                             ))}
                           </Select>
                         )}
-                      <div>1234</div>
+                      <div className="font16 c666 text-center mt15">
+                        贷款期限：
+                        {data &&
+                          data.loan &&
+                          data.loan.timelimit &&
+                          arrToDateString(arrToArr(data.loan.timelimit))}
+                      </div>
                     </div>
                   </div>
-
-                  <div className="relative" style={{ width: "174px", height: "174px" }}>
+                  <div className="h40" />
+                  <div className="flex jc-center ai-center">
                     <div
-                      style={{ width: "174px", height: "174px" }}
                       className="relative"
-                      ref={ele => (this.echartBox = ele)}
-                    />
-                    <div className="absolute-full z-index10 flex column jc-center ai-center">
-                      <div className="font14">总还款</div>
-                      <div className="font16 bold">1002</div>
+                      style={{ width: "174px", height: "174px" }}
+                    >
+                      <div
+                        style={{ width: "174px", height: "174px" }}
+                        className="relative"
+                        ref={ele => (this.echartBox = ele)}
+                      />
+                      <div className="absolute-full z-index10 flex column jc-center ai-center">
+                        <div className="font20">总还款</div>
+                        <div className="font20 bold">
+                          {data &&
+                            data.loan &&
+                            fee(
+                              finalMoney || data.loan.sum_start,
+                              data.loan.interest_rate,
+                              selectValue || arrToArr(data.loan.timelimit)[0]
+                            )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="ml30">
+                      <div>
+                        到账金额：{finalMoney ||
+                          (data && data.loan && data.loan.sum_start)}
+                      </div>
+                      <div>
+                        利息和费用：{data &&
+                          data.loan &&
+                          fee(
+                            finalMoney || data.loan.sum_start,
+                            data.loan.interest_rate,
+                            selectValue || arrToArr(data.loan.timelimit)[0],
+                            1
+                          )}
+                      </div>
+                      <div>
+                        月还款：{data &&
+                          data.loan &&
+                          fee(
+                            finalMoney || data.loan.sum_start,
+                            data.loan.interest_rate,
+                            selectValue || arrToArr(data.loan.timelimit)[0],
+                            2
+                          )}
+                      </div>
                     </div>
                   </div>
-
+                  <div className="h40" />
                 </div>
               </div>
               <div className="h30" />
