@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import uuid from "uuid/v4";
-import { Icon, Pagination, message } from "antd";
-import { http } from "@utils";
+import { Pagination, message } from "antd";
+import { http, searchToObj } from "@utils";
 import { getNewsHome } from "@actions";
 import reduxPage from "@reduxPage";
 import {
@@ -20,7 +20,7 @@ const util = require("util");
 export default class extends Component {
   static async getInitialProps(ctx) {
     // err req res pathname query asPath isServer
-    const { store, isServer } = ctx;
+    const { store, isServer, asPath } = ctx;
     if (!store.getState().newsHome) {
       try {
         const newsHomeFetch = await http.get(
@@ -35,7 +35,7 @@ export default class extends Component {
         return { err };
       }
     }
-    return null;
+    return { asPath };
   }
   state = {
     newTypeFocus: 0,
@@ -45,6 +45,29 @@ export default class extends Component {
     searchList: null,
     searchCount: null,
     typeId: null
+  };
+  componentDidMount() {
+    // 针对首页点击某个分类过来，应该做的数据转化。
+    const { asPath } = this.props;
+    const query = searchToObj(asPath);
+    if (query.typenew) {
+      const id = +query.typenew;
+      const index = id - 1;
+      this.onCityChoice(id, index);
+    }
+  }
+  onCityChoice = (id, index) => {
+    this.setState(
+      () => ({
+        isFetch: true,
+        typeId: id,
+        newTypeFocus: index
+      }),
+      () => {
+        const { typeId, currentPage } = this.state;
+        this.fetchData(typeId, currentPage);
+      }
+    );
   };
   onNewTypeClick = (id, index) => {
     this.setState(
@@ -127,11 +150,11 @@ export default class extends Component {
         {/* 主体 */}
         <div className="box">
           {/* 面包屑 */}
-          <div className="h70 flex ai-center plr20">
+          <div className="h70 flex ai-center crumbs-ico-bg ml20">
             <WrapLink href="/" as="/" className="c333 font16">
               首页
             </WrapLink>
-            <Icon type="right" className="plr5" />
+            <div className="crumbs-ico-right-bg ml10 mr10" />
             <span className="c999 font16">资讯</span>
           </div>
           {/* 核心块 */}
@@ -205,8 +228,8 @@ export default class extends Component {
                   newsHome.hot.list.slice(0, 9).map((item, index) => (
                     <WrapLink
                       key={uuid()}
-                      href="/"
-                      as="/"
+                      href={`/3-new/2-detail?id=${item.id}`}
+                      as={`/new/${item.id}`}
                       className="font14 c333 mb10 text-overflow-one block"
                       title={item.title}
                     >
