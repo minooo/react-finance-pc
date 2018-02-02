@@ -113,7 +113,7 @@ export default class extends Component {
           <div className="h80 font16 c333 flex ai-center">
             <WrapLink href="/" as="/" className="c333">首页</WrapLink>
             <Icon type="right" className="plr5 font14" />
-            <span>贷款超市</span>
+            <WrapLink href="/loan" as="/loan" className="c333">贷款超市</WrapLink>
             <Icon type="right" className="plr5 font14" />
             {isSpeed ? <span className="c999">极速贷贷款详情页</span> : <span className="c999">同城贷贷款详情页</span>}
           </div>
