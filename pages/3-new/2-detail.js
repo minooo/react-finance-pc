@@ -23,12 +23,36 @@ export default class extends Component {
       return { err };
     }
   }
-  state = {};
   componentDidMount() {
-    const script = document.createElement("script");
-    script.src =
-      "http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=408841";
-    document.body.appendChild(script);
+    /* eslint-disable */
+    window._bd_share_config = {
+      common : {
+        bdText : '自定义分享内容',
+        bdDesc : '自定义分享摘要',
+        bdUrl : '自定义分享url地址',
+        bdPic : '自定义分享图片'
+      },
+      share : [{
+        "bdSize" : 32
+      }],
+      slide : [{
+        bdImg : 0,
+        bdPos : "right",
+        bdTop : 100
+      }],
+      image : [{
+        viewType : 'list',
+        viewPos : 'top',
+        viewColor : 'black',
+        viewSize : '16',
+        viewList : ['qzone','tsina','huaban','tqq','renren']
+      }],
+      selectShare : [{
+        "bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+      }]
+    }
+    require("../../static/scripts/share.js");
+    /* eslint-enable */
   }
   render() {
     const {
@@ -58,7 +82,7 @@ export default class extends Component {
         {/* 主体 */}
         <div className="box">
           {/* 面包屑 */}
-          <div className="h70 flex ai-center crumbs-ico-bg ml20">
+          <div className="h70 flex ai-center crumbs-ico-bg">
             <WrapLink href="/" as="/" className="c333 font16">
               首页
             </WrapLink>
@@ -96,7 +120,10 @@ export default class extends Component {
                   __html: detail.content
                 }}
               />
-              <div className="bdsharebuttonbox flex jc-end mt30 mb25">
+              <div
+                className="bdsharebuttonbox flex jc-end mt30 mb25"
+                data-tag="share_1"
+              >
                 <a href="www.baidu.com" className="bds_more" data-cmd="more">
                   {null}
                 </a>
@@ -126,34 +153,31 @@ export default class extends Component {
                 </a>
               </div>
               <div>
-                <WrapLink
-                  href={next ? `/3-new/2-detail?id=${next.id}` : null}
-                  as={next ? `/new/${next.id}` : null}
-                  style={{ color: "#26709a" }}
-                  className=" font14 block lh100 mb15"
-                >
-                  【上一篇】
-                  <span
-                    className="font14"
-                    style={next ? { color: "#26709a" } : { color: "#999" }}
-                  >
-                    {next ? next.title : "第一页"}
-                  </span>
-                </WrapLink>
-                <WrapLink
-                  href={previous ? `/3-new/2-detail?id=${previous.id}` : null}
-                  as={previous ? `/new/${previous.id}` : null}
-                  style={{ color: "#26709a" }}
-                  className=" font14 block lh100 "
-                >
-                  【下一篇】
-                  <span
-                    style={previous ? { color: "#26709a" } : { color: "#999" }}
-                    className="font14"
-                  >
-                    {previous ? previous.title : "最后一页"}
-                  </span>
-                </WrapLink>
+                {previous &&
+                  previous.id && (
+                    <WrapLink
+                      href={`/3-new/2-detail?id=${previous.id}`}
+                      as={`/new/${previous.id}`}
+                      style={{ color: "#26709a" }}
+                      className=" font14 lh100 mb15"
+                    >
+                      【上一篇】
+                      {previous.title}
+                    </WrapLink>
+                  )}
+                <div className="pt10" />
+                {next &&
+                  next.id && (
+                    <WrapLink
+                      href={`/3-new/2-detail?id=${next.id}`}
+                      as={`/new/${next.id}`}
+                      style={{ color: "#26709a" }}
+                      className=" font14 lh100 mb15"
+                    >
+                      【下一篇】
+                      {next.title}
+                    </WrapLink>
+                  )}
               </div>
             </div>
             {/* 右边 资讯排行 */}
