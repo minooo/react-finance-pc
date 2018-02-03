@@ -526,7 +526,7 @@ export default class extends Component {
                     </div>
                     <div className="c-main font14 text-center lh120">
                       最高可借20万,当天放款
-                  </div>
+                    </div>
                   </div>
                 ) : (
                   <div className="plr10 ptb25 bg-white">

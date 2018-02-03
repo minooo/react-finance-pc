@@ -44,7 +44,6 @@ export default class extends Component {
     identityFocus: 0,
     aptitudeFocus: 0,
     credit_conditionFocus: 0,
-
     hasCitySearched: false,
     searchCityCount: null,
     sortFilterFocus: 0,
