@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import uuid from "uuid/v4";
-import { Icon, Pagination, message } from "antd";
+import { Pagination, message } from "antd";
 import { http } from "@utils";
 import { getCardsHome } from "@actions";
 import reduxPage from "@reduxPage";
@@ -148,11 +148,11 @@ export default class extends Component {
           {/* 主体 */}
           <div className="bg-white">
             {/* 面包屑 */}
-            <div className="h70 flex ai-center plr20">
+            <div className="h70 flex ai-center crumbs-ico-bg ml20">
               <WrapLink href="/" as="/" className="c333 font16">
                 首页
               </WrapLink>
-              <Icon type="right" className="plr5" />
+              <div className="crumbs-ico-right-bg ml10 mr10" />
               <span className="c999 font16">办信用卡</span>
             </div>
             {/* 核心块 */}
