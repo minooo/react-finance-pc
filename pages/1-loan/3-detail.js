@@ -168,7 +168,7 @@ export default class extends Component {
               贷款超市
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <span className="c999 font16">贷款详情</span>
+            <span className="c999 font16">{data.loan.name || "贷款详情"}</span>
           </div>
           {/* 核心块 */}
           <div className="flex box">
@@ -183,9 +183,9 @@ export default class extends Component {
                       alt=""
                     />
                   </div>
-                  <div className="pl15">
+                  <div className="pl15 equal">
                     <div className="flex mb15 ai-center">
-                      <div className="l120 font20 bold mr10">
+                      <div className="l120 font20 bold mr10 text-overflow-1">
                         {data && data.loan && data.loan.name}
                       </div>
                       {data &&
@@ -196,14 +196,14 @@ export default class extends Component {
                           index > 3 ? null :
                             <div
                               key={uuid()}
-                              className="c-second font14 plr10 flex ai-center mr10"
-                              style={{ backgroundColor: "#ffebe4", height: "24px" }}
+                              className="c-second font14 plr10 flex ai-center mr10 equal-no text-overflow-1"
+                              style={{ backgroundColor: "#ffebe4", height: "24px", maxWidth: "100px" }}
                             >
                               {item}
                             </div>
                         ))}
                     </div>
-                    <div className="lh100 font16 c666 text-overflow-1">
+                    <div className="lh120 font16 c666 text-overflow-1">
                       {data && data.loan && data.loan.description}
                     </div>
                   </div>
@@ -211,32 +211,32 @@ export default class extends Component {
                 <div className="plr30">
                   <div
                     className="flex ai-center loandetail-border-b"
-                    style={{ height: "140px" }}
+                    style={{ height: "140px", width: "830px" }}
                   >
                     <div
                       className="loandetail-border-r"
-                      style={{ paddingRight: "50px" }}
+                      style={{ paddingRight: "50px", maxWidth: "250px" }}
                     >
                       <div className="font16 mb15">还款方式</div>
-                      <div className="font18 bold">{data && data.loan && data.loan.payment_method}</div>
+                      <div className="font18 bold text-overflow-1">{data && data.loan && data.loan.payment_method}</div>
                     </div>
                     <div
-                      className="loandetail-border-r pl20"
-                      style={{ paddingRight: "50px" }}
+                      className="loandetail-border-r pl20 equal-no"
+                      style={{ paddingRight: "50px", maxWidth: "220px" }}
                     >
                       <div className="font16 mb15">放款时间</div>
-                      <div className="font18 bold">{data && data.loan && data.loan.cycle}</div>
+                      <div className="font18 bold text-overflow-1">{data && data.loan && data.loan.cycle}</div>
                     </div>
                     <div
-                      className="loandetail-border-r pl20"
-                      style={{ paddingRight: "50px" }}
+                      className="loandetail-border-r pl20 equal-no"
+                      style={{ paddingRight: "50px", maxWidth: "160px" }}
                     >
                       <div className="font16 mb15">参考{data && data.loan && data.loan.interest_rate_method}利率</div>
-                      <div className="font18 bold">{data && data.loan && data.loan.interest_rate}%</div>
+                      <div className="font18 bold text-overflow-1">{data && data.loan && data.loan.interest_rate}%</div>
                     </div>
-                    <div className="pl20" style={{ width: "150px" }}>
+                    <div className="pl20 equal-no" style={{ maxWidth: "200px" }}>
                       <div className="font16 mb15">申请人数</div>
-                      <div className="font18 bold">{data && data.loan && data.loan.apply_num}</div>
+                      <div className="font18 bold text-overflow-1">{data && data.loan && data.loan.apply_num}</div>
                     </div>
                   </div>
                   {/* canvs表区域 */}
@@ -256,7 +256,7 @@ export default class extends Component {
                       />
                       {data &&
                         data.loan && (
-                          <div className="font16 c666 mt15 pl15">
+                          <div className="font16 c666 mt15 pl10 text-overflow-1">
                             金额范围：{clipBigNum(data.loan.sum_start)}-{clipBigNum(
                               data.loan.sum_end
                             )}
@@ -282,7 +282,7 @@ export default class extends Component {
                             ))}
                           </Select>
                         )}
-                      <div className="font16 c666 pl15 mt15">
+                      <div className="font16 c666 pl10 mt15 text-overflow-1">
                         贷款期限：
                         {data &&
                           data.loan &&
@@ -340,7 +340,7 @@ export default class extends Component {
                       </div>
                       <div className="flex ai-center">
                         <span className="loandetail-globule mr5 bg-ccc circle" />
-                        <span>月还款：</span>
+                        <span>总还款：</span>
                         <span className="c-ccc">
                           {data &&
                             data.loan &&
@@ -408,12 +408,12 @@ export default class extends Component {
                           </div>
                           <div
                             className="pl20 font14 c33"
-                            dangerouslySetInnerHTML={{ __html: data.loan.application_requirements ? data.loan.application_requirements : "暂无信息" }}
+                            dangerouslySetInnerHTML={{ __html: data.loan.application_requirements || "暂无信息" }}
                           />
 
                           <div className="h60" />
                           <div className="c999 font16 lh100 mb30">
-                            {data.loan.name}客服电话：{data.loan.customer_tel ? data.loan.customer_tel : "暂无信息"}
+                            {data.loan.name}客服电话：{data.loan.customer_tel || "暂无信息"}
                           </div>
                         </div>
                       ) : (
@@ -424,7 +424,7 @@ export default class extends Component {
                           </div>
                           <div
                             className="pl20 font14 c33"
-                            dangerouslySetInnerHTML={{ __html: data.loan.application_requirements ? data.loan.application_requirements : "暂无信息" }}
+                            dangerouslySetInnerHTML={{ __html: data.loan.application_requirements || "暂无信息" }}
                           />
                           <div className="h40" />
                           <div>
@@ -452,12 +452,12 @@ export default class extends Component {
                             </div>
                             <div
                               className="pl20 font14 c33"
-                              dangerouslySetInnerHTML={{ __html: data.loan.rate_explain ? data.loan.rate_explain : "暂无信息" }}
+                              dangerouslySetInnerHTML={{ __html: data.loan.rate_explain || "暂无信息" }}
                             />
                           </div>
                           <div className="h60" />
                           <div className="c999 font16 lh100 mb30">
-                            咨询电话：{data.loan.customer_tel ? data.loan.customer_tel : "暂无信息"}
+                            咨询电话：{data.loan.customer_tel || "暂无信息"}
                           </div>
                         </div>
                       )}
@@ -486,13 +486,16 @@ export default class extends Component {
                     data.type.map((item, index) => (
                       <WrapLink
                         key={uuid()}
-                        href="/loan"
+                        href={`${data &&
+                          data.loan &&
+                          data.loan.category &&
+                          data.loan.category === 1 ? "/1-loan/2-home-speed" : "/1-loan/1-home"}`}
                         as={`
                         ${data &&
                             data.loan &&
                             data.loan.category &&
                             data.loan.category === 1 ? "/loan/speed" : "/loan"}?typeloan=${item.id}&typeloanfocus=${index + 1}`}
-                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot"
+                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-1"
                       >
                         {item.name}
                       </WrapLink>
