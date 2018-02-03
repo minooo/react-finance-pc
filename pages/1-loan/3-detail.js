@@ -340,7 +340,7 @@ export default class extends Component {
                       </div>
                       <div className="flex ai-center">
                         <span className="loandetail-globule mr5 bg-ccc circle" />
-                        <span>总还款：</span>
+                        <span>月还款：</span>
                         <span className="c-ccc">
                           {data &&
                             data.loan &&
@@ -361,116 +361,140 @@ export default class extends Component {
               <div className="h30" />
               {/* 申请 */}
               <div className="pl30 bg-white" style={{ paddingTop: "40px" }}>
-                <div>
-                  {
+                {
+                  data &&
+                    data.loan &&
+                    data.loan.category &&
+                    data.loan.category === 1 ? (
+                      <div>
+                        <div className="flex mb30">
+                          <div className="loandetail-right-icon" />
+                          <div className="pl10 font18 bold lh100">申请流程</div>
+                        </div>
+                        <div className="pt15 flex font16" style={{ width: "860px", overflow: "auto" }}>
+                          {data &&
+                            data.flowpath &&
+                            data.flowpath.length > 0 &&
+                            data.flowpath.map((item, index) => (
+                              <div
+                                className="flex jc-between"
+                                key={uuid()}
+                                style={{ width: `${index === data.flowpath.length - 1 ? "" : "180px"}` }}
+                              >
+                                <div className="flex column ai-center">
+                                  <div className="w38 h40 mb20">
+                                    <img src={item.icon} alt="" className="w-100 h-100" />
+                                  </div>
+                                  <div className="w80 text-overflow-1 text-center">{item.step_name}</div>
+                                </div>
+                                {
+                                  index === data.flowpath.length - 1 ? null :
+                                    <Icon
+                                      className="pt10"
+                                      type="right"
+                                      style={{ fontSize: 16, color: "#dedede", paddingRight: "40px" }}
+                                    />
+                                }
+                              </div>
+                            )
+                            )
+                          }
+                        </div>
+                      </div>
+                    )
+                    :
+                    (
+                      <div>
+                        <div className="flex mb30">
+                          <div className="he18 loandetail-right-icon" />
+                          <div className="pl10 font18 bold lh100">申请条件</div>
+                        </div>
+                        <div
+                          className="pl20 font14 c33"
+                          dangerouslySetInnerHTML={{ __html: data.loan.application_requirements || "暂无信息" }}
+                        />
+                      </div>
+                    )
+                }
+                <div className="h60" />
+                {
+                  data &&
+                    data.loan &&
+                    data.loan.category &&
+                    data.loan.category === 1 ?
+                    (
+                      <div>
+                        <div className="flex mb30">
+                          <div className="he18 loandetail-right-icon" />
+                          <div className="pl10 font18 bold lh100">申请条件</div>
+                        </div>
+                        <div
+                          className="pl20 font14 c33"
+                          dangerouslySetInnerHTML={{ __html: data.loan.application_requirements || "暂无信息" }}
+                        />
+                      </div>
+                    )
+                    :
+                    (
+                      <div>
+                        <div className="flex mb30">
+                          <div className="he18 loandetail-right-icon" />
+                          <div className="pl10 font18 bold lh100">申请材料</div>
+                        </div>
+                        <div className="pl20 font14 c33">
+                          {
+                            data &&
+                            data.loan &&
+                            data.loan.apply_material_name &&
+                            data.loan.apply_material_name.length > 0 &&
+                            data.loan.apply_material_name.map((item, index) => (
+                              <div key={uuid()} className="h30 lh100">{index + 1}、{item}</div>
+                            ))
+                          }
+                        </div>
+                      </div>
+                    )
+                }
+                <div
+                  className={`${
                     data &&
                       data.loan &&
                       data.loan.category &&
-                      data.loan.category === 1 ? (
-                        <div>
-                          <div className="flex mb30">
-                            <div className="he18 loandetail-right-icon" />
-                            <div className="pl10 font18 bold lh100">申请流程</div>
-                          </div>
-                          <div className="pt15 flex font16" style={{ width: "860px", overflow: "auto" }}>
-                            {data &&
-                              data.flowpath &&
-                              data.flowpath.length > 0 &&
-                              data.flowpath.map((item, index) => (
-                                <div
-                                  className="flex jc-between mb30"
-                                  key={uuid()}
-                                  style={{ width: `${index === data.flowpath.length - 1 ? "" : "180px"}` }}
-                                >
-                                  <div className="flex column ai-center">
-                                    <div className="w38 h40 mb20">
-                                      <img src={item.icon} alt="" className="w-100 h-100" />
-                                    </div>
-                                    <div className="w80 text-overflow-1 text-center">{item.step_name}</div>
-                                  </div>
-                                  {
-                                    index === data.flowpath.length - 1 ? null :
-                                      <Icon
-                                        className="pt10"
-                                        type="right"
-                                        style={{ fontSize: 16, color: "#dedede", paddingRight: "40px" }}
-                                      />
-                                  }
-                                </div>
-                              )
-                              )
-                            }
-                          </div>
-                          <div className="h30" />
-                          <div className="flex mb30">
-                            <div className="he18 loandetail-right-icon" />
-                            <div className="pl10 font18 bold lh100">申请条件</div>
-                          </div>
-                          <div
-                            className="pl20 font14 c33"
-                            dangerouslySetInnerHTML={{ __html: data.loan.application_requirements || "暂无信息" }}
-                          />
-
-                          <div className="h60" />
-                          <div className="c999 font16 lh100 mb30">
-                            {data.loan.name}客服电话：{data.loan.customer_tel || "暂无信息"}
-                          </div>
+                      data.loan.category === 1 ? "h60" : "h44"
+                    }`}
+                />
+                {
+                  data &&
+                    data.loan &&
+                    data.loan.category &&
+                    data.loan.category === 1 ?
+                    null :
+                    (
+                      <div>
+                        <div className="flex mb30">
+                          <div className="he18 loandetail-right-icon" />
+                          <div className="pl10 font18 bold lh100">利率说明</div>
                         </div>
-                      ) : (
-                        <div>
-                          <div className="flex mb30">
-                            <div className="he18 loandetail-right-icon" />
-                            <div className="pl10 font18 bold lh100">申请条件</div>
-                          </div>
-                          <div
-                            className="pl20 font14 c33"
-                            dangerouslySetInnerHTML={{ __html: data.loan.application_requirements || "暂无信息" }}
-                          />
-                          <div className="h40" />
-                          <div>
-                            <div className="flex mb30">
-                              <div className="he18 loandetail-right-icon" />
-                              <div className="pl10 font18 bold lh100">申请材料</div>
-                            </div>
-                            <div className="pl20 font14 c33">
-                              {
-                                data &&
-                                data.loan &&
-                                data.loan.apply_material_name &&
-                                data.loan.apply_material_name.length > 0 &&
-                                data.loan.apply_material_name.map((item, index) => (
-                                  <div key={uuid()} className="h30 lh100">{index + 1}、{item}</div>
-                                ))
-                              }
-                            </div>
-                          </div>
-                          <div className="h40" />
-                          <div>
-                            <div className="flex mb30">
-                              <div className="he18 loandetail-right-icon" />
-                              <div className="pl10 font18 bold lh100">利率说明</div>
-                            </div>
-                            <div
-                              className="pl20 font14 c33"
-                              dangerouslySetInnerHTML={{ __html: data.loan.rate_explain || "暂无信息" }}
-                            />
-                          </div>
-                          <div className="h60" />
-                          <div className="c999 font16 lh100 mb30">
-                            咨询电话：{data.loan.customer_tel || "暂无信息"}
-                          </div>
-                        </div>
-                      )}
-                  <WrapLink
-                    href={data.loan.external_links}
-                    as={data.loan.external_links}
-                    className="font18 bold c-white bg-main block h44 text-center r4"
-                    style={{ width: "200px", lineHeight: "44px" }}
-                  >
-                    <div className="c-white">马上申请</div>
-                  </WrapLink>
-                  <div className="h50" />
+                        <div
+                          className="pl20 font14 c33"
+                          dangerouslySetInnerHTML={{ __html: data.loan.rate_explain || "暂无信息" }}
+                        />
+                        <div style={{ height: "60px" }} />
+                      </div>
+                    )
+                }
+                <div className="c999 font16 lh100 mb30">
+                  咨询电话：{data.loan.customer_tel || "暂无信息"}
                 </div>
+                <WrapLink
+                  href={data.loan.external_links}
+                  as={data.loan.external_links}
+                  className="font18 bold c-white bg-main block h44 text-center r4"
+                  style={{ width: "200px", lineHeight: "44px" }}
+                >
+                  <div className="c-white">马上申请</div>
+                </WrapLink>
+                <div className="h50" />
               </div>
               <div className="h60" />
             </div>
@@ -503,55 +527,57 @@ export default class extends Component {
                 </div>
               </div>
               <div className="h20" />
-              {data &&
-                data.loan &&
-                data.loan.category &&
-                data.loan.category === 1 ? (
-                  <div className="pb25 pt30 plr30 bg-white">
-                    <div className="font18 c333 text-center mb25 lh120">
-                      APP下载，享专属优惠
+              {
+                data &&
+                  data.loan &&
+                  data.loan.category &&
+                  data.loan.category === 1 ? (
+                    <div className="pb25 pt30 plr30 bg-white">
+                      <div className="font18 c333 text-center mb25 lh120">
+                        APP下载，享专属优惠
                     </div>
-                    <div className="flex jc-around ai-center mb20">
-                      <div className="w70" style={{ height: "130px" }}>
-                        <img
-                          src="/static/images/foot_app.png"
-                          className="w-100"
-                          alt=""
-                        />
+                      <div className="flex jc-around ai-center mb20">
+                        <div className="w70" style={{ height: "130px" }}>
+                          <img
+                            src="/static/images/foot_app.png"
+                            className="w-100"
+                            alt=""
+                          />
+                        </div>
+                        <div className="w100 h100">
+                          <img
+                            src="/static/images/foot_code.png"
+                            className="w-100"
+                            alt=""
+                          />
+                        </div>
                       </div>
-                      <div className="w100 h100">
-                        <img
-                          src="/static/images/foot_code.png"
-                          className="w-100"
-                          alt=""
-                        />
-                      </div>
+                      <div className="c-main font14 text-center lh120">
+                        最高可借20万,当天放款
                     </div>
-                    <div className="c-main font14 text-center lh120">
-                      最高可借20万,当天放款
                     </div>
-                  </div>
-                ) : (
-                  <div className="plr10 ptb25 bg-white">
-                    <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
-                    {
-                      data &&
-                      data.recommend &&
-                      data.recommend.list &&
-                      data.recommend.list.length > 0 &&
-                      data.recommend.list.map(item => (
-                        <HomeRankListItem
-                          key={uuid()}
-                          item={item}
-                          isrank="true"
-                        />
-                      ))}
-                  </div>
-                )}
+                  ) : (
+                    <div className="plr10 ptb25 bg-white">
+                      <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
+                      {
+                        data &&
+                        data.recommend &&
+                        data.recommend.list &&
+                        data.recommend.list.length > 0 &&
+                        data.recommend.list.map(item => (
+                          <HomeRankListItem
+                            key={uuid()}
+                            item={item}
+                            isrank="true"
+                          />
+                        ))}
+                    </div>
+                  )
+              }
             </div>
           </div>
         </div>
-      </Layout>
+      </Layout >
     );
   }
 }
