@@ -249,7 +249,7 @@ export default class extends Component {
                         addonBefore="贷款金额:"
                         addonAfter="元"
                         value={
-                          moneyVal || (data && data.loan && data.loan.sum_start)
+                          (moneyVal || moneyVal === "") ? moneyVal : (data && data.loan && data.loan.sum_start)
                         }
                         onChange={this.onMoneyChange}
                         onBlur={this.onMoneyBlur}
