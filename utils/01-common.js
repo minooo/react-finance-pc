@@ -35,7 +35,8 @@ export const isAndroid = () => /(Android)/i.test(navigator.userAgent);
 
 export const setTitle = title => {
   document.title = title;
-  if (isIOS() && !window.__wxjs_is_wkwebview) { // eslint-disable-line
+  // eslint-disable-next-line
+  if (isIOS() && !window.__wxjs_is_wkwebview) {
     const i = document.createElement("iframe");
     i.src = "/favicon.ico";
     i.style.display = "none";
@@ -183,16 +184,55 @@ export const getUrlLastStr = pathStr => {
 };
 
 // 处理 ["11d", "12d", "15m"] 为对应的天数，月数
+const arrCompare = (a, b) => {
+  const a1 = a.slice(0, -1)
+  const a2 = a.substr(-1, 1)
+  const b1 = b.slice(0, -1)
+  const b2 = b.substr(-1, 1)
+  if (a2 === b2) {
+    if ((+a1) < (+b1)) {
+      return -1;
+    }
+    if ((+a1) > (+b1)) {
+      return 1;
+    }
+    // a must be equal to b
+    return 0;
+  }
+  if (a2 === "m") return 1
+  return -1
+}
+export const strTostr = str => (str.slice(0, -1) + (str.substr(-1, 1) === "d" ? "天" : "月"))
 export const arrToDateString = arr => {
-  const len = arr.length;
-  if (!arr || len === 0) {
+  if (!arr || arr.length === 0) {
     return "不存在";
   }
-  const first =
-    arr[0].slice(0, -1) + (arr[0].substr(-1, 1) === "d" ? "天" : "月");
-  const last = arr[len - 1].slice(0, -1) + (arr[len - 1].substr(-1, 1) === "d" ? "天" : "月");
+  const len = arr.length;
+  const newArr = arr.sort(arrCompare)
+  const first = strTostr(newArr[0]);
+  const last = strTostr(newArr[len - 1]);
   if (len === 1) {
     return first;
   }
   return `${first}-${last}`;
 };
+export const arrToArr = arr => {
+  if (!arr || arr.length === 0) return null
+  return arr.map(item => item.num + item.type).sort(arrCompare)
+}
+// 还款相关计算
+// 默认返回总还款
+// type 1 返回利息和费用
+// type 2 返回每个月应还的费用
+export const fee = (num, rate, dateStr, type) => {
+  const dateStrNum = +dateStr.slice(0, -1);
+  const dateStrNni = dateStr.substr(-1, 1) === "d" ? 1 : dateStrNum;
+  const totalFee = (+num * +rate * dateStrNni) / 100
+  if (type === 1) {
+    return clipPrice(totalFee);
+  }
+  if (type === 2) {
+    return clipPrice((+num + totalFee) / dateStrNni)
+  }
+  return +num + totalFee
+}
