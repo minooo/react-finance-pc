@@ -26,33 +26,35 @@ export default class extends Component {
   componentDidMount() {
     /* eslint-disable */
     window._bd_share_config = {
-      common : {
-        bdText : '自定义分享内容',
-        bdDesc : '自定义分享摘要',
-        bdUrl : '自定义分享url地址',
-        bdPic : '自定义分享图片'
+      common: {
+        bdSnsKey: {},
+        bdText: "",
+        bdMini: "2",
+        bdMiniList: false,
+        bdPic: "",
+        bdStyle: "1",
+        bdSize: "32"
       },
-      share : [{
-        "bdSize" : 32
-      }],
-      slide : [{
-        bdImg : 0,
-        bdPos : "right",
-        bdTop : 100
-      }],
-      image : [{
-        viewType : 'list',
-        viewPos : 'top',
-        viewColor : 'black',
-        viewSize : '16',
-        viewList : ['qzone','tsina','huaban','tqq','renren']
-      }],
-      selectShare : [{
-        "bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
-      }]
-    }
+      share: {}
+    };
     require("../../static/scripts/share.js");
     /* eslint-enable */
+  }
+  componentWillUpdate() {
+    /* eslint-disable */
+    window._bd_share_config = {
+      common: {
+        bdSnsKey: {},
+        bdText: "",
+        bdMini: "2",
+        bdMiniList: false,
+        bdPic: "",
+        bdStyle: "1",
+        bdSize: "32"
+      },
+      share: {}
+    };
+    require("../../static/scripts/share.js");
   }
   render() {
     const {
@@ -124,9 +126,6 @@ export default class extends Component {
                 className="bdsharebuttonbox flex jc-end mt30 mb25"
                 data-tag="share_1"
               >
-                <a href="www.baidu.com" className="bds_more" data-cmd="more">
-                  {null}
-                </a>
                 <a
                   href="www.baidu.com"
                   className="bds_weixin"
