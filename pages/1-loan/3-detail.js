@@ -28,87 +28,26 @@ export default class extends Component {
   state = {
     selectValue: null,
     moneyVal: null,
-    finalMoney: null,
-
-    isSpeed: false,
-    interest_rate: 3,
-    payment_method: "等额本息",
-    apply_num: 7869,
-    img: "http://dummyimage.com/70x70",
-    hot_classify: [
-      "房产抵押货",
-      "车辆抵押货",
-      "无担保贷",
-      "公积金贷",
-      "法人贷"
-    ],
-    recommend: [
-      {
-        name: "拍拍贷",
-        apply_num: "2013人申请",
-        description: "3分钟申请,2小时审核,秒过",
-        thumb: "https://dummyimage.com/68x68"
-      },
-      {
-        name: "拍拍贷",
-        apply_num: "2013人申请",
-        description: "3分钟申请,2小时审核,秒过",
-        thumb: "https://dummyimage.com/68x68"
-      },
-      {
-        name: "拍拍贷",
-        apply_num: "2013人申请",
-        description: "3分钟申请,2小时审核,秒过",
-        thumb: "https://dummyimage.com/68x68"
-      },
-      {
-        name: "拍拍贷",
-        apply_num: "2013人申请",
-        description: "3分钟申请,2小时审核,秒过",
-        thumb: "https://dummyimage.com/68x68"
-      },
-      {
-        name: "拍拍贷",
-        apply_num: "2013人申请",
-        description: "3分钟申请,2小时审核,秒过",
-        thumb: "https://dummyimage.com/68x68"
-      }
-    ]
+    finalMoney: null
   };
   componentDidMount() {
-    const { data: { loan: { sum_start, timelimit, interest_rate } } } = this.props;
-    this.myChart = echarts.init(this.echartBox)
+    const {
+      data: { loan: { sum_start, timelimit, interest_rate } }
+    } = this.props;
+    this.myChart = echarts.init(this.echartBox);
 
     if (sum_start && timelimit && interest_rate) {
-      const initTatal = fee(
-        sum_start,
-        interest_rate,
-        arrToArr(timelimit)[0],
-      )
-      const initFee = fee(
-        sum_start,
-        interest_rate,
-        arrToArr(timelimit)[0],
-        1
-      )
-      this.myChart.setOption(this.setMyOption(initFee, initTatal))
+      const initTatal = fee(sum_start, interest_rate, arrToArr(timelimit)[0]);
+      const initFee = fee(sum_start, interest_rate, arrToArr(timelimit)[0], 1);
+      this.myChart.setOption(this.setMyOption(initFee, initTatal));
     }
   }
   onSelectChange = selectValue => {
     const { data: { loan: { sum_start, interest_rate } } } = this.props;
-    const { finalMoney } = this.state
-    const initTatal = fee(
-      finalMoney || sum_start,
-      interest_rate,
-      selectValue
-    )
-    const initFee = fee(
-      finalMoney || sum_start,
-      interest_rate,
-      selectValue,
-      1
-    )
-    this.myChart.setOption(this.setMyOption(initFee, initTatal))
+    const { finalMoney } = this.state;
+    const initTatal = fee(finalMoney || sum_start, interest_rate, selectValue);
+    const initFee = fee(finalMoney || sum_start, interest_rate, selectValue, 1);
+    this.myChart.setOption(this.setMyOption(initFee, initTatal));
     this.setState(() => ({ selectValue }));
   };
   onMoneyChange = e => {
@@ -168,21 +107,9 @@ export default class extends Component {
         ]
       }
     ]
-  })
+  });
   render() {
-    const {
-      recommend,
-      hot_classify,
-      img,
-      isSpeed,
-      interest_rate,
-      payment_method,
-      apply_num,
-
-      selectValue,
-      moneyVal,
-      finalMoney
-    } = this.state;
+    const { selectValue, moneyVal, finalMoney } = this.state;
     const { data, err } = this.props;
     const { Option } = Select;
     if (err) {
@@ -221,7 +148,7 @@ export default class extends Component {
               贷款超市
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <span className="c999 font16">贷款详情</span>
+            <span className="c999 font16">{data.loan.name || "贷款详情"}</span>
           </div>
           {/* 核心块 */}
           <div className="flex box">
@@ -236,26 +163,30 @@ export default class extends Component {
                       alt=""
                     />
                   </div>
-                  <div className="pl15">
-                    <div className="flex mb15">
-                      <div className="l120 font20 bold mr10">
+                  <div className="pl15 equal">
+                    <div className="flex mb15 ai-center">
+                      <div className="l120 font20 bold mr10 text-overflow-1">
                         {data && data.loan && data.loan.name}
                       </div>
                       {data &&
                         data.loan &&
                         data.loan.apply_material_name &&
                         data.loan.apply_material_name.length > 0 &&
-                        data.loan.apply_material_name.map(item => (
+                        data.loan.apply_material_name.slice(0, 4).map(item => (
                           <div
                             key={uuid()}
-                            className="c-second font14 plr10 flex ai-center mr10"
-                            style={{ backgroundColor: "#ffebe4" }}
+                            className="c-second font14 plr10 flex ai-center mr10 equal-no text-overflow-1"
+                            style={{
+                              backgroundColor: "#ffebe4",
+                              height: "24px",
+                              maxWidth: "100px"
+                            }}
                           >
                             {item}
                           </div>
                         ))}
                     </div>
-                    <div className="lh100 font16 c999">
+                    <div className="lh120 font16 c666 text-overflow-1">
                       {data && data.loan && data.loan.description}
                     </div>
                   </div>
@@ -263,29 +194,47 @@ export default class extends Component {
                 <div className="plr30">
                   <div
                     className="flex ai-center loandetail-border-b"
-                    style={{ height: "140px" }}
+                    style={{ height: "140px", width: "830px" }}
                   >
-                    <div className="loandetail-border-r w120">
+                    <div
+                      className="loandetail-border-r"
+                      style={{ paddingRight: "50px", maxWidth: "250px" }}
+                    >
                       <div className="font16 mb15">还款方式</div>
-                      <div className="font18 bold">{payment_method}</div>
+                      <div className="font18 bold text-overflow-1">
+                        {data && data.loan && data.loan.payment_method}
+                      </div>
                     </div>
                     <div
-                      className="loandetail-border-r pl20"
-                      style={{ width: "150px" }}
+                      className="loandetail-border-r pl20 equal-no"
+                      style={{ paddingRight: "50px", maxWidth: "220px" }}
                     >
                       <div className="font16 mb15">放款时间</div>
-                      <div className="font18 bold">{interest_rate}天内放款</div>
+                      <div className="font18 bold text-overflow-1">
+                        {data && data.loan && data.loan.cycle}
+                      </div>
                     </div>
                     <div
-                      className="loandetail-border-r pl20"
-                      style={{ width: "150px" }}
+                      className="loandetail-border-r pl20 equal-no"
+                      style={{ paddingRight: "50px", maxWidth: "160px" }}
                     >
-                      <div className="font16 mb15">参考月利率</div>
-                      <div className="font18 bold">{interest_rate}%</div>
+                      <div className="font16 mb15">
+                        参考{data &&
+                          data.loan &&
+                          data.loan.interest_rate_method}利率
+                      </div>
+                      <div className="font18 bold text-overflow-1">
+                        {data && data.loan && data.loan.interest_rate}%
+                      </div>
                     </div>
-                    <div className="pl20" style={{ width: "150px" }}>
+                    <div
+                      className="pl20 equal-no"
+                      style={{ maxWidth: "200px" }}
+                    >
                       <div className="font16 mb15">申请人数</div>
-                      <div className="font18 bold">{apply_num}</div>
+                      <div className="font18 bold text-overflow-1">
+                        {data && data.loan && data.loan.apply_num}
+                      </div>
                     </div>
                   </div>
                   {/* canvs表区域 */}
@@ -298,14 +247,16 @@ export default class extends Component {
                         addonBefore="贷款金额:"
                         addonAfter="元"
                         value={
-                          moneyVal || (data && data.loan && data.loan.sum_start)
+                          moneyVal || moneyVal === ""
+                            ? moneyVal
+                            : data && data.loan && data.loan.sum_start
                         }
                         onChange={this.onMoneyChange}
                         onBlur={this.onMoneyBlur}
                       />
                       {data &&
                         data.loan && (
-                          <div className="font16 c666 text-center mt15">
+                          <div className="font16 c666 mt15 pl10 text-overflow-1">
                             金额范围：{clipBigNum(data.loan.sum_start)}-{clipBigNum(
                               data.loan.sum_end
                             )}
@@ -331,7 +282,7 @@ export default class extends Component {
                             ))}
                           </Select>
                         )}
-                      <div className="font16 c666 text-center mt15">
+                      <div className="font16 c666 pl10 mt15 text-overflow-1">
                         贷款期限：
                         {data &&
                           data.loan &&
@@ -364,30 +315,43 @@ export default class extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="ml30">
-                      <div>
-                        到账金额：{finalMoney ||
-                          (data && data.loan && data.loan.sum_start)}
+                    <div className="ml30 font16">
+                      <div className="flex ai-center">
+                        <span className="loandetail-globule mr5 bg-second circle" />
+                        <span>到账金额：</span>
+                        <span className="c-second">
+                          {finalMoney ||
+                            (data && data.loan && data.loan.sum_start)}
+                        </span>
                       </div>
-                      <div>
-                        利息和费用：{data &&
-                          data.loan &&
-                          fee(
-                            finalMoney || data.loan.sum_start,
-                            data.loan.interest_rate,
-                            selectValue || arrToArr(data.loan.timelimit)[0],
-                            1
-                          )}
+                      <div className="flex ai-center">
+                        <span className="loandetail-globule mr5 bg-main circle" />
+                        <span>利息和费用：</span>
+                        <span className="c-main">
+                          {" "}
+                          {data &&
+                            data.loan &&
+                            fee(
+                              finalMoney || data.loan.sum_start,
+                              data.loan.interest_rate,
+                              selectValue || arrToArr(data.loan.timelimit)[0],
+                              1
+                            )}
+                        </span>
                       </div>
-                      <div>
-                        月还款：{data &&
-                          data.loan &&
-                          fee(
-                            finalMoney || data.loan.sum_start,
-                            data.loan.interest_rate,
-                            selectValue || arrToArr(data.loan.timelimit)[0],
-                            2
-                          )}
+                      <div className="flex ai-center">
+                        <span className="loandetail-globule mr5 bg-ccc circle" />
+                        <span>月还款：</span>
+                        <span className="c-ccc">
+                          {data &&
+                            data.loan &&
+                            fee(
+                              finalMoney || data.loan.sum_start,
+                              data.loan.interest_rate,
+                              selectValue || arrToArr(data.loan.timelimit)[0],
+                              2
+                            )}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -397,156 +361,137 @@ export default class extends Component {
               <div className="h30" />
               {/* 申请 */}
               <div className="pl30 bg-white" style={{ paddingTop: "40px" }}>
-                <div>
-                  {isSpeed ? (
+                {data &&
+                  data.loan &&
+                  data.loan.category &&
+                  data.loan.category === 1 && (
                     <div>
                       <div className="flex mb30">
-                        <div className="he18 loandetail-right-icon" />
+                        <div className="loandetail-right-icon" />
                         <div className="pl10 font18 bold lh100">申请流程</div>
                       </div>
-                      <div className="pt15 flex font16">
-                        <div className="flex column ai-center">
-                          <div className="w38 h40 loandetail-apply-1 mb20" />
-                          <div>身份认证</div>
-                        </div>
-                        <Icon
-                          className="pt10"
-                          type="right"
-                          style={{
-                            fontSize: 16,
-                            color: "#dedede",
-                            paddingLeft: "66px",
-                            paddingRight: "40px"
-                          }}
-                        />
-                        <div className="flex column ai-center">
-                          <div className="w38 h40 loandetail-apply-2 mb20" />
-                          <div>运营商认证</div>
-                        </div>
-                        <Icon
-                          className="pt10"
-                          type="right"
-                          style={{
-                            fontSize: 16,
-                            color: "#dedede",
-                            paddingLeft: "66px",
-                            paddingRight: "40px"
-                          }}
-                        />
-                        <div className="flex column ai-center">
-                          <div className="w38 h40 loandetail-apply-3 mb20" />
-                          <div>芝麻分授权</div>
-                        </div>
-                        <Icon
-                          className="pt10"
-                          type="right"
-                          style={{
-                            fontSize: 16,
-                            color: "#dedede",
-                            paddingLeft: "66px",
-                            paddingRight: "40px"
-                          }}
-                        />
-                        <div className="flex column ai-center">
-                          <div className="w38 h40 loandetail-apply-4 mb20" />
-                          <div>等待放款</div>
-                        </div>
+                      <div
+                        className="pt15 flex font16"
+                        style={{ width: "860px", overflow: "auto" }}
+                      >
+                        {data &&
+                          data.flowpath &&
+                          data.flowpath.length > 0 &&
+                          data.flowpath.map((item, index) => (
+                            <div
+                              className="flex jc-between"
+                              key={uuid()}
+                              style={{
+                                width: `${
+                                  index === data.flowpath.length - 1
+                                    ? ""
+                                    : "180px"
+                                }`
+                              }}
+                            >
+                              <div className="flex column ai-center">
+                                <div className="w38 h40 mb20">
+                                  <img
+                                    src={item.icon}
+                                    alt=""
+                                    className="w-100 h-100"
+                                  />
+                                </div>
+                                <div className="w80 text-overflow-1 text-center">
+                                  {item.step_name}
+                                </div>
+                              </div>
+                              {index === data.flowpath.length - 1 ? null : (
+                                <Icon
+                                  className="pt10"
+                                  type="right"
+                                  style={{
+                                    fontSize: 16,
+                                    color: "#dedede",
+                                    paddingRight: "40px"
+                                  }}
+                                />
+                              )}
+                            </div>
+                          ))}
                       </div>
                       <div className="h60" />
-                      <div className="flex mb30">
-                        <div className="he18 loandetail-right-icon" />
-                        <div className="pl10 font18 bold lh100">申请条件</div>
-                      </div>
-                      <div className="pl20 font14 c33">
-                        <div className="h30 lh100">1、22-55周岁</div>
-                        <div className="h30 lh100">
-                          2、社保或公积金缴费1年以上（根据社保或公积金缴费技术判定额度）
-                        </div>
-                        <div className="h30 lh100">
-                          3、社保个人缴费额度400以上，或者公积金个人缴费额度360以上可申请（额度不足者可提供附加财力证明）
-                        </div>
-                        <div className="h30 lh100">
-                          4、可选择性提供本地产权清晰，无案件且可自由上市流通的房产（房龄不超过30年，市值50万以上）
-                        </div>
-                        <div className="h30 lh100">
-                          5、要求客户信用记录良好（可接受征信空白客户）
-                        </div>
-                        <div className="h30 lh100">
-                          6、本地工作或本地注册经营
-                        </div>
-                      </div>
-                      <div className="h60" />
-                      <div className="c999 font16 lh100 mb30">
-                        捷信福袋客服电话：400-85-80580
-                      </div>
                     </div>
-                  ) : (
+                  )}
+                <div>
+                  <div className="flex mb30">
+                    <div className="he18 loandetail-right-icon" />
+                    <div className="pl10 font18 bold lh100">申请条件</div>
+                  </div>
+                  <div
+                    className="pl20 font14 c33"
+                    dangerouslySetInnerHTML={{
+                      __html: data.loan.application_requirements || "暂无信息"
+                    }}
+                  />
+                </div>
+                {data &&
+                  data.loan &&
+                  data.loan.category === 2 && (
                     <div>
+                      <div className="h60" />
                       <div className="flex mb30">
                         <div className="he18 loandetail-right-icon" />
-                        <div className="pl10 font18 bold lh100">申请条件</div>
+                        <div className="pl10 font18 bold lh100">申请材料</div>
                       </div>
                       <div className="pl20 font14 c33">
-                        <div className="h30 lh100">1、22-55周岁</div>
-                        <div className="h30 lh100">
-                          2、社保或公积金缴费1年以上（根据社保或公积金缴费技术判定额度）
-                        </div>
-                        <div className="h30 lh100">
-                          3、社保个人缴费额度400以上，或者公积金个人缴费额度360以上可申请（额度不足者可提供附加财力证明）
-                        </div>
-                        <div className="h30 lh100">
-                          4、要求客户信用记录良好（可接受征信空白客户）
-                        </div>
-                        <div className="h30 lh100">
-                          5、本地工作或本地注册经营
-                        </div>
-                      </div>
-                      <div className="h40" />
-                      <div>
-                        <div className="flex mb30">
-                          <div className="he18 loandetail-right-icon" />
-                          <div className="pl10 font18 bold lh100">申请材料</div>
-                        </div>
-                        <div className="pl20 font14 c33">
-                          <div className="h30 lh100">1、申请人二代身份证</div>
-                          <div className="h30 lh100">2、一个月内信用报告</div>
-                          <div className="h30 lh100">
-                            3、车辆保险，测算表（额度不足者可提供附加财力证明）
-                          </div>
-                        </div>
-                      </div>
-                      <div className="h40" />
-                      <div>
-                        <div className="flex mb30">
-                          <div className="he18 loandetail-right-icon" />
-                          <div className="pl10 font18 bold lh100">利率说明</div>
-                        </div>
-                        <div className="pl20 font14 c33">
-                          <div className="h30 lh100">1、18-50周岁</div>
-                          <div className="h30 lh100">
-                            2、实名制手机使用满5个月
-                          </div>
-                          <div className="h30 lh100">
-                            3、无不良征信记录所需材料：身份证、征信、手机服务码
-                          </div>
-                        </div>
-                      </div>
-                      <div className="h60" />
-                      <div className="c999 font16 lh100 mb30">
-                        咨询电话：400-85-80580
+                        {data &&
+                          data.loan &&
+                          data.loan.apply_material_name &&
+                          data.loan.apply_material_name.length > 0 &&
+                          data.loan.apply_material_name.map((item, index) => (
+                            <div key={uuid()} className="h30 lh100">
+                              {index + 1}、{item}
+                            </div>
+                          ))}
                       </div>
                     </div>
                   )}
-                  <WrapLink
-                    href="/loan"
-                    as="/loan"
-                    className="font18 bold c-white bg-main block h44 text-center r4"
-                    style={{ width: "200px", lineHeight: "44px" }}
-                  >
-                    <div className="c-white">马上申请</div>
-                  </WrapLink>
-                  <div className="h50" />
+                <div
+                  className={`${
+                    data &&
+                    data.loan &&
+                    data.loan.category &&
+                    data.loan.category === 1
+                      ? "h60"
+                      : "h44"
+                  }`}
+                />
+                {data &&
+                  data.loan &&
+                  data.loan.category &&
+                  data.loan.category === 2 && (
+                    <div>
+                      <div className="flex mb30">
+                        <div className="he18 loandetail-right-icon" />
+                        <div className="pl10 font18 bold lh100">利率说明</div>
+                      </div>
+                      <div
+                        className="pl20 font14 c33"
+                        dangerouslySetInnerHTML={{
+                          __html: data.loan.rate_explain || "暂无信息"
+                        }}
+                      />
+                      <div style={{ height: "60px" }} />
+                    </div>
+                  )}
+                <div className="c999 font16 lh100 mb30">
+                  咨询电话：{data.loan.customer_tel || "暂无信息"}
                 </div>
+                <WrapLink
+                  href={data.loan.external_links}
+                  as={data.loan.external_links}
+                  className="font18 bold c-white bg-main block h44 text-center r4"
+                  style={{ width: "200px", lineHeight: "44px" }}
+                >
+                  <div className="c-white">马上申请</div>
+                </WrapLink>
+                <div className="h50" />
               </div>
               <div className="h60" />
             </div>
@@ -556,22 +501,41 @@ export default class extends Component {
               <div className="plr25 pt25 pb10 bg-white">
                 <div className="font20 bold lh100 mb25">热门分类</div>
                 <div className="flex wrap jc-between">
-                  {hot_classify &&
-                    hot_classify.length > 0 &&
-                    hot_classify.map(itme => (
+                  {data &&
+                    data.type &&
+                    data.type.length > 0 &&
+                    data.type.map((item, index) => (
                       <WrapLink
                         key={uuid()}
-                        href="/loan"
-                        as="/loan"
-                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot"
+                        href={`${
+                          data &&
+                          data.loan &&
+                          data.loan.category &&
+                          data.loan.category === 1
+                            ? "/1-loan/2-home-speed"
+                            : "/1-loan/1-home"
+                        }`}
+                        as={`
+                        ${
+                          data &&
+                          data.loan &&
+                          data.loan.category &&
+                          data.loan.category === 1
+                            ? "/loan/speed"
+                            : "/loan"
+                        }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
+                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-1"
                       >
-                        {itme}
+                        {item.name}
                       </WrapLink>
                     ))}
                 </div>
               </div>
               <div className="h20" />
-              {isSpeed ? (
+              {data &&
+              data.loan &&
+              data.loan.category &&
+              data.loan.category === 1 ? (
                 <div className="pb25 pt30 plr30 bg-white">
                   <div className="font18 c333 text-center mb25 lh120">
                     APP下载，享专属优惠
@@ -599,9 +563,11 @@ export default class extends Component {
               ) : (
                 <div className="plr10 ptb25 bg-white">
                   <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
-                  {recommend &&
-                    recommend.length > 0 &&
-                    recommend.map(item => (
+                  {data &&
+                    data.recommend &&
+                    data.recommend.list &&
+                    data.recommend.list.length > 0 &&
+                    data.recommend.list.map(item => (
                       <HomeRankListItem
                         key={uuid()}
                         item={item}

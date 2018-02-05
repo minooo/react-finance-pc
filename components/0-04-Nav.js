@@ -40,13 +40,7 @@ export default () => (
       style={{ position: "relative", zIndex: 5 }}
       className="flex jc-between ai-center h80 box"
     >
-      <WrapLink style={{ width: "140px", height: "60px" }}>
-        <img
-          src="http://dummyimage.com/140x60"
-          alt=""
-          className="w-100 h-100"
-        />
-      </WrapLink>
+      <WrapLink className="logo h40" href="/index" as="/" />
       <div className="flex">
         {config.map(item => <ActiveLink key={uuid()} {...item} />)}
       </div>

@@ -1,4 +1,8 @@
 // common
+.logo {
+  width: 140px;
+  background: url("../../images/logo.png") 0 0 no-repeat;
+}
 .nav-active {
   border-top: 3px solid #fff;
   border-bottom: 3px solid #4c8dfc;
@@ -215,7 +219,7 @@
   line-height: 34px;
 }
 .loandetail-hot:hover{
-  box-shadow: 0px 1px 10px 0px rgba(0, 94, 255, 0.15);
+  box-shadow: 0px 3px 12px 0px rgba(76, 141, 252, 0.7);
   color: white;
   background-color: #4c8dfc;
   font-weight: bold;
@@ -225,19 +229,11 @@
   height: 18px;
   background-image: url('../../images/loan-right-icon.png')
 }
-.loandetail-apply-1{
-  background-image:url('../../images/loan-apply-id.png')
+.loandetail-globule{
+    height: 12px;
+    display: block;
+    width: 12px;
 }
-.loandetail-apply-2{
-  background-image:url('../../images/loan-apply-phone.png')
-}
-.loandetail-apply-3{
-  background-image:url('../../images/loan-apply-mayi.png')
-}
-.loandetail-apply-4{
-  background-image:url('../../images/loan-apply-money.png')
-}
-
 //card
 .card-cardlist-bg {
   background-image: url("../../images/card_rank_bg.png");
