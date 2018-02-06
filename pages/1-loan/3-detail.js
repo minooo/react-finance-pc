@@ -535,7 +535,7 @@ export default class extends Component {
                     <div className="pb25 pt30 plr30 bg-white">
                       <div className="font18 c333 text-center mb25 lh120">
                         APP下载，享专属优惠
-                    </div>
+                      </div>
                       <div className="flex jc-around ai-center mb20">
                         <div className="w70" style={{ height: "130px" }}>
                           <img
@@ -554,7 +554,7 @@ export default class extends Component {
                       </div>
                       <div className="c-main font14 text-center lh120">
                         最高可借20万,当天放款
-                    </div>
+                      </div>
                     </div>
                   ) : (
                     <div className="plr10 ptb25 bg-white">
