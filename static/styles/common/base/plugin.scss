@@ -1,11 +1,15 @@
 .ant-input-lg {
-  font-size: 12px;
+  font-size: 14px;
+  height: 38px;
+}
+.ant-radio-inner:after {
+  border-radius: 4px;
 }
 .ant-select-selection-selected-value {
-  font-size: 12px;
+  font-size: 14px;
 }
 .ant-input-search-button {
-  font-size: 12px;
+  font-size: 14px;
 }
 .ant-pagination-item-active:focus a, .ant-pagination-item-active:hover a {
   color: #fff;
@@ -15,4 +19,8 @@
   a {
     color: #fff;
   }
+}
+.ant-select-search__field__placeholder, .ant-select-selection__placeholder {
+  font-size: 14px;
+  color: #999;
 }

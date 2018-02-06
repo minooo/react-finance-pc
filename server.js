@@ -68,6 +68,7 @@ app.prepare().then(() => {
   server.use(router.get("/", ctx => renderAndCache(ctx, "/index")));
   server.use(router.get("/loan", ctx => renderAndCache(ctx, "/1-loan/1-home")));
   server.use(router.get("/loan/speed", ctx => renderAndCache(ctx, "/1-loan/2-home-speed")));
+  server.use(router.get("/loan/apply", ctx => renderAndCache(ctx, "/1-loan/4-apply-loan")));
   server.use(router.get("/loan/:id", (ctx, id) => renderAndCache(ctx, "/1-loan/3-detail", null, { id })));
   server.use(router.get("/card", ctx => renderAndCache(ctx, "/2-card/1-home")));
   server.use(router.get("/new", ctx => renderAndCache(ctx, "/3-new/1-home")));
