@@ -25,33 +25,21 @@ export default class extends Component {
   }
   componentDidMount() {
     /* eslint-disable */
+    const { detail } = this.props
     window._bd_share_config = {
       common : {
-        bdText : '自定义分享内容',
-        bdDesc : '自定义分享摘要',
-        bdUrl : '自定义分享url地址',
-        bdPic : '自定义分享图片'
+        bdText : detail && detail.title,
+        bdDesc : detail && detail.content.substr(0, 20),
       },
       share : [{
-        "bdSize" : 32
+        "bdSize" : 24
       }],
-      slide : [{
-        bdImg : 0,
-        bdPos : "right",
-        bdTop : 100
-      }],
-      image : [{
-        viewType : 'list',
-        viewPos : 'top',
-        viewColor : 'black',
-        viewSize : '16',
-        viewList : ['qzone','tsina','huaban','tqq','renren']
-      }],
-      selectShare : [{
-        "bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
-      }]
     }
-    require("../../static/scripts/share.js");
+    if (!window._bd_share_main) {
+      require("../../static/scripts/share.js");
+    } else {
+      window._bd_share_main.init()
+    }
     /* eslint-enable */
   }
   render() {

@@ -169,7 +169,8 @@ export default class extends Component {
           playScale={[0.5, 0.8]}
           key={uuid()}
           className="bg-white app-common-bs"
-          style={{ height: "820px", overflow: "hidden" }}>
+          style={{ height: "820px", overflow: "hidden" }}
+        >
           <div key={uuid()} className="box flex" style={{ paddingRight: "62px" }}>
             <div className="equal relative" style={{ height: "820px" }}>
               <TweenOne

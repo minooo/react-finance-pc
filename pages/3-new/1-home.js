@@ -150,7 +150,7 @@ export default class extends Component {
         {/* 主体 */}
         <div className="box">
           {/* 面包屑 */}
-          <div className="h70 flex ai-center crumbs-ico-bg ml20">
+          <div className="h70 flex ai-center crumbs-ico-bg">
             <WrapLink href="/" as="/" className="c333 font16">
               首页
             </WrapLink>

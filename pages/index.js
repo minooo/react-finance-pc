@@ -176,8 +176,8 @@ export default class extends Component {
             <div className="flex jc-between plr20">
               <div className="font20 bold">热门卡片</div>
               <WrapLink
-                href="/card"
-                as="/2-card/1-home"
+                href="/2-card/1-home"
+                as="/card"
                 className="font16 mt5 more-link"
               >
                 更多
@@ -212,7 +212,7 @@ export default class extends Component {
               {hasSearched &&
                 (!cardList || cardList.length === 0) && (
                   <div
-                    className="flex jc-center font14 bold ai-center h50"
+                    className="flex jc-center font14 bold ai-center h50 plr20"
                     style={{ backgroundColor: "#f6f6f6" }}
                   >
                     orry~暂无数据。
