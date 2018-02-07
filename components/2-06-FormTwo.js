@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import { Select, Button, message, Radio } from "antd";
-// import uuid from "uuid/v4"
-// import { Btn } from "@components"
+import uuid from "uuid/v4";
+import { Btn } from "@components";
 
 export default class extends Component {
   state = {
     loanType: null,
     loanDate: null,
-    // credits: ["名下有车", "名下有房", "有信用卡", "有商业保险"]
+    credits: [
+      { key: "hasCar", name: "名下有车" },
+      { key: "hasHouse", name: "名下有房" },
+      { key: "hasCount", name: "有淘宝账号" },
+      { key: "hasCount1", name: "有淘宝账号" },
+      { key: "hasCount2", name: "有淘宝账号" },
+      { key: "hasCount3", name: "有淘宝账号" }
+    ],
+    assetParam: {}
   };
   onChange = (val, type) => {
     if (type === "loanType") {
@@ -31,8 +39,14 @@ export default class extends Component {
     console.info(loanType);
   };
 
+  onClick = key => {
+    this.setState(pre => ({
+      assetParam: { ...pre.assetParam, [key]: pre.assetParam[key] ? 0 : 1 }
+    }));
+  };
+
   render() {
-    // const { credits } = this.state
+    const { credits } = this.state;
     const { Option } = Select;
     const RadioGroup = Radio.Group;
     return (
@@ -82,36 +96,6 @@ export default class extends Component {
           </Select>
         </div>
 
-        {/* 贷款用途 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">贷款用途:</div>
-          <div className="w40" />
-          <Select
-            placeholder="请选择"
-            className="w310"
-            size="large"
-            onChange={val => this.onChange(val, "loanUse")}
-          >
-            <Option value="1">1月</Option>
-            <Option value="2">2月</Option>
-          </Select>
-        </div>
-
-        {/* 需款时间 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">需款时间:</div>
-          <div className="w40" />
-          <Select
-            placeholder="请选择"
-            className="w310"
-            size="large"
-            onChange={val => this.onChange(val, "needTime")}
-          >
-            <Option value="1">1月</Option>
-            <Option value="2">2月</Option>
-          </Select>
-        </div>
-
         {/* 信用情况 */}
         <div className="flex ai-center mb30">
           <div className="font14 c333 w90 text-right">信用情况:</div>
@@ -121,19 +105,35 @@ export default class extends Component {
             value={1}
             size="large"
           >
-            <Radio value={1}>未婚</Radio>
-            <Radio value={2}>已婚</Radio>
+            <Radio value={1}>信用良好</Radio>
+            <Radio value={2}>少量预期</Radio>
+            <Radio value={3}>大量预期</Radio>
           </RadioGroup>
         </div>
 
         {/* 资产情况 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">信用情况:</div>
+        <div className="flex mb15">
+          <div
+            style={{ lineHeight: "38px" }}
+            className="font14 c333 w90 text-right"
+          >
+            资产情况:
+          </div>
           <div className="w40" />
           <div style={{ width: "430px" }} className="flex wrap">
-            {/* {
-              credits.map(item => <Btn key={uuid()} ver btnClass={`w100 h38`} con={<span className={this.state[``]}>{item}</span>} />)
-            } */}
+            {credits.map(item => (
+              <Btn
+                key={uuid()}
+                style={{ lineHeight: "38px" }}
+                btnClass={`w100 h38 font14 mr5 mb15 c333 text-overflow-one text-center ${
+                  this.state.assetParam[item.key]
+                    ? "loan-apply-asset-bg-active"
+                    : "loan-apply-border"
+                }`}
+                con={item.name}
+                onClick={() => this.onClick(item.key)}
+              />
+            ))}
           </div>
         </div>
 

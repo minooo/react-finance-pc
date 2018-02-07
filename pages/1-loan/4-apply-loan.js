@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import uuid from "uuid/v4";
-import { Layout, LoanStep, LoanTip, LoanFormOne } from "@components";
+import {
+  Layout,
+  LoanStep,
+  LoanTip,
+  LoanFormOne,
+  LoanFormTwo,
+  LoanFormThree
+} from "@components";
 
 export default class extends Component {
   state = {
@@ -9,10 +16,12 @@ export default class extends Component {
       {
         ico: "smile-o",
         text: "您好，请您如实填写您的信息，离您贷款成功只差一步！"
-      }, {
+      },
+      {
         ico: "check-circle-o",
         text: "您已完成基本信息，请您填写其他信息！"
-      }, {
+      },
+      {
         ico: "check-circle-o",
         text: "恭喜您已成功提交贷款申请！",
         textClass: "c-main"
@@ -56,10 +65,12 @@ export default class extends Component {
             ))}
           </div>
           <div style={{ margin: "0 60px" }}>
-            <LoanTip {...(tips[focus])} />
+            <LoanTip {...tips[focus]} />
           </div>
           <div className="h40" />
-          { focus === 0 && <LoanFormOne /> }
+          {focus === 0 && <LoanFormOne />}
+          {focus === 1 && <LoanFormTwo />}
+          {focus === 2 && <LoanFormThree />}
         </div>
         <div className="h60" />
       </Layout>

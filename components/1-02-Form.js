@@ -1,15 +1,18 @@
 import React, { Component, Fragment } from "react";
 import { Input, Select, Button, message } from "antd";
-import { isMobile, isName } from "@utils";
+import { withRouter } from "next/router";
+import { isMobile, isName, http, setCookie } from "@utils";
 
+@withRouter
 export default class extends Component {
   state = {
     name: null,
     money: null,
-    loanType: null,
+    genre: null,
     mobile: null,
     code: null,
     tickNum: 60,
+    isLoading: false,
     isSendCode: true
   };
   componentWillUnmount() {
@@ -30,7 +33,7 @@ export default class extends Component {
         this.setState(() => ({ [type]: value }));
       }
     }
-    if (type === "loanType") {
+    if (type === "genre") {
       this.setState(() => ({ [type]: val }));
     }
   };
@@ -45,6 +48,13 @@ export default class extends Component {
       () => ({ tickNum: 60, isSendCode: false }),
       () => {
         // 发送验证码接口调用
+        http.post("auth/send_code", { phone: mobile }).then(response => {
+          if (response.code === 200 && response.success) {
+            message.success("验证码发送成功！")
+          } else {
+            message.error(response.msg || "抱歉，请求出错。")
+          }
+        }).catch(() => { message.error("抱歉，网络异常，请稍后再试！") })
 
         this.tick = setInterval(() => {
           this.setState(
@@ -61,7 +71,7 @@ export default class extends Component {
     );
   };
   applyLoan = () => {
-    const { name, money, mobile, loanType, code } = this.state;
+    const { name, money, mobile, genre, code } = this.state;
     if (!isName(name)) {
       message.error("请输入您的真实姓名，2-4个汉字");
       return;
@@ -70,7 +80,7 @@ export default class extends Component {
       message.error("请输入您的贷款金额");
       return;
     }
-    if (!loanType) {
+    if (!genre) {
       message.error("请选择您的贷款类型。");
       return;
     }
@@ -82,10 +92,20 @@ export default class extends Component {
       message.error("请输入您的验证码。");
       return;
     }
-    console.info(name, money, mobile, loanType, code);
+    this.setState(() => ({ isLoading: true }), () => {
+      http.post("loans/fast_apply", { name, money, genre, phone: mobile, code }).then(response => {
+        this.setState(() => ({ isLoading: false }))
+        if (response.code === 200 && response.success) {
+          const { token } = response.data
+          setCookie("userToken", token)
+        } else {
+          message.error(response.msg || "抱歉，请求出错。")
+        }
+      }).catch(() => { message.error("抱歉，网络异常，请稍后再试！") })
+    })
   };
   render() {
-    const { name, money, mobile, code, tickNum, isSendCode } = this.state;
+    const { name, money, mobile, code, tickNum, isSendCode, isLoading } = this.state;
     const { Option } = Select;
     const { Search } = Input;
     return (
@@ -108,16 +128,15 @@ export default class extends Component {
           onChange={val => this.onChange(val, "money")}
         />
         <Select
-          defaultValue="please"
+          placeholder="请选择贷款类型"
           className="w-100 mb10 mt10"
           size="large"
-          onChange={val => this.onChange(val, "loanType")}
+          onChange={val => this.onChange(val, "genre")}
         >
-          <Option value="please" disabled>
-            请选择贷款类型
-          </Option>
-          <Option value="1">买房</Option>
-          <Option value="2">买车</Option>
+          <Option value="房产贷款">房产贷款</Option>
+          <Option value="车辆贷款">车辆贷款</Option>
+          <Option value="信用贷款">信用贷款</Option>
+          <Option value="其他贷款">其他贷款</Option>
         </Select>
         <Input
           placeholder="请输入手机号"
@@ -139,6 +158,7 @@ export default class extends Component {
         />
         <Button
           type="primary"
+          loading={isLoading}
           className="h40 font16 w-100"
           onClick={this.applyLoan}
         >

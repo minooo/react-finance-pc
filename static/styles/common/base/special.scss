@@ -248,6 +248,12 @@
 .loan-apply-shdow {
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
 }
+.loan-apply-border {
+  border: 1px solid #ddd;
+}
+.loan-apply-asset-bg-active {
+  background: url("../../images/loan_apply_asset_bg.png") 0 0 no-repeat;
+}
 //card
 .card-cardlist-bg {
   background-image: url("../../images/card_rank_bg.png");

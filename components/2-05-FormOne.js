@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Input, Select, Button, message, Radio, Cascader } from "antd";
 import { isMobile, isName } from "@utils";
 
+
 export default class extends Component {
   state = {
     name: null,
@@ -204,6 +205,36 @@ export default class extends Component {
             className="w310"
             size="large"
             onChange={val => this.onChange(val, "loanDate")}
+          >
+            <Option value="1">1月</Option>
+            <Option value="2">2月</Option>
+          </Select>
+        </div>
+
+        {/* 贷款用途 */}
+        <div className="flex ai-center mb30">
+          <div className="font14 c333 w90 text-right">贷款用途:</div>
+          <div className="w40" />
+          <Select
+            placeholder="请选择"
+            className="w310"
+            size="large"
+            onChange={val => this.onChange(val, "loanUse")}
+          >
+            <Option value="1">1月</Option>
+            <Option value="2">2月</Option>
+          </Select>
+        </div>
+
+        {/* 需款时间 */}
+        <div className="flex ai-center mb30">
+          <div className="font14 c333 w90 text-right">需款时间:</div>
+          <div className="w40" />
+          <Select
+            placeholder="请选择"
+            className="w310"
+            size="large"
+            onChange={val => this.onChange(val, "needTime")}
           >
             <Option value="1">1月</Option>
             <Option value="2">2月</Option>
