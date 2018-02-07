@@ -25,20 +25,23 @@ export default class extends Component {
   }
   componentDidMount() {
     /* eslint-disable */
-    const { detail } = this.props
+    const { detail } = this.props;
     window._bd_share_config = {
-      common : {
-        bdText : detail && detail.title,
-        bdDesc : detail && detail.content.substr(0, 20),
+      common: {
+        bdStyle: "1",
+        bdText: detail && detail.title,
+        bdDesc: detail && detail.content.substr(0, 20)
       },
-      share : [{
-        "bdSize" : 24
-      }],
-    }
+      share: [
+        {
+          bdSize: 24
+        }
+      ]
+    };
     if (!window._bd_share_main) {
       require("../../static/scripts/share.js");
     } else {
-      window._bd_share_main.init()
+      window._bd_share_main.init();
     }
     /* eslint-enable */
   }
