@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Button, Radio, message } from "antd";
+import { Input, Button, Radio } from "antd";
 import { Layout, WrapLink } from "@components";
 
 export default class extends Component {
