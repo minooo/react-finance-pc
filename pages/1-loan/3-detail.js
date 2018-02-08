@@ -317,17 +317,17 @@ export default class extends Component {
                     </div>
                     <div className="ml30 font16">
                       <div className="flex ai-center">
-                        <span className="loandetail-globule mr5 bg-second circle" />
+                        <span className="loandetail-globule mr5 bg-main circle" />
                         <span>到账金额：</span>
-                        <span className="c-second">
+                        <span className="c-main">
                           {finalMoney ||
                             (data && data.loan && data.loan.sum_start)}
                         </span>
                       </div>
                       <div className="flex ai-center">
-                        <span className="loandetail-globule mr5 bg-main circle" />
+                        <span className="loandetail-globule mr5  bg-second circle" />
                         <span>利息和费用：</span>
-                        <span className="c-main">
+                        <span className="c-second">
                           {" "}
                           {data &&
                             data.loan &&

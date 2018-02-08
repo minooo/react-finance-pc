@@ -1,5 +1,5 @@
 export default ({
-  zIndex = 10,
+  zIndex = 20,
   alpha = 0.4,
   top = 0,
   right = 0,

@@ -34,3 +34,6 @@ export { default as CardRank } from "./3-41-Rank";
 // new
 export { default as NewTypeLink } from "./4-21-TypeLink";
 export { default as NewList } from "./4-22-NewList";
+
+// me
+export { default as MeSelection } from "./5-41-Selection.js";

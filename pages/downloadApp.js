@@ -116,7 +116,7 @@ export default class extends Component {
                   duration: 1000
                 }}
                 className="absolute app-mark-one"
-                style={{ width: "177px", height: "154px", left: "95px", top: "295px" }}
+                style={{ width: "173px", height: "156px", left: "95px", top: "295px" }}
               />
               <TweenOne
                 animation={{
@@ -265,7 +265,7 @@ export default class extends Component {
             />
             <div className="equal relative" style={{ height: "820px" }}>
               <div
-                className="absolute app-mark-five"
+                className="absolute app-mark-one"
                 style={{ width: "173px", height: "156px", left: "90px", top: "298px" }}
               />
               <TweenOne
@@ -298,7 +298,7 @@ export default class extends Component {
               >
                 品种繁多，极速下卡
               </TweenOne>
-              <div className="app-mark-six absolute" style={{ width: "170px", height: "154px", bottom: "190px", right: "80px" }} />
+              <div className="app-mark-two absolute" style={{ width: "170px", height: "154px", bottom: "190px", right: "80px" }} />
             </div>
           </div>
         </OverPack>

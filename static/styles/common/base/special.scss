@@ -464,12 +464,6 @@
 .app-mark-four{
   background-image: url("../../images/app_dl_mark4.png")
 }
-.app-mark-five{
-  background-image: url("../../images/app_dl_mark5.png")
-}
-.app-mark-six{
-  background-image: url("../../images/app_dl_mark6.png")
-}
 .app-banner-bg{
   background-image: url("../../images/app_dl_foot-banner.png");
   background-size: cover;
@@ -486,4 +480,31 @@
   box-shadow: 0px 0px 100px 0px
 		#edf8ff;
 }
-
+// me
+.me-icon-1{
+  width: 15px;
+  height: 18px;
+  background-image: url("../../images/me_data_icon.png");
+  background-repeat: no-repeat;
+}
+.me-icon-2{
+  width: 16px;
+  height: 18px;
+  background-image: url("../../images/me_apply_icon.png");
+  background-repeat: no-repeat;
+}
+.me-icon-3{
+  width: 18px;
+  height: 18px;
+  background-image: url("../../images/me_message_icon.png");
+  background-repeat: no-repeat;
+}
+.me-border-left{
+display: block;
+width: 4px;
+height: 56px;
+background-color: #4c8dfc;
+border-radius: 0px 2px 2px 0px;
+position: absolute;
+left: 0px;
+}
