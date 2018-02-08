@@ -10,7 +10,7 @@ export default class extends Component {
   state = {};
   render() {
     return (
-      <Layout footNoShow="true" title="App下载">
+      <Layout footNoShow title="App下载">
         {/* 全新上线 */}
         <OverPack
           replay
