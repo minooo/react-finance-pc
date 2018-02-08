@@ -101,7 +101,7 @@ export default class extends Component {
                 <div
                   className="flex h60 pl20 flex ai-center c333 font14"
                   key={uuid()}
-                  style={{ backgroundColor: `${index % 2 === 0 ? "#fff" : "#edf2f8"}` }}
+                  style={{ backgroundColor: `${index % 2 === 0 ? "#fff" : "#f5f7fa"}` }}
                 >
                   <div className="text-overflow-1 pr10" style={{ width: "200px" }}>{item.name}</div>
                   <div className="text-overflow-1 pr10" style={{ width: "155px" }}>{item.money}</div>
@@ -138,10 +138,10 @@ export default class extends Component {
             visible ?
               <Fragment>
                 <AlertBg />
-                <div className="bg-white absolute z-index50" style={{ left: "0px", bottom: "70px", width: "820px", height: "308px" }}>
+                <div className="bg-white absolute z-index100" style={{ left: "0px", bottom: "70px", width: "820px", height: "308px" }}>
                   <div className="h62 flex ai-center jc-between" style={{ backgroundColor: "#edf2f8" }}>
                     <div className="font16 c333 pl30 bold">申请详情</div>
-                    <Btn con={<Icon type="close" />} onClick={this.closeModal} className="c999 font18 pr30" />
+                    <Btn con={<Icon type="close" />} onClick={this.closeModal} className="c999 font18 mr30" />
                   </div>
                   <div className="flex ai-center jc-center bg-white font14" style={{ height: "246px" }}>
                     <div style={{ border: "1px solid #f2f2f2" }}>
