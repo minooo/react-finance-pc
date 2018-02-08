@@ -1,32 +1,15 @@
 import React, { Component } from "react";
 import { Input, Select, Button, message, Radio, Cascader } from "antd";
-import { isMobile, isName } from "@utils";
-
+import uuid from "uuid/v4";
+import { isMobile, isName, isIDNumber, http } from "@utils";
 
 export default class extends Component {
-  state = {
-    name: null,
-    age: null,
-    money: null,
-    loanType: null,
-    loanDate: null,
-    idNum: null,
-    mobile: null,
-    areas: [
-      {
-        value: 100,
-        label: "郑州",
-        isLeaf: false
-      },
-      {
-        value: 200,
-        label: "漯河",
-        isLeaf: false
-      }
-    ]
-  };
+  state = {};
+  componentDidMount() {
+    this.initAreas();
+  }
   onChange = (val, type) => {
-    if (type === "name" || type === "code") {
+    if (type === "name" || type === "sex" || type === "marry") {
       const { value } = val.target;
       this.setState(() => ({ [type]: value }));
     }
@@ -37,35 +20,67 @@ export default class extends Component {
       type === "idNum"
     ) {
       const { value } = val.target;
-      const reg =
-        type === "idNum"
-          ? /^[a-z0-9]*$/
-          : /^([1-9][0-9]*)?$/;
+      const reg = type === "idNum" ? /^[a-z0-9]*$/ : /^([1-9][0-9]*)?$/;
       if (reg.test(value)) {
         this.setState(() => ({ [type]: value }));
       }
     }
-    if (type === "loanType") {
-      this.setState(() => ({ [type]: val }));
-    }
-    if (type === "loanDate") {
+    if (
+      type === "loanType" ||
+      type === "loanDate" ||
+      type === "loanUse" ||
+      type === "needTime"
+    ) {
       this.setState(() => ({ [type]: val }));
     }
   };
-  onAreaChange = (value, selectedOptions) => {
-    console.info(value, selectedOptions);
+  onAreaChange = value => {
+    this.setState(() => ({ myArea: value }));
   };
   onNextOne = () => {
-    const { name, money, mobile, loanType, loanDate } = this.state;
-    if (!isName(name)) {
+    const {
+      name,
+      sex,
+      age,
+      mobile,
+      money,
+      loanType,
+      loanDate,
+      loanUse,
+      needTime,
+      idNum,
+      myArea,
+      marry
+    } = this.state;
+    const {
+      initName,
+      initSex,
+      initMobile,
+      initMoney,
+      initGenre,
+      initMarry
+    } = this.props;
+    if (!initName && !isName(name)) {
       message.error("请输入您的真实姓名，2-4个汉字");
       return;
     }
-    if (!money) {
+    if (!age) {
+      message.error("请输入您的年龄");
+      return;
+    }
+
+    // 注意，手机这里应该是固定，并且不可编辑
+    if (!initMobile && !isMobile(mobile)) {
+      message.error("您的手机号格式有误，请检查。");
+      return;
+    }
+    if (!initMoney && !money) {
       message.error("请输入您的贷款金额");
       return;
     }
-    if (!loanType) {
+
+    // 这个省去，不再判断
+    if (!initGenre && !loanType) {
       message.error("请选择您的贷款类型。");
       return;
     }
@@ -73,40 +88,102 @@ export default class extends Component {
       message.error("请选择您的贷款期限。");
       return;
     }
-    if (!isMobile(mobile)) {
-      message.error("您的手机号格式有误，请检查。");
+    if (!loanUse) {
+      message.error("请选择您的贷款用途。");
       return;
     }
-    console.info(name, money, mobile, loanType);
+    if (!needTime) {
+      message.error("请选择您的需款时间。");
+      return;
+    }
+    if (!isIDNumber(idNum)) {
+      message.error("请输入正确的身份证号。");
+      return;
+    }
+    if (!myArea) {
+      message.error("请选择您所在的地区。");
+      return;
+    }
+
+    const param = {
+      name,
+      sex: sex || initSex[0].id,
+      age,
+      money,
+      provide_a_loan_type_id: loanType || initGenre,
+      timelimit: loanDate,
+      purpose: loanUse,
+      cycle: needTime,
+      idNum,
+      province_id: myArea[0],
+      city_id: myArea[1],
+      county_id: myArea[2],
+      marital_status: marry || initMarry[0].id,
+      apply_loan_action: 1
+    };
+
+    console.info(param);
   };
   loadAreaData = selectedOptions => {
-    const targetOption = selectedOptions[selectedOptions.length - 1];
+    const len = selectedOptions.length;
+    const targetOption = selectedOptions[len - 1];
     targetOption.loading = true;
+    const reqKey = len === 1 ? "city" : "county";
+    const paramKey = len === 1 ? "province" : "city";
 
-    // load options lazily
-    setTimeout(() => {
-      targetOption.loading = false;
-      targetOption.children = [
-        {
-          label: `${targetOption.label} Dynamic 1`,
-          value: "dynamic1",
-          isLeaf: selectedOptions.length === 2
-        },
-        {
-          label: `${targetOption.label} Dynamic 2`,
-          value: "dynamic2",
-          isLeaf: selectedOptions.length === 2
+    http
+      .get(`common/get_${reqKey}`, { [`${paramKey}_id`]: targetOption.value })
+      .then(response => {
+        if (response.code === 200 && response.success) {
+          targetOption.loading = false;
+          const fetchData = response.data[reqKey];
+          if (!fetchData || fetchData.length === 0) {
+            targetOption.children = null;
+          } else {
+            const newData = fetchData.map(item => ({
+              value: item.id,
+              label: item.name,
+              isLeaf: len === 2
+            }));
+            targetOption.children = newData;
+          }
+          this.setState(() => ({
+            areas: [...this.state.areas]
+          }));
+        } else {
+          message.error(response.msg || "抱歉，请求异常，请稍后再试！");
         }
-      ];
-      this.setState({
-        areas: [...this.state.areas]
+      })
+      .catch(err => {
+        message.error("网络错误，请稍后再试！");
+        console.info(err);
       });
-    }, 1000);
+    // load options lazily
+  };
+  initAreas = () => {
+    const { initProvince } = this.props;
+    const areas = initProvince.map(item => ({
+      value: item.id,
+      label: item.name,
+      isLeaf: false
+    }));
+    this.setState(() => ({ areas }));
   };
   render() {
     const { name, age, money, mobile, idNum, areas } = this.state;
     const { Option } = Select;
     const RadioGroup = Radio.Group;
+    const {
+      initName,
+      initMoney,
+      initMobile,
+      initGenre,
+      initSex,
+      initLimit,
+      initPurpose,
+      initCycle,
+      initMarry
+    } = this.props;
     return (
       <div style={{ marginLeft: "290px" }}>
         {/* 姓名 */}
@@ -117,7 +194,7 @@ export default class extends Component {
             placeholder="请输入您的真实姓名"
             size="large"
             className="w310"
-            value={name}
+            value={name || name === "" ? name : initName}
             maxLength="4"
             onChange={val => this.onChange(val, "name")}
           />
@@ -129,11 +206,14 @@ export default class extends Component {
           <div className="w40" />
           <RadioGroup
             onChange={val => this.onChange(val, "sex")}
-            value={1}
+            value={this.state.sex || initSex[0].id}
             size="large"
           >
-            <Radio value={1}>男士</Radio>
-            <Radio value={2}>女士</Radio>
+            {initSex.map(item => (
+              <Radio key={uuid()} value={item.id}>
+                {item.name}
+              </Radio>
+            ))}
           </RadioGroup>
         </div>
 
@@ -159,7 +239,7 @@ export default class extends Component {
             placeholder="请输入手机号"
             size="large"
             className="w310"
-            value={mobile}
+            value={mobile || mobile === "" ? mobile : initMobile}
             maxLength="11"
             onChange={val => this.onChange(val, "mobile")}
           />
@@ -174,7 +254,7 @@ export default class extends Component {
               placeholder="请输入贷款金额"
               size="large"
               addonAfter="元"
-              value={money}
+              value={money || money === "" ? money : initMoney}
               maxLength="9"
               onChange={val => this.onChange(val, "money")}
             />
@@ -186,13 +266,15 @@ export default class extends Component {
           <div className="font14 c333 w90 text-right">贷款类型:</div>
           <div className="w40" />
           <Select
-            placeholder="请选择"
+            defaultValue={initGenre}
             className="w310"
             size="large"
             onChange={val => this.onChange(val, "loanType")}
           >
-            <Option value="1">买房</Option>
-            <Option value="2">买车</Option>
+            <Option value="房产贷款">房产贷款</Option>
+            <Option value="车辆贷款">车辆贷款</Option>
+            <Option value="信用贷款">信用贷款</Option>
+            <Option value="其他贷款">其他贷款</Option>
           </Select>
         </div>
 
@@ -206,8 +288,11 @@ export default class extends Component {
             size="large"
             onChange={val => this.onChange(val, "loanDate")}
           >
-            <Option value="1">1月</Option>
-            <Option value="2">2月</Option>
+            {initLimit.map(item => (
+              <Option key={uuid()} value={item.id}>
+                {item.name}
+              </Option>
+            ))}
           </Select>
         </div>
 
@@ -221,8 +306,11 @@ export default class extends Component {
             size="large"
             onChange={val => this.onChange(val, "loanUse")}
           >
-            <Option value="1">1月</Option>
-            <Option value="2">2月</Option>
+            {initPurpose.map(item => (
+              <Option key={uuid()} value={item.id}>
+                {item.name}
+              </Option>
+            ))}
           </Select>
         </div>
 
@@ -236,8 +324,11 @@ export default class extends Component {
             size="large"
             onChange={val => this.onChange(val, "needTime")}
           >
-            <Option value="1">1月</Option>
-            <Option value="2">2月</Option>
+            {initCycle.map(item => (
+              <Option key={uuid()} value={item.id}>
+                {item.name}
+              </Option>
+            ))}
           </Select>
         </div>
 
@@ -262,7 +353,7 @@ export default class extends Component {
           <Cascader
             className="w310"
             size="large"
-            placeholder="请选择/asdf/asdf"
+            placeholder="请选择"
             options={areas}
             loadData={this.loadAreaData}
             onChange={this.onAreaChange}
@@ -275,12 +366,15 @@ export default class extends Component {
           <div className="font14 c333 w90 text-right">婚姻状况:</div>
           <div className="w40" />
           <RadioGroup
-            onChange={val => this.onChange(val, "sex")}
-            value={1}
+            onChange={val => this.onChange(val, "marry")}
+            value={this.state.marry || initMarry[0].id}
             size="large"
           >
-            <Radio value={1}>未婚</Radio>
-            <Radio value={2}>已婚</Radio>
+            {initMarry.map(item => (
+              <Radio key={uuid()} value={item.id}>
+                {item.name}
+              </Radio>
+            ))}
           </RadioGroup>
         </div>
 

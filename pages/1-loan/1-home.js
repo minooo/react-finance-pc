@@ -66,12 +66,12 @@ export default class extends Component {
   /* eslint-enable */
   componentDidMount() {
     // 针对首页点击某个分类过来，应该做的数据转化。
-    const { asPath } = this.props
-    const query = searchToObj(asPath)
+    const { asPath } = this.props;
+    const query = searchToObj(asPath);
     if (query.typeloan) {
-      const id = +query.typeloan
-      const index = +query.typeloanfocus
-      this.onCityChoice("type", id, index)
+      const id = +query.typeloan;
+      const index = +query.typeloanfocus;
+      this.onCityChoice("type", id, index);
     }
   }
   onSelectChange = (key, id) => {
@@ -166,9 +166,7 @@ export default class extends Component {
             response.data && response.data.list && response.data.list.count;
           this.setState(() => ({ [list]: listData, [count]: countNum }));
         } else {
-          message.error(
-            response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
-          );
+          message.error(response.msg || "抱歉，请求异常，请稍后再试！");
         }
       })
       .catch(err => {
@@ -213,14 +211,14 @@ export default class extends Component {
                 style={{ width: "300px", borderRadius: "10px 10px 0 0" }}
                 className={`${
                   index === 0 ? "bg-white h64" : "bg-main h50"
-                  } mr10 flex jc-center ai-center`}
+                } mr10 flex jc-center ai-center`}
               >
                 <div
                   className={`${
                     index === 0
                       ? `${item.icoActive} c-main`
                       : `${item.ico} c-white`
-                    } pl30 font24`}
+                  } pl30 font24`}
                 >
                   {item.title}
                 </div>
@@ -298,7 +296,7 @@ export default class extends Component {
                               <span
                                 className={`${
                                   sortFilterFocus === index ? "c-main" : "c333"
-                                  } font16`}
+                                } font16`}
                               >
                                 {item.name}
                               </span>
@@ -318,27 +316,27 @@ export default class extends Component {
                           </span>款产品
                         </Fragment>
                       ) : (
-                          `orry~没有找到符合您筛选条件的产品。${
+                        `orry~没有找到符合您筛选条件的产品。${
                           loansHome &&
                           loansHome.recommend &&
                           loansHome.recommend.list &&
                           loansHome.recommend.list.length > 0
                             ? "您可以看看以下精选贷款产品"
                             : ""
-                          }`
-                        )
+                        }`
+                      )
                     ) : loansHome &&
-                      loansHome.list &&
-                      loansHome.list.count > 0 ? (
-                          <Fragment>
-                            一共为您找到
+                    loansHome.list &&
+                    loansHome.list.count > 0 ? (
+                      <Fragment>
+                        一共为您找到
                         <span className="c-main plr5">
-                              {loansHome.list.count}
+                          {loansHome.list.count}
                         </span>款产品
-                          </Fragment>
-                        ) : (
-                          "sorry~暂无相关贷款产品"
-                        )}
+                      </Fragment>
+                    ) : (
+                      "sorry~暂无相关贷款产品"
+                    )}
                   </div>
                 </div>
                 {/* 满足以下条件时，出现推荐列表 */}
@@ -357,13 +355,13 @@ export default class extends Component {
                   loansHome.list.list.length > 0 &&
                   (hasCitySearched
                     ? searchCityList &&
-                    searchCityList.length > 0 &&
-                    searchCityList.map(item => (
-                      <LoanList key={uuid()} item={item} />
-                    ))
+                      searchCityList.length > 0 &&
+                      searchCityList.map(item => (
+                        <LoanList key={uuid()} item={item} />
+                      ))
                     : loansHome.list.list.map(item => (
-                      <LoanList key={uuid()} item={item} />
-                    )))}
+                        <LoanList key={uuid()} item={item} />
+                      )))}
 
                 <div className="pb30 flex jc-center">
                   <Pagination

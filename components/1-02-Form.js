@@ -18,9 +18,6 @@ export default class extends Component {
   componentWillUnmount() {
     clearInterval(this.tick);
   }
-  onSwitch = () => {
-    this.setState(pre => ({ isOnOver: !pre.isOnOver }));
-  };
   onChange = (val, type) => {
     if (type === "name" || type === "code") {
       const { value } = val.target;
@@ -72,6 +69,7 @@ export default class extends Component {
   };
   applyLoan = () => {
     const { name, money, mobile, genre, code } = this.state;
+    const { router } = this.props
     if (!isName(name)) {
       message.error("请输入您的真实姓名，2-4个汉字");
       return;
@@ -94,10 +92,10 @@ export default class extends Component {
     }
     this.setState(() => ({ isLoading: true }), () => {
       http.post("loans/fast_apply", { name, money, genre, phone: mobile, code }).then(response => {
-        this.setState(() => ({ isLoading: false }))
         if (response.code === 200 && response.success) {
           const { token } = response.data
-          setCookie("userToken", token)
+          setCookie("token", token)
+          router.push({ pathname: "/1-loan/4-apply-loan", query: { name, money, mobile, genre } }, "/loan/apply")
         } else {
           message.error(response.msg || "抱歉，请求出错。")
         }

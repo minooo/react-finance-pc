@@ -1,5 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import uuid from "uuid/v4";
+import { message } from "antd";
+import { http } from "@utils";
+import { getUser } from "@actions";
+import reduxPage from "@reduxPage";
 import {
   Layout,
   LoanStep,
@@ -9,6 +14,8 @@ import {
   LoanFormThree
 } from "@components";
 
+@reduxPage
+@connect(({ user }) => ({ user }), { getUser })
 export default class extends Component {
   state = {
     steps: ["基本信息", "其他信息", "申请成功"],
@@ -29,8 +36,26 @@ export default class extends Component {
     ],
     focus: 0
   };
+  componentDidMount() {
+    // const { url: { replace, query }, getUser } = this.props;
+    const { getUser } = this.props;
+    // if (!query) { replace({ pathname: "/index" }, "/") }
+    http
+      .get("member/base_profile")
+      .then(response => {
+        if (response.code === 200 && response.success) {
+          getUser(response.data);
+        } else {
+          message.error(response.msg || "抱歉，请求出错。");
+        }
+      })
+      .catch(() => {
+        message.error("抱歉，网络异常，请稍后再试！");
+      });
+  }
   render() {
     const { steps, tips, focus } = this.state;
+    const { url: { query }, user } = this.props;
     return (
       <Layout title="快速申请贷款" className="bg-body">
         {/* banner */}
@@ -68,7 +93,20 @@ export default class extends Component {
             <LoanTip {...tips[focus]} />
           </div>
           <div className="h40" />
-          {focus === 0 && <LoanFormOne />}
+          {focus === 0 && user && (
+            <LoanFormOne
+              initName={query && query.name}
+              initMobile={query && query.mobile}
+              initMoney={query && query.money}
+              initGenre={query && query.genre}
+              initSex={user.sex}
+              initLimit={user.timelimit}
+              initPurpose={user.purpose}
+              initCycle={user.cycle}
+              initMarry={user.marital_status}
+              initProvince={user.province}
+            />
+          )}
           {focus === 1 && <LoanFormTwo />}
           {focus === 2 && <LoanFormThree />}
         </div>
