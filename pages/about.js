@@ -219,11 +219,17 @@ export default class extends Component {
               style={{ height: "378px", right: "-37px" }}
               className="relative"
             >
-              <div key={uuid()} className="about-culture-list  about-icon-vision">
+              <div
+                key={uuid()}
+                className="about-culture-list  about-icon-vision"
+              >
                 <div>企业愿景</div>
                 <p>打造中国最安全、最快捷、最方便的金融信息服务平台</p>
               </div>
-              <div key={uuid()} className="about-culture-list about-icon-mission">
+              <div
+                key={uuid()}
+                className="about-culture-list about-icon-mission"
+              >
                 <div>公司使命</div>
                 <p>对员工负责 、对客户负责、对社会负责</p>
               </div>

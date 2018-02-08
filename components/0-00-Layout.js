@@ -17,7 +17,6 @@ export default class extends React.Component {
         {
           footNoShow ? null : <Foot />
         }
-
       </div>
     );
   }
