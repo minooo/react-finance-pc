@@ -13,12 +13,12 @@ export default ({ detailed, closeModal }) => (
       </div>
       <div className="plr30 bg-white font14" style={{ height: "246px", paddingTop: "40px", }}>
         <div className="me-loanapply-border-tlr flex wrap">
-          <MeLoanAlertItem title="贷款产品" content={detailed.name} />
-          <MeLoanAlertItem title="发布时间" content={detailed.time} />
-          <MeLoanAlertItem title="贷款额度" content={detailed.money} />
-          <MeLoanAlertItem title="贷款类型" content={detailed.type} />
-          <MeLoanAlertItem title="贷款期限" content={detailed.time_limit} />
-          <MeLoanAlertItem title="需款时间" content={detailed.repayment_time} />
+          <MeLoanAlertItem title="贷款产品" content={detailed && detailed.name} />
+          <MeLoanAlertItem title="发布时间" content={detailed && detailed.time} />
+          <MeLoanAlertItem title="贷款额度" content={detailed && detailed.money} />
+          <MeLoanAlertItem title="贷款类型" content={detailed && detailed.type} />
+          <MeLoanAlertItem title="贷款期限" content={detailed && detailed.time_limit} />
+          <MeLoanAlertItem title="需款时间" content={detailed && detailed.repayment_time} />
         </div>
       </div>
     </div>
