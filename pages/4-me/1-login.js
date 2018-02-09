@@ -4,11 +4,6 @@ import { Layout, WrapLink } from "@components";
 import { http, isMobile } from "@utils";
 
 export default class extends Component {
-  static async getInitialProps(ctx) {
-    // err req res pathname query asPath isServer
-    const { isServer } = ctx;
-    return { isServer };
-  }
   state = {
     logCode: null,
     mobile: null,
