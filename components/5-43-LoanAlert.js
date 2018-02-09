@@ -11,7 +11,7 @@ export default ({ detailed, closeModal }) => (
         <div className="font16 c333 pl30 bold">申请详情</div>
         <Btn con={<Icon type="close" />} onClick={closeModal} className="c999 font18 mr30" />
       </div>
-      <div className="plr30 bg-white font14" style={{ height: "246px", paddingTop: "40px",  }}>
+      <div className="plr30 bg-white font14" style={{ height: "246px", paddingTop: "40px", }}>
         <div className="me-loanapply-border-tlr flex wrap">
           <MeLoanAlertItem title="贷款产品" content={detailed.name} />
           <MeLoanAlertItem title="发布时间" content={detailed.time} />
