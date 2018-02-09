@@ -3,14 +3,15 @@ import TweenOne from "rc-tween-one";
 import QueueAnim from "rc-queue-anim";
 import OverPack from "rc-scroll-anim/lib/ScrollOverPack";
 import uuid from "uuid/v4";
-import { Icon } from "antd"
+import { Icon } from "antd";
 import { Layout, WrapLink } from "@components";
 
 export default class extends Component {
   state = {};
   render() {
     return (
-      <Layout footNoShow="true" title="App下载">
+      <Layout footNoShow title="App下载">
+        {/* 全新上线 */}
         <OverPack
           replay
           playScale={[0.5, 0.8]}
@@ -18,19 +19,26 @@ export default class extends Component {
           className="app-one-bg"
           style={{ height: "820px" }}
         >
-          <div key={uuid()} className="box c-white flex" style={{ paddingLeft: "50px", paddingRight: "50px" }}>
+          <div
+            key={uuid()}
+            className="box c-white flex"
+            style={{ paddingLeft: "50px", paddingRight: "50px" }}
+          >
             <div key={uuid()} style={{ paddingTop: "236px" }}>
               <QueueAnim
                 type="left"
                 key={uuid()}
-                leaveReverse
                 animConfig={{ x: [0, -300], opacity: [1, 0], duration: 1000 }}
                 ease={["easeInOutCubic", "easeInOutCubic"]}
               >
-                <div className="lh100" style={{ fontSize: "54px", marginBottom: "50px" }}>
+                <div
+                  key={uuid()}
+                  className="lh100"
+                  style={{ fontSize: "54px", marginBottom: "50px" }}
+                >
                   嘟嘟e融 V1.0全新上线
                 </div>
-                <div className="font36 lh100 flex">
+                <div key={uuid()} className="font36 lh100 flex">
                   <div className="pr30">一站式贷款超市</div>
                   <div>人人都能贷到钱</div>
                 </div>
@@ -44,14 +52,34 @@ export default class extends Component {
                 animConfig={{ y: [0, 200], opacity: [1, 0], duration: 800 }}
                 ease={["easeInOutCubic", "easeInOutCubic"]}
               >
-                <div key={uuid()} className="code-bg mr30" style={{ width: "144px", height: "144px" }} />
+                <div
+                  key={uuid()}
+                  className="code-bg mr30"
+                  style={{ width: "144px", height: "144px" }}
+                />
                 <div key={uuid()} className="flex column jc-between">
-                  <WrapLink href="/about" as="/about" className="h58 flex ai-center r100 jc-center " style={{ width: "248px", border: "1px solid #fff" }}>
-                    <Icon type="android" style={{ fontSize: 32, color: "#fff" }} />
+                  <WrapLink
+                    href="/about"
+                    as="/about"
+                    className="h58 flex ai-center r100 jc-center "
+                    style={{ width: "248px", border: "1px solid #fff" }}
+                  >
+                    <Icon
+                      type="android"
+                      style={{ fontSize: 32, color: "#fff" }}
+                    />
                     <div className="c-white font24 pl15">安卓版下载</div>
                   </WrapLink>
-                  <WrapLink href="/about" as="/about" className="h58 flex ai-center jc-center r100" style={{ width: "248px", border: "1px solid #fff" }}>
-                    <Icon type="apple" style={{ fontSize: 32, color: "#fff" }} />
+                  <WrapLink
+                    href="/about"
+                    as="/about"
+                    className="h58 flex ai-center jc-center r100"
+                    style={{ width: "248px", border: "1px solid #fff" }}
+                  >
+                    <Icon
+                      type="apple"
+                      style={{ fontSize: 32, color: "#fff" }}
+                    />
                     <div className="c-white font24 pl15">苹果版下载</div>
                   </WrapLink>
                 </div>
@@ -68,7 +96,12 @@ export default class extends Component {
                   duration: 600
                 }}
                 className="app-phone-one absolute z-index10"
-                style={{ width: "283px", height: "600px", left: "100px", bottom: "110px" }}
+                style={{
+                  width: "283px",
+                  height: "600px",
+                  left: "100px",
+                  bottom: "110px"
+                }}
               />
               <TweenOne
                 key={uuid()}
@@ -81,18 +114,32 @@ export default class extends Component {
                   delay: 500
                 }}
                 className="app-phone-two absolute"
-                style={{ width: "253px", height: "534px", left: "296px", bottom: "110px" }}
+                style={{
+                  width: "253px",
+                  height: "534px",
+                  left: "296px",
+                  bottom: "110px"
+                }}
               />
             </div>
           </div>
         </OverPack>
+        {/* 我要贷 */}
         <OverPack
           replay
           playScale={[0.5, 0.8]}
           key={uuid()}
-          style={{ height: "820px", backgroundColor: "#edf8ff", overflow: "hidden" }}
+          style={{
+            height: "820px",
+            backgroundColor: "#edf8ff",
+            overflow: "hidden"
+          }}
         >
-          <div key={uuid()} className="box flex" style={{ paddingLeft: "60px" }}>
+          <div
+            key={uuid()}
+            className="box flex"
+            style={{ paddingLeft: "60px" }}
+          >
             <TweenOne
               key={uuid()}
               className="app-phone-three"
@@ -105,7 +152,11 @@ export default class extends Component {
                 duration: 1000
               }}
             />
-            <div key={uuid()} className="equal relative" style={{ height: "820px" }}>
+            <div
+              key={uuid()}
+              className="equal relative"
+              style={{ height: "820px" }}
+            >
               <TweenOne
                 key={uuid()}
                 animation={{
@@ -116,7 +167,12 @@ export default class extends Component {
                   duration: 1000
                 }}
                 className="absolute app-mark-one"
-                style={{ width: "177px", height: "154px", left: "95px", top: "295px" }}
+                style={{
+                  width: "177px",
+                  height: "154px",
+                  left: "95px",
+                  top: "295px"
+                }}
               />
               <TweenOne
                 animation={{
@@ -129,7 +185,12 @@ export default class extends Component {
                 }}
                 key={uuid()}
                 className="absolute lh100"
-                style={{ fontSize: "52px", color: "#000", left: "225px", top: "390px" }}
+                style={{
+                  fontSize: "52px",
+                  color: "#000",
+                  left: "225px",
+                  top: "390px"
+                }}
               >
                 我要贷&nbsp;&nbsp;&nbsp;填写资料
               </TweenOne>
@@ -159,11 +220,17 @@ export default class extends Component {
                   delay: 1000
                 }}
                 className="app-mark-two absolute"
-                style={{ width: "170px", height: "154px", bottom: "190px", right: "70px" }}
+                style={{
+                  width: "170px",
+                  height: "154px",
+                  bottom: "190px",
+                  right: "70px"
+                }}
               />
             </div>
           </div>
         </OverPack>
+        {/* 百款网贷产品 */}
         <OverPack
           replay
           playScale={[0.5, 0.8]}
@@ -171,7 +238,11 @@ export default class extends Component {
           className="bg-white app-common-bs"
           style={{ height: "820px", overflow: "hidden" }}
         >
-          <div key={uuid()} className="box flex" style={{ paddingRight: "62px" }}>
+          <div
+            key={uuid()}
+            className="box flex"
+            style={{ paddingRight: "62px" }}
+          >
             <div className="equal relative" style={{ height: "820px" }}>
               <TweenOne
                 key={uuid()}
@@ -184,7 +255,12 @@ export default class extends Component {
                   delay: 1000
                 }}
                 className="absolute app-mark-three"
-                style={{ width: "170px", height: "155px", left: "50px", top: "280px" }}
+                style={{
+                  width: "170px",
+                  height: "155px",
+                  left: "50px",
+                  top: "280px"
+                }}
               />
               <TweenOne
                 key={uuid()}
@@ -193,10 +269,15 @@ export default class extends Component {
                   opacity: 0,
                   type: "from",
                   ease: "easeInQuad",
-                  duration: 600,
+                  duration: 600
                 }}
                 className="absolute lh100"
-                style={{ fontSize: "52px", color: "#000", left: "94px", top: "372px" }}
+                style={{
+                  fontSize: "52px",
+                  color: "#000",
+                  left: "94px",
+                  top: "372px"
+                }}
               >
                 百款网贷产品
               </TweenOne>
@@ -226,7 +307,12 @@ export default class extends Component {
                   delay: 1200
                 }}
                 className="app-mark-four absolute"
-                style={{ width: "172px", height: "154px", bottom: "210px", right: "130px" }}
+                style={{
+                  width: "172px",
+                  height: "154px",
+                  bottom: "210px",
+                  right: "130px"
+                }}
               />
             </div>
             <TweenOne
@@ -236,21 +322,30 @@ export default class extends Component {
                 opacity: 0,
                 type: "from",
                 ease: "easeInOutQuint",
-                duration: 800,
+                duration: 800
               }}
               className="app-phone-four"
               style={{ width: "380px", height: "810px", marginTop: "140px" }}
             />
           </div>
         </OverPack>
+        {/* 信用卡中心 */}
         <OverPack
           replay
           playScale={[0.5, 0.8]}
           key={uuid()}
           className="app-common-bs"
-          style={{ height: "820px", backgroundColor: "#edf8ff", overflow: "hidden" }}
+          style={{
+            height: "820px",
+            backgroundColor: "#edf8ff",
+            overflow: "hidden"
+          }}
         >
-          <div key={uuid()} className="box flex" style={{ paddingLeft: "60px" }}>
+          <div
+            key={uuid()}
+            className="box flex"
+            style={{ paddingLeft: "60px" }}
+          >
             <TweenOne
               key={uuid()}
               animation={{
@@ -258,7 +353,7 @@ export default class extends Component {
                 opacity: 0,
                 type: "from",
                 ease: "easeInCirc",
-                duration: 800,
+                duration: 800
               }}
               className="app-phone-five"
               style={{ height: "808px", width: "380px", marginTop: "120px" }}
@@ -266,7 +361,12 @@ export default class extends Component {
             <div className="equal relative" style={{ height: "820px" }}>
               <div
                 className="absolute app-mark-five"
-                style={{ width: "173px", height: "156px", left: "90px", top: "298px" }}
+                style={{
+                  width: "173px",
+                  height: "156px",
+                  left: "90px",
+                  top: "298px"
+                }}
               />
               <TweenOne
                 key={uuid()}
@@ -279,7 +379,12 @@ export default class extends Component {
                   delay: 200
                 }}
                 className="absolute lh100"
-                style={{ fontSize: "52px", color: "#000", left: "243px", top: "392px" }}
+                style={{
+                  fontSize: "52px",
+                  color: "#000",
+                  left: "243px",
+                  top: "392px"
+                }}
               >
                 信用卡中心
               </TweenOne>
@@ -298,10 +403,19 @@ export default class extends Component {
               >
                 品种繁多，极速下卡
               </TweenOne>
-              <div className="app-mark-six absolute" style={{ width: "170px", height: "154px", bottom: "190px", right: "80px" }} />
+              <div
+                className="app-mark-six absolute"
+                style={{
+                  width: "170px",
+                  height: "154px",
+                  bottom: "190px",
+                  right: "80px"
+                }}
+              />
             </div>
           </div>
         </OverPack>
+        {/* 下载App */}
         <OverPack
           replay
           playScale={[0.5, 0.8]}
@@ -309,7 +423,11 @@ export default class extends Component {
           className="app-banner-bg app-common-bs"
           style={{ height: "720px" }}
         >
-          <div key={uuid()} className="box flex column ai-center" style={{ paddingTop: "140px" }}>
+          <div
+            key={uuid()}
+            className="box flex column ai-center"
+            style={{ paddingTop: "140px" }}
+          >
             <TweenOne
               key={uuid()}
               animation={{
@@ -347,7 +465,7 @@ export default class extends Component {
                   opacity: 0,
                   type: "from",
                   ease: "easeInOutCubic",
-                  duration: 800,
+                  duration: 800
                 }}
                 className="code-bg mr30"
                 style={{ width: "144px", height: "144px" }}
@@ -359,15 +477,28 @@ export default class extends Component {
                   opacity: 0,
                   type: "from",
                   ease: "easeInOutCubic",
-                  duration: 800,
+                  duration: 800
                 }}
                 className="flex column jc-between"
               >
-                <WrapLink href="/about" as="/about" className="h58 flex ai-center r100 jc-center " style={{ width: "248px", border: "1px solid #fff" }}>
-                  <Icon type="android" style={{ fontSize: 32, color: "#fff" }} />
+                <WrapLink
+                  href="/about"
+                  as="/about"
+                  className="h58 flex ai-center r100 jc-center "
+                  style={{ width: "248px", border: "1px solid #fff" }}
+                >
+                  <Icon
+                    type="android"
+                    style={{ fontSize: 32, color: "#fff" }}
+                  />
                   <div className="c-white font24 pl15">安卓版下载</div>
                 </WrapLink>
-                <WrapLink href="/about" as="/about" className="h58 flex ai-center jc-center r100" style={{ width: "248px", border: "1px solid #fff" }}>
+                <WrapLink
+                  href="/about"
+                  as="/about"
+                  className="h58 flex ai-center jc-center r100"
+                  style={{ width: "248px", border: "1px solid #fff" }}
+                >
                   <Icon type="apple" style={{ fontSize: 32, color: "#fff" }} />
                   <div className="c-white font24 pl15">苹果版下载</div>
                 </WrapLink>
@@ -378,13 +509,25 @@ export default class extends Component {
         {/* 下载页面底部 */}
         <div className="h100 pt30" style={{ backgroundColor: "#404040" }}>
           <div className="font14 lh100 flex c-white jc-center">
-            <WrapLink href="/about" as="/about" className="c-white plr10 border-right">
+            <WrapLink
+              href="/about"
+              as="/about"
+              className="c-white plr10 border-right"
+            >
               关于我们
             </WrapLink>
-            <WrapLink href="/about" as="/about" className="plr10 border-right c-white">
+            <WrapLink
+              href="/about"
+              as="/about"
+              className="plr10 border-right c-white"
+            >
               联系我们
             </WrapLink>
-            <WrapLink href="/about" as="/about" className="plr10 border-right c-white">
+            <WrapLink
+              href="/about"
+              as="/about"
+              className="plr10 border-right c-white"
+            >
               信贷经理入驻
             </WrapLink>
             <WrapLink href="/about" as="/about" className="pl10 c-white">
@@ -396,6 +539,6 @@ export default class extends Component {
           </div>
         </div>
       </Layout>
-    )
+    );
   }
 }
