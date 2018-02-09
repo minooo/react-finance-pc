@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MeSelection } from "@components";
+import { MeSelection, NoData } from "@components";
 
 export default class extends Component {
   static async getInitialProps(ctx) {
@@ -13,6 +13,7 @@ export default class extends Component {
     return (
       <MeSelection pathname={pathname}>
         home
+        <NoData />
       </MeSelection>
     )
   }

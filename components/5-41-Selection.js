@@ -59,14 +59,14 @@ export default ({ children, pathname }) => (
               <WrapLink
                 href={item.one.href}
                 as={item.one.as}
-                className={`relative h56 flex ai-center c333 ${item.one.href === pathname ? "bg-white c-main" : null}`}
+                className={`relative h56 flex ai-center c333 ${item.one.href === pathname ? "bg-white c-main" : ""}`}
                 style={{ paddingLeft: "62px" }}
               >
-                {item.one.href === pathname ? <div className="me-border-left" /> : null}
+                {(item.one.href === pathname) && <div className="me-border-left" />}
                 <div>{item.one.name}</div>
               </WrapLink>
-              <WrapLink href={item.other.href} as={item.other.as} className={`h56 relative flex ai-center c333 ${item.other.href === pathname ? "bg-white c-main" : null}`} style={{ paddingLeft: "62px" }}>
-                {item.other.href === pathname ? <div className="me-border-left" /> : null}
+              <WrapLink href={item.other.href} as={item.other.as} className={`h56 relative flex ai-center c333 ${item.other.href === pathname ? "bg-white c-main" : ""}`} style={{ paddingLeft: "62px" }}>
+                {item.other.href === pathname && <div className="me-border-left" />}
                 <div>{item.other.name}</div>
               </WrapLink>
             </Fragment>

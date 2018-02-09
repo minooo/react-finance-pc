@@ -401,7 +401,8 @@ export default class extends Component {
                                   {item.step_name}
                                 </div>
                               </div>
-                              {index === data.flowpath.length - 1 ? null : (
+                              {index === data.flowpath.length - 1 ||
+                              (
                                 <Icon
                                   className="pt10"
                                   type="right"

@@ -34,10 +34,10 @@ export default ({ item, isrank, isRight }) => (
           </div>
         </div>
         {
-          isRight ?
+          isRight &&
             <div className="flex ai-center c999">
               <Icon type="right" style={{ fontSize: 14 }} />
-            </div> : null
+            </div>
         }
 
       </div>
