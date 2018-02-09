@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Input, Select, Button, message, Radio, Cascader } from "antd";
+import { Input, Select, Button, message, Radio, Cascader, Alert } from "antd";
 import uuid from "uuid/v4";
-import { isMobile, isName, isIDNumber, http } from "@utils";
+import { isName, isIDNumber, http } from "@utils";
 
 export default class extends Component {
   state = {};
@@ -42,7 +42,6 @@ export default class extends Component {
       name,
       sex,
       age,
-      mobile,
       money,
       loanType,
       loanDate,
@@ -55,61 +54,49 @@ export default class extends Component {
     const {
       initName,
       initSex,
-      initMobile,
       initMoney,
       initGenre,
-      initMarry
+      initMarry,
+      onNextOne
     } = this.props;
-    if (!initName && !isName(name)) {
-      message.error("请输入您的真实姓名，2-4个汉字");
+    if (!isName(name || name === "" ? name : initName)) {
+      this.onErrMsg("请输入您的姓名，2-4字。");
       return;
     }
     if (!age) {
-      message.error("请输入您的年龄");
+      this.onErrMsg("请输入您的年龄。");
       return;
     }
-
-    // 注意，手机这里应该是固定，并且不可编辑
-    if (!initMobile && !isMobile(mobile)) {
-      message.error("您的手机号格式有误，请检查。");
-      return;
-    }
-    if (!initMoney && !money) {
-      message.error("请输入您的贷款金额");
-      return;
-    }
-
-    // 这个省去，不再判断
-    if (!initGenre && !loanType) {
-      message.error("请选择您的贷款类型。");
+    if (!(money || money === "" ? money : initMoney)) {
+      this.onErrMsg("请输入您的贷款金额。");
       return;
     }
     if (!loanDate) {
-      message.error("请选择您的贷款期限。");
+      this.onErrMsg("请选择您的贷款期限。");
       return;
     }
     if (!loanUse) {
-      message.error("请选择您的贷款用途。");
+      this.onErrMsg("请选择您的贷款用途。");
       return;
     }
     if (!needTime) {
-      message.error("请选择您的需款时间。");
+      this.onErrMsg("请选择您的需款时间。");
       return;
     }
     if (!isIDNumber(idNum)) {
-      message.error("请输入正确的身份证号。");
+      this.onErrMsg("请输入正确的身份证号。");
       return;
     }
     if (!myArea) {
-      message.error("请选择您所在的地区。");
+      this.onErrMsg("请选择您所在的地区。");
       return;
     }
 
     const param = {
-      name,
+      name: name || initName,
       sex: sex || initSex[0].id,
       age,
-      money,
+      money: name || initMoney,
       provide_a_loan_type_id: loanType || initGenre,
       timelimit: loanDate,
       purpose: loanUse,
@@ -122,15 +109,23 @@ export default class extends Component {
       apply_loan_action: 1
     };
 
-    console.info(param);
+    onNextOne(param);
   };
+  onClose = () => {
+    this.onErrMsg();
+  };
+  onErrMsg = msg => {
+    this.setState(() => ({ errMsg: msg }));
+  };
+
+  // 异步加载省市区域，三级联动
   loadAreaData = selectedOptions => {
     const len = selectedOptions.length;
     const targetOption = selectedOptions[len - 1];
-    targetOption.loading = true;
     const reqKey = len === 1 ? "city" : "county";
     const paramKey = len === 1 ? "province" : "city";
 
+    targetOption.loading = true;
     http
       .get(`common/get_${reqKey}`, { [`${paramKey}_id`]: targetOption.value })
       .then(response => {
@@ -158,7 +153,6 @@ export default class extends Component {
         message.error("网络错误，请稍后再试！");
         console.info(err);
       });
-    // load options lazily
   };
   initAreas = () => {
     const { initProvince } = this.props;
@@ -170,7 +164,7 @@ export default class extends Component {
     this.setState(() => ({ areas }));
   };
   render() {
-    const { name, age, money, mobile, idNum, areas } = this.state;
+    const { name, age, money, idNum, areas, errMsg } = this.state;
     const { Option } = Select;
     const RadioGroup = Radio.Group;
     const {
@@ -182,7 +176,8 @@ export default class extends Component {
       initLimit,
       initPurpose,
       initCycle,
-      initMarry
+      initMarry,
+      isLoading
     } = this.props;
     return (
       <div style={{ marginLeft: "290px" }}>
@@ -236,10 +231,10 @@ export default class extends Component {
           <div className="font14 c333 w90 text-right">手机号:</div>
           <div className="w40" />
           <Input
-            placeholder="请输入手机号"
+            disabled
             size="large"
             className="w310"
-            value={mobile || mobile === "" ? mobile : initMobile}
+            value={initMobile || 13603983223}
             maxLength="11"
             onChange={val => this.onChange(val, "mobile")}
           />
@@ -378,10 +373,22 @@ export default class extends Component {
           </RadioGroup>
         </div>
 
+        {errMsg && (
+          <Alert
+            message={errMsg}
+            type="error"
+            showIcon
+            closable
+            className="mb10"
+            style={{ width: "310px", marginLeft: "130px" }}
+            onClose={this.onClose}
+          />
+        )}
         <Button
           type="primary"
+          loading={isLoading}
           className="h40 font16 w220 r2"
-          style={{ margin: "0 0 56px 200px" }}
+          style={{ margin: "0 0 56px 130px" }}
           onClick={this.onNextOne}
         >
           下一步

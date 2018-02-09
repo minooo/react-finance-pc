@@ -140,7 +140,7 @@ export default class extends Component {
         <Button
           type="primary"
           className="h40 font16 w220 r2"
-          style={{ margin: "0 0 56px 200px" }}
+          style={{ margin: "0 0 56px 130px" }}
           onClick={this.onNextOne}
         >
           下一步

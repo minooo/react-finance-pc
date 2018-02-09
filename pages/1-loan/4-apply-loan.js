@@ -34,12 +34,17 @@ export default class extends Component {
         textClass: "c-main"
       }
     ],
-    focus: 0
+    isLoading: false,
+    focus: 1
   };
+  componentWillMount() {
+    const { url: { query, replace } } = this.props
+    if (!query || !query.mobile) {
+      replace({ pathname: "/index" }, "/")
+    }
+  }
   componentDidMount() {
-    // const { url: { replace, query }, getUser } = this.props;
     const { getUser } = this.props;
-    // if (!query) { replace({ pathname: "/index" }, "/") }
     http
       .get("member/base_profile")
       .then(response => {
@@ -53,8 +58,28 @@ export default class extends Component {
         message.error("抱歉，网络异常，请稍后再试！");
       });
   }
+  onNextOne = (param) => {
+    this.goNext("base", param, 1)
+  }
+  goNext = (reqKey, param, step) => {
+    this.setState(() => ({ isLoading: true }), () => {
+      http.post(`member/${reqKey}_profile`, param)
+      .then(response => {
+        this.setState(() => ({ isLoading: false }))
+        if (response.code === 200 && response.success) {
+          this.setState(() => ({ focus: step }))
+        } else {
+          message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+        }
+      })
+      .catch(err => {
+        message.error("网络错误，请稍后再试！");
+        console.info(err);
+      })
+    })
+  }
   render() {
-    const { steps, tips, focus } = this.state;
+    const { steps, tips, focus, isLoading } = this.state;
     const { url: { query }, user } = this.props;
     return (
       <Layout title="快速申请贷款" className="bg-body">
@@ -105,6 +130,8 @@ export default class extends Component {
               initCycle={user.cycle}
               initMarry={user.marital_status}
               initProvince={user.province}
+              isLoading={isLoading}
+              onNextOne={this.onNextOne}
             />
           )}
           {focus === 1 && <LoanFormTwo />}
