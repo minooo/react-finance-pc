@@ -265,7 +265,7 @@
   &:hover {
     color: #4c8dfc;
     background-color: #ffffff;
-    box-shadow: 0px 3px 18px 0px rgba(76, 141, 252, 0.12);
+    box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.35);
   }
   &:hover .new-shadow {
     box-shadow: none;
@@ -487,3 +487,10 @@
 		#edf8ff;
 }
 
+// login
+.me-login-banner{
+  background: url("../../images/me_login_banner.jpg") center no-repeat;
+}
+.login-img-code{
+  cursor:pointer;
+}

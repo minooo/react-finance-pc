@@ -9,18 +9,18 @@ const config = [
   },
   {
     text: "极速贷",
-    href: "/",
-    as: "/"
+    href: "/1-loan/2-home-speed",
+    as: "/loan/speed"
   },
   {
     text: "同城贷",
-    href: "/",
-    as: "/"
+    href: "/1-loan/1-home",
+    as: "/loan"
   },
   {
     text: "信用卡",
-    href: "/",
-    as: "/"
+    href: "/2-card/1-home",
+    as: "/card"
   },
   {
     text: "关于我们",
@@ -29,18 +29,18 @@ const config = [
   },
   {
     text: "联系我们",
-    href: "/",
-    as: "/"
+    href: "/about",
+    as: "/about"
   },
   {
     text: "贷款资讯",
-    href: "/",
-    as: "/"
+    href: "/3-new/1-home",
+    as: "/new"
   },
   {
     text: "贷款攻略",
-    href: "/",
-    as: "/"
+    href: "/3-new/1-home",
+    as: "/new"
   }
 ];
 export default () => (
@@ -77,7 +77,9 @@ export default () => (
             <div style={{ height: "132px" }} className=" w72 app-bg" />
             <div className="font14 ml20 c-white">
               <div className="mb10">嘟嘟e融APP</div>
-              <WrapLink>立即下载&nbsp;&gt;</WrapLink>
+              <WrapLink className="c-white" href="/downloadApp" as="/downloadApp">
+                立即下载&nbsp;&gt;
+              </WrapLink>
             </div>
           </div>
           <div className="flex ai-center">

@@ -25,22 +25,41 @@ export default class extends Component {
   }
   componentDidMount() {
     /* eslint-disable */
-    const { detail } = this.props
+    const { detail } = this.props;
     window._bd_share_config = {
-      common : {
-        bdText : detail && detail.title,
-        bdDesc : detail && detail.content.substr(0, 20),
+      common: {
+        bdStyle: "1",
+        bdText: detail && detail.title,
+        bdDesc: detail && detail.content.substr(0, 20)
       },
-      share : [{
-        "bdSize" : 24
-      }],
-    }
+      share: [
+        {
+          bdSize: 24
+        }
+      ]
+    };
     if (!window._bd_share_main) {
       require("../../static/scripts/share.js");
     } else {
-      window._bd_share_main.init()
+      window._bd_share_main.init();
     }
     /* eslint-enable */
+  }
+  componentWillUpdate() {
+    /* eslint-disable */
+    window._bd_share_config = {
+      common: {
+        bdSnsKey: {},
+        bdText: "",
+        bdMini: "2",
+        bdMiniList: false,
+        bdPic: "",
+        bdStyle: "1",
+        bdSize: "32"
+      },
+      share: {}
+    };
+    require("../../static/scripts/share.js");
   }
   render() {
     const {
@@ -112,9 +131,6 @@ export default class extends Component {
                 className="bdsharebuttonbox flex jc-end mt30 mb25"
                 data-tag="share_1"
               >
-                <a href="www.baidu.com" className="bds_more" data-cmd="more">
-                  {null}
-                </a>
                 <a
                   href="www.baidu.com"
                   className="bds_weixin"
