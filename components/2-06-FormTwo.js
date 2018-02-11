@@ -98,6 +98,7 @@ export default class extends Component {
       identity_status: job,
       ...jobParam,
       credit_condition: credit || initCredit[0].id,
+      apply_loan_action: 1,
       ...assetParam
     };
 
