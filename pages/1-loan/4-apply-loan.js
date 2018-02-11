@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import uuid from "uuid/v4";
 import { message } from "antd";
 import { http } from "@utils";
-import { getUser } from "@actions";
+import { getUser, getUserOther } from "@actions";
 import reduxPage from "@reduxPage";
 import {
   Layout,
@@ -15,7 +15,10 @@ import {
 } from "@components";
 
 @reduxPage
-@connect(({ user }) => ({ user }), { getUser })
+@connect(({ user, userOther }) => ({ user, userOther }), {
+  getUser,
+  getUserOther
+})
 export default class extends Component {
   state = {
     steps: ["基本信息", "其他信息", "申请成功"],
@@ -35,7 +38,7 @@ export default class extends Component {
       }
     ],
     isLoading: false,
-    focus: 1
+    focus: 0
   };
   componentWillMount() {
     const { url: { query, replace } } = this.props
@@ -44,12 +47,24 @@ export default class extends Component {
     }
   }
   componentDidMount() {
-    const { getUser } = this.props;
+    const { getUser, getUserOther } = this.props;
     http
       .get("member/base_profile")
       .then(response => {
         if (response.code === 200 && response.success) {
           getUser(response.data);
+          http
+            .get("member/other_profile")
+            .then(response => {
+              if (response.code === 200 && response.success) {
+                getUserOther(response.data);
+              } else {
+                message.error(response.msg || "抱歉，请求出错。");
+              }
+            })
+            .catch(() => {
+              message.error("抱歉，网络异常，请稍后再试！");
+            });
         } else {
           message.error(response.msg || "抱歉，请求出错。");
         }
@@ -58,29 +73,36 @@ export default class extends Component {
         message.error("抱歉，网络异常，请稍后再试！");
       });
   }
-  onNextOne = (param) => {
-    this.goNext("base", param, 1)
+  onNextOne = param => {
+    this.goNext("base", param, 1);
+  };
+  onNextTwo = param => {
+    this.goNext("other", param, 2)
   }
   goNext = (reqKey, param, step) => {
-    this.setState(() => ({ isLoading: true }), () => {
-      http.post(`member/${reqKey}_profile`, param)
-      .then(response => {
-        this.setState(() => ({ isLoading: false }))
-        if (response.code === 200 && response.success) {
-          this.setState(() => ({ focus: step }))
-        } else {
-          message.error(response.msg || "抱歉，请求异常，请稍后再试！");
-        }
-      })
-      .catch(err => {
-        message.error("网络错误，请稍后再试！");
-        console.info(err);
-      })
-    })
-  }
+    this.setState(
+      () => ({ isLoading: true }),
+      () => {
+        http
+          .post(`member/${reqKey}_profile`, param)
+          .then(response => {
+            this.setState(() => ({ isLoading: false }));
+            if (response.code === 200 && response.success) {
+              this.setState(() => ({ focus: step }));
+            } else {
+              message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+            }
+          })
+          .catch(err => {
+            message.error("网络错误，请稍后再试！");
+            console.info(err);
+          });
+      }
+    );
+  };
   render() {
     const { steps, tips, focus, isLoading } = this.state;
-    const { url: { query }, user } = this.props;
+    const { url: { query }, user, userOther } = this.props;
     return (
       <Layout title="快速申请贷款" className="bg-body">
         {/* banner */}
@@ -118,23 +140,37 @@ export default class extends Component {
             <LoanTip {...tips[focus]} />
           </div>
           <div className="h40" />
-          {focus === 0 && user && (
-            <LoanFormOne
-              initName={query && query.name}
-              initMobile={query && query.mobile}
-              initMoney={query && query.money}
-              initGenre={query && query.genre}
-              initSex={user.sex}
-              initLimit={user.timelimit}
-              initPurpose={user.purpose}
-              initCycle={user.cycle}
-              initMarry={user.marital_status}
-              initProvince={user.province}
-              isLoading={isLoading}
-              onNextOne={this.onNextOne}
-            />
-          )}
-          {focus === 1 && <LoanFormTwo />}
+          {/* 第一步，基本信息 */}
+          {focus === 0 &&
+            user &&
+            query && (
+              <LoanFormOne
+                initName={query.name}
+                initMobile={query.mobile}
+                initMoney={query.money}
+                initGenre={query.genre}
+                initSex={user.sex}
+                initLimit={user.timelimit}
+                initPurpose={user.purpose}
+                initCycle={user.cycle}
+                initMarry={user.marital_status}
+                initProvince={user.province}
+                isLoading={isLoading}
+                onNextOne={this.onNextOne}
+              />
+            )}
+          {/* 第二步，其他信息 */}
+          {focus === 1 &&
+            userOther && (
+              <LoanFormTwo
+                initJob={userOther.identity_status}
+                initIncomeWay={userOther.income_mode}
+                initCredit={userOther.credit_condition}
+                initAsset={userOther.asset}
+                isLoading={isLoading}
+                onNextTwo={this.onNextTwo}
+              />
+            )}
           {focus === 2 && <LoanFormThree />}
         </div>
         <div className="h60" />

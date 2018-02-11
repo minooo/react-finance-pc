@@ -250,7 +250,7 @@ export default class extends Component {
               size="large"
               addonAfter="元"
               value={money || money === "" ? money : initMoney}
-              maxLength="9"
+              maxLength="8"
               onChange={val => this.onChange(val, "money")}
             />
           </div>

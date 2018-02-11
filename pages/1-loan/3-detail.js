@@ -244,7 +244,7 @@ export default class extends Component {
                       <Input
                         className="font16 no-outline"
                         style={{ width: "234px" }}
-                        maxLength="9"
+                        maxLength="8"
                         addonBefore="贷款金额:"
                         addonAfter="元"
                         value={
