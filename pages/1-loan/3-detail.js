@@ -318,17 +318,17 @@ export default class extends Component {
                     </div>
                     <div style={{ minWidth: "200px" }} className="ml30 font16">
                       <div className="flex ai-center">
-                        <span className="loandetail-globule mr5 bg-second circle" />
+                        <span className="loandetail-globule mr5 bg-main circle" />
                         <span>到账金额：</span>
-                        <span className="c-second">
+                        <span className="c-main">
                           {finalMoney ||
                             (data && data.loan && data.loan.sum_start)}
                         </span>
                       </div>
                       <div className="flex ai-center">
-                        <span className="loandetail-globule mr5 bg-main circle" />
+                        <span className="loandetail-globule mr5 bg-second circle" />
                         <span>利息和费用：</span>
-                        <span className="c-main">
+                        <span className="c-second">
                           {" "}
                           {data &&
                             data.loan &&
@@ -387,7 +387,7 @@ export default class extends Component {
                                   index === data.flowpath.length - 1
                                     ? ""
                                     : "180px"
-                                }`
+                                  }`
                               }}
                             >
                               <div className="flex column ai-center">
@@ -402,17 +402,18 @@ export default class extends Component {
                                   {item.step_name}
                                 </div>
                               </div>
-                              {index === data.flowpath.length - 1 ? null : (
-                                <Icon
-                                  className="pt10"
-                                  type="right"
-                                  style={{
-                                    fontSize: 16,
-                                    color: "#dedede",
-                                    paddingRight: "40px"
-                                  }}
-                                />
-                              )}
+                              {index === data.flowpath.length - 1 ||
+                                (
+                                  <Icon
+                                    className="pt10"
+                                    type="right"
+                                    style={{
+                                      fontSize: 16,
+                                      color: "#dedede",
+                                      paddingRight: "40px"
+                                    }}
+                                  />
+                                )}
                             </div>
                           ))}
                       </div>
@@ -456,12 +457,12 @@ export default class extends Component {
                 <div
                   className={`${
                     data &&
-                    data.loan &&
-                    data.loan.category &&
-                    data.loan.category === 1
+                      data.loan &&
+                      data.loan.category &&
+                      data.loan.category === 1
                       ? "h60"
                       : "h44"
-                  }`}
+                    }`}
                 />
                 {data &&
                   data.loan &&
@@ -510,21 +511,21 @@ export default class extends Component {
                         key={uuid()}
                         href={`${
                           data &&
-                          data.loan &&
-                          data.loan.category &&
-                          data.loan.category === 1
+                            data.loan &&
+                            data.loan.category &&
+                            data.loan.category === 1
                             ? "/1-loan/2-home-speed"
                             : "/1-loan/1-home"
-                        }`}
+                          }`}
                         as={`
                         ${
                           data &&
-                          data.loan &&
-                          data.loan.category &&
-                          data.loan.category === 1
+                            data.loan &&
+                            data.loan.category &&
+                            data.loan.category === 1
                             ? "/loan/speed"
                             : "/loan"
-                        }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
+                          }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
                         className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-1"
                       >
                         {item.name}
@@ -534,49 +535,49 @@ export default class extends Component {
               </div>
               <div className="h20" />
               {data &&
-              data.loan &&
-              data.loan.category &&
-              data.loan.category === 1 ? (
-                <div className="pb25 pt30 plr30 bg-white">
-                  <div className="font18 c333 text-center mb25 lh120">
-                    APP下载，享专属优惠
-                  </div>
-                  <div className="flex jc-around ai-center mb20">
-                    <div className="w70" style={{ height: "130px" }}>
-                      <img
-                        src="/static/images/foot_app.png"
-                        className="w-100"
-                        alt=""
-                      />
+                data.loan &&
+                data.loan.category &&
+                data.loan.category === 1 ? (
+                  <div className="pb25 pt30 plr30 bg-white">
+                    <div className="font18 c333 text-center mb25 lh120">
+                      APP下载，享专属优惠
                     </div>
-                    <div className="w100 h100">
-                      <img
-                        src="/static/images/foot_code.png"
-                        className="w-100"
-                        alt=""
-                      />
+                    <div className="flex jc-around ai-center mb20">
+                      <div className="w70" style={{ height: "130px" }}>
+                        <img
+                          src="/static/images/foot_app.png"
+                          className="w-100"
+                          alt=""
+                        />
+                      </div>
+                      <div className="w100 h100">
+                        <img
+                          src="/static/images/foot_code.png"
+                          className="w-100"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <div className="c-main font14 text-center lh120">
+                      最高可借20万,当天放款
                     </div>
                   </div>
-                  <div className="c-main font14 text-center lh120">
-                    最高可借20万,当天放款
+                ) : (
+                  <div className="plr10 ptb25 bg-white">
+                    <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
+                    {data &&
+                      data.recommend &&
+                      data.recommend.list &&
+                      data.recommend.list.length > 0 &&
+                      data.recommend.list.map(item => (
+                        <HomeRankListItem
+                          key={uuid()}
+                          item={item}
+                          isrank="true"
+                        />
+                      ))}
                   </div>
-                </div>
-              ) : (
-                <div className="plr10 ptb25 bg-white">
-                  <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
-                  {data &&
-                    data.recommend &&
-                    data.recommend.list &&
-                    data.recommend.list.length > 0 &&
-                    data.recommend.list.map(item => (
-                      <HomeRankListItem
-                        key={uuid()}
-                        item={item}
-                        isrank="true"
-                      />
-                    ))}
-                </div>
-              )}
+                )}
             </div>
           </div>
         </div>

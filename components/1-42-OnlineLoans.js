@@ -94,7 +94,7 @@ export default class extends Component {
                         className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
                         href={`/1-loan/3-detail?id=${
                           onlineLoans.pop.list[focus].id
-                        }`}
+                          }`}
                         as={`/loan/${onlineLoans.pop.list[focus].id}`}
                       >
                         <span className="c-white">免费申请</span>
