@@ -97,7 +97,7 @@ export default class extends Component {
       sex: sex || initSex[0].id,
       age,
       money: name || initMoney,
-      provide_a_loan_type_id: loanType || initGenre,
+      genre: loanType || initGenre,
       timelimit: loanDate,
       purpose: loanUse,
       cycle: needTime,
