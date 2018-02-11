@@ -48,6 +48,9 @@
   bottom: 0;
   left: 0;
 }
+.opacity-half {
+  opacity: 0.5;
+}
 
 // home
 .home-top-city-bg {
@@ -233,6 +236,23 @@
     height: 12px;
     display: block;
     width: 12px;
+}
+.loan-apply-bg {
+  background: url("../../images/loan_apply_bg.jpg") center top no-repeat;
+}
+.loan-apply-con-bg {
+  background-image: url("../../images/loan_apply_line.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.loan-apply-shdow {
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+}
+.loan-apply-border {
+  border: 1px solid #ddd;
+}
+.loan-apply-asset-bg-active {
+  background: url("../../images/loan_apply_asset_bg.png") 0 0 no-repeat;
 }
 //card
 .card-cardlist-bg {

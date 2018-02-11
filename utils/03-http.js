@@ -25,7 +25,7 @@ const callApi = (url, method, data, isServer = false, options = {}) => {
         method,
         params: method === "get" ? data : {}, // 添加在请求URL后面的参数
         data: method !== "get" ? data : {}, // 适用于 PUT POST PATCH
-        withCredentials: true // 请求时是否携带cookie
+        withCredentials: true, // 请求时是否携带cookie
       },
       opts
     )

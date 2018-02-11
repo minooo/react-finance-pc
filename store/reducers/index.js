@@ -7,6 +7,7 @@ import loansSpeedHome from "./2-02-loansSpeedHome";
 import cardsHome from "./3-01-cardsHome";
 import newsHome from "./4-01-newsHome";
 import user from "./5-01-user";
+import userOther from "./5-02-userOther";
 
 export default combineReducers({
   home,
@@ -16,5 +17,6 @@ export default combineReducers({
   loansSpeedHome,
   cardsHome,
   newsHome,
-  user
+  user,
+  userOther
 });

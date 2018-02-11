@@ -54,6 +54,12 @@ export const getUser = payload => ({
   type: USER,
   payload
 });
+// 获取用户其他信息
+export const USER_OTHER = "USER_OTHER";
+export const getUserOther = payload => ({
+  type: USER_OTHER,
+  payload
+});
 
 // 退出登陆
 export const LOGOUT = "LOGOUT";
