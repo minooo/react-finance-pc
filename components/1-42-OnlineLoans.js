@@ -60,48 +60,50 @@ export default class extends Component {
           </div>
           <div className="flex overflow-h">
             <div className="pr30">
-              {onlineLoans.pop &&
-                onlineLoans.pop.list &&
-                onlineLoans.pop.list.length > 0 && (
-                  <Fragment>
-                    <div
-                      className="mb20 overflow-h"
-                      style={{ width: "200px", height: "125px" }}
-                    >
-                      <Carousel autoplay afterChange={this.afterChange}>
-                        {onlineLoans.pop.list.map(item => (
-                          <WrapLink
-                            key={uuid()}
-                            href={`/1-loan/3-detail?id=${item.id}`}
-                            as={`/loan/${item.id}`}
-                          >
-                            <img className="pointer" src={item.thumb} alt="" />
-                          </WrapLink>
-                        ))}
-                      </Carousel>
-                    </div>
-                    <div className="text-center mb20">
-                      <div className="font16 mb10 lh100 text-overflow-1 bold">
-                        {onlineLoans.pop.list[focus].name}
-                      </div>
-                      <div className="font14 lh120 text-overflow-1">
-                        {onlineLoans.pop.list[focus].description}
-                      </div>
-                    </div>
-                    <div className="flex jc-center mb20">
-                      <WrapLink
-                        style={{ width: "140px" }}
-                        className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
-                        href={`/1-loan/3-detail?id=${
-                          onlineLoans.pop.list[focus].id
-                        }`}
-                        as={`/loan/${onlineLoans.pop.list[focus].id}`}
+              <div style={{ height: "261px" }}>
+                {onlineLoans.pop &&
+                  onlineLoans.pop.list &&
+                  onlineLoans.pop.list.length > 0 && (
+                    <Fragment>
+                      <div
+                        className="mb20 overflow-h"
+                        style={{ width: "200px", height: "125px" }}
                       >
-                        <span className="c-white">免费申请</span>
-                      </WrapLink>
-                    </div>
-                  </Fragment>
-                )}
+                        <Carousel autoplay afterChange={this.afterChange}>
+                          {onlineLoans.pop.list.map(item => (
+                            <WrapLink
+                              key={uuid()}
+                              href={`/1-loan/3-detail?id=${item.id}`}
+                              as={`/loan/${item.id}`}
+                            >
+                              <img className="pointer" src={item.thumb} alt="" />
+                            </WrapLink>
+                          ))}
+                        </Carousel>
+                      </div>
+                      <div className="text-center mb20">
+                        <div className="font16 mb10 lh100 text-overflow-1 bold">
+                          {onlineLoans.pop.list[focus].name}
+                        </div>
+                        <div className="font14 lh120 text-overflow-1">
+                          {onlineLoans.pop.list[focus].description}
+                        </div>
+                      </div>
+                      <div className="flex jc-center mb20">
+                        <WrapLink
+                          style={{ width: "140px" }}
+                          className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
+                          href={`/1-loan/3-detail?id=${
+                            onlineLoans.pop.list[focus].id
+                            }`}
+                          as={`/loan/${onlineLoans.pop.list[focus].id}`}
+                        >
+                          <span className="c-white">免费申请</span>
+                        </WrapLink>
+                      </div>
+                    </Fragment>
+                  )}
+              </div>
               <div className="text-center lh150 font14 mb15">
                 APP下载，享专属优惠
               </div>
