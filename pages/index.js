@@ -108,8 +108,8 @@ export default class extends Component {
         {/* 申请贷款/轮播图/贷款类型 */}
         <div className="relative">
           <div
-            style={{ width: "320px", height: "390px" }}
-            className="bg-white home-shdow-mid home-form plr30"
+            style={{ width: "320px" }}
+            className="bg-white home-shdow-mid home-form plr30 pb30"
           >
             <HomeForm />
           </div>
@@ -207,8 +207,8 @@ export default class extends Component {
                   cardList &&
                   cardList.length > 0 && <HomeHotCardBox items={cardList} />
                 ) : (
-                  <HomeHotCardBox items={home.cards.cards} />
-                ))}
+                    <HomeHotCardBox items={home.cards.cards} />
+                  ))}
               {hasSearched &&
                 (!cardList || cardList.length === 0) && (
                   <div

@@ -48,7 +48,6 @@ export default class extends Component {
     typeFocus: 0,
     aptitudeFocus: 0,
     cycleFocus: 0,
-
     hasCitySearched: false,
     searchCityCount: null,
     sortFilterFocus: 0,
@@ -56,7 +55,6 @@ export default class extends Component {
     currentSearchPage: 1,
     isFetch: false,
     fetchSearchParam: {},
-
     tabTypes: [
       {
         title: "同城贷",
