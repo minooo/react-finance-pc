@@ -12,6 +12,8 @@ import axios from "axios";
 // baseURL: ctx.isServer ? 'http://m.jrdudu.com/api/' : '/api/',
 // const dev = process.env.NODE_ENV !== 'production'
 // const baseURL = dev ? 'http://m.jrdudu.com/api/' : '/api/'
+
+// responseType: (data && data.responseType) || "json", // 'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
 const pro = process.env.NODE_ENV === "production"
 const test = process.env.NODE_TEST === "test"
 const callApi = (url, method, data, isServer = false, options = {}) => {
@@ -20,7 +22,7 @@ const callApi = (url, method, data, isServer = false, options = {}) => {
     Object.assign(
       {},
       {
-        baseURL: isServer ? ((pro && !test) ? "http://jr.duduapp.net/web/" : "http://192.168.1.116/web/") : "/web/",
+        baseURL: isServer ? ((pro && !test) ? "http://jr.duduapp.net/web/" : "http://192.168.1.139/web/") : "/web/",
         url,
         method,
         params: method === "get" ? data : {}, // 添加在请求URL后面的参数

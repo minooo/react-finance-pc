@@ -101,7 +101,7 @@ export default class extends Component {
         this.setState(() => ({ isLoading: false }))
         if (response.code === 200 && response.success) {
           const { token } = response.data
-          setCookie("token", token)
+          setCookie("token", token, 1) // 有效期1天
           router.push({ pathname: "/1-loan/4-apply-loan", query: { name, money, mobile, genre } }, "/loan/apply")
         } else {
           this.onErrMsg(response.msg || "抱歉，请求出错。")
