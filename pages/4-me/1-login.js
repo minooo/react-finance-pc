@@ -1,26 +1,36 @@
 import React, { Component } from "react";
 import { Input, Button, Checkbox, message } from "antd";
-import uuid from "uuid/v4";
 import { Layout, WrapLink } from "@components";
 import { http, isMobile } from "@utils";
 
 export default class extends Component {
   state = {
-    logCode: "http://192.168.1.116/web/auth/captcha",
+    logCode: null,
     mobile: null,
     captcha: null,
     code: null,
     tickNum: 60,
     isSendCode: true
   };
+  componentDidMount() {
+    this.onImgCode();
+  }
   componentWillUnmount() {
     clearInterval(this.tick);
   }
   // 获取图形验证码
   onImgCode = () => {
-    this.setState(() => ({
-      logCode: `http://192.168.1.116/web/auth/captcha?${uuid()}`
-    }));
+    http
+      .get("/auth/captcha")
+      .then(response => {
+        // 这里的判断条件根据具体的接口情况而调整
+        const logCode = response;
+        this.setState(() => ({ logCode }));
+      })
+      .catch(err => {
+        message.error("网络错误，请稍后再试！");
+        console.info(err);
+      });
   };
   // 获取输入数据
   onChange = (val, type) => {
@@ -55,8 +65,6 @@ export default class extends Component {
             if (response.code === 200 && response.success) {
               message.success("手机验证码发送成功");
             } else {
-              this.setState(() => ({ tickNum: 60, isSendCode: true }));
-              clearInterval(this.tick);
               message.error(
                 response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
               );
@@ -88,7 +96,7 @@ export default class extends Component {
       return;
     }
     if (!captcha) {
-      message.error("请输入图形验证码。");
+      message.error("请输入的图形验证码。");
       return;
     }
     if (!code) {
@@ -96,7 +104,7 @@ export default class extends Component {
       return;
     }
     http
-      .post("auth/sign", { phone: mobile, code, captcha })
+      .post("/auth/sign", { mobile, code, captcha })
       .then(response => {
         // 这里的判断条件根据具体的接口情况而调整
         if (response.code === 200 && response.success) {
@@ -158,18 +166,12 @@ export default class extends Component {
                   value={captcha}
                   onChange={val => this.onChange(val, "captcha")}
                 />
-
-                <WrapLink
-                  style={{
-                    width: "117px",
-                    border: " 1px solid #eeeeee",
-                    borderLeft: "none"
-                  }}
-                  className="img-bg h40"
-                  onClick={this.onImgCode}
+                <div
+                  style={{ width: "117px" }}
+                  className="img-bg h40 login-img-code"
                 >
                   <img className="w-100 h-100" src={logCode} alt="" />
-                </WrapLink>
+                </div>
               </div>
               <Search
                 placeholder="手机验证码"
