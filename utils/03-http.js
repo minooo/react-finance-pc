@@ -12,6 +12,8 @@ import axios from "axios";
 // baseURL: ctx.isServer ? 'http://m.jrdudu.com/api/' : '/api/',
 // const dev = process.env.NODE_ENV !== 'production'
 // const baseURL = dev ? 'http://m.jrdudu.com/api/' : '/api/'
+
+// responseType: (data && data.responseType) || "json", // 'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
 const pro = process.env.NODE_ENV === "production"
 const test = process.env.NODE_TEST === "test"
 const callApi = (url, method, data, isServer = false, options = {}) => {

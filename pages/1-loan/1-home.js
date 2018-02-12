@@ -362,7 +362,6 @@ export default class extends Component {
                     : loansHome.list.list.map(item => (
                         <LoanList key={uuid()} item={item} />
                       )))}
-
                 <div className="pb30 flex jc-center">
                   <Pagination
                     hideOnSinglePage
