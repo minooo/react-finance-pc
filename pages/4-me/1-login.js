@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import { Input, Button, Checkbox, message } from "antd";
-import { Layout, WrapLink } from "@components";
-import { http, isMobile } from "@utils";
+import Router from "next/router";
+import { Input, Button, Checkbox, message, Alert } from "antd";
+import { Layout, WrapLink, Btn } from "@components";
+import { http, isMobile, setCookie, searchToObj } from "@utils";
 
 export default class extends Component {
   state = {
-    logCode: null,
-    mobile: null,
-    captcha: null,
-    code: null,
     tickNum: 60,
-    isSendCode: true
+    isLoading: false,
+    isSendCode: true,
+    isLongLogin: true,
   };
   componentDidMount() {
     this.onImgCode();
@@ -18,20 +17,6 @@ export default class extends Component {
   componentWillUnmount() {
     clearInterval(this.tick);
   }
-  // 获取图形验证码
-  onImgCode = () => {
-    http
-      .get("/auth/captcha")
-      .then(response => {
-        // 这里的判断条件根据具体的接口情况而调整
-        const logCode = response;
-        this.setState(() => ({ logCode }));
-      })
-      .catch(err => {
-        message.error("网络错误，请稍后再试！");
-        console.info(err);
-      });
-  };
   // 获取输入数据
   onChange = (val, type) => {
     if (type === "captcha" || type === "code") {
@@ -45,103 +30,145 @@ export default class extends Component {
         this.setState(() => ({ [type]: value }));
       }
     }
+    if (type === "login") {
+      const { checked } = val.target
+      this.setState(() => ({ isLongLogin: checked }))
+    }
   };
-  // 发送手机验证码
-  onSendCode = () => {
-    const { mobile, isSendCode } = this.state;
+  // 获取手机验证码
+  onSendCode = async () => {
+    const { mobile, isSendCode, captcha } = this.state;
     if (!isSendCode) return;
     if (!isMobile(mobile)) {
-      message.error("您的手机号格式有误，请检查。");
-      return;
-    }
-    this.setState(
-      () => ({ tickNum: 60, isSendCode: false }),
-      () => {
-        // 发送验证码接口调用
-        http
-          .post("auth/send_code", { phone: mobile })
-          .then(response => {
-            // 这里的判断条件根据具体的接口情况而调整
-            if (response.code === 200 && response.success) {
-              message.success("手机验证码发送成功");
-            } else {
-              message.error(
-                response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
-              );
-            }
-          })
-          .catch(err => {
-            message.error("网络错误，请稍后再试！");
-            console.info(err);
-          });
-        this.tick = setInterval(() => {
-          this.setState(
-            pre => ({ tickNum: pre.tickNum - 1 }),
-            () => {
-              if (this.state.tickNum === 0) {
-                this.setState(() => ({ tickNum: 60, isSendCode: true }));
-                clearInterval(this.tick);
-              }
-            }
-          );
-        }, 1000);
-      }
-    );
-  };
-  // 登录
-  applyLoan = () => {
-    const { mobile, captcha, code } = this.state;
-    if (!isMobile(mobile)) {
-      message.error("您的手机号格式有误，请检查。");
+      this.onErrMsg("您的手机号格式有误，请检查。");
       return;
     }
     if (!captcha) {
-      message.error("请输入的图形验证码。");
+      this.onErrMsg("请输入图形验证码。");
       return;
     }
-    if (!code) {
-      message.error("请输入您的验证码。");
-      return;
-    }
+
+    this.setState(
+      () => ({ tickNum: 60, isSendCode: false }),
+      () => {
+        http.post("auth/check_captcha", { captcha }).then(response => {
+          if (response.code === 200 && response.success) {
+            // 发送验证码接口调用
+            http
+              .post("auth/send_code", { phone: mobile })
+              .then(response => {
+                if (response.code === 200 && response.success) {
+                  message.success("手机验证码发送成功。");
+                } else {
+                  message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+                }
+              })
+              .catch(err => {
+                message.error("网络错误，请稍后再试！");
+                console.info(err);
+              });
+          } else {
+            this.onErrMsg(response.msg || "图片验证码有误，请检查。");
+            this.setState(() => ({ tickNum: 60, isSendCode: true }));
+            clearInterval(this.tick);
+          }
+
+          this.tick = setInterval(() => {
+            this.setState(
+              pre => ({ tickNum: pre.tickNum - 1 }),
+              () => {
+                if (this.state.tickNum === 0) {
+                  this.setState(() => ({ tickNum: 60, isSendCode: true }));
+                  clearInterval(this.tick);
+                }
+              }
+            );
+          }, 1000);
+        });
+      }
+    );
+  };
+  onClose = () => {
+    this.onErrMsg();
+  };
+  onErrMsg = msg => {
+    this.setState(() => ({ errMsg: msg }));
+  };
+  // 获取图形验证码
+  onImgCode = () => {
     http
-      .post("/auth/sign", { mobile, code, captcha })
+      .callApi("auth/captcha", "get", null, null, { responseType: "blob" })
       .then(response => {
-        // 这里的判断条件根据具体的接口情况而调整
-        if (response.code === 200 && response.success) {
-          message.success("登录成功");
-        } else {
-          message.error(
-            response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
-          );
-        }
+        const urlCreator = window.URL || window.webkitURL;
+        const imageUrl = urlCreator.createObjectURL(response);
+        this.setState(() => ({ logCode: imageUrl }));
       })
       .catch(err => {
         message.error("网络错误，请稍后再试！");
         console.info(err);
       });
   };
+  // 登录
+  applyLoan = () => {
+    const { mobile, captcha, code, isLongLogin } = this.state;
+    const { asPath } = this.props;
+    const query = searchToObj(asPath);
+
+    if (!isMobile(mobile)) {
+      this.onErrMsg("您的手机号格式有误，请检查。");
+      return;
+    }
+    if (!captcha) {
+      this.onErrMsg("请输入图形验证码。");
+      return;
+    }
+    if (!code) {
+      this.onErrMsg("请输入手机验证码。");
+      return;
+    }
+    this.setState(() => ({ isLoading: true }), () => {
+      http
+      .post("/auth/sign", { phone: mobile, code, captcha })
+      .then(response => {
+        this.setState(() => ({ isLoading: false }))
+        if (response.code === 200 && response.success) {
+          const { token } = response.data;
+          setCookie("token", token, !isLongLogin && 1);
+          Router.push(
+            { pathname: (query && query.href) || "/4-me/2-home" },
+            (query && query.as) || "/me"
+          );
+        } else {
+          message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+        }
+      })
+      .catch(err => {
+        message.error("网络错误，请稍后再试！");
+        console.info(err);
+      });
+    })
+  };
   render() {
-    const { logCode, mobile, captcha, code, tickNum, isSendCode } = this.state;
+    const {
+      logCode,
+      mobile,
+      captcha,
+      code,
+      tickNum,
+      isSendCode,
+      errMsg,
+      isLoading,
+      isLongLogin
+    } = this.state;
     const { Search } = Input;
     return (
       <Layout footNoShow title="登陆">
         {/* banner图 */}
-        <div
-          style={{
-            height: "600px"
-          }}
-          className="me-login-banner"
-        >
-          <div
-            style={{
-              height: "600px"
-            }}
-            className="box relative"
-          >
+        <div style={{ height: "600px" }} className="me-login-banner">
+          <div style={{ height: "600px" }} className="box relative">
             <div
               style={{
                 width: "320px",
-                height: "385px",
                 top: "80px",
                 right: "0px"
               }}
@@ -166,12 +193,12 @@ export default class extends Component {
                   value={captcha}
                   onChange={val => this.onChange(val, "captcha")}
                 />
-                <div
+                <Btn
                   style={{ width: "117px" }}
-                  className="img-bg h40 login-img-code"
-                >
-                  <img className="w-100 h-100" src={logCode} alt="" />
-                </div>
+                  className="img-bg h38 login-img-code"
+                  con={<img className="w-100 h-100" src={logCode} alt="" />}
+                  onClick={this.onImgCode}
+                />
               </div>
               <Search
                 placeholder="手机验证码"
@@ -185,15 +212,26 @@ export default class extends Component {
                 onChange={val => this.onChange(val, "code")}
                 onSearch={this.onSendCode}
               />
-              <Checkbox className=" c999 font14 ">七天免登录</Checkbox>
+              <Checkbox className="c999 font14 mb25" checked={isLongLogin} onChange={val => this.onChange(val, "login")}>七天免登录</Checkbox>
+              {errMsg && (
+                <Alert
+                  message={errMsg}
+                  type="error"
+                  showIcon
+                  closable
+                  className="mb10"
+                  onClose={this.onClose}
+                />
+              )}
               <Button
+                loading={isLoading}
                 type="primary"
-                className="h40 font16 w-100 mt25 mb25"
+                className="h40 font16 w-100 mb25"
                 onClick={this.applyLoan}
               >
                 登录
               </Button>
-              <p className="font14 lh100 c999 text-center">
+              <p className="font14 lh100 c999 text-center pb20">
                 动态验证码登录即可无需注册
               </p>
             </div>
