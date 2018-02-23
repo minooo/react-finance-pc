@@ -20,7 +20,7 @@ const callApi = (url, method, data, isServer = false, options = {}) => {
     Object.assign(
       {},
       {
-        baseURL: isServer ? ((pro && !test) ? "http://jr.duduapp.net/web/" : "http://192.168.1.116/web/") : "/web/",
+        baseURL: isServer ? ((pro && !test) ? "http://jr.duduapp.net/web/" : "http://192.168.1.87/web/") : "/web/",
         url,
         method,
         params: method === "get" ? data : {}, // 添加在请求URL后面的参数
