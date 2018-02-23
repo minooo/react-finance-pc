@@ -9,7 +9,7 @@ export default class extends Component {
     tickNum: 60,
     isLoading: false,
     isSendCode: true,
-    isLongLogin: true,
+    isLongLogin: true
   };
   componentDidMount() {
     this.onImgCode();
@@ -31,8 +31,8 @@ export default class extends Component {
       }
     }
     if (type === "login") {
-      const { checked } = val.target
-      this.setState(() => ({ isLongLogin: checked }))
+      const { checked } = val.target;
+      this.setState(() => ({ isLongLogin: checked }));
     }
   };
   // 获取手机验证码
@@ -126,27 +126,30 @@ export default class extends Component {
       this.onErrMsg("请输入手机验证码。");
       return;
     }
-    this.setState(() => ({ isLoading: true }), () => {
-      http
-      .post("/auth/sign", { phone: mobile, code, captcha })
-      .then(response => {
-        this.setState(() => ({ isLoading: false }))
-        if (response.code === 200 && response.success) {
-          const { token } = response.data;
-          setCookie("token", token, !isLongLogin && 1);
-          Router.push(
-            { pathname: (query && query.href) || "/4-me/2-home" },
-            (query && query.as) || "/me"
-          );
-        } else {
-          message.error(response.msg || "抱歉，请求异常，请稍后再试！");
-        }
-      })
-      .catch(err => {
-        message.error("网络错误，请稍后再试！");
-        console.info(err);
-      });
-    })
+    this.setState(
+      () => ({ isLoading: true }),
+      () => {
+        http
+          .post("/auth/sign", { phone: mobile, code, captcha })
+          .then(response => {
+            this.setState(() => ({ isLoading: false }));
+            if (response.code === 200 && response.success) {
+              const { token } = response.data;
+              setCookie("token", token, !isLongLogin && 1);
+              Router.push(
+                { pathname: (query && query.href) || "/4-me/2-home" },
+                (query && query.as) || "/me"
+              );
+            } else {
+              message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+            }
+          })
+          .catch(err => {
+            message.error("网络错误，请稍后再试！");
+            console.info(err);
+          });
+      }
+    );
   };
   render() {
     const {
@@ -212,7 +215,13 @@ export default class extends Component {
                 onChange={val => this.onChange(val, "code")}
                 onSearch={this.onSendCode}
               />
-              <Checkbox className="c999 font14 mb25" checked={isLongLogin} onChange={val => this.onChange(val, "login")}>七天免登录</Checkbox>
+              <Checkbox
+                className="c999 font14 mb25"
+                checked={isLongLogin}
+                onChange={val => this.onChange(val, "login")}
+              >
+                七天免登录
+              </Checkbox>
               {errMsg && (
                 <Alert
                   message={errMsg}
