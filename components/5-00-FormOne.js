@@ -1,111 +1,119 @@
 import React, { Component } from "react";
-import { Input, Select, Button, message, Radio, Cascader, Alert } from "antd";
+import {
+  Input,
+  Button,
+  Upload,
+  Icon,
+  message,
+  Radio,
+  Cascader,
+  Alert
+} from "antd";
 import uuid from "uuid/v4";
 import { isName, isIDNumber, http } from "@utils";
 
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+  const isJPG = file.type === "image/jpeg" || file.type === "image/png";
+  if (!isJPG) {
+    message.error("请选择JPG或者PNG文件上传!");
+  }
+  const isLt2M = file.size / 1024 / 1024 < 1;
+  if (!isLt2M) {
+    message.error("图片大小不能超过1M!");
+  }
+  return isJPG && isLt2M;
+}
+
 export default class extends Component {
-  state = {};
+  state = { loading: false };
   componentDidMount() {
     this.initAreas();
   }
   onChange = (val, type) => {
-    if (type === "name" || type === "sex" || type === "marry") {
+    if (
+      type === "nickname" ||
+      type === "name" ||
+      type === "sex" ||
+      type === "marry"
+    ) {
       const { value } = val.target;
       this.setState(() => ({ [type]: value }));
     }
-    if (
-      type === "money" ||
-      type === "age" ||
-      type === "idNum"
-    ) {
+    if (type === "mobile" || type === "age" || type === "idNum") {
       const { value } = val.target;
       const reg = type === "idNum" ? /^[a-z0-9]*$/ : /^([1-9][0-9]*)?$/;
       if (reg.test(value)) {
         this.setState(() => ({ [type]: value }));
       }
     }
-    if (
-      type === "loanType" ||
-      type === "loanDate" ||
-      type === "loanUse" ||
-      type === "needTime"
-    ) {
-      this.setState(() => ({ [type]: val }));
-    }
   };
-  onAreaChange = value => {
-    this.setState(() => ({ myArea: value }));
+  onAreaChange = (val, type) => {
+    console.info(val, 12344)
+    this.setState(() => ({ [type]: val }));
   };
   onNextOne = () => {
     const {
+      nickname,
       name,
+      imageUrl,
       sex,
       age,
-      money,
-      loanType,
-      loanDate,
-      loanUse,
-      needTime,
       idNum,
       myArea,
       marry
     } = this.state;
     const {
+      initNickName,
       initName,
+      initAge,
+      initIdNum,
       initSex,
-      initMoney,
-      initGenre,
+      initMySex,
       initMarry,
+      initMyMarry,
       onNextOne
     } = this.props;
+    if (!(nickname || nickname === "" ? nickname : initNickName)) {
+      this.onErrMsg("请输入您的用户名，最多11个字符。");
+      return;
+    }
     if (!isName(name || name === "" ? name : initName)) {
       this.onErrMsg("请输入您的姓名，2-4字。");
       return;
     }
-    if (!age) {
+    if (!myArea) {
+      this.onErrMsg("请选择您的注册站点。");
+      return;
+    }
+    if (!imageUrl) {
+      this.onErrMsg("请选择您的注册站点。");
+      return;
+    }
+    if (!(age || age === "" ? age : initAge)) {
       this.onErrMsg("请输入您的年龄。");
       return;
     }
-    if (!(money || money === "" ? money : initMoney)) {
-      this.onErrMsg("请输入您的贷款金额。");
-      return;
-    }
-    if (!loanDate) {
-      this.onErrMsg("请选择您的贷款期限。");
-      return;
-    }
-    if (!loanUse) {
-      this.onErrMsg("请选择您的贷款用途。");
-      return;
-    }
-    if (!needTime) {
-      this.onErrMsg("请选择您的需款时间。");
-      return;
-    }
-    if (!isIDNumber(idNum)) {
+    if (!isIDNumber(idNum || idNum === "" ? idNum : initIdNum)) {
       this.onErrMsg("请输入正确的身份证号。");
-      return;
-    }
-    if (!myArea) {
-      this.onErrMsg("请选择您所在的地区。");
       return;
     }
 
     const param = {
+      usename: nickname || initNickName,
       name: name || initName,
-      sex: sex || initSex[0].id,
-      age,
-      money: name || initMoney,
-      genre: loanType || initGenre,
-      timelimit: loanDate,
-      purpose: loanUse,
-      cycle: needTime,
-      idNum,
+      sex: sex || initMySex || initSex[0].id,
+      age: age || initAge,
+      idNum: idNum || initIdNum,
       province_id: myArea[0],
       city_id: myArea[1],
       county_id: myArea[2],
-      marital_status: marry || initMarry[0].id,
-      apply_loan_action: 1
+      marital_status: marry || initMyMarry || initMarry[0].id
     };
 
     onNextOne(param);
@@ -162,24 +170,62 @@ export default class extends Component {
     }));
     this.setState(() => ({ areas }));
   };
+  handleChange = info => {
+    if (info.file.status === "uploading") {
+      this.setState(() => ({ loading: true }));
+      return;
+    }
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, imageUrl =>
+        this.setState(
+          () => ({
+            imageUrl,
+            loading: false
+          })
+        )
+      );
+    }
+  };
   render() {
-    const { name, age, money, idNum, areas, errMsg } = this.state;
-    const { Option } = Select;
+    const { nickname, name, age, idNum, areas, errMsg, imageUrl } = this.state;
     const RadioGroup = Radio.Group;
     const {
+      initNickName,
       initName,
-      initMoney,
       initMobile,
-      initGenre,
       initSex,
-      initLimit,
-      initPurpose,
-      initCycle,
+      initMySex,
+      initAge,
+      initIdNum,
       initMarry,
+      initMyMarry,
       isLoading
     } = this.props;
+    const uploadButton = (
+      <div>
+        <Icon
+          type={this.state.loading ? "loading" : "plus"}
+          className="font32 c999"
+        />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
     return (
-      <div style={{ marginLeft: "290px" }}>
+      <div style={{ marginLeft: "140px" }}>
+        {/* 用户名 */}
+        <div className="flex ai-center mb30">
+          <div className="font14 c333 w90 text-right">用户名:</div>
+          <div className="w40" />
+          <Input
+            placeholder="请输入您的昵称(最多11个字符)"
+            size="large"
+            className="w310"
+            value={nickname || nickname === "" ? nickname : initNickName}
+            maxLength="11"
+            onChange={val => this.onChange(val, "nickname")}
+          />
+        </div>
         {/* 姓名 */}
         <div className="flex ai-center mb30">
           <div className="font14 c333 w90 text-right">姓名:</div>
@@ -194,13 +240,50 @@ export default class extends Component {
           />
         </div>
 
+        {/* 注册站点 */}
+        <div className="flex ai-center mb30">
+          <div className="font14 c333 w90 text-right">注册站点:</div>
+          <div className="w40" />
+          <Cascader
+            className="w310"
+            size="large"
+            placeholder="请选择"
+            options={areas}
+            loadData={this.loadAreaData}
+            onChange={val => this.onAreaChange(val, "myArea")}
+            changeOnSelect
+          />
+          <div className="pl10 c-main font14">郑州站</div>
+        </div>
+
+        {/* 上传头像 */}
+        <div className="flex mb30">
+          <div className="font14 c333 w90 text-right">上传头像:</div>
+          <div className="w40" />
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="w120 h120 font20"
+            showUploadList={false}
+            action="http://jr.duduapp.net/web/common/upload_picture"
+            beforeUpload={beforeUpload}
+            onChange={this.handleChange}
+          >
+            {imageUrl ? (
+              <img src={imageUrl} className="block w100 h100" alt="" />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+        </div>
+
         {/* 性别 */}
         <div className="flex ai-center mb30">
           <div className="font14 c333 w90 text-right">性别:</div>
           <div className="w40" />
           <RadioGroup
             onChange={val => this.onChange(val, "sex")}
-            value={this.state.sex || initSex[0].id}
+            value={this.state.sex || initMySex || initSex[0].id}
             size="large"
           >
             {initSex.map(item => (
@@ -219,7 +302,7 @@ export default class extends Component {
             placeholder="请输入您的年龄"
             size="large"
             className="w310"
-            value={age}
+            value={age || age === "" ? age : initAge}
             maxLength="2"
             onChange={val => this.onChange(val, "age")}
           />
@@ -238,93 +321,6 @@ export default class extends Component {
           />
         </div>
 
-        {/* 贷款金额 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">贷款金额:</div>
-          <div className="w40" />
-          <div className="w310">
-            <Input
-              placeholder="请输入贷款金额"
-              size="large"
-              addonAfter="元"
-              value={money || money === "" ? money : initMoney}
-              maxLength="8"
-              onChange={val => this.onChange(val, "money")}
-            />
-          </div>
-        </div>
-
-        {/* 贷款类型 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">贷款类型:</div>
-          <div className="w40" />
-          <Select
-            defaultValue={initGenre}
-            className="w310"
-            size="large"
-            onChange={val => this.onChange(val, "loanType")}
-          >
-            <Option value="房产贷款">房产贷款</Option>
-            <Option value="车辆贷款">车辆贷款</Option>
-            <Option value="信用贷款">信用贷款</Option>
-            <Option value="其他贷款">其他贷款</Option>
-          </Select>
-        </div>
-
-        {/* 贷款期限 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">贷款期限:</div>
-          <div className="w40" />
-          <Select
-            placeholder="请选择"
-            className="w310"
-            size="large"
-            onChange={val => this.onChange(val, "loanDate")}
-          >
-            {initLimit.map(item => (
-              <Option key={uuid()} value={item.id}>
-                {item.name}
-              </Option>
-            ))}
-          </Select>
-        </div>
-
-        {/* 贷款用途 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">贷款用途:</div>
-          <div className="w40" />
-          <Select
-            placeholder="请选择"
-            className="w310"
-            size="large"
-            onChange={val => this.onChange(val, "loanUse")}
-          >
-            {initPurpose.map(item => (
-              <Option key={uuid()} value={item.id}>
-                {item.name}
-              </Option>
-            ))}
-          </Select>
-        </div>
-
-        {/* 需款时间 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">需款时间:</div>
-          <div className="w40" />
-          <Select
-            placeholder="请选择"
-            className="w310"
-            size="large"
-            onChange={val => this.onChange(val, "needTime")}
-          >
-            {initCycle.map(item => (
-              <Option key={uuid()} value={item.id}>
-                {item.name}
-              </Option>
-            ))}
-          </Select>
-        </div>
-
         {/* 身份证号 */}
         <div className="flex ai-center mb30">
           <div className="font14 c333 w90 text-right">身份证号:</div>
@@ -333,24 +329,9 @@ export default class extends Component {
             placeholder="请输入您的真实身份证号"
             size="large"
             className="w310"
-            value={idNum}
+            value={idNum || idNum === "" ? idNum : initIdNum}
             maxLength="18"
             onChange={val => this.onChange(val, "idNum")}
-          />
-        </div>
-
-        {/* 所在地区 */}
-        <div className="flex ai-center mb30">
-          <div className="font14 c333 w90 text-right">所在地区:</div>
-          <div className="w40" />
-          <Cascader
-            className="w310"
-            size="large"
-            placeholder="请选择"
-            options={areas}
-            loadData={this.loadAreaData}
-            onChange={this.onAreaChange}
-            changeOnSelect
           />
         </div>
 
@@ -360,7 +341,7 @@ export default class extends Component {
           <div className="w40" />
           <RadioGroup
             onChange={val => this.onChange(val, "marry")}
-            value={this.state.marry || initMarry[0].id}
+            value={this.state.marry || initMyMarry || initMarry[0].id}
             size="large"
           >
             {initMarry.map(item => (
