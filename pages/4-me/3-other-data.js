@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { message } from "antd";
-import { http } from "@utils";
+import Router from "next/router";
+import { http, cache } from "@utils";
 import { getUser, getUserOther } from "@actions";
 import reduxPage from "@reduxPage";
-import { MeSelection, MeFormOne, LoanFormTwo } from "@components";
+import { MeSelection, MeFormOne, MeFormTwo } from "@components";
 
 @reduxPage
 @connect(({ user, userOther }) => ({ user, userOther }), {
@@ -19,13 +20,7 @@ export default class extends Component {
   }
   state = { focus: 0, isLoading: false };
   componentDidMount() {
-    const {
-      getUser,
-      getUserOther,
-      user,
-      userOther,
-      url: { replace }
-    } = this.props;
+    const { getUser, getUserOther, user, userOther } = this.props;
     if (!user || !userOther) {
       http
         .get("member/base_profile")
@@ -38,12 +33,12 @@ export default class extends Component {
                 if (response.code === 200 && response.success) {
                   getUserOther(response.data);
                 } else {
-                  replace({ pathname: "/4-me/1-login" }, "/login");
+                  Router.replace({ pathname: "/4-me/1-login" }, "/login");
                   message.error(response.msg || "抱歉，请求出错。");
                 }
               })
               .catch(() => {
-                replace({ pathname: "/4-me/1-login" }, "/login");
+                Router.replace({ pathname: "/4-me/1-login" }, "/login");
                 message.error("抱歉，网络异常，请稍后再试！");
               });
           } else {
@@ -70,7 +65,12 @@ export default class extends Component {
           .then(response => {
             this.setState(() => ({ isLoading: false }));
             if (response.code === 200 && response.success) {
-              this.setState(() => ({ focus: step }));
+              if (step === 1) {
+                this.setState(() => ({ focus: 1 }));
+                cache.setItem("userName", param.username)
+              } else {
+                Router.push({ pathname: "/4-me/2-home" }, "/me");
+              }
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
@@ -109,7 +109,8 @@ export default class extends Component {
         {/* 第二步，其他信息 */}
         {focus === 1 &&
           userOther && (
-            <LoanFormTwo
+            <MeFormTwo
+              noapply="true"
               initJob={userOther.identity_status}
               initIncomeWay={userOther.income_mode}
               initCredit={userOther.credit_condition}

@@ -1,13 +1,20 @@
-import React, { Component } from "react";
-import { WrapLink } from "@components";
+import React, { Component, Fragment } from "react";
+import Router from "next/router";
+import { delCookie } from "@utils";
+import { WrapLink, Btn } from "@components";
 
 export default class extends Component {
   state = { isOnOver: false };
   onSwitch = () => {
     this.setState(pre => ({ isOnOver: !pre.isOnOver }));
   };
+  onClick = () => {
+    delCookie("token");
+    Router.replace({ pathname: "/4-me/1-login" }, "/login");
+  };
   render() {
     const { isOnOver } = this.state;
+    const { me } = this.props;
     return (
       <div className="bg-body">
         <div className="box h30 flex jc-between ai-center relative hom-top-code bg-body">
@@ -24,14 +31,36 @@ export default class extends Component {
               <img src="http://dummyimage.com/100x100" alt="" />
             </div>
           )}
-          <WrapLink className="c666 pl15 home-top-city-bg" href="/city" as="/city">
+          <WrapLink
+            className="c666 pl15 home-top-city-bg"
+            href="/city"
+            as="/city"
+          >
             郑州[切换]
           </WrapLink>
           <div className="flex ai-center">
             <span style={{ marginRight: "70px" }}>客服热线：400-968-8821</span>
-            <WrapLink className="font12 c-main mr30" href="/4-me/1-login" as="/login">
-              登录
-            </WrapLink>
+            {me ? (
+              <Fragment>
+                <WrapLink
+                  className="font12 c-main mr15"
+                  href="/4-me/2-home"
+                  as="/me"
+                >
+                  {me}
+                </WrapLink>
+                <Btn btnClass="font12 mr30" con="退出" onClick={this.onClick} />
+              </Fragment>
+            ) : (
+              <WrapLink
+                className="font12 c-main mr30"
+                href="/4-me/1-login"
+                as="/login"
+              >
+                登录
+              </WrapLink>
+            )}
+
             <span onMouseEnter={this.onSwitch} onMouseLeave={this.onSwitch}>
               手机站
             </span>

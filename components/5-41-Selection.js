@@ -11,7 +11,7 @@ const selectList = [
       href: "/4-me/2-home"
     },
     other: {
-      name: "编辑资料",
+      name: "其他资料",
       as: "/me/other",
       href: "/4-me/3-other-data"
     }

@@ -31,7 +31,7 @@ function beforeUpload(file) {
 }
 
 export default class extends Component {
-  state = { loading: false };
+  state = { loading: false, disabled: true };
   componentDidMount() {
     this.initAreas();
   }
@@ -54,7 +54,16 @@ export default class extends Component {
     }
   };
   onAreaChange = (val, type) => {
-    console.info(val, 12344)
+    const levelList = ["province", "city", "county"];
+    const len = val.length;
+    const id = val[len - 1];
+    const level = levelList[len - 1];
+    http.get("common/get_station", { id, level }).then(response => {
+      if (response.code === 200 && response.success) {
+        const { station } = response.data;
+        this.setState(() => ({ station }));
+      }
+    });
     this.setState(() => ({ [type]: val }));
   };
   onNextOne = () => {
@@ -62,11 +71,13 @@ export default class extends Component {
       nickname,
       name,
       imageUrl,
+      avatar,
       sex,
       age,
       idNum,
       myArea,
-      marry
+      marry,
+      station
     } = this.state;
     const {
       initNickName,
@@ -92,7 +103,7 @@ export default class extends Component {
       return;
     }
     if (!imageUrl) {
-      this.onErrMsg("请选择您的注册站点。");
+      this.onErrMsg("请上传您的头像。");
       return;
     }
     if (!(age || age === "" ? age : initAge)) {
@@ -105,15 +116,17 @@ export default class extends Component {
     }
 
     const param = {
-      usename: nickname || initNickName,
+      username: nickname || initNickName,
       name: name || initName,
+      avatar,
       sex: sex || initMySex || initSex[0].id,
       age: age || initAge,
       idNum: idNum || initIdNum,
       province_id: myArea[0],
       city_id: myArea[1],
       county_id: myArea[2],
-      marital_status: marry || initMyMarry || initMarry[0].id
+      marital_status: marry || initMyMarry || initMarry[0].id,
+      station_id: station.id
     };
 
     onNextOne(param);
@@ -178,21 +191,45 @@ export default class extends Component {
     if (info.file.status === "done") {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl =>
-        this.setState(
-          () => ({
-            imageUrl,
-            loading: false
+        this.setState(() => ({
+          imageUrl,
+          loading: false
+        }), () => {
+          const index = imageUrl.indexOf("base64,") + 7
+          const url = imageUrl.substring(index)
+          http.post("common/upload_picture", { url }).then(response => {
+            if (response.code === 200 && response.success) {
+              const avatar = response.data.url
+              this.setState(() => ({ avatar }))
+            } else {
+              message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+            }
           })
-        )
+          .catch(err => {
+            message.error("网络错误，请稍后再试！");
+            console.info(err);
+          });
+        })
       );
     }
   };
   render() {
-    const { nickname, name, age, idNum, areas, errMsg, imageUrl } = this.state;
+    const {
+      disabled,
+      nickname,
+      name,
+      age,
+      idNum,
+      areas,
+      errMsg,
+      imageUrl,
+      station
+    } = this.state;
     const RadioGroup = Radio.Group;
     const {
       initNickName,
       initName,
+      initAreaName,
       initMobile,
       initSex,
       initMySex,
@@ -218,6 +255,7 @@ export default class extends Component {
           <div className="font14 c333 w90 text-right">用户名:</div>
           <div className="w40" />
           <Input
+            disabled={disabled}
             placeholder="请输入您的昵称(最多11个字符)"
             size="large"
             className="w310"
@@ -231,6 +269,7 @@ export default class extends Component {
           <div className="font14 c333 w90 text-right">姓名:</div>
           <div className="w40" />
           <Input
+            disabled={disabled}
             placeholder="请输入您的真实姓名"
             size="large"
             className="w310"
@@ -246,14 +285,19 @@ export default class extends Component {
           <div className="w40" />
           <Cascader
             className="w310"
+            disabled={disabled}
             size="large"
-            placeholder="请选择"
+            placeholder={initAreaName || "请选择"}
             options={areas}
+            allowClear={false}
             loadData={this.loadAreaData}
             onChange={val => this.onAreaChange(val, "myArea")}
             changeOnSelect
           />
-          <div className="pl10 c-main font14">郑州站</div>
+          {station &&
+            station.name && (
+              <div className="pl10 c-main font14">{station.name}站</div>
+            )}
         </div>
 
         {/* 上传头像 */}
@@ -262,6 +306,7 @@ export default class extends Component {
           <div className="w40" />
           <Upload
             name="avatar"
+            disabled={disabled}
             listType="picture-card"
             className="w120 h120 font20"
             showUploadList={false}
