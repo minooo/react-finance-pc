@@ -17,6 +17,12 @@ export default class extends Component {
   componentWillUnmount() {
     clearInterval(this.tick);
   }
+  onClose = () => {
+    this.onErrMsg();
+  };
+  onErrMsg = msg => {
+    this.setState(() => ({ errMsg: msg }));
+  };
   // 获取输入数据
   onChange = (val, type) => {
     if (type === "captcha" || type === "code") {
@@ -34,6 +40,20 @@ export default class extends Component {
       const { checked } = val.target;
       this.setState(() => ({ isLongLogin: checked }));
     }
+  };
+  // 获取图形验证码
+  onImgCode = () => {
+    http
+      .callApi("auth/captcha", "get", null, null, { responseType: "blob" })
+      .then(response => {
+        const urlCreator = window.URL || window.webkitURL;
+        const imageUrl = urlCreator.createObjectURL(response);
+        this.setState(() => ({ logCode: imageUrl }));
+      })
+      .catch(err => {
+        message.error("网络错误，请稍后再试！");
+        console.info(err);
+      });
   };
   // 获取手机验证码
   onSendCode = async () => {
@@ -87,26 +107,6 @@ export default class extends Component {
         });
       }
     );
-  };
-  onClose = () => {
-    this.onErrMsg();
-  };
-  onErrMsg = msg => {
-    this.setState(() => ({ errMsg: msg }));
-  };
-  // 获取图形验证码
-  onImgCode = () => {
-    http
-      .callApi("auth/captcha", "get", null, null, { responseType: "blob" })
-      .then(response => {
-        const urlCreator = window.URL || window.webkitURL;
-        const imageUrl = urlCreator.createObjectURL(response);
-        this.setState(() => ({ logCode: imageUrl }));
-      })
-      .catch(err => {
-        message.error("网络错误，请稍后再试！");
-        console.info(err);
-      });
   };
   // 登录
   applyLoan = () => {
