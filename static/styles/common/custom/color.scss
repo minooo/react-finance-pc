@@ -43,6 +43,12 @@ $color-list: (
 .bg-light-yellow {
   background-color: #f8f3d4;
 }
+.bg-df {
+  background-color: #dfdfdf;
+}
+.c-a5 {
+  color: #a5a5a5;
+}
 .c-me-star {
   color: #ffbf17;
 }
@@ -84,4 +90,8 @@ input::placeholder {
 
 a:hover {
   color: #4c8dfc;
+}
+
+.hover-white:hover {
+  color: #fff;
 }

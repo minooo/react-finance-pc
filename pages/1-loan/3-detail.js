@@ -31,6 +31,7 @@ export default class extends Component {
     finalMoney: null
   };
   componentDidMount() {
+    if (!this.props.data) return
     const {
       data: { loan: { sum_start, timelimit, interest_rate } }
     } = this.props;
@@ -243,7 +244,7 @@ export default class extends Component {
                       <Input
                         className="font16 no-outline"
                         style={{ width: "234px" }}
-                        maxLength="9"
+                        maxLength="8"
                         addonBefore="贷款金额:"
                         addonAfter="元"
                         value={
@@ -315,7 +316,7 @@ export default class extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="ml30 font16">
+                    <div style={{ minWidth: "200px" }} className="ml30 font16">
                       <div className="flex ai-center">
                         <span className="loandetail-globule mr5 bg-main circle" />
                         <span>到账金额：</span>
@@ -486,7 +487,7 @@ export default class extends Component {
                 </div>
                 <WrapLink
                   href={data && data.loan && data.loan.external_links}
-                  as={data && data.loan && data.loan.external_links}
+                  as={data && data.loan.external_links && data.loan.external_links}
                   className="font18 bold c-white bg-main block h44 text-center r4"
                   style={{ width: "200px", lineHeight: "44px" }}
                 >
