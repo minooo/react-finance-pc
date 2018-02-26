@@ -1,22 +1,21 @@
 import Head from "next/head";
 import React from "react";
-import { Nav, HomeTop, Foot } from "@components"
+import { Nav, HomeTop, Foot, BackTop } from "@components";
 
 export default class extends React.Component {
   componentDidMount() {}
   render() {
     const { title, footNoShow, children, ...rest } = this.props;
     return (
-      <div className="bg-white" {...rest} >
+      <div className="bg-white" {...rest}>
         <Head>
           <title>{title}</title>
         </Head>
         <HomeTop />
         <Nav />
+        <BackTop />
         {children}
-        {
-          footNoShow ? null : <Foot />
-        }
+        {footNoShow ? null : <Foot />}
       </div>
     );
   }

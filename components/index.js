@@ -11,6 +11,7 @@ export { default as AlertBg } from "./0-13-AlertBg";
 export { default as Foot } from "./0-05-Foot";
 export { default as Ranking } from "./0-41-Ranking.js";
 export { default as NoData } from "./0-42-NoData.js";
+export { default as BackTop } from "./0-43-BackTop.js";
 // home
 export { default as HomeType } from "./1-00-Type";
 export { default as HomeOnlineLoans } from "./1-42-OnlineLoans";

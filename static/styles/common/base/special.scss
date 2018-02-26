@@ -51,7 +51,36 @@
 .opacity-half {
   opacity: 0.5;
 }
+.backtop-item{
+  background-color: #ddd;
+  color: #ababab;
+  margin-bottom: 2px;
+}
+.backtop-hover:hover{
+  background-color: #4c8dfc;
+  color: #fff;
+}
+.backtop-transition{
+  transition: all 10s
+}
+.visible{
+  visibility: visible;
+}
+.hidden{
+  visibility: hidden;
+}
+.qrcode-triangle::after {
+  width: 0;
+  height:0;
+  border:12px solid transparent;
+  border-left:12px solid #fff;
+  content: "";
+  display: block;
+  position: absolute;
+  top:112px;
+  right:-24px;
 
+}
 // home
 .home-top-city-bg {
   background: url("../../images/home_top_bg.png") 0 center no-repeat;
