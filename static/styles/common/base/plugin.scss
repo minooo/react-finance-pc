@@ -25,3 +25,14 @@
   font-size: 14px;
   color: #999;
 }
+.ant-input-disabled {
+  background-color: #f8f8f8;
+  color: #999;
+  border-color: #ddd;
+}
+
+.ant-select-disabled > .ant-select-selection {
+  border-color: #ddd;
+  background: #f8f8f8;
+  color: #999;
+}

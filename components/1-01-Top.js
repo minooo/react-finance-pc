@@ -39,7 +39,8 @@ export default class extends Component {
             郑州[切换]
           </WrapLink>
           <div className="flex ai-center">
-            <span style={{ marginRight: "70px" }}>客服热线：400-968-8821</span>
+            <span style={{ marginRight: "30px" }}>客服热线：400-968-8821</span>
+            <span style={{ marginRight: "35px" }}>招商热线：13253595612</span>
             {me ? (
               <Fragment>
                 <WrapLink

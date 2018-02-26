@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { message } from "antd";
 import Router from "next/router";
-import { http, cache } from "@utils";
-import { getUser, getUserOther } from "@actions";
+import { http } from "@utils";
+import { getUserOther } from "@actions";
 import reduxPage from "@reduxPage";
-import { MeSelection, MeFormOne, MeFormTwo } from "@components";
+import { MeSelection, MeFormTwo } from "@components";
 
 @reduxPage
-@connect(({ user, userOther }) => ({ user, userOther }), {
-  getUser,
+@connect(({ userOther }) => ({ userOther }), {
   getUserOther
 })
 export default class extends Component {
@@ -18,45 +17,33 @@ export default class extends Component {
     const { pathname } = ctx;
     return { pathname };
   }
-  state = { focus: 0, isLoading: false };
+  state = { isLoading: false, initDisabled: true };
   componentDidMount() {
-    const { getUser, getUserOther, user, userOther } = this.props;
-    if (!user || !userOther) {
+    const { getUserOther, userOther } = this.props;
+    if (!userOther) {
       http
-        .get("member/base_profile")
+        .get("member/other_profile")
         .then(response => {
           if (response.code === 200 && response.success) {
-            getUser(response.data);
-            http
-              .get("member/other_profile")
-              .then(response => {
-                if (response.code === 200 && response.success) {
-                  getUserOther(response.data);
-                } else {
-                  Router.replace({ pathname: "/4-me/1-login" }, "/login");
-                  message.error(response.msg || "抱歉，请求出错。");
-                }
-              })
-              .catch(() => {
-                Router.replace({ pathname: "/4-me/1-login" }, "/login");
-                message.error("抱歉，网络异常，请稍后再试！");
-              });
+            getUserOther(response.data);
           } else {
+            Router.replace({ pathname: "/4-me/1-login" }, "/login");
             message.error(response.msg || "抱歉，请求出错。");
           }
         })
         .catch(() => {
+          Router.replace({ pathname: "/4-me/1-login" }, "/login");
           message.error("抱歉，网络异常，请稍后再试！");
         });
     }
   }
-  onNextOne = param => {
-    this.goNext("base", param, 1);
-  };
   onNextTwo = param => {
-    this.goNext("other", param, 2);
+    this.goNext("other", param);
   };
-  goNext = (reqKey, param, step) => {
+  onEdit = () => {
+    this.setState(() => ({ initDisabled: false }));
+  };
+  goNext = (reqKey, param) => {
     this.setState(
       () => ({ isLoading: true }),
       () => {
@@ -65,12 +52,7 @@ export default class extends Component {
           .then(response => {
             this.setState(() => ({ isLoading: false }));
             if (response.code === 200 && response.success) {
-              if (step === 1) {
-                this.setState(() => ({ focus: 1 }));
-                cache.setItem("userName", param.username)
-              } else {
-                Router.push({ pathname: "/4-me/2-home" }, "/me");
-              }
+              message.success("资料保存成功");
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
@@ -83,42 +65,36 @@ export default class extends Component {
     );
   };
   render() {
-    const { focus, isLoading } = this.state;
-    const { pathname, user, userOther } = this.props;
+    const { isLoading, initDisabled } = this.state;
+    const { pathname, userOther } = this.props;
     return (
       <MeSelection pathname={pathname}>
         <div className="h50" />
-        {/* 第一步，基本信息 */}
-        {focus === 0 &&
-          user && (
-            <MeFormOne
-              initNickName={user.base.username || user.base.phone}
-              initName={user.base.name || user.base.phone}
-              initMobile={user.base.phone}
-              initSex={user.sex}
-              initMySex={user.base.sex}
-              initAge={user.base.age}
-              initIdNum={user.base.idNum}
-              initMarry={user.marital_status}
-              initMyMarry={user.base.marital_status}
-              initProvince={user.province}
-              isLoading={isLoading}
-              onNextOne={this.onNextOne}
-            />
-          )}
         {/* 第二步，其他信息 */}
-        {focus === 1 &&
-          userOther && (
-            <MeFormTwo
-              noapply="true"
-              initJob={userOther.identity_status}
-              initIncomeWay={userOther.income_mode}
-              initCredit={userOther.credit_condition}
-              initAsset={userOther.asset}
-              isLoading={isLoading}
-              onNextTwo={this.onNextTwo}
-            />
-          )}
+        {userOther && (
+          <MeFormTwo
+            noapply="true"
+            initJob={userOther.identity_status}
+            initMyJob={userOther.info.identity_status}
+            initIncomeWay={userOther.income_mode}
+            initMyIncomeWay={userOther.info.income_mode}
+            initMyMonthlyIncome={userOther.info.monthly_income}
+            initMyMonthlyTurnover={userOther.info.monthly_turnover}
+            initMyMonthlyBusinessAccountIncome={
+              userOther.info.monthly_business_account_income
+            }
+            initMyCashSettlementOperatingIncome={
+              userOther.info.cash_settlement_operating_income
+            }
+            initCredit={userOther.credit_condition}
+            initMyCredit={userOther.info.asset && userOther.info.asset.credit_condition}
+            initAsset={userOther.asset}
+            isLoading={isLoading}
+            initDisabled={initDisabled}
+            onEdit={this.onEdit}
+            onNextTwo={this.onNextTwo}
+          />
+        )}
       </MeSelection>
     );
   }

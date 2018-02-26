@@ -31,7 +31,7 @@ function beforeUpload(file) {
 }
 
 export default class extends Component {
-  state = { loading: false, disabled: true };
+  state = { loading: false, myArea: [] };
   componentDidMount() {
     this.initAreas();
   }
@@ -58,7 +58,7 @@ export default class extends Component {
     const len = val.length;
     const id = val[len - 1];
     const level = levelList[len - 1];
-    http.get("common/get_station", { id, level }).then(response => {
+    http.get("station/station_by_area_id", { id, level }).then(response => {
       if (response.code === 200 && response.success) {
         const { station } = response.data;
         this.setState(() => ({ station }));
@@ -83,6 +83,9 @@ export default class extends Component {
       initNickName,
       initName,
       initAge,
+      initAreaVal,
+      initAvatar,
+      initStationId,
       initIdNum,
       initSex,
       initMySex,
@@ -98,11 +101,11 @@ export default class extends Component {
       this.onErrMsg("请输入您的姓名，2-4字。");
       return;
     }
-    if (!myArea) {
+    if (!myArea && !initAreaVal[0]) {
       this.onErrMsg("请选择您的注册站点。");
       return;
     }
-    if (!imageUrl) {
+    if (!imageUrl && !initAvatar) {
       this.onErrMsg("请上传您的头像。");
       return;
     }
@@ -118,15 +121,15 @@ export default class extends Component {
     const param = {
       username: nickname || initNickName,
       name: name || initName,
-      avatar,
+      avatar: avatar || initAvatar,
       sex: sex || initMySex || initSex[0].id,
       age: age || initAge,
       idNum: idNum || initIdNum,
-      province_id: myArea[0],
-      city_id: myArea[1],
-      county_id: myArea[2],
+      province_id: myArea[0] ? myArea[0] : initAreaVal[0],
+      city_id: myArea[0] ? myArea[1] : initAreaVal[1],
+      county_id: myArea[0] ? myArea[2] : initAreaVal[2],
       marital_status: marry || initMyMarry || initMarry[0].id,
-      station_id: station.id
+      station_id: station ? station.id : initStationId
     };
 
     onNextOne(param);
@@ -191,31 +194,35 @@ export default class extends Component {
     if (info.file.status === "done") {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl =>
-        this.setState(() => ({
-          imageUrl,
-          loading: false
-        }), () => {
-          const index = imageUrl.indexOf("base64,") + 7
-          const url = imageUrl.substring(index)
-          http.post("common/upload_picture", { url }).then(response => {
-            if (response.code === 200 && response.success) {
-              const avatar = response.data.url
-              this.setState(() => ({ avatar }))
-            } else {
-              message.error(response.msg || "抱歉，请求异常，请稍后再试！");
-            }
-          })
-          .catch(err => {
-            message.error("网络错误，请稍后再试！");
-            console.info(err);
-          });
-        })
+        this.setState(
+          () => ({
+            imageUrl,
+            loading: false
+          }),
+          () => {
+            const index = imageUrl.indexOf("base64,") + 7;
+            const url = imageUrl.substring(index);
+            http
+              .post("common/upload_picture", { url })
+              .then(response => {
+                if (response.code === 200 && response.success) {
+                  const avatar = response.data.url;
+                  this.setState(() => ({ avatar }));
+                } else {
+                  message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+                }
+              })
+              .catch(err => {
+                message.error("网络错误，请稍后再试！");
+                console.info(err);
+              });
+          }
+        )
       );
     }
   };
   render() {
     const {
-      disabled,
       nickname,
       name,
       age,
@@ -230,6 +237,7 @@ export default class extends Component {
       initNickName,
       initName,
       initAreaName,
+      initAvatar,
       initMobile,
       initSex,
       initMySex,
@@ -237,6 +245,8 @@ export default class extends Component {
       initIdNum,
       initMarry,
       initMyMarry,
+      initDisabled,
+      onEdit,
       isLoading
     } = this.props;
     const uploadButton = (
@@ -248,6 +258,7 @@ export default class extends Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
+    const marryStatus = ["未婚", "已婚", "离异", "丧偶"];
     return (
       <div style={{ marginLeft: "140px" }}>
         {/* 用户名 */}
@@ -255,7 +266,7 @@ export default class extends Component {
           <div className="font14 c333 w90 text-right">用户名:</div>
           <div className="w40" />
           <Input
-            disabled={disabled}
+            disabled={initDisabled}
             placeholder="请输入您的昵称(最多11个字符)"
             size="large"
             className="w310"
@@ -269,7 +280,7 @@ export default class extends Component {
           <div className="font14 c333 w90 text-right">姓名:</div>
           <div className="w40" />
           <Input
-            disabled={disabled}
+            disabled={initDisabled}
             placeholder="请输入您的真实姓名"
             size="large"
             className="w310"
@@ -285,7 +296,7 @@ export default class extends Component {
           <div className="w40" />
           <Cascader
             className="w310"
-            disabled={disabled}
+            disabled={initDisabled}
             size="large"
             placeholder={initAreaName || "请选择"}
             options={areas}
@@ -306,7 +317,7 @@ export default class extends Component {
           <div className="w40" />
           <Upload
             name="avatar"
-            disabled={disabled}
+            disabled={initDisabled}
             listType="picture-card"
             className="w120 h120 font20"
             showUploadList={false}
@@ -314,8 +325,12 @@ export default class extends Component {
             beforeUpload={beforeUpload}
             onChange={this.handleChange}
           >
-            {imageUrl ? (
-              <img src={imageUrl} className="block w100 h100" alt="" />
+            {imageUrl || initAvatar ? (
+              <img
+                src={imageUrl || initAvatar}
+                className="block w100 h100"
+                alt=""
+              />
             ) : (
               uploadButton
             )}
@@ -326,17 +341,23 @@ export default class extends Component {
         <div className="flex ai-center mb30">
           <div className="font14 c333 w90 text-right">性别:</div>
           <div className="w40" />
-          <RadioGroup
-            onChange={val => this.onChange(val, "sex")}
-            value={this.state.sex || initMySex || initSex[0].id}
-            size="large"
-          >
-            {initSex.map(item => (
-              <Radio key={uuid()} value={item.id}>
-                {item.name}
-              </Radio>
-            ))}
-          </RadioGroup>
+          {initDisabled ? (
+            <div className="font14 c999">
+              {!initMySex || initMySex === 1 ? "男" : "女"}
+            </div>
+          ) : (
+            <RadioGroup
+              onChange={val => this.onChange(val, "sex")}
+              value={this.state.sex || initMySex || initSex[0].id}
+              size="large"
+            >
+              {initSex.map(item => (
+                <Radio key={uuid()} value={item.id}>
+                  {item.name}
+                </Radio>
+              ))}
+            </RadioGroup>
+          )}
         </div>
 
         {/* 年龄 */}
@@ -345,6 +366,7 @@ export default class extends Component {
           <div className="w40" />
           <Input
             placeholder="请输入您的年龄"
+            disabled={initDisabled}
             size="large"
             className="w310"
             value={age || age === "" ? age : initAge}
@@ -372,6 +394,7 @@ export default class extends Component {
           <div className="w40" />
           <Input
             placeholder="请输入您的真实身份证号"
+            disabled={initDisabled}
             size="large"
             className="w310"
             value={idNum || idNum === "" ? idNum : initIdNum}
@@ -384,17 +407,23 @@ export default class extends Component {
         <div className="flex ai-center mb30">
           <div className="font14 c333 w90 text-right">婚姻状况:</div>
           <div className="w40" />
-          <RadioGroup
-            onChange={val => this.onChange(val, "marry")}
-            value={this.state.marry || initMyMarry || initMarry[0].id}
-            size="large"
-          >
-            {initMarry.map(item => (
-              <Radio key={uuid()} value={item.id}>
-                {item.name}
-              </Radio>
-            ))}
-          </RadioGroup>
+          {initDisabled ? (
+            <div className="font14 c999">
+              {marryStatus[initMyMarry ? initMyMarry - 1 : 0]}
+            </div>
+          ) : (
+            <RadioGroup
+              onChange={val => this.onChange(val, "marry")}
+              value={this.state.marry || initMyMarry || initMarry[0].id}
+              size="large"
+            >
+              {initMarry.map(item => (
+                <Radio key={uuid()} value={item.id}>
+                  {item.name}
+                </Radio>
+              ))}
+            </RadioGroup>
+          )}
         </div>
 
         {errMsg && (
@@ -413,9 +442,9 @@ export default class extends Component {
           loading={isLoading}
           className="h40 font16 w220 r2"
           style={{ margin: "0 0 56px 130px" }}
-          onClick={this.onNextOne}
+          onClick={initDisabled ? onEdit : this.onNextOne}
         >
-          下一步
+          {initDisabled ? "编辑资料" : "提交保存"}
         </Button>
       </div>
     );
