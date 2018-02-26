@@ -12,7 +12,6 @@ export default class extends Component {
   componentDidMount() {
     window.onscroll = () => this.handleScroll();
   }
-
   handleScroll = () => {
     const scrollTop =
       window.pageYOffset ||
