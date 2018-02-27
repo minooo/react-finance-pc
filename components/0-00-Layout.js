@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import { getCookie, cache } from "@utils";
-import { Nav, HomeTop, Foot } from "@components";
+import { Nav, HomeTop, Foot, BackTop } from "@components";
 
 export default class extends React.Component {
   state = {};
@@ -29,6 +29,7 @@ export default class extends React.Component {
         </Head>
         <HomeTop me={me} />
         <Nav />
+        <BackTop />
         {children}
         {footNoShow ? null : <Foot />}
       </div>

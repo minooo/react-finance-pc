@@ -15,10 +15,13 @@ import {
 } from "@components";
 
 @reduxPage
-@connect(({ user, userOther }) => ({ user, userOther }), {
-  getUser,
-  getUserOther
-})
+@connect(
+  ({ user, userOther }) => ({ user, userOther }),
+  {
+    getUser,
+    getUserOther
+  }
+)
 export default class extends Component {
   state = {
     steps: ["基本信息", "其他信息", "申请成功"],
