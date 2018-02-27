@@ -206,36 +206,36 @@
   box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
 }
-.loandetail-banner-textshadow{
+.loandetail-banner-textshadow {
   text-shadow: 0px 5px 3px #438dff;
 }
-.loandetail-title{
-  box-shadow: 0 5px 15px 0 rgba(0,0,0,.05);
+.loandetail-title {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.05);
 }
-.loandetail-border-r{
-  border-right:1px dashed #dddddd;
+.loandetail-border-r {
+  border-right: 1px dashed #dddddd;
 }
-.loandetail-border-b{
-  border-bottom:1px dashed #dddddd;
+.loandetail-border-b {
+  border-bottom: 1px dashed #dddddd;
 }
-.loandetail-hot{
+.loandetail-hot {
   line-height: 34px;
 }
-.loandetail-hot:hover{
+.loandetail-hot:hover {
   box-shadow: 0px 3px 12px 0px rgba(76, 141, 252, 0.7);
   color: white;
   background-color: #4c8dfc;
   font-weight: bold;
 }
-.loandetail-right-icon{
+.loandetail-right-icon {
   width: 11px;
   height: 18px;
-  background-image: url('../../images/loan-right-icon.png')
+  background-image: url("../../images/loan-right-icon.png");
 }
-.loandetail-globule{
-    height: 12px;
-    display: block;
-    width: 12px;
+.loandetail-globule {
+  height: 12px;
+  display: block;
+  width: 12px;
 }
 .loan-apply-bg {
   background: url("../../images/loan_apply_bg.jpg") center top no-repeat;
@@ -388,7 +388,7 @@
   background: url("../../images/about_culture_value.png") right no-repeat;
 }
 .about-culture-bg {
-  background: url("../../images/about_culture_bg.jpg")  no-repeat;
+  background: url("../../images/about_culture_bg.jpg") no-repeat;
 }
 // 联系我们
 .about-contact-title {
@@ -442,101 +442,150 @@
   }
 }
 //app 下载
-.app-one-bg{
-  background-image: linear-gradient(180deg,
-		#3d66eb 1%,
-		#32beff 100%)
+.app-one-bg {
+  background-image: linear-gradient(180deg, #3d66eb 1%, #32beff 100%);
 }
-.app-phone-one{
+.app-phone-one {
   background-image: url("../../images/app_dl_phone1.png");
-  border-radius:32px;
-  box-shadow:-10px 0px 60px #3d66eb
+  border-radius: 32px;
+  box-shadow: -10px 0px 60px #3d66eb;
 }
-.app-phone-two{
+.app-phone-two {
   background-image: url("../../images/app_dl_phone2.png");
-  border-radius:32px;
-  box-shadow: 0px 0px 100px  #3d66eb
+  border-radius: 32px;
+  box-shadow: 0px 0px 100px #3d66eb;
 }
-.app-phone-three{
+.app-phone-three {
   background-image: url("../../images/app_dl_phone3.png");
-  border-radius:32px;
-  box-shadow: 0px 0px 100px  #d4eeff
+  border-radius: 32px;
+  box-shadow: 0px 0px 100px #d4eeff;
 }
-.app-phone-four{
+.app-phone-four {
   background-image: url("../../images/app_dl_phone4.png");
-  border-radius:32px;
-  box-shadow: 0px 0px 100px  #e5e5e5
+  border-radius: 32px;
+  box-shadow: 0px 0px 100px #e5e5e5;
 }
-.app-phone-five{
+.app-phone-five {
   background-image: url("../../images/app_dl_phone5.png");
-  border-radius:32px;
-  box-shadow: 0px 0px 100px  #edf8ff
+  border-radius: 32px;
+  box-shadow: 0px 0px 100px #edf8ff;
 }
-.app-mark-one{
-  background-image: url("../../images/app_dl_mark1.png")
+.app-mark-one {
+  background-image: url("../../images/app_dl_mark1.png");
 }
-.app-mark-two{
-  background-image: url("../../images/app_dl_mark2.png")
+.app-mark-two {
+  background-image: url("../../images/app_dl_mark2.png");
 }
-.app-mark-three{
-  background-image: url("../../images/app_dl_mark3.png")
+.app-mark-three {
+  background-image: url("../../images/app_dl_mark3.png");
 }
-.app-mark-four{
-  background-image: url("../../images/app_dl_mark4.png")
+.app-mark-four {
+  background-image: url("../../images/app_dl_mark4.png");
 }
-.app-banner-bg{
+.app-banner-bg {
   background-image: url("../../images/app_dl_foot-banner.png");
   background-size: cover;
 }
-.app-logo{
+.app-logo {
   background-image: url("../../images/app_dl_logo.png");
 }
-.app-logo-bs{
+.app-logo-bs {
   border-radius: 20px;
-  box-shadow: 0px 0px 25px 0px
-		rgba(61, 128, 249, 0.5);
+  box-shadow: 0px 0px 25px 0px rgba(61, 128, 249, 0.5);
 }
-.app-common-bs{
-  box-shadow: 0px 0px 100px 0px
-		#edf8ff;
+.app-common-bs {
+  box-shadow: 0px 0px 100px 0px #edf8ff;
 }
 // me
-.me-icon-1{
+.me-icon-1 {
   width: 15px;
   height: 18px;
   background-image: url("../../images/me_data_icon.png");
   background-repeat: no-repeat;
 }
-.me-icon-2{
+.me-icon-2 {
   width: 16px;
   height: 18px;
   background-image: url("../../images/me_apply_icon.png");
   background-repeat: no-repeat;
 }
-.me-icon-3{
+.me-icon-3 {
   width: 18px;
   height: 18px;
   background-image: url("../../images/me_message_icon.png");
   background-repeat: no-repeat;
 }
-.me-border-left{
-display: block;
-width: 4px;
-height: 56px;
-background-color: #4c8dfc;
-border-radius: 0px 2px 2px 0px;
-position: absolute;
-left: 0px;
+.me-border-left {
+  display: block;
+  width: 4px;
+  height: 56px;
+  background-color: #4c8dfc;
+  border-radius: 0px 2px 2px 0px;
+  position: absolute;
+  left: 0px;
 }
-.me-loanapply-border-tlr{
+.me-loanapply-border-tlr {
   border-top: 1px solid #f2f2f2;
   border-left: 1px solid #f2f2f2;
 }
 
 // login
-.me-login-banner{
+.me-login-banner {
   background: url("../../images/me_login_banner.jpg") center no-repeat;
 }
-.login-img-code{
-  cursor:pointer;
+.login-img-code {
+  cursor: pointer;
+}
+// city
+.city-head-bg {
+  height: 137px;
+  background: url("../../images/city_head_bg.png") right no-repeat;
+}
+.city-hot-icon {
+  margin-top: 35px;
+  background-image: url("../../images/city_icon.png");
+  background-repeat: no-repeat;
+}
+.city-serial {
+  background-color: #f5f5f5;
+  border: 1px solid #eee;
+  border-bottom: 1px solid #f5f5f5;
+  position: relative;
+  &:after {
+    position: absolute;
+    top: calc(50% - 10px);
+    right: -15px;
+    content: "";
+    border: 10px solid transparent;
+    border-left: 10px solid #4c8dfc;
+    display: none;
+  }
+}
+.city-item {
+  padding: 12px 38px 0 0;
+  border: 1px solid #eee;
+  border-bottom: 1px solid #fff;
+}
+.city-item button:hover{
+  color: #4c8dfc;
+}
+.city-list {
+  &:hover .city-serial {
+    color: #fff;
+    border: 1px solid #4c8dfc;
+    background-color: #4c8dfc;
+  }
+  &:hover .city-serial::after {
+    display: block;
+  }
+  &:hover .city-item {
+    border: 1px solid #f5f5f5;
+    background-color: #f5f5f5;
+  }
+  &:last-child .city-item{
+    border-bottom: 1px solid #eee;
+  }
+  &:last-child .city-serial{
+    border-bottom: 1px solid #eee;
+  }
 }

@@ -82,7 +82,7 @@ app.prepare().then(() => {
   server.use(router.get("/me/card-apply", ctx => renderAndCache(ctx, "/4-me/5-card-apply")));
   server.use(router.get("/me/system-message", ctx => renderAndCache(ctx, "/4-me/6-system-message")));
   server.use(router.get("/me/apply-message", ctx => renderAndCache(ctx, "/4-me/7-apply-message")));
-
+  server.use(router.get("/city", ctx => renderAndCache(ctx, "/city")));
 
   server.use(async ctx => {
       await handle(ctx.req, ctx.res);
