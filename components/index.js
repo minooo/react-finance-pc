@@ -48,6 +48,7 @@ export { default as NewList } from "./4-22-NewList";
 // me 5
 export { default as MeFormOne } from "./5-00-FormOne";
 export { default as MeFormTwo } from "./5-01-FormTwo";
+export { default as MeMessageList } from "./5-21-MessageList";
 export { default as MeSelection } from "./5-41-Selection";
 export { default as MeloanApplyList } from "./5-42-LoanApplyList";
 export { default as MeLoanAlert } from "./5-43-LoanAlert";
