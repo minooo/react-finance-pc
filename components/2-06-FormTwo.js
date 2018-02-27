@@ -37,7 +37,7 @@ export default class extends Component {
       credit,
       assetParam
     } = this.state;
-    const { initCredit, onNextTwo } = this.props;
+    const { initCredit, onNextTwo, noapply } = this.props;
     let jobParam = {};
 
     if (!job) {
@@ -98,7 +98,7 @@ export default class extends Component {
       identity_status: job,
       ...jobParam,
       credit_condition: credit || initCredit[0].id,
-      apply_loan_action: 1,
+      ...(!noapply && { apply_loan_action: 1 }),
       ...assetParam
     };
 
@@ -124,12 +124,13 @@ export default class extends Component {
       initIncomeWay,
       initCredit,
       initAsset,
-      isLoading
+      isLoading,
+      noapply
     } = this.props;
     const { Option } = Select;
     const RadioGroup = Radio.Group;
     return (
-      <div style={{ marginLeft: "290px" }}>
+      <div style={{ marginLeft: noapply ? "120px" : "290px" }}>
         {/* 职业身份 */}
         <div className="flex ai-center mb30">
           <div className="font14 c333 w110 text-right">职业身份:</div>

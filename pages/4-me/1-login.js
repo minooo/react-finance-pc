@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Router from "next/router";
 import { Input, Button, Checkbox, message, Alert } from "antd";
 import { Layout, WrapLink, Btn } from "@components";
-import { http, isMobile, setCookie, searchToObj } from "@utils";
+import { http, isMobile, setCookie, cache, searchToObj } from "@utils";
 
 export default class extends Component {
   state = {
@@ -126,30 +126,29 @@ export default class extends Component {
       this.onErrMsg("请输入手机验证码。");
       return;
     }
-    this.setState(
-      () => ({ isLoading: true }),
-      () => {
-        http
-          .post("/auth/sign", { phone: mobile, code, captcha })
-          .then(response => {
-            this.setState(() => ({ isLoading: false }));
-            if (response.code === 200 && response.success) {
-              const { token } = response.data;
-              setCookie("token", token, !isLongLogin && 1);
-              Router.push(
-                { pathname: (query && query.href) || "/4-me/2-home" },
-                (query && query.as) || "/me"
-              );
-            } else {
-              message.error(response.msg || "抱歉，请求异常，请稍后再试！");
-            }
-          })
-          .catch(err => {
-            message.error("网络错误，请稍后再试！");
-            console.info(err);
-          });
-      }
-    );
+    this.setState(() => ({ isLoading: true }), () => {
+      http
+      .post("/auth/sign", { phone: mobile, code, captcha })
+      .then(response => {
+        this.setState(() => ({ isLoading: false }))
+        if (response.code === 200 && response.success) {
+          const { token } = response.data;
+          const time = isLongLogin ? 29 : 1
+          setCookie("token", token, time);
+          cache.setItem("userPhone", mobile)
+          Router.push(
+            { pathname: (query && query.href) || "/4-me/2-home" },
+            (query && query.as) || "/me"
+          );
+        } else {
+          message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+        }
+      })
+      .catch(err => {
+        message.error("网络错误，请稍后再试！");
+        console.info(err);
+      });
+    })
   };
   render() {
     const {

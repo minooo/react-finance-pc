@@ -25,12 +25,10 @@ export default class extends Component {
   static async getInitialProps(ctx) {
     // err req res pathname query asPath isServer
     const { store, isServer, asPath } = ctx;
-
     if (!store.getState().loansHome) {
       try {
-        const loansHomeFetch = await http.get("loans/index", null, isServer);
-        const loansHomeData = loansHomeFetch.data;
-        store.dispatch(getLoansHome(loansHomeData));
+        const { data } = await http.get("loans/index", null, isServer);
+        store.dispatch(getLoansHome(data));
       } catch (error) {
         const err = util.inspect(error);
         return { err };
