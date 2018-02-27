@@ -7,6 +7,9 @@ export default class extends Component {
   state = {
     assetParam: {}
   };
+  componentDidMount() {
+    this.initAsset();
+  }
   onChange = (val, type) => {
     if (type === "credit") {
       const { value } = val.target;
@@ -24,7 +27,7 @@ export default class extends Component {
       this.setState(() => ({ [type]: val }));
     }
     if (type === "job") {
-      this.setState(() => ({ [type]: val, jobChange: true }))
+      this.setState(() => ({ [type]: val, jobChange: true }));
     }
   };
 
@@ -137,7 +140,10 @@ export default class extends Component {
   onErrMsg = msg => {
     this.setState(() => ({ errMsg: msg }));
   };
-
+  initAsset = () => {
+    const { initMyAsset } = this.props;
+    this.setState(() => ({ assetParam: initMyAsset }));
+  };
   render() {
     const { errMsg, credit, job, jobChange } = this.state;
     const {
@@ -221,10 +227,12 @@ export default class extends Component {
                 size="large"
                 addonAfter="元"
                 value={
-                  this.state[`income${job}1`] ||
-                  (initMyJob === 2
-                    ? initMyMonthlyTurnover
-                    : initMyMonthlyBusinessAccountIncome)
+                  jobChange
+                    ? this.state[`income${job}1`]
+                    : this.state[`income${job}1`] ||
+                      (initMyJob === 2
+                        ? initMyMonthlyTurnover
+                        : initMyMonthlyBusinessAccountIncome)
                 }
                 maxLength="8"
                 onChange={val => this.onChange(val, `income${job}1`)}
@@ -234,46 +242,48 @@ export default class extends Component {
         )}
 
         {/* 月收入 */}
-        {(job || (!jobChange && initMyJob)) &&
-          (job !== 3 || (!jobChange && initMyJob !== 3)) && (
-            <div className="flex ai-center mb30">
-              <div className="font14 c333 w110 text-right">
-                {job === 1 ||
-                (!jobChange && initMyJob === 1) ||
-                (job === 4 || (!jobChange && initMyJob === 4))
-                  ? "月收入"
-                  : "月现金结算流水"}:
-              </div>
-              <div className="w40" />
-              <div className="w310">
-                <Input
-                  placeholder="请输入..."
-                  disabled={initDisabled}
-                  size="large"
-                  addonAfter="元"
-                  value={
-                    this.state[`income${job === 1 || job === 4 ? "" : 1}`] ||
-                    (initMyJob === 1 || initMyJob === 4
-                      ? initMyMonthlyIncome
-                      : initMyCashSettlementOperatingIncome)
-                  }
-                  maxLength="8"
-                  onChange={val =>
-                    this.onChange(
-                      val,
-                      `income${
-                        job === 1 ||
-                        (!jobChange && initMyJob === 1) ||
-                        (job === 4 || (!jobChange && initMyJob === 4))
-                          ? ""
-                          : 1
-                      }`
-                    )
-                  }
-                />
-              </div>
+        {((job && job !== 3) ||
+          (!jobChange && initMyJob && initMyJob !== 3)) && (
+          <div className="flex ai-center mb30">
+            <div className="font14 c333 w110 text-right">
+              {job === 1 ||
+              (!jobChange && initMyJob === 1) ||
+              (job === 4 || (!jobChange && initMyJob === 4))
+                ? "月收入"
+                : "月现金结算流水"}:
             </div>
-          )}
+            <div className="w40" />
+            <div className="w310">
+              <Input
+                placeholder="请输入..."
+                disabled={initDisabled}
+                size="large"
+                addonAfter="元"
+                value={
+                  jobChange
+                    ? this.state[`income${job === 1 || job === 4 ? "" : 1}`]
+                    : this.state[`income${job === 1 || job === 4 ? "" : 1}`] ||
+                      (initMyJob === 1 || initMyJob === 4
+                        ? initMyMonthlyIncome
+                        : initMyCashSettlementOperatingIncome)
+                }
+                maxLength="8"
+                onChange={val =>
+                  this.onChange(
+                    val,
+                    `income${
+                      job === 1 ||
+                      (!jobChange && initMyJob === 1) ||
+                      (job === 4 || (!jobChange && initMyJob === 4))
+                        ? ""
+                        : 1
+                    }`
+                  )
+                }
+              />
+            </div>
+          </div>
+        )}
 
         {/* 信用情况 */}
         <div className="flex mb15">
@@ -281,7 +291,11 @@ export default class extends Component {
           <div className="w40 equal-no" />
           {initDisabled ? (
             <div className="font14 c999">
-              {initCredit[initMyCredit ? initMyCredit - 1 : 0].name}
+              {
+                initCredit[
+                  credit ? credit - 1 : initMyCredit ? initMyCredit - 1 : 0
+                ].name
+              }
             </div>
           ) : (
             <RadioGroup
@@ -308,7 +322,13 @@ export default class extends Component {
             资产情况:
           </div>
           <div className="w40" />
-          <div style={{ width: "430px" }} className="flex wrap">
+          <div style={{ width: "430px" }} className="flex wrap relative">
+            {initDisabled && (
+              <div
+                className="absolute-full z-index10"
+                style={{ background: "rgba(255, 255, 255, .5" }}
+              />
+            )}
             {initAsset.map(item => (
               <Btn
                 key={uuid()}

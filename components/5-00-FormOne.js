@@ -229,6 +229,8 @@ export default class extends Component {
       idNum,
       areas,
       errMsg,
+      marry,
+      sex,
       imageUrl,
       station
     } = this.state;
@@ -258,7 +260,6 @@ export default class extends Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    const marryStatus = ["未婚", "已婚", "离异", "丧偶"];
     return (
       <div style={{ marginLeft: "140px" }}>
         {/* 用户名 */}
@@ -343,7 +344,7 @@ export default class extends Component {
           <div className="w40" />
           {initDisabled ? (
             <div className="font14 c999">
-              {!initMySex || initMySex === 1 ? "男" : "女"}
+              {initSex[sex ? sex - 1 : initMySex ? initMySex - 1 : 0].name}
             </div>
           ) : (
             <RadioGroup
@@ -409,7 +410,7 @@ export default class extends Component {
           <div className="w40" />
           {initDisabled ? (
             <div className="font14 c999">
-              {marryStatus[initMyMarry ? initMyMarry - 1 : 0]}
+              {initMarry[marry ? marry - 1 : initMyMarry ? initMyMarry - 1 : 0].name}
             </div>
           ) : (
             <RadioGroup

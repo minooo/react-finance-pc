@@ -15,9 +15,9 @@ function areaToStr(a, b, c) {
 }
 
 function areaToArr(a, b, c) {
-  const arr = []
-  arr.push(a, b, c)
-  return arr
+  const arr = [];
+  arr.push(a, b, c);
+  return arr;
 }
 
 @reduxPage
@@ -32,30 +32,17 @@ export default class extends Component {
   }
   state = { isLoading: false, initDisabled: true };
   componentDidMount() {
-    const { getUser, user } = this.props;
+    const { user } = this.props;
     if (!user) {
-      http
-        .get("member/base_profile")
-        .then(response => {
-          if (response.code === 200 && response.success) {
-            getUser(response.data);
-          } else {
-            Router.replace({ pathname: "/4-me/1-login" }, "/login");
-            message.error(response.msg || "抱歉，请求出错。");
-          }
-        })
-        .catch(() => {
-          Router.replace({ pathname: "/4-me/1-login" }, "/login");
-          message.error("抱歉，网络异常，请稍后再试！");
-        });
+      this.initData()
     }
   }
   onNextOne = param => {
     this.goNext("base", param);
   };
   onEdit = () => {
-    this.setState(() => ({ initDisabled: false }))
-  }
+    this.setState(() => ({ initDisabled: false }));
+  };
   goNext = (reqKey, param) => {
     this.setState(
       () => ({ isLoading: true, initDisabled: true }),
@@ -67,6 +54,7 @@ export default class extends Component {
             if (response.code === 200 && response.success) {
               message.success("资料保存成功");
               cache.setItem("userName", param.username);
+              this.initData()
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
@@ -77,6 +65,22 @@ export default class extends Component {
           });
       }
     );
+  };
+  initData = () => {
+    const { getUser } = this.props;
+    http
+      .get("member/base_profile")
+      .then(response => {
+        if (response.code === 200 && response.success) {
+          getUser(response.data);
+        } else {
+          Router.replace({ pathname: "/4-me/1-login" }, "/login");
+        }
+      })
+      .catch(() => {
+        Router.replace({ pathname: "/4-me/1-login" }, "/login");
+        message.error("抱歉，网络异常，请稍后再试！");
+      });
   };
   render() {
     const { isLoading, initDisabled } = this.state;

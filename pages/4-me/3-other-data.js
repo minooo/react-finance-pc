@@ -19,22 +19,9 @@ export default class extends Component {
   }
   state = { isLoading: false, initDisabled: true };
   componentDidMount() {
-    const { getUserOther, userOther } = this.props;
+    const { userOther } = this.props;
     if (!userOther) {
-      http
-        .get("member/other_profile")
-        .then(response => {
-          if (response.code === 200 && response.success) {
-            getUserOther(response.data);
-          } else {
-            Router.replace({ pathname: "/4-me/1-login" }, "/login");
-            message.error(response.msg || "抱歉，请求出错。");
-          }
-        })
-        .catch(() => {
-          Router.replace({ pathname: "/4-me/1-login" }, "/login");
-          message.error("抱歉，网络异常，请稍后再试！");
-        });
+      this.initData();
     }
   }
   onNextTwo = param => {
@@ -45,7 +32,7 @@ export default class extends Component {
   };
   goNext = (reqKey, param) => {
     this.setState(
-      () => ({ isLoading: true }),
+      () => ({ isLoading: true, initDisabled: true }),
       () => {
         http
           .post(`member/${reqKey}_profile`, param)
@@ -53,6 +40,7 @@ export default class extends Component {
             this.setState(() => ({ isLoading: false }));
             if (response.code === 200 && response.success) {
               message.success("资料保存成功");
+              this.initData()
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
@@ -63,6 +51,22 @@ export default class extends Component {
           });
       }
     );
+  };
+  initData = () => {
+    const { getUserOther } = this.props;
+    http
+      .get("member/other_profile")
+      .then(response => {
+        if (response.code === 200 && response.success) {
+          getUserOther(response.data);
+        } else {
+          Router.replace({ pathname: "/4-me/1-login" }, "/login");
+        }
+      })
+      .catch(() => {
+        Router.replace({ pathname: "/4-me/1-login" }, "/login");
+        message.error("抱歉，网络异常，请稍后再试！");
+      });
   };
   render() {
     const { isLoading, initDisabled } = this.state;
@@ -87,8 +91,11 @@ export default class extends Component {
               userOther.info.cash_settlement_operating_income
             }
             initCredit={userOther.credit_condition}
-            initMyCredit={userOther.info.asset && userOther.info.asset.credit_condition}
+            initMyCredit={
+              userOther.info.asset && userOther.info.asset.credit_condition
+            }
             initAsset={userOther.asset}
+            initMyAsset={userOther.info.asset}
             isLoading={isLoading}
             initDisabled={initDisabled}
             onEdit={this.onEdit}
