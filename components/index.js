@@ -11,7 +11,9 @@ export { default as AlertBg } from "./0-13-AlertBg";
 export { default as Foot } from "./0-05-Foot";
 export { default as Ranking } from "./0-41-Ranking.js";
 export { default as NoData } from "./0-42-NoData.js";
-// home
+export { default as BackTop } from "./0-43-BackTop.js";
+
+// home 1
 export { default as HomeType } from "./1-00-Type";
 export { default as HomeOnlineLoans } from "./1-42-OnlineLoans";
 export { default as HomeCityselection } from "./1-43-Cityselection";
@@ -24,7 +26,8 @@ export { default as HomeCardLink } from "./1-04-CardLink";
 export { default as HomeHotCard } from "./1-05-HotCard";
 export { default as HomeHotNew } from "./1-06-HotNew";
 export { default as HomeHotCardBox } from "./1-21-HotCardBox.js";
-// loan
+
+// loan 2
 export { default as LoanSelect } from "./2-00-Select";
 export { default as LoanCityFilter } from "./2-01-CityFilter";
 export { default as LoanList } from "./2-02-List";
@@ -34,15 +37,18 @@ export { default as LoanFormOne } from "./2-05-FormOne";
 export { default as LoanFormTwo } from "./2-06-FormTwo";
 export { default as LoanFormThree } from "./2-07-FormThree";
 
-// card
+// card 3
 export { default as CardList } from "./3-00-List";
 export { default as CardRank } from "./3-41-Rank";
-// new
+
+// new 4
 export { default as NewTypeLink } from "./4-21-TypeLink";
 export { default as NewList } from "./4-22-NewList";
 
-// me
-export { default as MeSelection } from "./5-41-Selection.js";
-export { default as MeloanApplyList } from "./5-42-LoanApplyList.js";
-export { default as MeLoanAlert } from "./5-43-LoanAlert.js";
-export { default as MeLoanAlertItem } from "./5-44-LoanAlertItem.js"
+// me 5
+export { default as MeFormOne } from "./5-00-FormOne";
+export { default as MeFormTwo } from "./5-01-FormTwo";
+export { default as MeSelection } from "./5-41-Selection";
+export { default as MeloanApplyList } from "./5-42-LoanApplyList";
+export { default as MeLoanAlert } from "./5-43-LoanAlert";
+export { default as MeLoanAlertItem } from "./5-44-LoanAlertItem";

@@ -535,7 +535,7 @@ export default class extends Component {
             </WrapLink>
           </div>
           <div className="font12 mt15 c-white w-100 text-center">
-            Copyright&nbsp;2018&nbsp;&nbsp;河南晨隆金融服务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;豫ICP备13439999号-2
+            Copyright&nbsp;2014&nbsp;&nbsp;河南晨隆金融服务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;豫ICP备14012584号-3
           </div>
         </div>
       </Layout>

@@ -1,22 +1,37 @@
 import Head from "next/head";
 import React from "react";
-import { Nav, HomeTop, Foot } from "@components"
+import { getCookie, cache } from "@utils";
+import { Nav, HomeTop, Foot, BackTop } from "@components";
 
 export default class extends React.Component {
-  componentDidMount() {}
+  state = {};
+  componentDidMount() {
+    const token = getCookie("token");
+    const userPhone = cache.getItem("userPhone");
+    const userName = cache.getItem("userName");
+    if (token) {
+      if (userName) {
+        // eslint-disable-next-line
+        this.setState(() => ({ me: userName }));
+      } else {
+        // eslint-disable-next-line
+        this.setState(() => ({ me: userPhone }));
+      }
+    }
+  }
   render() {
+    const { me } = this.state
     const { title, footNoShow, children, ...rest } = this.props;
     return (
-      <div className="bg-white" {...rest} >
+      <div className="bg-white" {...rest}>
         <Head>
           <title>{title}</title>
         </Head>
-        <HomeTop />
+        <HomeTop me={me} />
         <Nav />
+        <BackTop />
         {children}
-        {
-          footNoShow ? null : <Foot />
-        }
+        {footNoShow ? null : <Foot />}
       </div>
     );
   }

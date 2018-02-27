@@ -26,11 +26,11 @@ const util = require("util");
 export default class extends Component {
   static async getInitialProps(ctx) {
     // err req res pathname query asPath isServer
-    const { store, isServer, asPath } = ctx;
+    const { store, req, asPath } = ctx;
 
     if (!store.getState().home) {
       try {
-        const homeFetch = await http.get("home", null, isServer);
+        const homeFetch = await http.get("home", null, !!req);
         const homeData = homeFetch.data;
         store.dispatch(getHome(homeData));
       } catch (error) {

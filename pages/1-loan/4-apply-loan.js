@@ -15,10 +15,13 @@ import {
 } from "@components";
 
 @reduxPage
-@connect(({ user, userOther }) => ({ user, userOther }), {
-  getUser,
-  getUserOther
-})
+@connect(
+  ({ user, userOther }) => ({ user, userOther }),
+  {
+    getUser,
+    getUserOther
+  }
+)
 export default class extends Component {
   state = {
     steps: ["基本信息", "其他信息", "申请成功"],
@@ -40,15 +43,13 @@ export default class extends Component {
     isLoading: false,
     focus: 0
   };
-  componentWillMount() {
-    const { url: { query, replace } } = this.props
+  componentDidMount() {
+    const { getUser, getUserOther, user, userOther, url: { query, replace } } = this.props;
     if (!query || !query.mobile) {
       replace({ pathname: "/index" }, "/")
     }
-  }
-  componentDidMount() {
-    const { getUser, getUserOther } = this.props;
-    http
+    if (!user || !userOther) {
+      http
       .get("member/base_profile")
       .then(response => {
         if (response.code === 200 && response.success) {
@@ -72,6 +73,7 @@ export default class extends Component {
       .catch(() => {
         message.error("抱歉，网络异常，请稍后再试！");
       });
+    }
   }
   onNextOne = param => {
     this.goNext("base", param, 1);
