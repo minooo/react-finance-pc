@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Router from "next/router";
 import { Input, Button, Checkbox, message, Alert } from "antd";
 import { Layout, WrapLink, Btn } from "@components";
-import { http, isMobile, setCookie, searchToObj } from "@utils";
+import { http, isMobile, setCookie, cache, searchToObj } from "@utils";
 
 export default class extends Component {
   state = {
@@ -133,7 +133,9 @@ export default class extends Component {
         this.setState(() => ({ isLoading: false }))
         if (response.code === 200 && response.success) {
           const { token } = response.data;
-          setCookie("token", token, !isLongLogin && 1);
+          const time = isLongLogin ? 29 : 1
+          setCookie("token", token, time);
+          cache.setItem("userPhone", mobile)
           Router.push(
             { pathname: (query && query.href) || "/4-me/2-home" },
             (query && query.as) || "/me"
