@@ -5,7 +5,7 @@ export default ({ ver, hor, btnClass, path, icoClass, con, ...rest }) => (
     path={path}
     className={`${btnClass || ""} relative ${
       ver || hor ? "flex jc-center ai-center" : ""
-    } ${ver ? "column" : ""}`} // eslint-disable-line
+    } ${ver ? "column" : ""}`}
     {...rest}
   >
     {icoClass && <i className={icoClass} />}

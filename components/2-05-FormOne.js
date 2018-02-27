@@ -15,7 +15,6 @@ export default class extends Component {
     }
     if (
       type === "money" ||
-      type === "mobile" ||
       type === "age" ||
       type === "idNum"
     ) {
@@ -234,9 +233,8 @@ export default class extends Component {
             disabled
             size="large"
             className="w310"
-            value={initMobile || 13603983223}
+            value={initMobile}
             maxLength="11"
-            onChange={val => this.onChange(val, "mobile")}
           />
         </div>
 
