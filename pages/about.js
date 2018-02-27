@@ -286,9 +286,9 @@ export default class extends Component {
                   <a
                     key={uuid()}
                     style={{ target: "_blank" }}
-                    href="http://wpa.qq.com/msgrd?v=3&uin=506340225&site=qq&menu=yes"
+                    href="tencent://message/?uin=2712219568&amp;Site=sc.chinaz.com&amp;Menu=yes"
                   >
-                    QQ:506340225
+                    QQ:2712219568
                   </a>
                 </div>
                 <div key={uuid()} className="about-contact-list">
@@ -307,9 +307,9 @@ export default class extends Component {
                   <a
                     key={uuid()}
                     style={{ target: "_blank" }}
-                    href="http://wpa.qq.com/msgrd?v=3&uin=506340225&site=qq&menu=yes"
+                    href="tencent://message/?uin=2712219568&amp;Site=sc.chinaz.com&amp;Menu=yes"
                   >
-                    QQ:506340225
+                    QQ:2712219568
                   </a>
                   点击号码即可申请加入
                   我们会在两个自然工作日内尽快与您联系。为提高合作效率，不接受电话来访，客服热线无法转接。感谢您的配合!
