@@ -564,7 +564,7 @@
     border-radius: 50%;
     position: absolute;
     left: 0;
-    top:6px;
+    top: 6px;
   }
 }
 // login
@@ -572,6 +572,11 @@
   background: url("../../images/me_login_banner.jpg") center no-repeat;
 }
 .login-img-code {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
   cursor: pointer;
 }
 

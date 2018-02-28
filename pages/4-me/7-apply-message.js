@@ -9,9 +9,6 @@ export default class extends Component {
     const { pathname } = ctx;
     return { pathname };
   }
-  state = {
-    message: null
-  };
   componentDidMount() {
     this.onMessageData();
   }
@@ -36,7 +33,6 @@ export default class extends Component {
   };
   render() {
     const { pathname } = this.props;
-    const { message } = this.state;
     return (
       <MeSelection pathname={pathname}>
         {message && message.length > 0 ? (
