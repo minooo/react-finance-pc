@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Input, Select } from "antd";
 import Router from "next/router";
+import QRCode from "qrcode-react";
 import uuid from "uuid/v4";
 import {
   http,
@@ -8,6 +9,7 @@ import {
   arrToDateString,
   arrToArr,
   clipBigNum,
+  getCookie,
   fee
 } from "@utils";
 import {
@@ -38,7 +40,7 @@ export default class extends Component {
     finalMoney: null
   };
   componentDidMount() {
-    if (!this.props.data) return;
+    if (!this.props.data || !this.props.data.loan) return;
     const {
       data: { loan: { sum_start, timelimit, interest_rate } }
     } = this.props;
@@ -78,10 +80,30 @@ export default class extends Component {
     }
     this.setState(() => ({ finalMoney: finalVal, moneyVal: finalVal }));
   };
-  onApply = (type, url, id, start, end) => {
+  onApply = (type, url, id, name, start, end) => {
+    const { url: { pathname, asPath } } = this.props;
     // type 2 同城  1 极速
     if (type === 2) {
-      Router.push({ pathname: "/1-loan/5-city-apply-loan", query: { id, start, end } }, "/loan/city")
+      Router.push(
+        {
+          pathname: "/1-loan/5-city-apply-loan",
+          query: { id, name, start, end }
+        },
+        "/loan/city"
+      );
+    }
+    if (type === 1) {
+      if (getCookie("token")) {
+        this.setState(() => ({ showQrcode: true }));
+      } else {
+        Router.push(
+          {
+            pathname: "/4-me/1-login",
+            query: { href: pathname, as: asPath, id }
+          },
+          "/login"
+        );
+      }
     }
   };
   setMyOption = (fee, total) => ({
@@ -123,7 +145,7 @@ export default class extends Component {
     ]
   });
   render() {
-    const { selectValue, moneyVal, finalMoney } = this.state;
+    const { selectValue, moneyVal, finalMoney, showQrcode } = this.state;
     const { data, err } = this.props;
     const { Option } = Select;
     if (err) {
@@ -506,7 +528,8 @@ export default class extends Component {
                   咨询电话：{(data && data.loan && data.loan.customer_tel) ||
                     "暂无信息"}
                 </div>
-                {data &&
+                {!showQrcode &&
+                  data &&
                   data.loan &&
                   data.loan.category && (
                     <Btn
@@ -518,12 +541,31 @@ export default class extends Component {
                           data.loan.category,
                           data.loan.external_links,
                           data.loan.id,
+                          data.loan.name,
                           data.loan.sum_start,
                           data.loan.sum_end
                         )
                       }
                     />
                   )}
+                {showQrcode &&
+                  data &&
+                  data.loan &&
+                  data.loan.external_links && (
+                    <QRCode
+                      value={data.loan.external_links}
+                      logo="http://public.duduapp.net/finance/pc-static/img/qrcode_ico.png"
+                      logoWidth={34}
+                    />
+                  )}
+                {showQrcode && (
+                  <div
+                    style={{ width: "128px" }}
+                    className="c333 font18 text-center mt10"
+                  >
+                    立即扫码申请
+                  </div>
+                )}
                 <div className="h50" />
               </div>
               <div className="h60" />

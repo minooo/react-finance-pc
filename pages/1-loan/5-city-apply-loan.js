@@ -10,7 +10,7 @@ import {
   Layout,
   LoanStep,
   LoanTip,
-  LoanFormOne,
+  LoanCityFormOne,
   LoanFormThree
 } from "@components";
 
@@ -132,9 +132,12 @@ export default class extends Component {
             }}
             className="loan-apply-con-bg flex ai-center jc-center column"
           >
-            <div className="font46 bold c333 mb20">快速申请贷款</div>
+            <div className="font20">您正在申请</div>
+            <div className="font46 bold c333 mb20">
+              {query && query.name && query.name.substr(0, 10)}
+            </div>
             <div className="font20">
-              QUICK&nbsp;&nbsp;APPLICATION&nbsp;&nbsp;FOR&nbsp;&nbsp;LOAN
+              请如实填写贷款信息，信贷经理会尽快与您联系
             </div>
           </div>
         </div>
@@ -157,17 +160,12 @@ export default class extends Component {
           {focus === 0 &&
             user &&
             query && (
-              <LoanFormOne
-                initName={query.name}
-                initMobile={query.mobile}
-                initMoney={query.money}
-                initGenre={query.genre}
-                initSex={user.sex}
+              <LoanCityFormOne
+                initMoneyStart={query.start}
+                initMoneyEnd={query.end}
                 initLimit={user.timelimit}
                 initPurpose={user.purpose}
                 initCycle={user.cycle}
-                initMarry={user.marital_status}
-                initProvince={user.province}
                 isLoading={isLoading}
                 onNextOne={this.onNextOne}
               />
