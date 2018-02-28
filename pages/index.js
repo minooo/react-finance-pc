@@ -262,7 +262,7 @@ export default class extends Component {
                   title={item.title}
                 >
                   {index <= 2 && (
-                    <span className="c-second">[ {index + 1} ] </span>
+                    <span className="c-second">【{index + 1}】 </span>
                   )}
                   {item.title}
                 </WrapLink>

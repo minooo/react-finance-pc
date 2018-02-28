@@ -9,7 +9,7 @@ import {
 export default ({ citySelection, rankingList }) => (
   <div className="flex box">
     <div
-      className="plr20 pt25 c333 home-shdow-mid relative"
+      className="plr20 pt25 c333 home-shdow-mid relative z-index10 bg-white"
       style={{ height: "560px", width: "860px" }}
     >
       <div className="home-loan-top">

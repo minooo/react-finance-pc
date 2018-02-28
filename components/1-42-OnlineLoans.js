@@ -94,7 +94,7 @@ export default class extends Component {
                         className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
                         href={`/1-loan/3-detail?id=${
                           onlineLoans.pop.list[focus].id
-                          }`}
+                        }`}
                         as={`/loan/${onlineLoans.pop.list[focus].id}`}
                       >
                         <span className="c-white">免费申请</span>
@@ -116,7 +116,11 @@ export default class extends Component {
                 onlineLoans.default.list.length > 0 &&
                 onlineLoans.default.list.map(item => (
                   <div style={{ width: "50%" }} key={uuid()}>
-                    <HomeRankListItem item={item} isrank={false} isRight="true" />
+                    <HomeRankListItem
+                      item={item}
+                      isrank={false}
+                      isRight="true"
+                    />
                   </div>
                 ))}
             </div>
@@ -127,26 +131,38 @@ export default class extends Component {
             className="plr20 pt20 bg-white font14 home-shdow-mid"
             style={{ height: "520px" }}
           >
-            <Ranking
-              title="急速贷排行榜"
-              bg="home-loanlist-bg"
-              list={
-                onlineLoans.new &&
-                onlineLoans.new.list &&
-                onlineLoans.new.list.length > 0 &&
-                onlineLoans.new.list.map(item => (
-                  <HomeRankListItem key={uuid()} item={item} isrank isRight="true" />
-                ))
-              }
-              othList={
-                onlineLoans.heat &&
-                onlineLoans.heat.list &&
-                onlineLoans.heat.list.length > 0 &&
-                onlineLoans.heat.list.map(item => (
-                  <HomeRankListItem key={uuid()} item={item} isrank isRight="true" />
-                ))
-              }
-            />
+            <div classN>
+              <Ranking
+                title="急速贷排行榜"
+                bg="home-loanlist-bg"
+                list={
+                  onlineLoans.new &&
+                  onlineLoans.new.list &&
+                  onlineLoans.new.list.length > 0 &&
+                  onlineLoans.new.list.map(item => (
+                    <HomeRankListItem
+                      key={uuid()}
+                      item={item}
+                      isrank
+                      isRight="true"
+                    />
+                  ))
+                }
+                othList={
+                  onlineLoans.heat &&
+                  onlineLoans.heat.list &&
+                  onlineLoans.heat.list.length > 0 &&
+                  onlineLoans.heat.list.map(item => (
+                    <HomeRankListItem
+                      key={uuid()}
+                      item={item}
+                      isrank
+                      isRight="true"
+                    />
+                  ))
+                }
+              />
+            </div>
           </div>
         </div>
       </div>

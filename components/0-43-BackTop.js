@@ -88,7 +88,7 @@ export default class extends Component {
                   style={{ width: "205px", height: "205px" }}
                 />
                 <div className="text-center font18 c333">
-                  嘟嘟e金融公众微信号
+                  嘟嘟e融公众微信号
                 </div>
               </div>
             )}
