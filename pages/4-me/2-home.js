@@ -34,7 +34,7 @@ export default class extends Component {
   componentDidMount() {
     const { user } = this.props;
     if (!user) {
-      this.initData()
+      this.initData();
     }
   }
   onNextOne = param => {
@@ -54,7 +54,7 @@ export default class extends Component {
             if (response.code === 200 && response.success) {
               message.success("资料保存成功");
               cache.setItem("userName", param.username);
-              this.initData()
+              this.initData();
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }

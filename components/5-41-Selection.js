@@ -38,7 +38,7 @@ const selectList = [
     },
     other: {
       name: "申请消息",
-      as: "/apply-message",
+      as: "/me/apply-message",
       href: "/4-me/7-apply-message"
     }
   }
