@@ -51,10 +51,9 @@ export default class extends Component {
     const param = {
       money,
       genre: loanType,
-      timelimit: loanDate,
+      deadline: loanDate,
       purpose: loanUse,
       cycle: needTime,
-      apply_loan_action: 1
     };
 
     onNextOne(param);

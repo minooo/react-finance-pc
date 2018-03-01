@@ -87,21 +87,19 @@ export default class extends Component {
     }
   }
   onNextOne = param => {
-    this.goNext("base", param, 1);
+    const { url } = this.props
+    this.goNext("base", param, url.query.id);
   };
-  onNextTwo = param => {
-    this.goNext("other", param, 2);
-  };
-  goNext = (reqKey, param, step) => {
+  goNext = (reqKey, param, id) => {
     this.setState(
       () => ({ isLoading: true }),
       () => {
         http
-          .post(`member/${reqKey}_profile`, param)
+          .post("loans/common_city_apply", { ...param, id })
           .then(response => {
             this.setState(() => ({ isLoading: false }));
             if (response.code === 200 && response.success) {
-              this.setState(() => ({ focus: step }));
+              this.setState(() => ({ focus: 1 }));
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
