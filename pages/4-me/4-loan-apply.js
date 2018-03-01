@@ -25,7 +25,6 @@ export default class extends Component {
       .then(response => {
         if (response.code === 200 && response.success) {
           const { data } = response;
-          console.log(data)
           this.setState(() => ({
             loan_logs: data.loan_logs
           }));
