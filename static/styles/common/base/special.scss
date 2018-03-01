@@ -51,32 +51,31 @@
 .opacity-half {
   opacity: 0.5;
 }
-.backtop-item{
+.backtop-item {
   background-color: #ddd;
   color: #ababab;
   margin-bottom: 2px;
 }
-.backtop-hover:hover{
+.backtop-hover:hover {
   background-color: #4c8dfc;
   color: #fff;
 }
-.visible{
+.visible {
   visibility: visible;
 }
-.hidden{
+.hidden {
   visibility: hidden;
 }
 .qrcode-triangle::after {
   width: 0;
-  height:0;
-  border:12px solid transparent;
-  border-left:12px solid #fff;
+  height: 0;
+  border: 12px solid transparent;
+  border-left: 12px solid #fff;
   content: "";
   display: block;
   position: absolute;
-  top:112px;
-  right:-24px;
-
+  top: 112px;
+  right: -24px;
 }
 // home
 .home-top-city-bg {
@@ -554,14 +553,33 @@
   border-top: 1px solid #f2f2f2;
   border-left: 1px solid #f2f2f2;
 }
-
+.me-massage-list {
+  align-items: flex-start;
+  position: relative;
+  &::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: #ff764c;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 6px;
+  }
+}
 // login
 .me-login-banner {
   background: url("../../images/me_login_banner.jpg") center no-repeat;
 }
 .login-img-code {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
   cursor: pointer;
 }
+
 // city
 .city-head-bg {
   height: 137px;
@@ -592,7 +610,7 @@
   border: 1px solid #eee;
   border-bottom: 1px solid #fff;
 }
-.city-item button:hover{
+.city-item button:hover {
   color: #4c8dfc;
 }
 .city-list {
@@ -608,10 +626,10 @@
     border: 1px solid #f5f5f5;
     background-color: #f5f5f5;
   }
-  &:last-child .city-item{
+  &:last-child .city-item {
     border-bottom: 1px solid #eee;
   }
-  &:last-child .city-serial{
+  &:last-child .city-serial {
     border-bottom: 1px solid #eee;
   }
 }
