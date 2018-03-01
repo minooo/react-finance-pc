@@ -33,7 +33,7 @@ export default ({ item, index }) => (
       免费申请
     </Button>
     <div className="font12 c333">
-      <span className="c-main">{item.apply_num}人</span>申请
+      {/* <span className="c-main">{item.apply_num}人</span>申请 */}
     </div>
   </WrapLink>
 );
