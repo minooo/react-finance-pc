@@ -40,10 +40,10 @@ export default ({ item }) => (
       </div>
       <div className="font12 c999 lh100 text-overflow-one">放款时间</div>
     </div>
-    <div className="h56 flex column jc-between ai-center pl20">
-      <div className="font14 c333 lh100 text-overflow-one">
+    <div className="h56 flex column jc-center ai-center pl20">
+      {/* <div className="font14 c333 lh100 text-overflow-one mb5">
         <span className="c-main">{item.apply_num}人申请</span>
-      </div>
+      </div> */}
       <Button type="primary" className="h32 w110 r100 font14 bold">
         立即申请
       </Button>

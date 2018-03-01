@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Router from "next/router";
 import { Input, Button, Checkbox, message, Alert } from "antd";
 import { Layout, WrapLink, Btn } from "@components";
-import { http, isMobile, setCookie, cache, searchToObj } from "@utils";
+import { http, isMobile, setCookie, cache } from "@utils";
 
 export default class extends Component {
   state = {
@@ -111,8 +111,7 @@ export default class extends Component {
   // 登录
   applyLoan = () => {
     const { mobile, captcha, code, isLongLogin } = this.state;
-    const { asPath } = this.props;
-    const query = searchToObj(asPath);
+    const { url: { query } } = this.props;
 
     if (!isMobile(mobile)) {
       this.onErrMsg("您的手机号格式有误，请检查。");
@@ -126,29 +125,32 @@ export default class extends Component {
       this.onErrMsg("请输入手机验证码。");
       return;
     }
-    this.setState(() => ({ isLoading: true }), () => {
-      http
-      .post("/auth/sign", { phone: mobile, code, captcha })
-      .then(response => {
-        this.setState(() => ({ isLoading: false }))
-        if (response.code === 200 && response.success) {
-          const { token } = response.data;
-          const time = isLongLogin ? 29 : 1
-          setCookie("token", token, time);
-          cache.setItem("userPhone", mobile)
-          Router.push(
-            { pathname: (query && query.href) || "/4-me/2-home" },
-            (query && query.as) || "/me"
-          );
-        } else {
-          message.error(response.msg || "抱歉，请求异常，请稍后再试！");
-        }
-      })
-      .catch(err => {
-        message.error("网络错误，请稍后再试！");
-        console.info(err);
-      });
-    })
+    this.setState(
+      () => ({ isLoading: true }),
+      () => {
+        http
+          .post("/auth/sign", { phone: mobile, code, captcha })
+          .then(response => {
+            this.setState(() => ({ isLoading: false }));
+            if (response.code === 200 && response.success) {
+              const { token } = response.data;
+              const time = isLongLogin ? 29 : 1;
+              setCookie("token", token, time);
+              cache.setItem("userPhone", mobile);
+              Router.push(
+                { pathname: (query && query.href) || "/4-me/2-home", query },
+                (query && query.as) || "/me"
+              );
+            } else {
+              message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+            }
+          })
+          .catch(err => {
+            message.error("网络错误，请稍后再试！");
+            console.info(err);
+          });
+      }
+    );
   };
   render() {
     const {
@@ -186,9 +188,8 @@ export default class extends Component {
                 maxLength="11"
                 onChange={val => this.onChange(val, "mobile")}
               />
-              <div className="mb10 flex">
+              <div className="mb10 relative">
                 <Input
-                  className="equal"
                   placeholder="图片验证码"
                   size="large"
                   maxLength="6"
@@ -196,9 +197,16 @@ export default class extends Component {
                   onChange={val => this.onChange(val, "captcha")}
                 />
                 <Btn
-                  style={{ width: "117px" }}
+                  style={{ width: "130px" }}
                   className="img-bg h38 login-img-code"
-                  con={<img className="w-100 h-100" src={logCode} alt="" />}
+                  con={
+                    <img
+                      style={{ width: "130px" }}
+                      className="h-100 block"
+                      src={logCode}
+                      alt=""
+                    />
+                  }
                   onClick={this.onImgCode}
                 />
               </div>

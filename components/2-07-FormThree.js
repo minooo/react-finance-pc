@@ -10,8 +10,8 @@ export default () => (
       </div>
       <div className="flex jc-center">
         <WrapLink
-          href="/index"
-          as="/"
+          href="/4-me/4-loan-apply"
+          as="/me/loan-apply"
           style={{ marginRight: "40px" }}
           className="w220 h44 r2 flex ai-center jc-center font16 bold bg-main c-white hover-white"
         >

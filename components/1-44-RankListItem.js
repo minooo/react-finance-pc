@@ -10,7 +10,7 @@ export default ({ item, isrank, isRight }) => (
     <div
       className={`flex mb10 pl10 pt20 pb15 ${
         isrank ? "pr20" : "pr15"
-        } h100 home-loanlist-hover pointer`}
+      } h100 home-loanlist-hover pointer`}
     >
       <div className="w66 h66 img-bg">
         <img className="w-100 h-100" src={item.thumb} alt="" />
@@ -28,18 +28,16 @@ export default ({ item, isrank, isRight }) => (
           <div
             className={`font12 lh120 text-overflow-one ${
               isrank ? "c333" : "c-second"
-              }`}
+            }`}
           >
             {item.description}
           </div>
         </div>
-        {
-          isRight &&
-            <div className="flex ai-center c999">
-              <Icon type="right" style={{ fontSize: 14 }} />
-            </div>
-        }
-
+        {isRight && (
+          <div className="flex ai-center c999">
+            <Icon type="right" style={{ fontSize: 14 }} />
+          </div>
+        )}
       </div>
     </div>
   </WrapLink>

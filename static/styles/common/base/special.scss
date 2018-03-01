@@ -558,14 +558,33 @@
   border-top: 1px solid #f2f2f2;
   border-left: 1px solid #f2f2f2;
 }
-
+.me-massage-list {
+  align-items: flex-start;
+  position: relative;
+  &::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: #ff764c;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 6px;
+  }
+}
 // login
 .me-login-banner {
   background: url("../../images/me_login_banner.jpg") center no-repeat;
 }
 .login-img-code {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
   cursor: pointer;
 }
+
 // city
 .city-head-bg {
   height: 137px;
