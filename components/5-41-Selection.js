@@ -12,7 +12,7 @@ const selectList = [
         href: "/4-me/2-home"
       },
       {
-        name: "其他资料",
+        name: "修改资料",
         as: "/me/other",
         href: "/4-me/3-other-data"
       }
@@ -94,7 +94,7 @@ export default ({ children, pathname }) => (
             </Fragment>
           ))}
         </div>
-        <div className="equal bg-white">{children}</div>
+        <div className="equal overflow-h bg-white">{children}</div>
       </div>
     </div>
   </Layout>

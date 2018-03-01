@@ -154,7 +154,7 @@ export default class extends Component {
           {/* 核心块 */}
           <div className="flex box">
             {/* 左半拉，产品筛选以及列表 */}
-            <div className="equal mr20 c333">
+            <div className="equal mr20 c333 overflow-h">
               <div className="bg-white">
                 <div className="h100 loandetail-title flex ai-center pl30">
                   <div className="w70 h70">
@@ -164,9 +164,9 @@ export default class extends Component {
                       alt=""
                     />
                   </div>
-                  <div className="pl15 equal">
+                  <div className="pl15 equal overflow-h">
                     <div className="flex mb15 ai-center">
-                      <div className="l120 font20 bold mr10 text-overflow-1">
+                      <div className="l120 font20 bold mr10 text-overflow-one">
                         {data && data.loan && data.loan.name}
                       </div>
                       {data &&
@@ -176,7 +176,7 @@ export default class extends Component {
                         data.loan.apply_material_name.slice(0, 4).map(item => (
                           <div
                             key={uuid()}
-                            className="c-second font14 plr10 flex ai-center mr10 equal-no text-overflow-1"
+                            className="c-second font14 plr10 flex ai-center mr10 equal-no text-overflow-one"
                             style={{
                               backgroundColor: "#ffebe4",
                               height: "24px",
@@ -187,7 +187,7 @@ export default class extends Component {
                           </div>
                         ))}
                     </div>
-                    <div className="lh120 font16 c666 text-overflow-1">
+                    <div className="lh120 font16 c666 text-overflow-one">
                       {data && data.loan && data.loan.description}
                     </div>
                   </div>
@@ -202,7 +202,7 @@ export default class extends Component {
                       style={{ paddingRight: "50px", maxWidth: "250px" }}
                     >
                       <div className="font16 mb15">还款方式</div>
-                      <div className="font18 bold text-overflow-1">
+                      <div className="font18 bold text-overflow-one">
                         {data && data.loan && data.loan.payment_method}
                       </div>
                     </div>
@@ -211,7 +211,7 @@ export default class extends Component {
                       style={{ paddingRight: "50px", maxWidth: "220px" }}
                     >
                       <div className="font16 mb15">放款时间</div>
-                      <div className="font18 bold text-overflow-1">
+                      <div className="font18 bold text-overflow-one">
                         {data && data.loan && data.loan.cycle}
                       </div>
                     </div>
@@ -224,7 +224,7 @@ export default class extends Component {
                           data.loan &&
                           data.loan.interest_rate_method}利率
                       </div>
-                      <div className="font18 bold text-overflow-1">
+                      <div className="font18 bold text-overflow-one">
                         {data && data.loan && data.loan.interest_rate}%
                       </div>
                     </div>
@@ -233,7 +233,7 @@ export default class extends Component {
                       style={{ maxWidth: "200px" }}
                     >
                       <div className="font16 mb15">申请人数</div>
-                      <div className="font18 bold text-overflow-1">
+                      <div className="font18 bold text-overflow-one">
                         {data && data.loan && data.loan.apply_num}
                       </div>
                     </div>
@@ -257,7 +257,7 @@ export default class extends Component {
                       />
                       {data &&
                         data.loan && (
-                          <div className="font16 c666 mt15 pl10 text-overflow-1">
+                          <div className="font16 c666 mt15 pl10 text-overflow-one">
                             金额范围：{clipBigNum(data.loan.sum_start)}-{clipBigNum(
                               data.loan.sum_end
                             )}
@@ -283,7 +283,7 @@ export default class extends Component {
                             ))}
                           </Select>
                         )}
-                      <div className="font16 c666 pl10 mt15 text-overflow-1">
+                      <div className="font16 c666 pl10 mt15 text-overflow-one">
                         贷款期限：
                         {data &&
                           data.loan &&
@@ -398,7 +398,7 @@ export default class extends Component {
                                     className="w-100 h-100"
                                   />
                                 </div>
-                                <div className="w80 text-overflow-1 text-center">
+                                <div className="w80 text-overflow-one text-center">
                                   {item.step_name}
                                 </div>
                               </div>
@@ -526,7 +526,7 @@ export default class extends Component {
                             ? "/loan/speed"
                             : "/loan"
                           }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
-                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-1"
+                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-one"
                       >
                         {item.name}
                       </WrapLink>
@@ -550,16 +550,10 @@ export default class extends Component {
                           alt=""
                         />
                       </div>
-                      <div className="w100 h100">
-                        <img
-                          src="/static/images/foot_code.png"
-                          className="w-100"
-                          alt=""
-                        />
-                      </div>
+                      <div className="w100 h100 app-qrcode-bg" />
                     </div>
                     <div className="c-main font14 text-center lh120">
-                      最高可借20万,当天放款
+                      最高可借30万,最快当天放款
                     </div>
                   </div>
                 ) : (

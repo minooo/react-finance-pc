@@ -54,13 +54,11 @@ export default class extends Component {
               >
                 <div
                   key={uuid()}
-                  className="code-bg mr30"
+                  className="app-qrcode-bg mr30"
                   style={{ width: "144px", height: "144px" }}
                 />
                 <div key={uuid()} className="flex column jc-between">
-                  <WrapLink
-                    href="/about"
-                    as="/about"
+                  <div
                     className="h58 flex ai-center r100 jc-center "
                     style={{ width: "248px", border: "1px solid #fff" }}
                   >
@@ -69,10 +67,8 @@ export default class extends Component {
                       style={{ fontSize: 32, color: "#fff" }}
                     />
                     <div className="c-white font24 pl15">安卓版下载</div>
-                  </WrapLink>
-                  <WrapLink
-                    href="/about"
-                    as="/about"
+                  </div>
+                  <div
                     className="h58 flex ai-center jc-center r100"
                     style={{ width: "248px", border: "1px solid #fff" }}
                   >
@@ -81,7 +77,7 @@ export default class extends Component {
                       style={{ fontSize: 32, color: "#fff" }}
                     />
                     <div className="c-white font24 pl15">苹果版下载</div>
-                  </WrapLink>
+                  </div>
                 </div>
               </QueueAnim>
             </div>
@@ -360,7 +356,7 @@ export default class extends Component {
             />
             <div className="equal relative" style={{ height: "820px" }}>
               <div
-                className="absolute app-mark-five"
+                className="absolute app-mark-one"
                 style={{
                   width: "173px",
                   height: "156px",
@@ -404,7 +400,7 @@ export default class extends Component {
                 品种繁多，极速下卡
               </TweenOne>
               <div
-                className="app-mark-six absolute"
+                className="app-mark-two absolute"
                 style={{
                   width: "170px",
                   height: "154px",
@@ -467,7 +463,7 @@ export default class extends Component {
                   ease: "easeInOutCubic",
                   duration: 800
                 }}
-                className="code-bg mr30"
+                className="app-qrcode-bg mr30"
                 style={{ width: "144px", height: "144px" }}
               />
               <TweenOne
@@ -481,9 +477,7 @@ export default class extends Component {
                 }}
                 className="flex column jc-between"
               >
-                <WrapLink
-                  href="/about"
-                  as="/about"
+                <div
                   className="h58 flex ai-center r100 jc-center "
                   style={{ width: "248px", border: "1px solid #fff" }}
                 >
@@ -492,16 +486,14 @@ export default class extends Component {
                     style={{ fontSize: 32, color: "#fff" }}
                   />
                   <div className="c-white font24 pl15">安卓版下载</div>
-                </WrapLink>
-                <WrapLink
-                  href="/about"
-                  as="/about"
+                </div>
+                <div
                   className="h58 flex ai-center jc-center r100"
                   style={{ width: "248px", border: "1px solid #fff" }}
                 >
                   <Icon type="apple" style={{ fontSize: 32, color: "#fff" }} />
                   <div className="c-white font24 pl15">苹果版下载</div>
-                </WrapLink>
+                </div>
               </TweenOne>
             </div>
           </div>

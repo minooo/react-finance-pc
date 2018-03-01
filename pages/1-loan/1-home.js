@@ -391,10 +391,10 @@ export default class extends Component {
                   </div>
                   <div className="flex jc-around ai-center mb20">
                     <div className="w70 app-bg" style={{ height: "130px" }} />
-                    <div className="w100 h100 code-bg" />
+                    <div className="w100 h100 app-qrcode-bg" />
                   </div>
                   <div className="c-main font14 text-center lh120">
-                    最高可借20万,当天放款
+                    最高可借30万,最快当天放款
                   </div>
                 </div>
               </div>

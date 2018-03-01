@@ -59,7 +59,7 @@ export default class extends Component {
             </div>
           </div>
           <div className="flex overflow-h">
-            <div className="pr30">
+            <div className="pr30" style={{ width: "200px" }}>
               {onlineLoans.pop &&
                 onlineLoans.pop.list &&
                 onlineLoans.pop.list.length > 0 && (
@@ -74,17 +74,18 @@ export default class extends Component {
                             key={uuid()}
                             href={`/1-loan/3-detail?id=${item.id}`}
                             as={`/loan/${item.id}`}
+                            style={{ width: "200px", height: "125px" }}
                           >
-                            <img className="pointer" src={item.thumb} alt="" />
+                            <img className="pointer w-100 h-100" src={item.thumb} alt="" />
                           </WrapLink>
                         ))}
                       </Carousel>
                     </div>
                     <div className="text-center mb20">
-                      <div className="font16 mb10 lh100 text-overflow-1 bold">
+                      <div className="font16 mb10 lh100 text-overflow-one bold">
                         {onlineLoans.pop.list[focus].name}
                       </div>
-                      <div className="font14 lh120 text-overflow-1">
+                      <div className="font14 lh120 text-overflow-one">
                         {onlineLoans.pop.list[focus].description}
                       </div>
                     </div>
@@ -110,7 +111,7 @@ export default class extends Component {
                 <div className="w90 h90 code-bg" />
               </div>
             </div>
-            <div className="flex equal wrap pl5">
+            <div className="flex equal wrap pl5 overflow-h">
               {onlineLoans.default &&
                 onlineLoans.default.list &&
                 onlineLoans.default.list.length > 0 &&
@@ -126,43 +127,41 @@ export default class extends Component {
             </div>
           </div>
         </div>
-        <div className="equal z-index10">
+        <div className="equal overflow-h z-index10 home-shdow-mid">
           <div
-            className="plr20 pt20 bg-white font14 home-shdow-mid"
+            className="plr20 pt20 bg-white font14"
             style={{ height: "520px" }}
           >
-            <div classN>
-              <Ranking
-                title="急速贷排行榜"
-                bg="home-loanlist-bg"
-                list={
-                  onlineLoans.new &&
-                  onlineLoans.new.list &&
-                  onlineLoans.new.list.length > 0 &&
-                  onlineLoans.new.list.map(item => (
-                    <HomeRankListItem
-                      key={uuid()}
-                      item={item}
-                      isrank
-                      isRight="true"
-                    />
-                  ))
-                }
-                othList={
-                  onlineLoans.heat &&
-                  onlineLoans.heat.list &&
-                  onlineLoans.heat.list.length > 0 &&
-                  onlineLoans.heat.list.map(item => (
-                    <HomeRankListItem
-                      key={uuid()}
-                      item={item}
-                      isrank
-                      isRight="true"
-                    />
-                  ))
-                }
-              />
-            </div>
+            <Ranking
+              title="急速贷排行榜"
+              bg="home-loanlist-bg"
+              list={
+                onlineLoans.new &&
+                onlineLoans.new.list &&
+                onlineLoans.new.list.length > 0 &&
+                onlineLoans.new.list.map(item => (
+                  <HomeRankListItem
+                    key={uuid()}
+                    item={item}
+                    isrank
+                    isRight="true"
+                  />
+                ))
+              }
+              othList={
+                onlineLoans.heat &&
+                onlineLoans.heat.list &&
+                onlineLoans.heat.list.length > 0 &&
+                onlineLoans.heat.list.map(item => (
+                  <HomeRankListItem
+                    key={uuid()}
+                    item={item}
+                    isrank
+                    isRight="true"
+                  />
+                ))
+              }
+            />
           </div>
         </div>
       </div>

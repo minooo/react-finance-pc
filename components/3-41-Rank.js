@@ -8,9 +8,9 @@ export default ({ item, index }) => (
       <div className="w106 h66">
         <img src={item.thumb} alt="" className="w-100 h-100" />
       </div>
-      <div className="flex column equal jc-between pl15 ptb5">
-        <div className="font16 lh120 text-overflow-1">{item.name}</div>
-        <div className="font12 lh120 c333 text-overflow-1">
+      <div className="flex column equal overflow-h jc-between pl15 ptb5">
+        <div className="font16 lh120 text-overflow-one">{item.name}</div>
+        <div className="font12 lh120 c333 text-overflow-one">
           <span className="c-main">{item.apply_num}人</span>
         申请
         </div>
@@ -26,7 +26,7 @@ export default ({ item, index }) => (
       >
         {index + 1}
       </div>
-      <div className="c333 font16 lh120 text-overflow-1" style={{ width: "180px" }}>{item.name}</div>
+      <div className="c333 font16 lh120 text-overflow-one" style={{ width: "180px" }}>{item.name}</div>
     </div>
     <div className="font12 lh100 c333">
       <span className="c-main">{item.apply_num}人</span>
