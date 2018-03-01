@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Router from "next/router";
 import { Input, Button, Checkbox, message, Alert } from "antd";
 import { Layout, WrapLink, Btn } from "@components";
-import { http, isMobile, setCookie, cache, searchToObj } from "@utils";
+import { http, isMobile, setCookie, cache } from "@utils";
 
 export default class extends Component {
   state = {
@@ -111,8 +111,7 @@ export default class extends Component {
   // 登录
   applyLoan = () => {
     const { mobile, captcha, code, isLongLogin } = this.state;
-    const { asPath } = this.props;
-    const query = searchToObj(asPath);
+    const { url: { query } } = this.props;
 
     if (!isMobile(mobile)) {
       this.onErrMsg("您的手机号格式有误，请检查。");
@@ -139,7 +138,7 @@ export default class extends Component {
               setCookie("token", token, time);
               cache.setItem("userPhone", mobile);
               Router.push(
-                { pathname: (query && query.href) || "/4-me/2-home" },
+                { pathname: (query && query.href) || "/4-me/2-home", query },
                 (query && query.as) || "/me"
               );
             } else {

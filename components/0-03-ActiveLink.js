@@ -6,7 +6,7 @@ const ActiveLink = ({ text, router, href, as = href, ...rest }) => (
     <a
       style={{ width: "140px" }}
       className={`flex column jc-center ai-center font16 bold h-100 ${
-        as.length > 1 && router.asPath.indexOf(as) !== -1
+        as.length > 1 && as.indexOf(router.asPath) !== -1 && router.asPath.indexOf(as) !== -1
           ? "c-main nav-default"
           : `${
               router.asPath === "/" && as === "/"

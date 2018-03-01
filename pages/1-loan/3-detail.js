@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Input, Select } from "antd";
+import Router from "next/router";
+import QRCode from "qrcode-react";
 import uuid from "uuid/v4";
 import {
   http,
@@ -7,9 +9,16 @@ import {
   arrToDateString,
   arrToArr,
   clipBigNum,
+  getCookie,
   fee
 } from "@utils";
-import { Layout, WrapLink, HomeRankListItem, ErrorFetch } from "@components";
+import {
+  Layout,
+  WrapLink,
+  HomeRankListItem,
+  ErrorFetch,
+  Btn
+} from "@components";
 
 const echarts = require("../../static/scripts/echarts.min.js");
 const util = require("util");
@@ -31,7 +40,7 @@ export default class extends Component {
     finalMoney: null
   };
   componentDidMount() {
-    if (!this.props.data) return
+    if (!this.props.data || !this.props.data.loan) return;
     const {
       data: { loan: { sum_start, timelimit, interest_rate } }
     } = this.props;
@@ -70,6 +79,33 @@ export default class extends Component {
       finalVal = +sum_start;
     }
     this.setState(() => ({ finalMoney: finalVal, moneyVal: finalVal }));
+  };
+  onApply = (type, url, id, name, start, end) => {
+    const { url: { pathname, asPath } } = this.props;
+    // type 2 同城  1 极速
+    if (type === 2) {
+      Router.push(
+        {
+          pathname: "/1-loan/5-city-apply-loan",
+          query: { id, name, start, end }
+        },
+        "/loan/city"
+      );
+    }
+    if (type === 1) {
+      if (getCookie("token")) {
+        http.post("loans/top_speed_apply", { id })
+        this.setState(() => ({ showQrcode: true }));
+      } else {
+        Router.push(
+          {
+            pathname: "/4-me/1-login",
+            query: { href: pathname, as: asPath, id }
+          },
+          "/login"
+        );
+      }
+    }
   };
   setMyOption = (fee, total) => ({
     color: ["#ff764c", "#7eaeff"],
@@ -110,7 +146,7 @@ export default class extends Component {
     ]
   });
   render() {
-    const { selectValue, moneyVal, finalMoney } = this.state;
+    const { selectValue, moneyVal, finalMoney, showQrcode } = this.state;
     const { data, err } = this.props;
     const { Option } = Select;
     if (err) {
@@ -149,7 +185,9 @@ export default class extends Component {
               贷款超市
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <span className="c999 font16">{(data && data.loan && data.loan.name) || "贷款详情"}</span>
+            <span className="c999 font16">
+              {(data && data.loan && data.loan.name) || "贷款详情"}
+            </span>
           </div>
           {/* 核心块 */}
           <div className="flex box">
@@ -387,7 +425,7 @@ export default class extends Component {
                                   index === data.flowpath.length - 1
                                     ? ""
                                     : "180px"
-                                  }`
+                                }`
                               }}
                             >
                               <div className="flex column ai-center">
@@ -402,18 +440,17 @@ export default class extends Component {
                                   {item.step_name}
                                 </div>
                               </div>
-                              {index === data.flowpath.length - 1 ||
-                                (
-                                  <Icon
-                                    className="pt10"
-                                    type="right"
-                                    style={{
-                                      fontSize: 16,
-                                      color: "#dedede",
-                                      paddingRight: "40px"
-                                    }}
-                                  />
-                                )}
+                              {index === data.flowpath.length - 1 || (
+                                <Icon
+                                  className="pt10"
+                                  type="right"
+                                  style={{
+                                    fontSize: 16,
+                                    color: "#dedede",
+                                    paddingRight: "40px"
+                                  }}
+                                />
+                              )}
                             </div>
                           ))}
                       </div>
@@ -428,7 +465,11 @@ export default class extends Component {
                   <div
                     className="pl20 font14 c33"
                     dangerouslySetInnerHTML={{
-                      __html: (data && data.loan && data.loan.application_requirements) || "暂无信息"
+                      __html:
+                        (data &&
+                          data.loan &&
+                          data.loan.application_requirements) ||
+                        "暂无信息"
                     }}
                   />
                 </div>
@@ -457,12 +498,12 @@ export default class extends Component {
                 <div
                   className={`${
                     data &&
-                      data.loan &&
-                      data.loan.category &&
-                      data.loan.category === 1
+                    data.loan &&
+                    data.loan.category &&
+                    data.loan.category === 1
                       ? "h60"
                       : "h44"
-                    }`}
+                  }`}
                 />
                 {data &&
                   data.loan &&
@@ -476,23 +517,56 @@ export default class extends Component {
                       <div
                         className="pl20 font14 c33"
                         dangerouslySetInnerHTML={{
-                          __html: (data && data.loan && data.loan.rate_explain) || "暂无信息"
+                          __html:
+                            (data && data.loan && data.loan.rate_explain) ||
+                            "暂无信息"
                         }}
                       />
                       <div style={{ height: "60px" }} />
                     </div>
                   )}
                 <div className="c999 font16 lh100 mb30">
-                  咨询电话：{(data && data.loan && data.loan.customer_tel) || "暂无信息"}
+                  咨询电话：{(data && data.loan && data.loan.customer_tel) ||
+                    "暂无信息"}
                 </div>
-                <WrapLink
-                  href={data && data.loan && data.loan.external_links}
-                  as={data && data.loan.external_links && data.loan.external_links}
-                  className="font18 bold c-white bg-main block h44 text-center r4"
-                  style={{ width: "200px", lineHeight: "44px" }}
-                >
-                  <div className="c-white">马上申请</div>
-                </WrapLink>
+                {!showQrcode &&
+                  data &&
+                  data.loan &&
+                  data.loan.category && (
+                    <Btn
+                      btnClass="font18 bold c-white bg-main block h44 text-center r4"
+                      style={{ width: "200px", lineHeight: "44px" }}
+                      con="马上申请"
+                      onClick={() =>
+                        this.onApply(
+                          data.loan.category,
+                          data.loan.external_links,
+                          data.loan.id,
+                          data.loan.name,
+                          data.loan.sum_start,
+                          data.loan.sum_end
+                        )
+                      }
+                    />
+                  )}
+                {showQrcode &&
+                  data &&
+                  data.loan &&
+                  data.loan.external_links && (
+                    <QRCode
+                      value={data.loan.external_links}
+                      logo="http://public.duduapp.net/finance/pc-static/img/qrcode_ico.png"
+                      logoWidth={34}
+                    />
+                  )}
+                {showQrcode && (
+                  <div
+                    style={{ width: "128px" }}
+                    className="c333 font18 text-center mt10"
+                  >
+                    立即扫码申请
+                  </div>
+                )}
                 <div className="h50" />
               </div>
               <div className="h60" />
@@ -511,21 +585,21 @@ export default class extends Component {
                         key={uuid()}
                         href={`${
                           data &&
-                            data.loan &&
-                            data.loan.category &&
-                            data.loan.category === 1
+                          data.loan &&
+                          data.loan.category &&
+                          data.loan.category === 1
                             ? "/1-loan/2-home-speed"
                             : "/1-loan/1-home"
-                          }`}
+                        }`}
                         as={`
                         ${
                           data &&
-                            data.loan &&
-                            data.loan.category &&
-                            data.loan.category === 1
+                          data.loan &&
+                          data.loan.category &&
+                          data.loan.category === 1
                             ? "/loan/speed"
                             : "/loan"
-                          }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
+                        }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
                         className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-1"
                       >
                         {item.name}
@@ -535,49 +609,49 @@ export default class extends Component {
               </div>
               <div className="h20" />
               {data &&
-                data.loan &&
-                data.loan.category &&
-                data.loan.category === 1 ? (
-                  <div className="pb25 pt30 plr30 bg-white">
-                    <div className="font18 c333 text-center mb25 lh120">
-                      APP下载，享专属优惠
+              data.loan &&
+              data.loan.category &&
+              data.loan.category === 1 ? (
+                <div className="pb25 pt30 plr30 bg-white">
+                  <div className="font18 c333 text-center mb25 lh120">
+                    APP下载，享专属优惠
+                  </div>
+                  <div className="flex jc-around ai-center mb20">
+                    <div className="w70" style={{ height: "130px" }}>
+                      <img
+                        src="/static/images/foot_app.png"
+                        className="w-100"
+                        alt=""
+                      />
                     </div>
-                    <div className="flex jc-around ai-center mb20">
-                      <div className="w70" style={{ height: "130px" }}>
-                        <img
-                          src="/static/images/foot_app.png"
-                          className="w-100"
-                          alt=""
-                        />
-                      </div>
-                      <div className="w100 h100">
-                        <img
-                          src="/static/images/foot_code.png"
-                          className="w-100"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div className="c-main font14 text-center lh120">
-                      最高可借20万,当天放款
+                    <div className="w100 h100">
+                      <img
+                        src="/static/images/foot_code.png"
+                        className="w-100"
+                        alt=""
+                      />
                     </div>
                   </div>
-                ) : (
-                  <div className="plr10 ptb25 bg-white">
-                    <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
-                    {data &&
-                      data.recommend &&
-                      data.recommend.list &&
-                      data.recommend.list.length > 0 &&
-                      data.recommend.list.map(item => (
-                        <HomeRankListItem
-                          key={uuid()}
-                          item={item}
-                          isrank="true"
-                        />
-                      ))}
+                  <div className="c-main font14 text-center lh120">
+                    最高可借20万,当天放款
                   </div>
-                )}
+                </div>
+              ) : (
+                <div className="plr10 ptb25 bg-white">
+                  <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
+                  {data &&
+                    data.recommend &&
+                    data.recommend.list &&
+                    data.recommend.list.length > 0 &&
+                    data.recommend.list.map(item => (
+                      <HomeRankListItem
+                        key={uuid()}
+                        item={item}
+                        isrank="true"
+                      />
+                    ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
