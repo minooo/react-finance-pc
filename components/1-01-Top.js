@@ -14,7 +14,7 @@ export default class extends Component {
   };
   render() {
     const { isOnOver } = this.state;
-    const { me } = this.props;
+    const { me, city } = this.props;
     return (
       <div className="bg-body">
         <div className="box h30 flex jc-between ai-center relative hom-top-code bg-body">
@@ -36,7 +36,7 @@ export default class extends Component {
             href="/city"
             as="/city"
           >
-            郑州[切换]
+            {city}[切换]
           </WrapLink>
           <div className="flex ai-center">
             <span style={{ marginRight: "30px" }}>客服热线：400-968-8821</span>

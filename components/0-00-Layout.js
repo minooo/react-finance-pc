@@ -9,6 +9,7 @@ export default class extends React.Component {
     const token = getCookie("token");
     const userPhone = cache.getItem("userPhone");
     const userName = cache.getItem("userName");
+    const userCity = cache.getItem("userCity");
     if (token) {
       if (userName) {
         // eslint-disable-next-line
@@ -18,16 +19,24 @@ export default class extends React.Component {
         this.setState(() => ({ me: userPhone }));
       }
     }
+    if (userCity) {
+      // eslint-disable-next-line
+      this.setState(() => ({ city: userCity }));
+    } else {
+      cache.setItem("userCity", "郑州");
+      // eslint-disable-next-line
+      this.setState(() => ({ city: "郑州" }));
+    }
   }
   render() {
-    const { me } = this.state
+    const { me, city } = this.state;
     const { title, footNoShow, children, ...rest } = this.props;
     return (
       <div className="bg-white" {...rest}>
         <Head>
           <title>{title}</title>
         </Head>
-        <HomeTop me={me} />
+        <HomeTop me={me} city={city} />
         <Nav />
         <BackTop />
         {children}
