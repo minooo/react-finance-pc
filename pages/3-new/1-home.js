@@ -234,7 +234,7 @@ export default class extends Component {
                       title={item.title}
                     >
                       <span className={index < 3 ? "c-main" : "c666"}>
-                        [ {index + 1} ]{" "}
+                        【{index + 1}】
                       </span>
                       {item.title}
                     </WrapLink>

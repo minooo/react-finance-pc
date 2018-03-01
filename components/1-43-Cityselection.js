@@ -9,7 +9,7 @@ import {
 export default ({ citySelection, rankingList }) => (
   <div className="flex box">
     <div
-      className="plr20 pt25 c333 home-shdow-mid relative"
+      className="plr20 pt25 c333 home-shdow-mid relative z-index10 bg-white"
       style={{ height: "560px", width: "860px" }}
     >
       <div className="home-loan-top">
@@ -34,7 +34,7 @@ export default ({ citySelection, rankingList }) => (
             className="plr30 img-bg c333 block home-citybg-big"
             style={{ width: "345px", height: "472xp", paddingTop: "50px" }}
           >
-            <div className="font26 mb20 lh120 text-overflow-1 bold c333">
+            <div className="font26 mb20 lh120 text-overflow-one bold c333">
               {citySelection[0].name}
             </div>
             <div className="font14 lh150 text-overflow-2 c333">
@@ -43,7 +43,7 @@ export default ({ citySelection, rankingList }) => (
           </WrapLink>
         )}
 
-        <div className="equal flex wrap">
+        <div className="equal flex wrap overflow-h">
           {citySelection.length > 0 &&
             citySelection
               .slice(1, 5)
@@ -53,9 +53,9 @@ export default ({ citySelection, rankingList }) => (
         </div>
       </div>
     </div>
-    <div className="mt20 mb20 equal">
+    <div className="mt20 mb20 equal overflow-h home-shdow-mid">
       <div
-        className="plr20 pt20 bg-white font14 home-shdow-mid"
+        className="plr20 pt20 bg-white font14"
         style={{ height: "520px" }}
       >
         <Ranking

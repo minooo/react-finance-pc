@@ -5,42 +5,43 @@ import { Layout, WrapLink } from "@components";
 const selectList = [
   {
     title: "个人资料",
-    one: {
-      name: "基本资料",
-      as: "/me",
-      href: "/4-me/2-home"
-    },
-    other: {
-      name: "其他资料",
-      as: "/me/other",
-      href: "/4-me/3-other-data"
-    }
+    children: [
+      {
+        name: "基本资料",
+        as: "/me",
+        href: "/4-me/2-home"
+      },
+      {
+        name: "修改资料",
+        as: "/me/other",
+        href: "/4-me/3-other-data"
+      }
+    ]
   },
   {
     title: "申请管理",
-    one: {
-      name: "贷款申请记录",
-      as: "/me/loan-apply",
-      href: "/4-me/4-loan-apply"
-    },
-    other: {
-      name: "信用卡申请记录",
-      as: "/me/card-apply",
-      href: "/4-me/5-card-apply"
-    }
+    children: [
+      {
+        name: "贷款申请记录",
+        as: "/me/loan-apply",
+        href: "/4-me/4-loan-apply"
+      }
+    ]
   },
   {
     title: "消息管理",
-    one: {
-      name: "系统消息",
-      as: "/me/system-message",
-      href: "/4-me/6-system-message"
-    },
-    other: {
-      name: "申请消息",
-      as: "/me/apply-message",
-      href: "/4-me/7-apply-message"
-    }
+    children: [
+      {
+        name: "系统消息",
+        as: "/me/system-message",
+        href: "/4-me/5-system-message"
+      },
+      {
+        name: "申请消息",
+        as: "/me/apply-message",
+        href: "/4-me/6-apply-message"
+      }
+    ]
   }
 ];
 
@@ -48,13 +49,16 @@ export default ({ children, pathname }) => (
   <Layout title="个人中心">
     <div
       className="w-100 h-100 pt20"
-      style={{ backgroundColor: "#f2f2f2", paddingBottom: "60px" }}
+      style={{
+        backgroundColor: "#f2f2f2",
+        paddingBottom: "60px"
+      }}
     >
       <div className="box flex">
         {/* 左边路由部分 */}
         <div
           className="bg-body font14 pt15"
-          style={{ width: "190px", height: "574px" }}
+          style={{ width: "190px", height: "inherit" }}
         >
           {selectList.map((item, index) => (
             <Fragment key={uuid()}>
@@ -68,36 +72,29 @@ export default ({ children, pathname }) => (
                 />
                 <div>{item.title}</div>
               </div>
-              <WrapLink
-                href={item.one.href}
-                as={item.one.as}
-                className={`relative h56 flex ai-center c333 ${
-                  item.one.href === pathname ? "bg-white c-main" : ""
-                }`}
-                style={{ paddingLeft: "62px" }}
-              >
-                {item.one.href === pathname && (
-                  <div className="me-border-left" />
-                )}
-                <div>{item.one.name}</div>
-              </WrapLink>
-              <WrapLink
-                href={item.other.href}
-                as={item.other.as}
-                className={`h56 relative flex ai-center c333 ${
-                  item.other.href === pathname ? "bg-white c-main" : ""
-                }`}
-                style={{ paddingLeft: "62px" }}
-              >
-                {item.other.href === pathname && (
-                  <div className="me-border-left" />
-                )}
-                <div>{item.other.name}</div>
-              </WrapLink>
+              {item &&
+                item.children &&
+                item.children.length > 0 &&
+                item.children.map(value => (
+                  <WrapLink
+                    key={uuid()}
+                    href={value.href}
+                    as={value.as}
+                    className={`relative h56 flex ai-center c333 ${
+                      value.href === pathname ? "bg-white c-main" : ""
+                    }`}
+                    style={{ paddingLeft: "62px" }}
+                  >
+                    {value.href === pathname && (
+                      <div className="me-border-left" />
+                    )}
+                    <div>{value.name}</div>
+                  </WrapLink>
+                ))}
             </Fragment>
           ))}
         </div>
-        <div className="equal bg-white">{children}</div>
+        <div className="equal overflow-h bg-white">{children}</div>
       </div>
     </div>
   </Layout>

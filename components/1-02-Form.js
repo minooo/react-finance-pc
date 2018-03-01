@@ -114,7 +114,7 @@ export default class extends Component {
     const { Option } = Select;
     const { Search } = Input;
     return (
-      <Fragment>
+      <Fragment className="home-form">
         <div className="font22 c333 ptb20 text-center">快速申请贷款</div>
         <Input
           placeholder="请输入姓名"

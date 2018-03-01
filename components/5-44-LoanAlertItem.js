@@ -12,7 +12,7 @@ export default ({ title, content }) => (
       className="me-loanapply-bordersize c333 h56 flex ai-center jc-center border-right border-bottom-one"
       style={{ width: "219px" }}
     >
-      <span className="text-overflow-1 plr10">{content || "暂无"}</span>
+      <span className="text-overflow-one plr10">{content || "暂无"}</span>
     </div>
   </Fragment>
 
