@@ -10,30 +10,22 @@ import {
   Layout,
   LoanStep,
   LoanTip,
-  LoanFormOne,
-  LoanFormTwo,
+  LoanCityFormOne,
   LoanFormThree
 } from "@components";
 
 @reduxPage
-@connect(
-  ({ user, userOther }) => ({ user, userOther }),
-  {
-    getUser,
-    getUserOther
-  }
-)
+@connect(({ user, userOther }) => ({ user, userOther }), {
+  getUser,
+  getUserOther
+})
 export default class extends Component {
   state = {
-    steps: ["基本信息", "其他信息", "申请成功"],
+    steps: ["基本信息", "申请成功"],
     tips: [
       {
         ico: "smile-o",
         text: "您好，请您如实填写您的信息，离您贷款成功只差一步！"
-      },
-      {
-        ico: "check-circle-o",
-        text: "您已完成基本信息，请您填写其他信息！"
       },
       {
         ico: "check-circle-o",
@@ -45,53 +37,69 @@ export default class extends Component {
     focus: 0
   };
   componentDidMount() {
-    const { getUser, getUserOther, user, userOther, url: { query } } = this.props;
-    if (!query || !query.mobile) {
-      Router.replace({ pathname: "/index" }, "/")
+    const {
+      getUser,
+      getUserOther,
+      user,
+      userOther,
+      url: { query, pathname, asPath }
+    } = this.props;
+    if (!query || !query.id || !query.start || !query.end) {
+      Router.replace({ pathname: "/index" }, "/");
     }
     if (!user || !userOther) {
       http
-      .get("member/base_profile")
-      .then(response => {
-        if (response.code === 200 && response.success) {
-          getUser(response.data);
-          http
-            .get("member/other_profile")
-            .then(response => {
-              if (response.code === 200 && response.success) {
-                getUserOther(response.data);
-              } else {
-                message.error(response.msg || "抱歉，请求出错。");
-              }
-            })
-            .catch(() => {
-              message.error("抱歉，网络异常，请稍后再试！");
-            });
-        } else {
-          message.error(response.msg || "抱歉，请求出错。");
-        }
-      })
-      .catch(() => {
-        message.error("抱歉，网络异常，请稍后再试！");
-      });
+        .get("member/base_profile")
+        .then(response => {
+          if (response.code === 200 && response.success) {
+            getUser(response.data);
+            http
+              .get("member/other_profile")
+              .then(response => {
+                if (response.code === 200 && response.success) {
+                  getUserOther(response.data);
+                } else {
+                  Router.replace(
+                    {
+                      pathname: "/4-me/1-login",
+                      query: { ...query, href: pathname, as: asPath }
+                    },
+                    "/login"
+                  );
+                }
+              })
+              .catch(() => {
+                message.error("抱歉，网络异常，请稍后再试！");
+              });
+          } else {
+            Router.replace(
+              {
+                pathname: "/4-me/1-login",
+                query: { ...query, href: pathname, as: asPath }
+              },
+              "/login"
+            );
+          }
+        })
+        .catch(() => {
+          message.error("抱歉，网络异常，请稍后再试！");
+        });
     }
   }
   onNextOne = param => {
-    this.goNext("base", param, 1);
+    const { url } = this.props
+    this.goNext("base", param, url.query.id);
   };
-  onNextTwo = param => {
-    this.goNext("other", param, 2)
-  }
-  goNext = (reqKey, param, step) => {
+  goNext = (reqKey, param, id) => {
     this.setState(
       () => ({ isLoading: true }),
       () => {
         http
-          .post(`member/${reqKey}_profile`, param)
+          .post("loans/common_city_apply", { ...param, id })
           .then(response => {
             this.setState(() => ({ isLoading: false }));
             if (response.code === 200 && response.success) {
-              this.setState(() => ({ focus: step }));
+              this.setState(() => ({ focus: 1 }));
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
@@ -105,7 +113,7 @@ export default class extends Component {
   };
   render() {
     const { steps, tips, focus, isLoading } = this.state;
-    const { url: { query }, user, userOther } = this.props;
+    const { url: { query }, user } = this.props;
     return (
       <Layout title="快速申请贷款" className="bg-body">
         {/* banner */}
@@ -122,9 +130,12 @@ export default class extends Component {
             }}
             className="loan-apply-con-bg flex ai-center jc-center column"
           >
-            <div className="font46 bold c333 mb20">快速申请贷款</div>
+            <div className="font20">您正在申请</div>
+            <div className="font46 bold c333 mb20">
+              {query && query.name && query.name.substr(0, 10)}
+            </div>
             <div className="font20">
-              QUICK&nbsp;&nbsp;APPLICATION&nbsp;&nbsp;FOR&nbsp;&nbsp;LOAN
+              请如实填写贷款信息，信贷经理会尽快与您联系
             </div>
           </div>
         </div>
@@ -147,34 +158,18 @@ export default class extends Component {
           {focus === 0 &&
             user &&
             query && (
-              <LoanFormOne
-                initName={query.name}
-                initMobile={query.mobile}
-                initMoney={query.money}
-                initGenre={query.genre}
-                initSex={user.sex}
+              <LoanCityFormOne
+                initMoneyStart={query.start}
+                initMoneyEnd={query.end}
                 initLimit={user.timelimit}
                 initPurpose={user.purpose}
                 initCycle={user.cycle}
-                initMarry={user.marital_status}
-                initProvince={user.province}
                 isLoading={isLoading}
                 onNextOne={this.onNextOne}
               />
             )}
-          {/* 第二步，其他信息 */}
-          {focus === 1 &&
-            userOther && (
-              <LoanFormTwo
-                initJob={userOther.identity_status}
-                initIncomeWay={userOther.income_mode}
-                initCredit={userOther.credit_condition}
-                initAsset={userOther.asset}
-                isLoading={isLoading}
-                onNextTwo={this.onNextTwo}
-              />
-            )}
-          {focus === 2 && <LoanFormThree />}
+          {/* 第二步 */}
+          {focus === 1 && <LoanFormThree />}
         </div>
         <div className="h60" />
       </Layout>

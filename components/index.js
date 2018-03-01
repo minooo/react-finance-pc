@@ -36,6 +36,7 @@ export { default as LoanTip } from "./2-04-Tip";
 export { default as LoanFormOne } from "./2-05-FormOne";
 export { default as LoanFormTwo } from "./2-06-FormTwo";
 export { default as LoanFormThree } from "./2-07-FormThree";
+export { default as LoanCityFormOne } from "./2-08-CityFormOne";
 
 // card 3
 export { default as CardList } from "./3-00-List";

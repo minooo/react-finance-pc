@@ -11,8 +11,7 @@ export default ({ item, index }) => (
       <div className="flex column equal jc-between pl15 ptb5">
         <div className="font16 lh120 text-overflow-1">{item.name}</div>
         <div className="font12 lh120 c333 text-overflow-1">
-          <span className="c-main">{item.apply_num}人</span>
-        申请
+          {/* <span className="c-main">{item.apply_num}</span>人申请 */}
         </div>
       </div>
     </div>
@@ -29,8 +28,7 @@ export default ({ item, index }) => (
       <div className="c333 font16 lh120 text-overflow-1" style={{ width: "180px" }}>{item.name}</div>
     </div>
     <div className="font12 lh100 c333">
-      <span className="c-main">{item.apply_num}人</span>
-      申请
+      {/* <span className="c-main">{item.apply_num}</span>人申请 */}
     </div>
   </div>)
   }
