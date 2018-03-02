@@ -20,10 +20,10 @@ export default ({ item, isrank, isRight }) => (
           <div className="flex font16 lh120 text-overflow-1 bold">
             {item.name}
           </div>
-          <div className="lh120 text-overflow-1">
-            <span className={`${isrank ? "c-main" : "c333"}`}>
+          <div className="lh120 text-overflow-one">
+            {/* <span className={`${isrank ? "c-main" : "c333"}`}>
               {item.apply_num}
-            </span>人申请
+            </span>人申请 */}
           </div>
           <div
             className={`font12 lh120 text-overflow-1 ${

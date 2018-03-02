@@ -196,7 +196,7 @@ export default class extends Component {
                       className="flex jc-center font14 bold ai-center h50"
                       style={{ backgroundColor: "#f6f6f6" }}
                     >
-                      orry~暂无数据。
+                      sorry~暂无数据。
                     </div>
                   )}
               </div>

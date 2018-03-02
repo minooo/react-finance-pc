@@ -136,12 +136,14 @@
     }
   }
 }
-.home-slide {
-  width: 100vw;
-  text-align: center;
+.home-slide-img {
+  display: block;
+  width: 1920px;
   height: 480px;
-  background: #4c8dfc;
-  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
 }
 .home-loanlist-bg {
   background-image: url("../../images/home_loan_bg.png");
