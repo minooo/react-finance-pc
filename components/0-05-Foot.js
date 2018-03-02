@@ -72,7 +72,7 @@ export default () => (
             </WrapLink>
           ))}
         </div>
-        <div style={{ width: "815px" }} className="flex jc-between">
+        <div style={{ width: "815px" }} className="flex jc-around">
           <div className="flex ai-center">
             <div style={{ height: "132px" }} className=" w72 app-bg" />
             <div className="font14 ml20 c-white">
@@ -85,15 +85,8 @@ export default () => (
           <div className="flex ai-center">
             <div className="w110 h110 code-bg" />
             <div className="font14 ml20 c-white">
-              <div className="mb10">嘟嘟e融公众号</div>
-              <div>扫码进入&nbsp;&gt;</div>
-            </div>
-          </div>
-          <div className="flex ai-center">
-            <div className="w110 h110 code-bg" />
-            <div className="font14 ml20 c-white">
               <div className="mb10">嘟嘟e融手机版</div>
-              <div>扫码进入&nbsp;&gt;</div>
+              <div>立即扫码</div>
             </div>
           </div>
         </div>

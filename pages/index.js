@@ -106,24 +106,26 @@ export default class extends Component {
       <Layout title="首页">
         {isFetch && <LoadingFetch />}
         {/* 申请贷款/轮播图/贷款类型 */}
-        <div className="relative">
-          <div
-            style={{ width: "320px" }}
-            className="bg-white home-shdow-mid home-form plr30 pb30"
-          >
-            <HomeForm />
+        <div className="relative" style={{ height: "600px" }}>
+          <div className="relative" style={{ height: "480px" }}>
+            <div
+              style={{ width: "320px" }}
+              className="bg-white home-shdow-mid home-form plr30 pb30"
+            >
+              <HomeForm />
+            </div>
+            <Carousel className="home-carousel" autoplay>
+              <div>
+                <h3 className="home-slide">aaa</h3>
+              </div>
+              <div>
+                <h3 className="home-slide">bbb</h3>
+              </div>
+              <div>
+                <h3 className="home-slide">ccc</h3>
+              </div>
+            </Carousel>
           </div>
-          <Carousel className="home-carousel" autoplay>
-            <div>
-              <h3 className="home-slide">aaa</h3>
-            </div>
-            <div>
-              <h3 className="home-slide">bbb</h3>
-            </div>
-            <div>
-              <h3 className="home-slide">ccc</h3>
-            </div>
-          </Carousel>
           <div className="flex jc-between home-type-position">
             {home &&
               home.top_speed_loans_type &&
@@ -207,8 +209,8 @@ export default class extends Component {
                   cardList &&
                   cardList.length > 0 && <HomeHotCardBox items={cardList} />
                 ) : (
-                    <HomeHotCardBox items={home.cards.cards} />
-                  ))}
+                  <HomeHotCardBox items={home.cards.cards} />
+                ))}
               {hasSearched &&
                 (!cardList || cardList.length === 0) && (
                   <div
@@ -262,7 +264,7 @@ export default class extends Component {
                   title={item.title}
                 >
                   {index <= 2 && (
-                    <span className="c-second">[ {index + 1} ] </span>
+                    <span className="c-second">【{index + 1}】 </span>
                   )}
                   {item.title}
                 </WrapLink>

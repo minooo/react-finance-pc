@@ -6,9 +6,9 @@ export default ({ index, item, showModal }) => (
     className="flex h60 pl20 flex ai-center c333 font14"
     style={{ backgroundColor: `${index % 2 === 0 ? "#fff" : "#f5f7fa"}` }}
   >
-    <div className="text-overflow-1 pr10" style={{ width: "200px" }}>{item.name}</div>
-    <div className="text-overflow-1 pr10" style={{ width: "155px" }}>{item.money}</div>
-    <div className="text-overflow-1 pr10" style={{ width: "260px" }}>{item.time}</div>
+    <div className="text-overflow-one pr10" style={{ width: "200px" }}>{item.name}</div>
+    <div className="text-overflow-one pr10" style={{ width: "155px" }}>{item.money}</div>
+    <div className="text-overflow-one pr10" style={{ width: "260px" }}>{item.time}</div>
     {
       item.type === "ing" ?
         (

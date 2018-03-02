@@ -26,9 +26,9 @@ export default class extends Component {
                 top: "40px",
                 right: 0
               }}
-              className="w120 h120 bg-white ptb10 plr10 home-shdow-sm r2"
+              className="w120 h120 bg-white ptb5 plr5 home-shdow-sm r2"
             >
-              <img src="http://dummyimage.com/100x100" alt="" />
+              <div className="w110 h110 code-bg" />
             </div>
           )}
           <WrapLink
