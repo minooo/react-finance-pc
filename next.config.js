@@ -16,7 +16,7 @@ const onDemandEntries = {
 
 module.exports = {
   useFileSystemPublicRoutes: false,
-  assetPrefix: pro ? (test ? "" : "http://public.duduapp.net/finance/static") : "",
+  assetPrefix: pro ? (test ? "" : "http://public.duduapp.net/finance/pc-static") : "",
   ...(!pro && !test && { onDemandEntries }),
   exportPathMap: () => ({
     "/": { page: "/" },
