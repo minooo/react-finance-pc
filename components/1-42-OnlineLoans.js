@@ -23,8 +23,8 @@ export default class extends Component {
     return (
       <div className="box flex">
         <div
-          className="mt20 flex column pt25 pl20 pr15 c333 mb20 bg-white home-shdow-mid relative"
-          style={{ width: "860px", height: "480px" }}
+          className=" flex column pt25 pl20 pr15 c333  bg-white home-shdow-mid relative mr20"
+          style={{ width: "860px", height: "520px" }}
         >
           <div className="home-loan-top">
             <div
@@ -76,7 +76,11 @@ export default class extends Component {
                             as={`/loan/${item.id}`}
                             style={{ width: "200px", height: "125px" }}
                           >
-                            <img className="pointer w-100 h-100" src={item.thumb} alt="" />
+                            <img
+                              className="pointer w-100 h-100"
+                              src={item.thumb}
+                              alt=""
+                            />
                           </WrapLink>
                         ))}
                       </Carousel>
