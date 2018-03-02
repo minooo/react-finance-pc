@@ -76,7 +76,11 @@ export default class extends Component {
                             as={`/loan/${item.id}`}
                             style={{ width: "200px", height: "125px" }}
                           >
-                            <img className="pointer w-100 h-100" src={item.thumb} alt="" />
+                            <img
+                              className="pointer w-100 h-100"
+                              src={item.thumb}
+                              alt=""
+                            />
                           </WrapLink>
                         ))}
                       </Carousel>

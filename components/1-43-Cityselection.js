@@ -54,10 +54,7 @@ export default ({ citySelection, rankingList }) => (
       </div>
     </div>
     <div className="equal overflow-h home-shdow-mid">
-      <div
-        className="plr20 pt20 bg-white font14"
-        style={{ height: "520px" }}
-      >
+      <div className="plr20 pt20 bg-white font14" style={{ height: "520px" }}>
         <Ranking
           title="同城贷排行榜"
           bg="home-loancity-bg"
