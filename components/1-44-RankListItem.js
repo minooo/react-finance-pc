@@ -17,16 +17,16 @@ export default ({ item, isrank, isRight }) => (
       </div>
       <div className="flex equal jc-between pl15 overflow-h">
         <div className="flex column jc-between c333 font12">
-          <div className="flex font16 lh120 text-overflow-one bold">
+          <div className="flex font16 lh120 text-overflow-1 bold">
             {item.name}
           </div>
-          <div className="lh120 text-overflow-one">
+          <div className="lh120 text-overflow-1">
             <span className={`${isrank ? "c-main" : "c333"}`}>
               {item.apply_num}
             </span>人申请
           </div>
           <div
-            className={`font12 lh120 text-overflow-one ${
+            className={`font12 lh120 text-overflow-1 ${
               isrank ? "c333" : "c-second"
             }`}
           >

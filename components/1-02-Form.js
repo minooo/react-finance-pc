@@ -38,20 +38,25 @@ export default class extends Component {
     const { mobile, isSendCode } = this.state;
     if (!isSendCode) return;
     if (!isMobile(mobile)) {
-      this.onErrMsg("您的手机号格式有误，请检查。")
+      this.onErrMsg("您的手机号格式有误，请检查。");
       return;
     }
     this.setState(
       () => ({ tickNum: 60, isSendCode: false }),
       () => {
         // 发送验证码接口调用
-        http.post("auth/send_code", { phone: mobile }).then(response => {
-          if (response.code === 200 && response.success) {
-            message.success("验证码发送成功！")
-          } else {
-            message.error(response.msg || "抱歉，请求出错。")
-          }
-        }).catch(() => { message.error("抱歉，网络异常，请稍后再试！") })
+        http
+          .post("auth/send_code", { phone: mobile })
+          .then(response => {
+            if (response.code === 200 && response.success) {
+              message.success("验证码发送成功！");
+            } else {
+              message.error(response.msg || "抱歉，请求出错。");
+            }
+          })
+          .catch(() => {
+            message.error("抱歉，网络异常，请稍后再试！");
+          });
 
         this.tick = setInterval(() => {
           this.setState(
@@ -68,53 +73,76 @@ export default class extends Component {
     );
   };
   onClose = () => {
-    this.onErrMsg()
-  }
-  onErrMsg = (msg) => {
-    this.setState(() => ({ errMsg: msg }))
-  }
+    this.onErrMsg();
+  };
+  onErrMsg = msg => {
+    this.setState(() => ({ errMsg: msg }));
+  };
   applyLoan = () => {
     const { name, money, mobile, genre, code } = this.state;
-    const { router } = this.props
+    const { router } = this.props;
     if (!isName(name)) {
-      this.onErrMsg("请输入您的姓名，2-4字")
+      this.onErrMsg("请输入您的姓名，2-4字");
       return;
     }
     if (!money) {
-      this.onErrMsg("请输入您的贷款金额")
+      this.onErrMsg("请输入您的贷款金额");
       return;
     }
     if (!genre) {
-      this.onErrMsg("请选择您的贷款类型。")
+      this.onErrMsg("请选择您的贷款类型。");
       return;
     }
     if (!isMobile(mobile)) {
-      this.onErrMsg("您的手机号格式有误，请检查。")
+      this.onErrMsg("您的手机号格式有误，请检查。");
       return;
     }
     if (!code) {
-      this.onErrMsg("请输入您的验证码。")
+      this.onErrMsg("请输入您的验证码。");
       return;
     }
-    this.setState(() => ({ isLoading: true }), () => {
-      http.post("loans/fast_apply", { name, money, genre, phone: mobile, code }).then(response => {
-        this.setState(() => ({ isLoading: false }))
-        if (response.code === 200 && response.success) {
-          const { token } = response.data
-          setCookie("token", token, 1) // 有效期1天
-          router.push({ pathname: "/1-loan/4-apply-loan", query: { name, money, mobile, genre } }, "/loan/apply")
-        } else {
-          this.onErrMsg(response.msg || "抱歉，请求出错。")
-        }
-      }).catch(() => { message.error("抱歉，网络异常，请稍后再试！") })
-    })
+    this.setState(
+      () => ({ isLoading: true }),
+      () => {
+        http
+          .post("loans/fast_apply", { name, money, genre, phone: mobile, code })
+          .then(response => {
+            this.setState(() => ({ isLoading: false }));
+            if (response.code === 200 && response.success) {
+              const { token } = response.data;
+              setCookie("token", token, 1); // 有效期1天
+              router.push(
+                {
+                  pathname: "/1-loan/4-apply-loan",
+                  query: { name, money, mobile, genre }
+                },
+                "/loan/apply"
+              );
+            } else {
+              this.onErrMsg(response.msg || "抱歉，请求出错。");
+            }
+          })
+          .catch(() => {
+            message.error("抱歉，网络异常，请稍后再试！");
+          });
+      }
+    );
   };
   render() {
-    const { name, money, mobile, code, tickNum, isSendCode, isLoading, errMsg } = this.state;
+    const {
+      name,
+      money,
+      mobile,
+      code,
+      tickNum,
+      isSendCode,
+      isLoading,
+      errMsg
+    } = this.state;
     const { Option } = Select;
     const { Search } = Input;
     return (
-      <Fragment className="home-form">
+      <Fragment>
         <div className="font22 c333 ptb20 text-center">快速申请贷款</div>
         <Input
           placeholder="请输入姓名"
@@ -161,7 +189,16 @@ export default class extends Component {
           onChange={val => this.onChange(val, "code")}
           onSearch={this.onSendCode}
         />
-        {errMsg && <Alert message={errMsg} type="error" showIcon closable className="mb10" onClose={this.onClose} />}
+        {errMsg && (
+          <Alert
+            message={errMsg}
+            type="error"
+            showIcon
+            closable
+            className="mb10"
+            onClose={this.onClose}
+          />
+        )}
         <Button
           type="primary"
           loading={isLoading}
