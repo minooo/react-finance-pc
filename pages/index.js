@@ -45,20 +45,6 @@ export default class extends Component {
     hasSearched: false,
     isFetch: false,
     cardList: null,
-    coupons: [
-      {
-        img: "http://dummyimage.com/224x140",
-        link: "http://www.baidu.com"
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        link: "http://www.baidu.com"
-      },
-      {
-        img: "http://dummyimage.com/224x140",
-        link: "http://www.baidu.com"
-      }
-    ]
   };
   onCardTypeClick = (id, index) => {
     // card/list?category=1
@@ -91,13 +77,7 @@ export default class extends Component {
       });
   };
   render() {
-    const {
-      coupons,
-      cardTypeFocus,
-      cardList,
-      hasSearched,
-      isFetch
-    } = this.state;
+    const { cardTypeFocus, cardList, hasSearched, isFetch } = this.state;
     const { home, err } = this.props;
     if (err) {
       return <ErrorFetch err={err} />;
@@ -115,15 +95,14 @@ export default class extends Component {
               <HomeForm />
             </div>
             <Carousel className="home-carousel" autoplay>
-              <div>
-                <h3 className="home-slide">aaa</h3>
-              </div>
-              <div>
-                <h3 className="home-slide">bbb</h3>
-              </div>
-              <div>
-                <h3 className="home-slide">ccc</h3>
-              </div>
+              {home &&
+                home.banner &&
+                home.banner.length > 0 &&
+                home.banner.map(item => (
+                <WrapLink key={uuid} className="relative" href={item.url}>
+                  <img src={item.image} className="home-slide-img" alt="" />
+                </WrapLink>
+              ))}
             </Carousel>
           </div>
           <div className="flex jc-between home-type-position">
@@ -170,7 +149,7 @@ export default class extends Component {
                   key={uuid()}
                   item={item}
                   index={index}
-                  len={coupons.length - 1}
+                  len={home.special_offer.length - 1}
                 />
               ))}
           </div>
@@ -217,7 +196,7 @@ export default class extends Component {
                     className="flex jc-center font14 bold ai-center h50 plr20"
                     style={{ backgroundColor: "#f6f6f6" }}
                   >
-                    orry~暂无数据。
+                    sorry~暂无数据。
                   </div>
                 )}
             </div>

@@ -45,6 +45,12 @@ export default class extends Component {
     }
     /* eslint-enable */
   }
+  componentWillReceiveProps() {
+    const dia = document.getElementById("bdshare_weixin_qrcode_dialog")
+    if (dia) {
+      dia.style.display = "none"
+    }
+  }
   componentWillUpdate() {
     /* eslint-disable */
     window._bd_share_config = {
@@ -60,6 +66,12 @@ export default class extends Component {
       share: {}
     };
     require("../../static/scripts/share.js");
+  }
+  componentWillUnmount(){
+    const dia = document.getElementById("bdshare_weixin_qrcode_dialog")
+    if (dia) {
+      dia.style.display = "none"
+    }
   }
   render() {
     const {
