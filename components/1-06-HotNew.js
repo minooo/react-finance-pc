@@ -12,8 +12,8 @@ export default ({ item, index }) => (
       item.map(n => (
         <WrapLink
           key={uuid()}
-          href="/index"
-          as="/"
+          href={`/3-new/2-detail?id=${n.id}`}
+          as={`/new/${n.id}`}
           style={{ marginBottom: "7px" }}
           className="font14 c333 home-new-link pl20 text-overflow-one block"
           title={n.title}

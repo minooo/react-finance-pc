@@ -41,7 +41,12 @@ export default class extends Component {
             onDeletemessages={this.onDeletemessages}
           />
         ) : (
-          <NoData caption="没有系统消息" />
+          <NoData
+            icoType="message"
+            style={{ fontSize: "60px" }}
+            className="pb10"
+            caption="暂时没有系统消息"
+          />
         )}
       </MeSelection>
     );

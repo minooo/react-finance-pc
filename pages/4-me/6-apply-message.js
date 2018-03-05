@@ -38,7 +38,12 @@ export default class extends Component {
         {message && message.length > 0 ? (
           <MeMessageList message={message} />
         ) : (
-          <NoData caption="没有申请消息" />
+          <NoData
+            icoType="message"
+            style={{ fontSize: "60px" }}
+            className="pb10"
+            caption="暂时没有申请消息"
+          />
         )}
       </MeSelection>
     );
