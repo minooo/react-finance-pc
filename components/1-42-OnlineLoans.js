@@ -137,7 +137,7 @@ export default class extends Component {
             style={{ height: "520px" }}
           >
             <Ranking
-              title="急速贷排行榜"
+              title="极速贷排行榜"
               bg="home-loanlist-bg"
               list={
                 onlineLoans.new &&
