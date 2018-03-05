@@ -103,7 +103,7 @@
   box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
 }
 .home-shdow-mid {
-  box-shadow: 2px 4px 25px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.06);
 }
 .home-form {
   position: absolute;
@@ -136,12 +136,14 @@
     }
   }
 }
-.home-slide {
-  width: 100vw;
-  text-align: center;
+.home-slide-img {
+  display: block;
+  width: 1920px;
   height: 480px;
-  background: #4c8dfc;
-  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
 }
 .home-loanlist-bg {
   background-image: url("../../images/home_loan_bg.png");

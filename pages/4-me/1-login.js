@@ -166,7 +166,7 @@ export default class extends Component {
     } = this.state;
     const { Search } = Input;
     return (
-      <Layout footNoShow title="登陆">
+      <Layout footNoShow title="登录">
         {/* banner图 */}
         <div style={{ height: "600px" }} className="me-login-banner">
           <div style={{ height: "600px" }} className="box relative">

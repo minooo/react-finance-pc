@@ -211,7 +211,7 @@ export default class extends Component {
                         data.loan &&
                         data.loan.apply_material_name &&
                         data.loan.apply_material_name.length > 0 &&
-                        data.loan.apply_material_name.slice(0, 4).map(item => (
+                        data.loan.apply_material_name.slice(0, 7).map(item => (
                           <div
                             key={uuid()}
                             className="c-second font14 plr10 flex ai-center mr10 equal-no text-overflow-one"
@@ -225,7 +225,7 @@ export default class extends Component {
                           </div>
                         ))}
                     </div>
-                    <div className="lh120 font16 c666 text-overflow-one">
+                    <div className="lh150 font16 c666 text-overflow-one">
                       {data && data.loan && data.loan.description}
                     </div>
                   </div>

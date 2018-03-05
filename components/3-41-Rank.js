@@ -10,8 +10,7 @@ export default ({ item, index }) => (
         <div className="flex column equal overflow-h jc-between pl15 ptb5">
           <div className="font16 lh120 text-overflow-one">{item.name}</div>
           <div className="font12 lh120 c333 text-overflow-one">
-            <span className="c-main">{item.apply_num}人</span>
-            申请
+            {/* <span className="c-main">{item.apply_num}</span>人申请 */}
           </div>
         </div>
       </div>

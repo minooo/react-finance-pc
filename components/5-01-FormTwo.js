@@ -61,13 +61,13 @@ export default class extends Component {
       this.onErrMsg("请选择您的职业身份。");
       return;
     }
-    // 上班族
     if (job === 1 || initMyJob === 1) {
+      // 上班族
       if (!incomeWay && !initMyIncomeWay) {
         this.onErrMsg("请选择您的收入方式。");
         return;
       }
-      if (!income && !initMyMonthlyIncome) {
+      if (income === "" || (income === undefined && !initMyMonthlyIncome)) {
         this.onErrMsg("请输入您的月收入。");
         return;
       }
@@ -75,14 +75,19 @@ export default class extends Component {
         income_mode: incomeWay || initMyIncomeWay,
         monthly_income: income || initMyMonthlyIncome
       };
-    }
-    // 个体户
-    if (job === 2 || initMyJob === 2) {
-      if (!income21 && !initMyMonthlyTurnover) {
+    } else if (job === 2 || initMyJob === 2) {
+      // 个体户
+      if (
+        income21 === "" ||
+        (income21 === undefined && !initMyMonthlyTurnover)
+      ) {
         this.onErrMsg("请输入您的月经营流水。");
         return;
       }
-      if (!income1 && !initMyCashSettlementOperatingIncome) {
+      if (
+        income1 === "" ||
+        (income1 === undefined && !initMyCashSettlementOperatingIncome)
+      ) {
         this.onErrMsg("请填写您的月现金结算流水。");
         return;
       }
@@ -91,22 +96,26 @@ export default class extends Component {
         cash_settlement_operating_income:
           income1 || initMyCashSettlementOperatingIncome
       };
-    }
-    // 自由职业者
-    if (job === 4 || initMyJob === 4) {
-      if (!income && !initMyMonthlyIncome) {
+    } else if (job === 4 || initMyJob === 4) {
+      // 自由职业者
+      if (income === "" || (income === undefined && !initMyMonthlyIncome)) {
         this.onErrMsg("请填写您的月收入。");
         return;
       }
       jobParam = { monthly_income: income || initMyMonthlyIncome };
-    }
-    // 企业主
-    if (job === 5 || initMyJob === 5) {
-      if (!income51 && !initMyMonthlyBusinessAccountIncome) {
+    } else if (job === 5 || initMyJob === 5) {
+      // 企业主
+      if (
+        income51 === "" ||
+        (income51 === undefined && !initMyMonthlyBusinessAccountIncome)
+      ) {
         this.onErrMsg("请填写您的月对公账户收入");
         return;
       }
-      if (!income1 && !initMyCashSettlementOperatingIncome) {
+      if (
+        income1 === "" ||
+        (income1 === undefined && !initMyCashSettlementOperatingIncome)
+      ) {
         this.onErrMsg("请填写您的月现金结算流水。");
         return;
       }
@@ -126,6 +135,9 @@ export default class extends Component {
       ...assetParam
     };
 
+    // console.log(param)
+
+    // return
     onNextTwo(param);
   };
 
@@ -226,7 +238,7 @@ export default class extends Component {
                 disabled={initDisabled}
                 size="large"
                 addonAfter="元"
-                value={
+                defaultValue={
                   jobChange
                     ? this.state[`income${job}1`]
                     : this.state[`income${job}1`] ||
@@ -259,7 +271,7 @@ export default class extends Component {
                 disabled={initDisabled}
                 size="large"
                 addonAfter="元"
-                value={
+                defaultValue={
                   jobChange
                     ? this.state[`income${job === 1 || job === 4 ? "" : 1}`]
                     : this.state[`income${job === 1 || job === 4 ? "" : 1}`] ||
