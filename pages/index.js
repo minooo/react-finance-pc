@@ -89,7 +89,7 @@ export default class extends Component {
         <div className="relative" style={{ height: "600px" }}>
           <div className="relative" style={{ height: "480px" }}>
             <div
-              style={{ width: "320px" }}
+              style={{ width: "320px", minHeight: "396px" }}
               className="bg-white home-shdow-mid home-form plr30 pb30"
             >
               <HomeForm />
