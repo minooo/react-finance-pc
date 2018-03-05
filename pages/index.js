@@ -44,7 +44,7 @@ export default class extends Component {
     cardTypeFocus: 0,
     hasSearched: false,
     isFetch: false,
-    cardList: null,
+    cardList: null
   };
   onCardTypeClick = (id, index) => {
     // card/list?category=1
@@ -99,10 +99,10 @@ export default class extends Component {
                 home.banner &&
                 home.banner.length > 0 &&
                 home.banner.map(item => (
-                <WrapLink key={uuid} className="relative" href={item.url}>
-                  <img src={item.image} className="home-slide-img" alt="" />
-                </WrapLink>
-              ))}
+                  <WrapLink key={uuid()} className="relative" href={item.url}>
+                    <img src={item.image} className="home-slide-img" alt="" />
+                  </WrapLink>
+                ))}
             </Carousel>
           </div>
           <div className="flex jc-between home-type-position">

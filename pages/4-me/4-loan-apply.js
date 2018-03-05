@@ -87,7 +87,12 @@ export default class extends Component {
             )}
           </div>
         ) : (
-          <NoData caption="你没有贷款申请记录" />
+          <NoData
+            icoType="message"
+            style={{ fontSize: "60px" }}
+            className="pb10"
+            caption="你没有贷款申请记录"
+          />
         )}
       </MeSelection>
     );
