@@ -13,11 +13,7 @@ export default class extends Component {
       const { value } = val.target;
       this.setState(() => ({ [type]: value }));
     }
-    if (
-      type === "money" ||
-      type === "age" ||
-      type === "idNum"
-    ) {
+    if (type === "money" || type === "age" || type === "idNum") {
       const { value } = val.target;
       const reg = type === "idNum" ? /^[a-z0-9]*$/ : /^([1-9][0-9]*)?$/;
       if (reg.test(value)) {

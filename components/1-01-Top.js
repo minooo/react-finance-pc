@@ -61,7 +61,6 @@ export default class extends Component {
                 登录
               </WrapLink>
             )}
-
             <span onMouseEnter={this.onSwitch} onMouseLeave={this.onSwitch}>
               手机站
             </span>

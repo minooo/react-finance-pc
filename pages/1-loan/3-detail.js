@@ -185,7 +185,7 @@ export default class extends Component {
               贷款超市
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <span className="c999 font16">
+            <span className="c333 font16">
               {(data && data.loan && data.loan.name) || "贷款详情"}
             </span>
           </div>
