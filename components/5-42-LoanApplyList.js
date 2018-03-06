@@ -16,16 +16,16 @@ export default ({ index, item, showModal }) => (
       {item.created_at}
     </div>
     {item.status === 1 ? (
-      <div style={{ width: "190px", color: "#e4393c" }}>
-        <Icon className="pr5" type="clock-circle-o" />进行中
+      <div className="c999" style={{ width: "190px" }}>
+        <Icon className="pr5" type="close-circle-o" />已关闭
       </div>
     ) : item.type === 2 ? (
       <div style={{ width: "190px", color: "#71b247" }}>
         <Icon className="pr5" type="check-circle-o" />已成功
       </div>
     ) : (
-      <div className="c999" style={{ width: "190px" }}>
-        <Icon className="pr5" type="close-circle-o" />已关闭
+      <div style={{ width: "190px", color: "#e4393c" }}>
+        <Icon className="pr5" type="clock-circle-o" />进行中
       </div>
     )}
     <Btn
