@@ -10,23 +10,23 @@ export default ({ item }) => (
     <div className="w106 h66 img-bg mr15">
       <img src={item.thumb} alt="" className="w-100 h-100" />
     </div>
-    <div className="flex column h56 jc-between equal overflow-h pr20">
+    <div className="flex column h56 jc-between overflow-h pr20" style={{ width: "310px" }}>
       <div className="font18 c333 lh100 text-overflow-one">{item.name}</div>
       <div className="font12 c999 lh100 text-overflow-one">{item.description}</div>
     </div>
     <div
-      style={{ borderLeft: "1px solid #f2f2f2" }}
+      style={{ borderLeft: "1px solid #f2f2f2", width: "210px" }}
       className="h62 flex column jc-between plr30"
     >
-      <div className="font14 c333 lh100">
+      <div className="font14 c333 lh100 text-overflow-one">
         <span className="font12 c999">卡片等级：</span>
         {item.level}
       </div>
-      <div className="font14 c333 lh100">
+      <div className="font14 c333 lh100 text-overflow-one">
         <span className="font12 c999">系列币种：</span>
         {item.currency}
       </div>
-      <div className="font14 c333 lh100">
+      <div className="font14 c333 lh100 text-overflow-one">
         <span className="font12 c999">年费政策：</span>
         {(item.yearFee && item.yearFee.substr(0, 10)) || "暂无"}
       </div>

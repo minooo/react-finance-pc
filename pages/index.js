@@ -86,124 +86,133 @@ export default class extends Component {
       <Layout title="首页">
         {isFetch && <LoadingFetch />}
         {/* 申请贷款/轮播图/贷款类型 */}
-        <div className="relative" style={{ height: "600px" }}>
+        <div className="relative" style={{ height: "480px" }}>
           <div className="relative" style={{ height: "480px" }}>
-            <div
-              style={{ width: "320px" }}
-              className="bg-white home-shdow-mid home-form plr30 pb30"
-            >
-              <HomeForm />
+            <div className="flex home-form ai-center">
+              <div
+                style={{ width: "320px" }}
+                className="bg-white home-shdow-mid plr30 pb30"
+              >
+                <HomeForm />
+              </div>
             </div>
+
             <Carousel className="home-carousel" autoplay>
               {home &&
                 home.banner &&
                 home.banner.length > 0 &&
                 home.banner.map(item => (
-                <WrapLink key={uuid} className="relative" href={item.url}>
-                  <img src={item.image} className="home-slide-img" alt="" />
-                </WrapLink>
-              ))}
+                  <WrapLink key={uuid()} className="relative" href={item.url}>
+                    <img src={item.image} className="home-slide-img" alt="" />
+                  </WrapLink>
+                ))}
             </Carousel>
           </div>
-          <div className="flex jc-between home-type-position">
-            {home &&
-              home.top_speed_loans_type &&
-              home.top_speed_loans_type.length > 0 &&
-              home.top_speed_loans_type.map((item, index) => (
-                <HomeType key={uuid()} item={item} index={index} />
-              ))}
-          </div>
         </div>
+        <div className="flex jc-between box mt30">
+          {home &&
+            home.top_speed_loans_type &&
+            home.top_speed_loans_type.length > 0 &&
+            home.top_speed_loans_type.map((item, index) => (
+              <HomeType key={uuid()} item={item} index={index} />
+            ))}
+        </div>
+        {/* 第一个背景图 */}
+        <div className="home-bg-1">
+          <div className="h80" />
+          {/* 在线极速贷款 */}
+          {home &&
+            home.top_speed_loans && (
+              <HomeOnlineLoans onlineLoans={home.top_speed_loans} />
+            )}
 
-        <div style={{ height: "225px" }} />
-        {/* 在线极速贷款 */}
-        {home &&
-          home.top_speed_loans && (
-            <HomeOnlineLoans onlineLoans={home.top_speed_loans} />
-          )}
-
-        <div style={{ height: "100px" }} />
-        {/* 同城贷款贷款 */}
-        {home &&
-          home.common_city_loans_type &&
-          home.common_city_loans && (
-            <HomeCityselection
-              citySelection={home.common_city_loans_type}
-              rankingList={home.common_city_loans}
-            />
-          )}
-
-        <div style={{ height: "140px" }} />
-        {/* 优惠活动 */}
-        <div style={{ height: "580px" }} className="box flex">
-          <div
-            style={{ width: "266px" }}
-            className="flex column ai-center mr20 home-shdow-mid"
-          >
-            <div className="font20 bold pt20 pb15">优惠活动</div>
-            {home &&
-              home.special_offer &&
-              home.special_offer.length > 0 &&
-              home.special_offer.map((item, index) => (
-                <HomeCoupon
-                  key={uuid()}
-                  item={item}
-                  index={index}
-                  len={home.special_offer.length - 1}
-                />
-              ))}
-          </div>
-          <div className="equal home-shdow-mid pt20">
-            <div className="flex jc-between plr20">
-              <div className="font20 bold">热门卡片</div>
-              <WrapLink
-                href="/2-card/1-home"
-                as="/card"
-                className="font16 mt5 more-link"
-              >
-                更多
-              </WrapLink>
-            </div>
-            <div className="flex ptb15 mb5">
+          <div className="h80" />
+          {/* 同城贷款贷款 */}
+          {home &&
+            home.common_city_loans_type &&
+            home.common_city_loans && (
+              <HomeCityselection
+                citySelection={home.common_city_loans_type}
+                rankingList={home.common_city_loans}
+              />
+            )}
+          <div className="h70" />
+        </div>
+        {/* 第二个背景图 */}
+        <div className="home-bg-2">
+          <div className="h70" />
+          {/* 优惠活动 */}
+          <div style={{ height: "580px" }} className="box flex">
+            <div
+              style={{ width: "266px" }}
+              className="flex plr20 column mr20 home-shdow-mid bg-white "
+            >
+              <div className="font20 bold pt20 pb15">优惠活动</div>
               {home &&
-                home.card_types &&
-                home.card_types.length > 0 &&
-                home.card_types.map((item, index) => (
-                  <HomeCardLink
+                home.special_offer &&
+                home.special_offer.length > 0 &&
+                home.special_offer.map((item, index) => (
+                  <HomeCoupon
                     key={uuid()}
                     item={item}
                     index={index}
-                    len={home.card_types.length - 1}
-                    cardTypeFocus={cardTypeFocus}
-                    onCardTypeClick={this.onCardTypeClick}
+                    len={home.special_offer.length - 1}
                   />
                 ))}
             </div>
-            <div className="plr20 flex wrap jc-between">
-              {home &&
-                home.cards &&
-                home.cards.cards &&
-                home.cards.cards.length > 0 &&
-                (hasSearched ? (
-                  cardList &&
-                  cardList.length > 0 && <HomeHotCardBox items={cardList} />
-                ) : (
-                  <HomeHotCardBox items={home.cards.cards} />
-                ))}
-              {hasSearched &&
-                (!cardList || cardList.length === 0) && (
-                  <div
-                    className="flex jc-center font14 bold ai-center h50 plr20"
-                    style={{ backgroundColor: "#f6f6f6" }}
-                  >
-                    sorry~暂无数据。
-                  </div>
-                )}
+            <div className="equal home-shdow-mid pt20 bg-white ">
+              <div className="flex jc-between plr20">
+                <div className="font20 bold">热门卡片</div>
+                <WrapLink
+                  href="/2-card/1-home"
+                  as="/card"
+                  className="font16 mt5 more-link"
+                >
+                  更多
+                </WrapLink>
+              </div>
+              <div className="flex ptb15 mb5">
+                {home &&
+                  home.card_types &&
+                  home.card_types.length > 0 &&
+                  home.card_types.map((item, index) => (
+                    <HomeCardLink
+                      key={uuid()}
+                      item={item}
+                      index={index}
+                      len={home.card_types.length - 1}
+                      cardTypeFocus={cardTypeFocus}
+                      onCardTypeClick={this.onCardTypeClick}
+                    />
+                  ))}
+              </div>
+              <div className="plr20 flex wrap jc-between">
+                {home &&
+                  home.cards &&
+                  home.cards.cards &&
+                  home.cards.cards.length > 0 &&
+                  (hasSearched ? (
+                    cardList &&
+                    cardList.length > 0 && <HomeHotCardBox items={cardList} />
+                  ) : (
+                      <HomeHotCardBox items={home.cards.cards} />
+                    ))}
+                {hasSearched &&
+                  (!cardList || cardList.length === 0) && (
+                    <div
+                      className="flex jc-center font14 bold ai-center h50 plr20"
+                      style={{ backgroundColor: "#f6f6f6" }}
+                    >
+                      sorry~暂无数据
+                    </div>
+                  )}
+              </div>
             </div>
           </div>
+          {/* 热门资讯/资讯排行 */}
+          <div className="h70" />
         </div>
-        {/* 热门资讯/资讯排行 */}
-        <div style={{ height: "140px" }} />
+        <div className="h70" />
         <div
           style={{ height: "350px" }}
           className="box home-shdow-mid plr20 flex jc-between"
@@ -242,9 +251,7 @@ export default class extends Component {
                   className="font14 c333 text-overflow-one block"
                   title={item.title}
                 >
-                  {index <= 2 && (
-                    <span className="c-second">【{index + 1}】 </span>
-                  )}
+                  <span className="c-main">【{index + 1}】 </span>
                   {item.title}
                 </WrapLink>
               ))}

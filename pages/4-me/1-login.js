@@ -176,7 +176,7 @@ export default class extends Component {
                 top: "80px",
                 right: "0px"
               }}
-              className=" bg-white plr30 absolute"
+              className="bg-white plr30 absolute"
             >
               <div className="font22 c333 lh100 ptb30 text-center">登录</div>
               <Input

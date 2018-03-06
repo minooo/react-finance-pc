@@ -110,7 +110,7 @@ export default class extends Component {
               资讯
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <span className="c999 font16">
+            <span className="c333 font16">
               {type &&
                 type.length > 0 &&
                 type.map(item => {
