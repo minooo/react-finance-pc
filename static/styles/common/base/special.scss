@@ -60,6 +60,12 @@
   background-color: #4c8dfc;
   color: #fff;
 }
+.back-top-qq{
+  height: 22px;
+  width: 22px;
+  background-image: url("../../images/backtop_qq.png");
+  background-repeat: no-repeat;
+}
 .visible {
   visibility: visible;
 }
@@ -78,6 +84,14 @@
   right: -24px;
 }
 // home
+.home-bg-1{
+  background-image: url("../../images/home_bg_1.jpg");
+  background-size: cover;
+}
+.home-bg-2{
+  background-image: url("../../images/home_bg_2.jpg");
+  background-size: cover;
+}
 .home-top-city-bg {
   background: url("../../images/home_top_bg.png") 0 center no-repeat;
 }
@@ -108,10 +122,9 @@
 .home-form {
   position: absolute;
   z-index: 10;
-  top: 50%;
-  transform: translateY(-50%);
   left: 50%;
   margin-left: -600px;
+  height:480px;
 }
 .home-type-position {
   position: absolute;
@@ -189,10 +202,12 @@
   background-size: cover;
 }
 .home-citybg-1 {
-  background-color: #f5f1ff;
+   background-image: url("../../images/home_citylbg_2.jpg");
+  background-size: cover;
 }
 .home-citybg-2 {
-  background-color: #ddf3ff;
+  background-image: url("../../images/home_citylbg_3.jpg");
+  background-size: cover;
 }
 .home-citybg-3 {
   background-image: url("../../images/home_citylbg_4.jpg");
@@ -555,6 +570,7 @@
   border-radius: 0px 2px 2px 0px;
   position: absolute;
   left: 0px;
+  top:0px;
 }
 .me-loanapply-border-tlr {
   border-top: 1px solid #f2f2f2;

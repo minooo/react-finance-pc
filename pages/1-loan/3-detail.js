@@ -185,7 +185,7 @@ export default class extends Component {
               贷款超市
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <span className="c999 font16">
+            <span className="c333 font16">
               {(data && data.loan && data.loan.name) || "贷款详情"}
             </span>
           </div>
@@ -425,7 +425,7 @@ export default class extends Component {
                                   index === data.flowpath.length - 1
                                     ? ""
                                     : "180px"
-                                }`
+                                  }`
                               }}
                             >
                               <div className="flex column ai-center">
@@ -498,12 +498,12 @@ export default class extends Component {
                 <div
                   className={`${
                     data &&
-                    data.loan &&
-                    data.loan.category &&
-                    data.loan.category === 1
+                      data.loan &&
+                      data.loan.category &&
+                      data.loan.category === 1
                       ? "h60"
                       : "h44"
-                  }`}
+                    }`}
                 />
                 {data &&
                   data.loan &&
@@ -585,21 +585,21 @@ export default class extends Component {
                         key={uuid()}
                         href={`${
                           data &&
-                          data.loan &&
-                          data.loan.category &&
-                          data.loan.category === 1
+                            data.loan &&
+                            data.loan.category &&
+                            data.loan.category === 1
                             ? "/1-loan/2-home-speed"
                             : "/1-loan/1-home"
-                        }`}
+                          }`}
                         as={`
                         ${
                           data &&
-                          data.loan &&
-                          data.loan.category &&
-                          data.loan.category === 1
+                            data.loan &&
+                            data.loan.category &&
+                            data.loan.category === 1
                             ? "/loan/speed"
                             : "/loan"
-                        }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
+                          }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
                         className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-one"
                       >
                         {item.name}
@@ -609,43 +609,43 @@ export default class extends Component {
               </div>
               <div className="h20" />
               {data &&
-              data.loan &&
-              data.loan.category &&
-              data.loan.category === 1 ? (
-                <div className="pb25 pt30 plr30 bg-white">
-                  <div className="font18 c333 text-center mb25 lh120">
-                    APP下载，享专属优惠
+                data.loan &&
+                data.loan.category &&
+                data.loan.category === 1 ? (
+                  <div className="pb25 pt30 plr30 bg-white">
+                    <div className="font18 c333 text-center mb25 lh120">
+                      APP下载，享专属优惠
                   </div>
-                  <div className="flex jc-around ai-center mb20">
-                    <div className="w70" style={{ height: "130px" }}>
-                      <img
-                        src="/static/images/foot_app.png"
-                        className="w-100"
-                        alt=""
-                      />
+                    <div className="flex jc-around ai-center mb20">
+                      <div className="w70" style={{ height: "130px" }}>
+                        <img
+                          src="/static/images/foot_app.png"
+                          className="w-100"
+                          alt=""
+                        />
+                      </div>
+                      <div className="w100 h100 app-qrcode-bg" />
                     </div>
-                    <div className="w100 h100 app-qrcode-bg" />
+                    <div className="c-main font14 text-center lh120">
+                      最高可借30万,最快当天放款
                   </div>
-                  <div className="c-main font14 text-center lh120">
-                    最高可借30万,最快当天放款
                   </div>
-                </div>
-              ) : (
-                <div className="plr10 ptb25 bg-white">
-                  <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
-                  {data &&
-                    data.recommend &&
-                    data.recommend.list &&
-                    data.recommend.list.length > 0 &&
-                    data.recommend.list.map(item => (
-                      <HomeRankListItem
-                        key={uuid()}
-                        item={item}
-                        isrank="true"
-                      />
-                    ))}
-                </div>
-              )}
+                ) : (
+                  <div className="plr10 ptb25 bg-white">
+                    <div className="pl15 pb15 font20 lh100 bold">相关推荐</div>
+                    {data &&
+                      data.recommend &&
+                      data.recommend.list &&
+                      data.recommend.list.length > 0 &&
+                      data.recommend.list.map(item => (
+                        <HomeRankListItem
+                          key={uuid()}
+                          item={item}
+                          isrank="true"
+                        />
+                      ))}
+                  </div>
+                )}
             </div>
           </div>
         </div>

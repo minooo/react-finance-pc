@@ -57,7 +57,7 @@ export default class extends Component {
                 咨询客服
               </div>
             ) : (
-              <Icon className="block" type="qq" style={{ fontSize: 22 }} />
+              <div className="block back-top-qq" />
             )}
           </WrapLink>
           <BackTop

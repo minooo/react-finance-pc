@@ -99,7 +99,7 @@ export default class extends Component {
                         className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
                         href={`/1-loan/3-detail?id=${
                           onlineLoans.pop.list[focus].id
-                        }`}
+                          }`}
                         as={`/loan/${onlineLoans.pop.list[focus].id}`}
                       >
                         <span className="c-white">免费申请</span>
@@ -112,7 +112,7 @@ export default class extends Component {
               </div>
               <div className="flex jc-between ai-center">
                 <div className="w80 h116 app-bg" />
-                <div className="w90 h90 code-bg" />
+                <div className="w90 h90 app-qrcode-bg" />
               </div>
             </div>
             <div className="flex equal wrap pl5 overflow-h">

@@ -220,7 +220,7 @@ export default class extends Component {
                 贷款超市
               </WrapLink>
               <Icon type="right" className="plr5" />
-              <span className="c999 font16">极速贷</span>
+              <span className="c333 font16">极速贷</span>
             </div>
             {/* 核心块 */}
             <div className="flex pr20">
@@ -277,7 +277,7 @@ export default class extends Component {
                           </span>款产品
                         </Fragment>
                       ) : (
-                        `sorry~没有找到符合您筛选条件的产品。${
+                        `sorry~没有找到符合您筛选条件的产品${
                           loansSpeedHome &&
                           loansSpeedHome.recommend &&
                           loansSpeedHome.recommend.list &&
