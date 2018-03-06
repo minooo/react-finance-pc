@@ -155,7 +155,7 @@ export default class extends Component {
               首页
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <span className="c999 font16">资讯</span>
+            <span className="c333 font16">资讯</span>
           </div>
           {/* 核心块 */}
           <div className="flex">
@@ -196,7 +196,7 @@ export default class extends Component {
                       className="flex jc-center font14 bold ai-center h50"
                       style={{ backgroundColor: "#f6f6f6" }}
                     >
-                      sorry~暂无数据。
+                      sorry~暂无数据
                     </div>
                   )}
               </div>

@@ -15,5 +15,4 @@ export default ({ title, content }) => (
       <span className="text-overflow-one plr10">{content || "暂无"}</span>
     </div>
   </Fragment>
-
-)
+);

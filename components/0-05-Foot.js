@@ -72,7 +72,11 @@ export default () => (
             <div style={{ height: "132px" }} className=" w72 app-bg" />
             <div className="font14 ml20 c-white">
               <div className="mb10">嘟嘟e融APP</div>
-              <WrapLink className="c-white" href="/downloadApp" as="/downloadApp">
+              <WrapLink
+                className="c-white"
+                href="/downloadApp"
+                as="/downloadApp"
+              >
                 立即下载&nbsp;&gt;
               </WrapLink>
             </div>

@@ -41,9 +41,7 @@ export default class extends Component {
             onDeletemessages={this.onDeletemessages}
           />
         ) : (
-          <NoData
-            caption="暂时没有系统消息"
-          />
+          <NoData caption="暂时没有系统消息" />
         )}
       </MeSelection>
     );
