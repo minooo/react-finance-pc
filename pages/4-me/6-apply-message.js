@@ -38,7 +38,9 @@ export default class extends Component {
         {message && message.length > 0 ? (
           <MeMessageList message={message} />
         ) : (
-          <NoData caption="没有申请消息" />
+          <NoData
+            caption="暂时没有申请消息"
+          />
         )}
       </MeSelection>
     );
