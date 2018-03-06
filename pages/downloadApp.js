@@ -509,13 +509,13 @@ export default class extends Component {
               关于我们
             </WrapLink>
             <WrapLink
-              href="/about"
-              as="/about"
-              className="plr10 border-right c-white"
+              href="/about#contact-us"
+              as="/about#contact-us"
+              className="plr10  c-white"
             >
               联系我们
             </WrapLink>
-            <WrapLink
+            {/* <WrapLink
               href="/about"
               as="/about"
               className="plr10 border-right c-white"
@@ -524,7 +524,7 @@ export default class extends Component {
             </WrapLink>
             <WrapLink href="/about" as="/about" className="pl10 c-white">
               信贷经理登录
-            </WrapLink>
+            </WrapLink> */}
           </div>
           <div className="font12 mt15 c-white w-100 text-center">
             Copyright&nbsp;2014&nbsp;&nbsp;河南晨隆金融服务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;豫ICP备14012584号-3
