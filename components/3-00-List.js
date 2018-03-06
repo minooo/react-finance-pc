@@ -10,9 +10,14 @@ export default ({ item }) => (
     <div className="w106 h66 img-bg mr15">
       <img src={item.thumb} alt="" className="w-100 h-100" />
     </div>
-    <div className="flex column h56 jc-between overflow-h pr20" style={{ width: "310px" }}>
+    <div
+      className="flex column h56 jc-between overflow-h pr20"
+      style={{ width: "310px" }}
+    >
       <div className="font18 c333 lh100 text-overflow-one">{item.name}</div>
-      <div className="font12 c999 lh100 text-overflow-one">{item.description}</div>
+      <div className="font12 c999 lh100 text-overflow-one">
+        {item.description}
+      </div>
     </div>
     <div
       style={{ borderLeft: "1px solid #f2f2f2", width: "210px" }}

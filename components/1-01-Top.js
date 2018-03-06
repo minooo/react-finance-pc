@@ -17,7 +17,10 @@ export default class extends Component {
     const { me, city } = this.props;
     return (
       <div className="bg-body">
-        <div className="box h30 flex jc-between ai-center relative hom-top-code bg-body">
+        <div
+          className="box h30 flex jc-between ai-center relative hom-top-code bg-body"
+          style={{ justifyCcontent: "space-between" }}
+        >
           {isOnOver && (
             <div
               style={{
@@ -53,14 +56,14 @@ export default class extends Component {
                 <Btn btnClass="font12 mr30" con="退出" onClick={this.onClick} />
               </Fragment>
             ) : (
-                <WrapLink
-                  className="font12 c-main mr30"
-                  href="/4-me/1-login"
-                  as="/login"
-                >
-                  登录
-                </WrapLink>
-              )}
+              <WrapLink
+                className="font12 c-main mr30"
+                href="/4-me/1-login"
+                as="/login"
+              >
+                登录
+              </WrapLink>
+            )}
             <span onMouseEnter={this.onSwitch} onMouseLeave={this.onSwitch}>
               手机站
             </span>

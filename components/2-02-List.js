@@ -14,7 +14,9 @@ export default ({ item }) => (
     </div>
     <div className="h56 flex column jc-between equal overflow-h">
       <div className="font18 c333 lh100 text-overflow-one">{item.name}</div>
-      <div className="font12 c999 lh100 text-overflow-one">{item.description}</div>
+      <div className="font12 c999 lh100 text-overflow-one">
+        {item.description}
+      </div>
     </div>
     <div className="h56 flex column jc-between ai-center plr20">
       <div className="font14 c333 lh100 text-overflow-one">
@@ -23,7 +25,9 @@ export default ({ item }) => (
       <div className="font12 c999 lh100 text-overflow-one">贷款额度</div>
     </div>
     <div className="h56 flex column jc-between ai-center plr20">
-      <div className="font14 c333 lh100 text-overflow-one">{item.interest_rate}%</div>
+      <div className="font14 c333 lh100 text-overflow-one">
+        {item.interest_rate}%
+      </div>
       <div className="font12 c999 lh100 text-overflow-one">
         {item.interest_rate_method}利率
       </div>

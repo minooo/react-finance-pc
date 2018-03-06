@@ -44,7 +44,7 @@ export default class extends Component {
     cardTypeFocus: 0,
     hasSearched: false,
     isFetch: false,
-    cardList: null,
+    cardList: null
   };
   onCardTypeClick = (id, index) => {
     // card/list?category=1
@@ -195,8 +195,8 @@ export default class extends Component {
                     cardList &&
                     cardList.length > 0 && <HomeHotCardBox items={cardList} />
                   ) : (
-                      <HomeHotCardBox items={home.cards.cards} />
-                    ))}
+                    <HomeHotCardBox items={home.cards.cards} />
+                  ))}
                 {hasSearched &&
                   (!cardList || cardList.length === 0) && (
                     <div

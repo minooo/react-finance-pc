@@ -46,9 +46,9 @@ export default class extends Component {
     /* eslint-enable */
   }
   componentWillReceiveProps() {
-    const dia = document.getElementById("bdshare_weixin_qrcode_dialog")
+    const dia = document.getElementById("bdshare_weixin_qrcode_dialog");
     if (dia) {
-      dia.style.display = "none"
+      dia.style.display = "none";
     }
   }
   componentWillUpdate() {
@@ -67,10 +67,10 @@ export default class extends Component {
     };
     require("../../static/scripts/share.js");
   }
-  componentWillUnmount(){
-    const dia = document.getElementById("bdshare_weixin_qrcode_dialog")
+  componentWillUnmount() {
+    const dia = document.getElementById("bdshare_weixin_qrcode_dialog");
     if (dia) {
-      dia.style.display = "none"
+      dia.style.display = "none";
     }
   }
   render() {
