@@ -16,10 +16,7 @@ export default ({ item, isrank, isRight }) => (
       <div className="w66 h66 img-bg">
         <img className="w-100 h-100" src={item.thumb} alt="" />
       </div>
-      <div
-        className="flex equal jc-between pl15 overflow-h"
-        style={{ minWidth: 0 }}
-      >
+      <div className="flex equal jc-between pl15 overflow-h">
         <div className="flex column jc-between c333 font12 overflow-h">
           <div className="flex font16 lh120 text-overflow-one bold inline-block">
             {item.name}

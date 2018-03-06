@@ -17,10 +17,7 @@ export default class extends Component {
     const { me, city } = this.props;
     return (
       <div className="bg-body">
-        <div
-          className="box h30 flex jc-between ai-center relative hom-top-code bg-body"
-          style={{ justifyCcontent: "space-between" }}
-        >
+        <div className="box h30 flex jc-between ai-center relative hom-top-code bg-body">
           {isOnOver && (
             <div
               style={{
