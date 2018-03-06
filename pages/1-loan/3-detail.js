@@ -254,7 +254,7 @@ export default class extends Component {
                       </div>
                     </div>
                     <div
-                      className="loandetail-border-r pl20 equal-no"
+                      className="pl20 equal-no"
                       style={{ paddingRight: "50px", maxWidth: "160px" }}
                     >
                       <div className="font16 mb15">
@@ -266,7 +266,7 @@ export default class extends Component {
                         {data && data.loan && data.loan.interest_rate}%
                       </div>
                     </div>
-                    <div
+                    {/* <div
                       className="pl20 equal-no"
                       style={{ maxWidth: "200px" }}
                     >
@@ -274,7 +274,7 @@ export default class extends Component {
                       <div className="font18 bold text-overflow-one">
                         {data && data.loan && data.loan.apply_num}
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   {/* canvs表区域 */}
                   <div className="flex jc-center" style={{ marginTop: "45px" }}>
@@ -307,19 +307,22 @@ export default class extends Component {
                         data.loan &&
                         data.loan.timelimit &&
                         data.loan.timelimit.length > 0 && (
-                          <Select
-                            value={
-                              selectValue || arrToArr(data.loan.timelimit)[0]
-                            }
-                            onChange={this.onSelectChange}
-                            style={{ width: "234px" }}
-                          >
-                            {arrToArr(data.loan.timelimit).map(item => (
-                              <Option key={uuid()} value={item}>
-                                {strTostr(item)}
-                              </Option>
-                            ))}
-                          </Select>
+                          <div style={{ width: "234px" }} className="flex">
+                            <div style={{ lineHeight: "30px" }} className="equal ant-input-group-addon">贷款期限</div>
+                            <Select
+                              value={
+                                selectValue || arrToArr(data.loan.timelimit)[0]
+                              }
+                              onChange={this.onSelectChange}
+                              style={{ width: "154px" }}
+                            >
+                              {arrToArr(data.loan.timelimit).map(item => (
+                                <Option key={uuid()} value={item}>
+                                  {strTostr(item)}
+                                </Option>
+                              ))}
+                            </Select>
+                          </div>
                         )}
                       <div className="font16 c666 pl10 mt15 text-overflow-one">
                         贷款期限：

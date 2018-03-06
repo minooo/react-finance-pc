@@ -50,6 +50,8 @@ export default class extends Component {
     if (dia) {
       dia.style.display = "none";
     }
+    // eslint-disable-next-line
+    window._bd_share_main && window._bd_share_main.init();
   }
   componentWillUpdate() {
     /* eslint-disable */
@@ -72,6 +74,8 @@ export default class extends Component {
     if (dia) {
       dia.style.display = "none";
     }
+    // eslint-disable-next-line
+    window._bd_share_main && window._bd_share_main.init();
   }
   render() {
     const {
