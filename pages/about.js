@@ -224,7 +224,7 @@ export default class extends Component {
                 className="about-culture-list  about-icon-vision"
               >
                 <div>企业愿景</div>
-                <p>打造中国最安全、最快捷、最方便的金融信息服务平台</p>
+                <p>打造中国安全、快捷、方便的金融信息服务平台</p>
               </div>
               <div
                 key={uuid()}
@@ -279,7 +279,7 @@ export default class extends Component {
               >
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>客服热线</div>
-                  <p key={uuid()}>400-869-8881</p>
+                  <p key={uuid()}>400-968-8821</p>
                 </div>
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>在线咨询</div>
@@ -294,7 +294,7 @@ export default class extends Component {
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>公司地址</div>
                   <p key={uuid()}>
-                    浙江省杭州市滨江区滨安路650号IX-WORKB座701室
+                    河南省郑州市金水区绿地原盛国际1号楼B座9楼
                   </p>
                 </div>
               </div>
@@ -312,7 +312,7 @@ export default class extends Component {
                     QQ:2712219568
                   </a>
                   点击号码即可申请加入
-                  我们会在两个自然工作日内尽快与您联系。为提高合作效率，不接受电话来访，客服热线无法转接。感谢您的配合!
+                  我们会在两个自然工作日内尽快与您联系。
                 </p>
               </div>
             </QueueAnim>
