@@ -39,8 +39,6 @@ export default class extends Component {
           <MeMessageList message={message} />
         ) : (
           <NoData
-            icoType="message"
-            style={{ fontSize: "60px" }}
             caption="暂时没有申请消息"
           />
         )}

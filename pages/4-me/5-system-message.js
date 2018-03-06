@@ -42,8 +42,6 @@ export default class extends Component {
           />
         ) : (
           <NoData
-            icoType="message"
-            style={{ fontSize: "60px" }}
             caption="暂时没有系统消息"
           />
         )}

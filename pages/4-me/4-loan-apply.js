@@ -88,8 +88,6 @@ export default class extends Component {
           </div>
         ) : (
           <NoData
-            icoType="message"
-            style={{ fontSize: "60px" }}
             caption="你没有贷款申请记录"
           />
         )}
