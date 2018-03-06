@@ -236,3 +236,17 @@ export const fee = (num, rate, dateStr, type) => {
   }
   return +num + totalFee
 }
+
+// 判断当前路由是否激活
+export const isActiveLink = (navLink, currentLink) => {
+  const index = currentLink.indexOf("?")
+  let initStr
+  if (index === -1) {
+    initStr = currentLink
+  } else {
+    initStr = currentLink.substr(0, index)
+  }
+  const keyStr = navLink.substr(1)
+  const keyArr = initStr.split("/").slice(1)
+  return keyArr.some(item => item === keyStr)
+}

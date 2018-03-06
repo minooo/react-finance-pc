@@ -41,6 +41,7 @@ export default class extends Component {
       income1,
       incomeWay,
       credit,
+      jobChange,
       assetParam
     } = this.state;
     const {
@@ -61,7 +62,7 @@ export default class extends Component {
       this.onErrMsg("请选择您的职业身份。");
       return;
     }
-    if (job === 1 || initMyJob === 1) {
+    if (job === 1 || (!jobChange && initMyJob === 1)) {
       // 上班族
       if (!incomeWay && !initMyIncomeWay) {
         this.onErrMsg("请选择您的收入方式。");
@@ -75,7 +76,7 @@ export default class extends Component {
         income_mode: incomeWay || initMyIncomeWay,
         monthly_income: income || initMyMonthlyIncome
       };
-    } else if (job === 2 || initMyJob === 2) {
+    } else if (job === 2 || (!jobChange && initMyJob === 2)) {
       // 个体户
       if (
         income21 === "" ||
@@ -96,14 +97,14 @@ export default class extends Component {
         cash_settlement_operating_income:
           income1 || initMyCashSettlementOperatingIncome
       };
-    } else if (job === 4 || initMyJob === 4) {
+    } else if (job === 4 || (!jobChange && initMyJob === 4)) {
       // 自由职业者
       if (income === "" || (income === undefined && !initMyMonthlyIncome)) {
         this.onErrMsg("请填写您的月收入。");
         return;
       }
       jobParam = { monthly_income: income || initMyMonthlyIncome };
-    } else if (job === 5 || initMyJob === 5) {
+    } else if (job === 5 || (!jobChange && initMyJob === 5)) {
       // 企业主
       if (
         income51 === "" ||
@@ -238,7 +239,7 @@ export default class extends Component {
                 disabled={initDisabled}
                 size="large"
                 addonAfter="元"
-                defaultValue={
+                value={
                   jobChange
                     ? this.state[`income${job}1`]
                     : this.state[`income${job}1`] ||
@@ -271,7 +272,7 @@ export default class extends Component {
                 disabled={initDisabled}
                 size="large"
                 addonAfter="元"
-                defaultValue={
+                value={
                   jobChange
                     ? this.state[`income${job === 1 || job === 4 ? "" : 1}`]
                     : this.state[`income${job === 1 || job === 4 ? "" : 1}`] ||
