@@ -37,5 +37,5 @@ export default ({ item, isrank, isRight }) => (
         )}
       </div>
     </div>
-  </WrapLink >
+  </WrapLink>
 );
