@@ -5,7 +5,7 @@ export default class extends Component {
   state = {
     isNew: true
   };
-  onSwitch = (v) => {
+  onSwitch = v => {
     this.setState(() => ({ isNew: v === "isNew" }));
   };
   render() {
@@ -36,9 +36,7 @@ export default class extends Component {
           </div>
         </div>
         <div className={`h20 mb10 ${bg}`} />
-        {
-          isNew ? list : othList
-        }
+        {isNew ? list : othList}
       </Fragment>
     );
   }

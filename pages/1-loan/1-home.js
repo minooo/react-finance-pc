@@ -231,7 +231,7 @@ export default class extends Component {
                 首页
               </WrapLink>
               <div className="crumbs-ico-right-bg ml10 mr10" />
-              <span className="c999 font16">贷款超市</span>
+              <span className="c333 font16">贷款超市</span>
             </div>
             {/* 核心块 */}
             <div className="flex pr20">
@@ -314,7 +314,7 @@ export default class extends Component {
                           </span>款产品
                         </Fragment>
                       ) : (
-                        `sorry~没有找到符合您筛选条件的产品。${
+                        `sorry~没有找到符合您筛选条件的产品,${
                           loansHome &&
                           loansHome.recommend &&
                           loansHome.recommend.list &&

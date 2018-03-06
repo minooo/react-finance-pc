@@ -66,12 +66,12 @@ export default class extends Component {
   };
   componentDidMount() {
     // 针对首页点击某个分类过来，应该做的数据转化。
-    const { asPath } = this.props
-    const query = searchToObj(asPath)
+    const { asPath } = this.props;
+    const query = searchToObj(asPath);
     if (query.typeloan) {
-      const id = +query.typeloan
-      const index = +query.typeloanfocus
-      this.onCityChoice("type", id, index)
+      const id = +query.typeloan;
+      const index = +query.typeloanfocus;
+      this.onCityChoice("type", id, index);
     }
   }
   /* eslint-enable */
@@ -277,7 +277,7 @@ export default class extends Component {
                           </span>款产品
                         </Fragment>
                       ) : (
-                        `sorry~没有找到符合您筛选条件的产品。${
+                        `sorry~没有找到符合您筛选条件的产品${
                           loansSpeedHome &&
                           loansSpeedHome.recommend &&
                           loansSpeedHome.recommend.list &&

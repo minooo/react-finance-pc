@@ -250,7 +250,7 @@ export default class extends Component {
           />
         </div>
         {/* 联系我们 */}
-        <div style={{ height: "844px" }}>
+        <div id="contact-us" style={{ height: "844px" }}>
           <OverPack key={uuid()} className="box">
             <TweenOne
               key={uuid()}

@@ -29,16 +29,11 @@ const config = [
   },
   {
     text: "联系我们",
-    href: "/about",
-    as: "/about"
+    href: "/about#contact-us",
+    as: "/about#contact-us"
   },
   {
     text: "贷款资讯",
-    href: "/3-new/1-home",
-    as: "/new"
-  },
-  {
-    text: "贷款攻略",
     href: "/3-new/1-home",
     as: "/new"
   }
@@ -77,7 +72,11 @@ export default () => (
             <div style={{ height: "132px" }} className=" w72 app-bg" />
             <div className="font14 ml20 c-white">
               <div className="mb10">嘟嘟e融APP</div>
-              <WrapLink className="c-white" href="/downloadApp" as="/downloadApp">
+              <WrapLink
+                className="c-white"
+                href="/downloadApp"
+                as="/downloadApp"
+              >
                 立即下载&nbsp;&gt;
               </WrapLink>
             </div>
