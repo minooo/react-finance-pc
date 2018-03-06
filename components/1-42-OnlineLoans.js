@@ -72,7 +72,7 @@ export default class extends Component {
                         {onlineLoans.pop.list.map(item => (
                           <WrapLink
                             key={uuid()}
-                            href={`/1-loan/3-detail?id=${item.id}`}
+                            href={item.url}
                             as={`/loan/${item.id}`}
                             style={{ width: "200px", height: "125px" }}
                           >
