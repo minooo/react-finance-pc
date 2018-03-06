@@ -574,6 +574,12 @@
     top: 6px;
   }
 }
+.me-nodata-bg{
+  width: 200px;
+  height: 200px;
+  background: url("../../images/me_nodata_img.png")  no-repeat;
+  background-size: 100%;
+}
 // login
 .me-login-banner {
   background: url("../../images/me_login_banner.jpg") center no-repeat;
