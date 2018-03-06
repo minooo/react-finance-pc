@@ -29,16 +29,11 @@ const config = [
   },
   {
     text: "联系我们",
-    href: "/about",
-    as: "/about"
+    href: "/about#contact-us",
+    as: "/about#contact-us"
   },
   {
     text: "贷款资讯",
-    href: "/3-new/1-home",
-    as: "/new"
-  },
-  {
-    text: "贷款攻略",
     href: "/3-new/1-home",
     as: "/new"
   }
