@@ -21,7 +21,8 @@ export {
   strTostr,
   arrToDateString,
   arrToArr,
-  fee
+  fee,
+  isActiveLink
 } from "./01-common";
 export { default as cache } from "./02-cache";
 export { default as http } from "./03-http";
