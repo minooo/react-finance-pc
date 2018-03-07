@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import uuid from "uuid/v4";
-import { Carousel, Icon } from "antd";
+import { Carousel } from "antd";
 import { Ranking, WrapLink, HomeRankListItem } from "@components";
 
 export default class extends Component {
@@ -42,7 +42,7 @@ export default class extends Component {
               onMouseLeave={this.handChangeOver}
             >
               <span className="pr10 font16 le100">扫码进入手机版</span>
-              <Icon type="qrcode" style={{ fontSize: 22 }} />
+              <div className="home-small-qrcode" />
               {isOver && (
                 <div
                   style={{
@@ -61,49 +61,78 @@ export default class extends Component {
           <div className="flex overflow-h">
             <div className="pr30" style={{ width: "200px" }}>
               {onlineLoans.pop &&
-                onlineLoans.pop.list &&
-                onlineLoans.pop.list.length > 0 && (
+                onlineLoans.pop.length > 0 && (
                   <Fragment>
                     <div
                       className="mb20 overflow-h"
                       style={{ width: "200px", height: "125px" }}
                     >
-                      <Carousel autoplay afterChange={this.afterChange}>
-                        {onlineLoans.pop.list.map(item => (
-                          <WrapLink
-                            key={uuid()}
-                            href={`/1-loan/3-detail?id=${item.id}`}
-                            as={`/loan/${item.id}`}
-                            style={{ width: "200px", height: "125px" }}
-                          >
-                            <img
-                              className="pointer w-100 h-100"
-                              src={item.thumb}
-                              alt=""
-                            />
-                          </WrapLink>
-                        ))}
-                      </Carousel>
+                      {onlineLoans.pop.length === 1 ? (
+                        <WrapLink
+                          href={onlineLoans.pop[0].url}
+                          style={{ width: "200px", height: "125px" }}
+                        >
+                          <img
+                            className="pointer w-100 h-100"
+                            src={onlineLoans.pop[0].thumb}
+                            alt=""
+                          />
+                        </WrapLink>
+                      ) : (
+                        <Carousel autoplay afterChange={this.afterChange}>
+                          {onlineLoans.pop.map(item => (
+                            <WrapLink
+                              key={uuid()}
+                              href={item.url}
+                              style={{ width: "200px", height: "125px" }}
+                            >
+                              <img
+                                className="pointer w-100 h-100"
+                                src={item.thumb}
+                                alt=""
+                              />
+                            </WrapLink>
+                          ))}
+                        </Carousel>
+                      )}
                     </div>
-                    <div className="text-center mb20">
-                      <div className="font16 mb10 lh100 text-overflow-one bold">
-                        {onlineLoans.pop.list[focus].name}
+                    {onlineLoans.pop.length === 1 ? (
+                      <div className="text-center mb20">
+                        <div className="font16 mb10 lh100 text-overflow-one bold">
+                          {onlineLoans.pop[0].name}
+                        </div>
+                        <div className="font14 lh120 text-overflow-one">
+                          {onlineLoans.pop[0].description}
+                        </div>
                       </div>
-                      <div className="font14 lh120 text-overflow-one">
-                        {onlineLoans.pop.list[focus].description}
+                    ) : (
+                      <div className="text-center mb20">
+                        <div className="font16 mb10 lh100 text-overflow-one bold">
+                          {onlineLoans.pop[focus].name}
+                        </div>
+                        <div className="font14 lh120 text-overflow-one">
+                          {onlineLoans.pop[focus].description}
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div className="flex jc-center mb20">
-                      <WrapLink
-                        style={{ width: "140px" }}
-                        className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
-                        href={`/1-loan/3-detail?id=${
-                          onlineLoans.pop.list[focus].id
-                        }`}
-                        as={`/loan/${onlineLoans.pop.list[focus].id}`}
-                      >
-                        <span className="c-white">免费申请</span>
-                      </WrapLink>
+                      {onlineLoans.pop.length === 1 ? (
+                        <WrapLink
+                          style={{ width: "140px" }}
+                          className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
+                          href={onlineLoans.pop[0].url}
+                        >
+                          <span className="c-white">免费申请</span>
+                        </WrapLink>
+                      ) : (
+                        <WrapLink
+                          style={{ width: "140px" }}
+                          className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
+                          href={onlineLoans.pop[focus].url}
+                        >
+                          <span className="c-white">免费申请</span>
+                        </WrapLink>
+                      )}
                     </div>
                   </Fragment>
                 )}

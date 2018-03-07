@@ -215,7 +215,7 @@ export default class extends Component {
                 贷款超市
               </WrapLink>
               <div className="crumbs-ico-right-bg ml10 mr10" />
-              <span className="c999 font16">极速贷</span>
+              <span className="c333 font16">极速贷</span>
             </div>
             {/* 核心块 */}
             <div className="flex pr20">

@@ -395,7 +395,7 @@ export default class extends Component {
                   delay: 500
                 }}
                 className="font36 c333 absolute lh100 z-index10"
-                style={{ left: "225px", top: "485px" }}
+                style={{ left: "243px", top: "485px" }}
               >
                 品种繁多，极速下卡
               </TweenOne>

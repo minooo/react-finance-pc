@@ -1,5 +1,5 @@
 module.exports = {
   plugins: {
-    autoprefixer: {}
+    autoprefixer: { browsers: ["> 0.5%", "last 2 versions"] }
   }
 };
