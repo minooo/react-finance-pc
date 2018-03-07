@@ -50,7 +50,7 @@ export default class extends Component {
     // 针对首页点击某个分类过来，应该做的数据转化。
     const { asPath } = this.props;
     const query = searchToObj(asPath);
-    if (query.typenew) {
+    if (query && query.typenew) {
       const id = +query.typenew;
       const index = id - 1;
       this.onCityChoice(id, index);

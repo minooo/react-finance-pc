@@ -44,7 +44,14 @@ export default class extends Component {
     cardTypeFocus: 0,
     hasSearched: false,
     isFetch: false,
-    cardList: null
+    cardList: null,
+    loanTypes: [
+      { name: "芝麻分贷款", description: "有芝麻信用分就能贷", id: 4 },
+      { name: "信用卡贷款", description: "有信用卡就能贷", id: 2 },
+      { name: "实名制贷款", description: "手机+身份证就能贷", id: 1 },
+      { name: "工薪上班贷", description: "需要征信社保公积金", id: 3 },
+      { name: "无工作贷款", description: "无工作也能贷", id: 5 }
+    ]
   };
   onCardTypeClick = (id, index) => {
     // card/list?category=1
@@ -77,7 +84,7 @@ export default class extends Component {
       });
   };
   render() {
-    const { cardTypeFocus, cardList, hasSearched, isFetch } = this.state;
+    const { cardTypeFocus, cardList, hasSearched, isFetch, loanTypes } = this.state;
     const { home, err } = this.props;
     if (err) {
       return <ErrorFetch err={err} />;
@@ -96,25 +103,41 @@ export default class extends Component {
                 <HomeForm />
               </div>
             </div>
-            <Carousel className="home-carousel" autoplay>
-              {home &&
-                home.banner &&
-                home.banner.length > 0 &&
-                home.banner.map(item => (
-                  <WrapLink key={uuid()} className="relative" href={item.url}>
-                    <img src={item.image} className="home-slide-img" alt="" />
+            {home &&
+              home.banner &&
+              home.banner.length === 1 && (
+                <div
+                  style={{ height: "480px" }}
+                  className="relative overflow-h"
+                >
+                  <WrapLink key={uuid()} href={home.banner[0].url}>
+                    <img
+                      src={home.banner[0].image}
+                      className="home-slide-img"
+                      alt=""
+                    />
                   </WrapLink>
-                ))}
-            </Carousel>
+                </div>
+              )}
+
+            {
+              <Carousel className="home-carousel" autoplay>
+                {home &&
+                  home.banner &&
+                  home.banner.length > 1 &&
+                  home.banner.map(item => (
+                    <WrapLink key={uuid()} className="relative" href={item.url}>
+                      <img src={item.image} className="home-slide-img" alt="" />
+                    </WrapLink>
+                  ))}
+              </Carousel>
+            }
           </div>
         </div>
         <div className="flex jc-between box mt30">
-          {home &&
-            home.top_speed_loans_type &&
-            home.top_speed_loans_type.length > 0 &&
-            home.top_speed_loans_type.map((item, index) => (
-              <HomeType key={uuid()} item={item} index={index} />
-            ))}
+          {loanTypes.map((item, index) => (
+            <HomeType key={uuid()} item={item} index={index} />
+          ))}
         </div>
         {/* 第一个背景图 */}
         <div className="home-bg-1">
