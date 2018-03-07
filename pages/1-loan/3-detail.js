@@ -344,7 +344,7 @@ export default class extends Component {
                       </div>
                     </div>
                     <div style={{ minWidth: "200px" }} className="ml30 font16">
-                      <div className="flex ai-center">
+                      <div className="flex ai-center mb20">
                         <span className="loandetail-globule mr5 bg-main circle" />
                         <span>到账金额：</span>
                         <span className="c-main">
@@ -352,7 +352,7 @@ export default class extends Component {
                             (data && data.loan && data.loan.sum_start)}
                         </span>
                       </div>
-                      <div className="flex ai-center">
+                      <div className="flex ai-center mb20">
                         <span className="loandetail-globule mr5 bg-second circle" />
                         <span>利息和费用：</span>
                         <span className="c-second">
@@ -589,7 +589,7 @@ export default class extends Component {
                             ? "/loan/speed"
                             : "/loan"
                         }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
-                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-one"
+                        className="mb20 text-center h34 w110 block c-main loandetail-hot text-overflow-one r2"
                       >
                         {item.name}
                       </WrapLink>

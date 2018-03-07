@@ -4,7 +4,7 @@ import { Btn } from "@components";
 
 export default ({ cityFilters, onCityChoice, state }) => (
   <Fragment>
-    {cityFilters.map(item => (
+    {cityFilters.map((item, index) => (
       <div key={uuid()} className="flex mb25 pl20">
         <div className="font14 c999 equal-no pr20">{item.title}</div>
         <div className="flex wrap">
@@ -13,7 +13,9 @@ export default ({ cityFilters, onCityChoice, state }) => (
             item.list.map((x, i) => (
               <Btn
                 key={uuid()}
-                btnClass="mr30 mb5"
+                btnClass={`mr30 ${
+                  index === cityFilters.length - 1 ? "mb15" : "mb5"
+                }`}
                 con={
                   <span
                     className={`${
