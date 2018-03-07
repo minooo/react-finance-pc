@@ -56,7 +56,7 @@ export default class extends Component {
         {/* 先判断有无数据 */}
         {loan_logs && loan_logs.length > 0 ? (
           <div
-            className="relative w-100 h-100"
+            className="w-100 h-100 absolute"
             style={{
               paddingTop: "50px",
               paddingLeft: "45px"

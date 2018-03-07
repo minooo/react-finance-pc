@@ -95,7 +95,7 @@ export default ({ children, pathname }) => (
           ))}
         </div>
         <div
-          className="equal overflow-h bg-white"
+          className="equal overflow-h bg-white relative"
           style={{ minHeight: "463px" }}
         >
           {children}
