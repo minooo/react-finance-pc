@@ -11,10 +11,7 @@ export default class extends Component {
     return (
       <Layout title="关于我们" className="bg-white overflow-h">
         {/* banan */}
-        <div
-          style={{ height: "300px", backgroundColor: "#88bdff" }}
-          className="about-banner-bg"
-        />
+        <div className="about-banner-bg" />
         {/* 公司简介 */}
         <OverPack
           style={{ height: "655px" }}
@@ -293,10 +290,7 @@ export default class extends Component {
                 </div>
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>联系邮箱</div>
-                  <a
-                    key={uuid()}
-                    href="mailto:BD@duduapp.net"
-                  >
+                  <a key={uuid()} href="mailto:BD@duduapp.net">
                     BD@duduapp.net
                   </a>
                 </div>

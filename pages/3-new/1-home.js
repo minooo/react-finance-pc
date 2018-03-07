@@ -141,12 +141,7 @@ export default class extends Component {
       <Layout title="资讯" style={{ backgroundColor: "#f8f8f8" }}>
         {isFetch && <LoadingFetch />}
         {/* banner */}
-        <div style={{ height: "300px", backgroundColor: "#6bb0ff" }}>
-          <div
-            style={{ backgroundColor: "#6bb0ff" }}
-            className="box h-100 loan-banner-bg"
-          />
-        </div>
+        <div className="new-banner-bg" />
         {/* 主体 */}
         <div className="box">
           {/* 面包屑 */}

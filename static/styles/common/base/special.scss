@@ -60,7 +60,7 @@
   background-color: #4c8dfc;
   color: #fff;
 }
-.back-top-qq{
+.back-top-qq {
   height: 22px;
   width: 22px;
   background-image: url("../../images/backtop_qq.png");
@@ -83,17 +83,17 @@
   top: 112px;
   right: -24px;
 }
-.nodata-ico{
+.nodata-ico {
   width: 48px;
   height: 48px;
   background: url("../../images/nodata-ico.png") no-repeat;
 }
 // home
-.home-bg-1{
+.home-bg-1 {
   background-image: url("../../images/home_bg_1.jpg");
   background-size: cover;
 }
-.home-bg-2{
+.home-bg-2 {
   background-image: url("../../images/home_bg_2.jpg");
   background-size: cover;
 }
@@ -129,7 +129,7 @@
   z-index: 10;
   left: 50%;
   margin-left: -600px;
-  height:480px;
+  height: 480px;
 }
 .home-type-position {
   position: absolute;
@@ -207,7 +207,7 @@
   background-size: cover;
 }
 .home-citybg-1 {
-   background-image: url("../../images/home_citylbg_2.jpg");
+  background-image: url("../../images/home_citylbg_2.jpg");
   background-size: cover;
 }
 .home-citybg-2 {
@@ -233,7 +233,9 @@
 
 // loan
 .loan-banner-bg {
-  background: url("../../images/loan_banner_bg.png") 720px top no-repeat;
+  min-width: 1200px;
+  height: 230px;
+  background: url("../../images/loan_banner_bg.jpg") top center no-repeat;
 }
 .loan-tab-one {
   background: url("../../images/loan_tab_one.png") left center no-repeat;
@@ -303,6 +305,11 @@
   background: url("../../images/loan_apply_asset_bg.png") 0 0 no-repeat;
 }
 //card
+.card-banner-bg {
+  min-width: 1200px;
+  height: 230px;
+  background: url("../../images/loan_banner_bg1.jpg") top center no-repeat;
+}
 .card-cardlist-bg {
   background-image: url("../../images/card_rank_bg.png");
   background-size: contain;
@@ -312,17 +319,21 @@
   background-color: #999;
 }
 //new
+.new-banner-bg {
+  height: 230px;
+  min-width: 1200px;
+  background: url("../../images/loan_banner_bg2.jpg") top center no-repeat;
+}
 .new-active {
   background-color: #4c8dfc;
   box-shadow: 0px 3px 12px 0px rgba(76, 141, 252, 0.7);
 }
 .new-default {
-  background-color: rgba(76, 141, 252, 0.2);
+  background-color: rgba(76, 141, 252, 0.15);
 }
 .new-shadow {
   transition: box-shadow 1s;
-  box-shadow: 0px 0px 13px 0px
-		rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.35);
 }
 .new-browse {
   background: url("../../images/nwe_newlist_browse.png") left no-repeat;
@@ -334,8 +345,7 @@
   &:hover {
     color: #4c8dfc;
     background-color: #ffffff;
-    box-shadow: 0px 3px 18px 0px
-		rgba(76, 141, 252, 0.12);
+    box-shadow: 0px 3px 18px 0px rgba(76, 141, 252, 0.12);
   }
   &:hover .new-shadow {
     box-shadow: none;
@@ -349,7 +359,9 @@
 }
 //about
 .about-banner-bg {
-  background: url("../../images/about_banner_bg.jpg") center top no-repeat;
+  height: 230px;
+  min-width: 1200px;
+  background: url("../../images/loan_banner_bg3.jpg") top center no-repeat;
 }
 .about-title-bg {
   background: url("../../images/about_title_bg.png") center center no-repeat;
@@ -577,7 +589,7 @@
   border-radius: 0px 2px 2px 0px;
   position: absolute;
   left: 0px;
-  top:0px;
+  top: 0px;
 }
 .me-loanapply-border-tlr {
   border-top: 1px solid #f2f2f2;
@@ -597,10 +609,10 @@
     top: 6px;
   }
 }
-.me-nodata-bg{
+.me-nodata-bg {
   width: 200px;
   height: 200px;
-  background: url("../../images/me_nodata_img.png")  no-repeat;
+  background: url("../../images/me_nodata_img.png") no-repeat;
   background-size: 100%;
 }
 // login

@@ -192,13 +192,8 @@ export default class extends Component {
       <Layout title="贷款超市" style={{ backgroundColor: "#f8f8f8" }}>
         {isFetch && <LoadingFetch />}
         {/* banner */}
-        <div style={{ height: "300px", backgroundColor: "#6bb0ff" }}>
-          <div
-            style={{ backgroundColor: "#6bb0ff" }}
-            className="box h-100 loan-banner-bg"
-          />
-        </div>
-        <div style={{ marginTop: "-134px" }} className="box mb30">
+        <div className="loan-banner-bg" />
+        <div style={{ marginTop: "-64px" }} className="box mb30">
           {/* 选项卡按钮 */}
           <div className="flex ai-end">
             {tabTypes.map((item, index) => (
