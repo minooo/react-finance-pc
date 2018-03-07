@@ -10,7 +10,9 @@ export default class extends Component {
   };
   onClick = () => {
     delCookie("token");
-    Router.replace({ pathname: "/4-me/1-login" }, "/login");
+    setTimeout(() => {
+      Router.replace({ pathname: "/4-me/1-login" }, "/login");
+    }, 50);
   };
   render() {
     const { isOnOver } = this.state;

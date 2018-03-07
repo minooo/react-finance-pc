@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Input, Select } from "antd";
+import { Icon, Input, Select, message } from "antd";
 import Router from "next/router";
 import QRCode from "qrcode-react";
 import uuid from "uuid/v4";
@@ -10,7 +10,8 @@ import {
   arrToArr,
   clipBigNum,
   getCookie,
-  fee
+  fee,
+  cache
 } from "@utils";
 import {
   Layout,
@@ -81,7 +82,25 @@ export default class extends Component {
     this.setState(() => ({ finalMoney: finalVal, moneyVal: finalVal }));
   };
   onApply = (type, url, id, name, start, end) => {
-    const { url: { pathname, asPath } } = this.props;
+    const { url: { pathname, asPath }, data } = this.props;
+    if (!getCookie("token")) {
+      message.warn("当前操作需要登陆", 2, () => {
+        Router.push({ pathname: "/4-me/1-login", query: { href: pathname, as: asPath, id: data.loan.id } }, "/login")
+      })
+      return true
+    }
+    if (!cache.getItem("userId")) {
+      message.warn("当前操作需要完善基本资料", 2, () => {
+        Router.push({ pathname: "/4-me/2-home", query: { href: pathname, as: asPath, id: data.loan.id } }, "/me")
+      })
+      return true
+    }
+    if (!cache.getItem("userJob")) {
+      message.warn("当前操作需要完善其他资料", 2, () => {
+        Router.push({ pathname: "/4-me/3-other-data", query: { href: pathname, as: asPath, id: data.loan.id } }, "/me/other")
+      })
+      return true
+    }
     // type 2 同城  1 极速
     if (type === 2) {
       Router.push(
@@ -93,19 +112,10 @@ export default class extends Component {
       );
     }
     if (type === 1) {
-      if (getCookie("token")) {
-        http.post("loans/top_speed_apply", { id });
-        this.setState(() => ({ showQrcode: true }));
-      } else {
-        Router.push(
-          {
-            pathname: "/4-me/1-login",
-            query: { href: pathname, as: asPath, id }
-          },
-          "/login"
-        );
-      }
+      http.post("loans/top_speed_apply", { id });
+      this.setState(() => ({ showQrcode: true }));
     }
+    return null
   };
   setMyOption = (fee, total) => ({
     color: ["#ff764c", "#7eaeff"],
@@ -181,8 +191,12 @@ export default class extends Component {
               首页
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <WrapLink href="/1-loan/1-home" as="/loan" className="c333 font16">
-              贷款超市
+            <WrapLink
+              href={data && data.loan && data.loan.category === 1 ? "/1-loan/2-home-speed" : "/1-loan/1-home"}
+              as={data && data.loan && data.loan.category === 1 ? "/loan/speed" : "/loan"}
+              className="c333 font16"
+            >
+              { data && data.loan && data.loan.category === 1 ? "极速贷" : "同城贷" }
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
             <span className="c333 font16">
