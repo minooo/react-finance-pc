@@ -31,16 +31,20 @@ export default class extends Component {
               <div className="w110 h110 code-bg" />
             </div>
           )}
-          <WrapLink
-            className="c666 pl15 home-top-city-bg"
-            href="/city"
-            as="/city"
-          >
-            {city}[切换]
-          </WrapLink>
+          <div>
+            <WrapLink
+              className="c333 pl15 home-top-city-bg mr30"
+              href="/city"
+              as="/city"
+            >
+              {city}[切换]
+            </WrapLink>
+            <span className="c999" style={{ marginRight: "35px" }}>
+              客服热线：400-968-8821
+            </span>
+            <span className="c999">招商热线：13693719740</span>
+          </div>
           <div className="flex ai-center">
-            <span style={{ marginRight: "30px" }}>客服热线：400-968-8821</span>
-            <span style={{ marginRight: "35px" }}>招商热线：13253595612</span>
             {me ? (
               <Fragment>
                 <WrapLink

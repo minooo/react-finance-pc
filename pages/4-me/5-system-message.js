@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { MeMessageList, MeSelection, NoData } from "@components";
 import { message } from "antd";
+import Router from "next/router";
+import { MeMessageList, MeSelection, NoData } from "@components";
 import { http } from "@utils";
 
 export default class extends Component {
@@ -19,11 +20,13 @@ export default class extends Component {
         if (response.code === 200 && response.success) {
           const { message } = response.data;
           this.setState(() => ({ message }));
+        } else {
+          Router.replace({ pathname: "/4-me/1-login" }, "/login");
         }
       })
-      .catch(err => {
-        message.error("网络错误，请稍后再试！");
-        console.info(err);
+      .catch(() => {
+        Router.replace({ pathname: "/4-me/1-login" }, "/login");
+        message.error("抱歉，网络异常，请稍后再试！");
       });
   };
   onDeletemessages = id => {

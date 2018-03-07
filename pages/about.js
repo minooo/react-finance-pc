@@ -11,10 +11,7 @@ export default class extends Component {
     return (
       <Layout title="关于我们" className="bg-white overflow-h">
         {/* banan */}
-        <div
-          style={{ height: "300px", backgroundColor: "#88bdff" }}
-          className="about-banner-bg"
-        />
+        <div className="about-banner-bg" />
         {/* 公司简介 */}
         <OverPack
           style={{ height: "655px" }}
@@ -219,12 +216,9 @@ export default class extends Component {
               style={{ height: "378px", right: "-37px" }}
               className="relative"
             >
-              <div
-                key={uuid()}
-                className="about-culture-list  about-icon-vision"
-              >
-                <div>企业愿景</div>
-                <p>打造中国安全、快捷、方便的金融信息服务平台</p>
+              <div key={uuid()} className="about-culture-list about-icon-idea">
+                <div>经营理念</div>
+                <p>让中小微城市的贷款从这里开始简单</p>
               </div>
               <div
                 key={uuid()}
@@ -233,13 +227,16 @@ export default class extends Component {
                 <div>公司使命</div>
                 <p>对员工负责 、对客户负责、对社会负责</p>
               </div>
-              <div key={uuid()} className="about-culture-list about-icon-idea">
-                <div>经营理念</div>
-                <p>让中小微城市的贷款从这里开始简单</p>
-              </div>
               <div key={uuid()} className="about-culture-list about-icon-value">
                 <div>核心价值观</div>
                 <p>以团队精神追求目标，为客户创造最大价值</p>
+              </div>
+              <div
+                key={uuid()}
+                className="about-culture-list  about-icon-vision"
+              >
+                <div>企业愿景</div>
+                <p>打造区域板块内安全，快捷，方便的金融信息服务平台</p>
               </div>
             </QueueAnim>
           </OverPack>
@@ -271,8 +268,8 @@ export default class extends Component {
                 style={{
                   width: "520px",
                   height: "527px",
-                  paddingTop: "80px",
-                  paddingBottom: "80px",
+                  paddingTop: "60px",
+                  paddingBottom: "60px",
                   boxShadow: "0px 5px 20px 0px rgba(76, 141, 252, 0.25)"
                 }}
                 className="r2 bg-white flex column ai-center jc-between"
@@ -292,10 +289,14 @@ export default class extends Component {
                   </a>
                 </div>
                 <div key={uuid()} className="about-contact-list">
+                  <div key={uuid()}>联系邮箱</div>
+                  <a key={uuid()} href="mailto:BD@duduapp.net">
+                    BD@duduapp.net
+                  </a>
+                </div>
+                <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>公司地址</div>
-                  <p key={uuid()}>
-                    河南省郑州市金水区绿地原盛国际1号楼B座9楼
-                  </p>
+                  <p key={uuid()}>河南省郑州市金水区绿地原盛国际1号楼B座9楼</p>
                 </div>
               </div>
               <div
@@ -311,8 +312,7 @@ export default class extends Component {
                   >
                     QQ:2712219568
                   </a>
-                  点击号码即可申请加入
-                  我们会在两个自然工作日内尽快与您联系。
+                  点击号码即可申请加入 我们会在两个自然工作日内尽快与您联系。
                 </p>
               </div>
             </QueueAnim>

@@ -28,7 +28,6 @@ export default class extends Component {
     const { detail } = this.props;
     window._bd_share_config = {
       common: {
-        bdStyle: "1",
         bdText: detail && detail.title,
         bdDesc: detail && detail.content.substr(0, 20)
       },
@@ -62,8 +61,7 @@ export default class extends Component {
         bdMini: "2",
         bdMiniList: false,
         bdPic: "",
-        bdStyle: "1",
-        bdSize: "32"
+        bdSize: "24"
       },
       share: {}
     };
@@ -96,12 +94,7 @@ export default class extends Component {
     return (
       <Layout title="资讯详情" style={{ backgroundColor: "#f8f8f8" }}>
         {/* banner */}
-        <div style={{ height: "300px", backgroundColor: "#6bb0ff" }}>
-          <div
-            style={{ backgroundColor: "#6bb0ff" }}
-            className="box h-100 loan-banner-bg"
-          />
-        </div>
+        <div className="new-banner-bg" />
         {/* 主体 */}
         <div className="box">
           {/* 面包屑 */}

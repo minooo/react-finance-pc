@@ -509,9 +509,9 @@ export default class extends Component {
               关于我们
             </WrapLink>
             <WrapLink
-              href="/about/#contact-us"
-              as="/about/#contact-us"
-              className="plr10 c-white"
+              href="/about#contact-us"
+              as="/about#contact-us"
+              className="plr10  c-white"
             >
               联系我们
             </WrapLink>
