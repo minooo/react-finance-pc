@@ -87,9 +87,7 @@ export default class extends Component {
             )}
           </div>
         ) : (
-          <NoData
-            caption="你没有贷款申请记录"
-          />
+          <NoData caption="你没有贷款申请记录" />
         )}
       </MeSelection>
     );
