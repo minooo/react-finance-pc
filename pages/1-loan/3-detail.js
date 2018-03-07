@@ -165,26 +165,7 @@ export default class extends Component {
     return (
       <Layout title="贷款详情" style={{ backgroundColor: "#f8f8f8" }}>
         {/* banner */}
-        <div style={{ height: "300px", backgroundColor: "#6bb0ff" }}>
-          <div
-            style={{
-              backgroundColor: "#6bb0ff",
-              paddingLeft: "170px",
-              paddingTop: "110px"
-            }}
-            className="box h-100 loan-banner-bg"
-          >
-            <div className="font44 bold c-white loandetail-banner-textshadow lh100 mb20">
-              贷款超市
-            </div>
-            <div
-              className="font22 c-inverse lh100"
-              style={{ fontWeight: "200" }}
-            >
-              LOAN SUPERMARKET
-            </div>
-          </div>
-        </div>
+        <div className="loan-banner-bg" />
         <div className="box">
           <div className="h70 flex ai-center crumbs-ico-bg">
             <WrapLink href="/" as="/" className="c333 font16">
@@ -322,7 +303,12 @@ export default class extends Component {
                         data.loan.timelimit &&
                         data.loan.timelimit.length > 0 && (
                           <div style={{ width: "234px" }} className="flex">
-                            <div style={{ lineHeight: "30px" }} className="equal ant-input-group-addon">贷款期限</div>
+                            <div
+                              style={{ lineHeight: "30px" }}
+                              className="equal ant-input-group-addon"
+                            >
+                              贷款期限
+                            </div>
                             <Select
                               value={
                                 selectValue || arrToArr(data.loan.timelimit)[0]
@@ -372,7 +358,7 @@ export default class extends Component {
                       </div>
                     </div>
                     <div style={{ minWidth: "200px" }} className="ml30 font16">
-                      <div className="flex ai-center">
+                      <div className="flex ai-center mb20">
                         <span className="loandetail-globule mr5 bg-main circle" />
                         <span>到账金额：</span>
                         <span className="c-main">
@@ -380,7 +366,7 @@ export default class extends Component {
                             (data && data.loan && data.loan.sum_start)}
                         </span>
                       </div>
-                      <div className="flex ai-center">
+                      <div className="flex ai-center mb20">
                         <span className="loandetail-globule mr5 bg-second circle" />
                         <span>利息和费用：</span>
                         <span className="c-second">
@@ -617,7 +603,7 @@ export default class extends Component {
                             ? "/loan/speed"
                             : "/loan"
                         }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
-                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-one"
+                        className="mb20 text-center h34 w110 block c-main loandetail-hot text-overflow-one r2"
                       >
                         {item.name}
                       </WrapLink>

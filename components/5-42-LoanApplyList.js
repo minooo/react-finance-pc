@@ -7,13 +7,13 @@ export default ({ index, item, showModal }) => (
     style={{ backgroundColor: `${index % 2 === 0 ? "#fff" : "#f5f7fa"}` }}
   >
     <div className="text-overflow-one pr10" style={{ width: "200px" }}>
-      {item.product_name}
+      {item.product_name || "暂无"}
     </div>
     <div className="text-overflow-one pr10" style={{ width: "155px" }}>
-      {item.money}
+      {item.money || "暂无"}
     </div>
     <div className="text-overflow-one pr10" style={{ width: "260px" }}>
-      {item.created_at}
+      {item.created_at || "暂无"}
     </div>
     {item.status === 1 ? (
       <div className="c999" style={{ width: "190px" }}>

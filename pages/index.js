@@ -84,13 +84,7 @@ export default class extends Component {
       });
   };
   render() {
-    const {
-      cardTypeFocus,
-      cardList,
-      hasSearched,
-      isFetch,
-      loanTypes
-    } = this.state;
+    const { cardTypeFocus, cardList, hasSearched, isFetch, loanTypes } = this.state;
     const { home, err } = this.props;
     if (err) {
       return <ErrorFetch err={err} />;

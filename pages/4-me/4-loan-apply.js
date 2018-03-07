@@ -56,8 +56,11 @@ export default class extends Component {
         {/* 先判断有无数据 */}
         {loan_logs && loan_logs.length > 0 ? (
           <div
-            className="relative w-100 h-100"
-            style={{ paddingTop: "50px", paddingLeft: "45px" }}
+            className="w-100 h-100 absolute"
+            style={{
+              paddingTop: "50px",
+              paddingLeft: "45px"
+            }}
           >
             <div style={{ width: "920px" }}>
               {/* 题头 */}
@@ -87,9 +90,7 @@ export default class extends Component {
             )}
           </div>
         ) : (
-          <NoData
-            caption="你没有贷款申请记录"
-          />
+          <NoData caption="你没有贷款申请记录" />
         )}
       </MeSelection>
     );
