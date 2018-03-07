@@ -155,7 +155,7 @@ export default class extends Component {
   };
   initAsset = () => {
     const { initMyAsset } = this.props;
-    this.setState(() => ({ assetParam: initMyAsset }));
+    this.setState(() => ({ assetParam: initMyAsset || {} }));
   };
   render() {
     const { errMsg, credit, job, jobChange } = this.state;

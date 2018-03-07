@@ -322,7 +322,7 @@ export default class extends Component {
             listType="picture-card"
             className="w120 h120 font20"
             showUploadList={false}
-            action="http://jr.duduapp.net/web/common/upload_picture"
+            action="http://er.duduapp.net/web/common/upload_picture"
             beforeUpload={beforeUpload}
             onChange={this.handleChange}
           >

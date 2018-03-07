@@ -94,7 +94,12 @@ export default ({ children, pathname }) => (
             </Fragment>
           ))}
         </div>
-        <div className="equal overflow-h bg-white">{children}</div>
+        <div
+          className="equal overflow-h bg-white relative"
+          style={{ minHeight: "463px" }}
+        >
+          {children}
+        </div>
       </div>
     </div>
   </Layout>

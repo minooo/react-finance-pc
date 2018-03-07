@@ -31,7 +31,7 @@ export default class extends PureComponent {
       );
     } else if (isHref(href)) {
       return (
-        <a href={href} className={className} style={style} {...rest}>
+        <a href={href} className={className} style={style} target="_Blank" {...rest}>
           {children}
         </a>
       );

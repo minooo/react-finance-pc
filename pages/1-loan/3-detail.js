@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Input, Select } from "antd";
+import { Icon, Input, Select, message } from "antd";
 import Router from "next/router";
 import QRCode from "qrcode-react";
 import uuid from "uuid/v4";
@@ -10,7 +10,8 @@ import {
   arrToArr,
   clipBigNum,
   getCookie,
-  fee
+  fee,
+  cache
 } from "@utils";
 import {
   Layout,
@@ -81,7 +82,25 @@ export default class extends Component {
     this.setState(() => ({ finalMoney: finalVal, moneyVal: finalVal }));
   };
   onApply = (type, url, id, name, start, end) => {
-    const { url: { pathname, asPath } } = this.props;
+    const { url: { pathname, asPath }, data } = this.props;
+    if (!getCookie("token")) {
+      message.warn("当前操作需要登陆", 2, () => {
+        Router.push({ pathname: "/4-me/1-login", query: { href: pathname, as: asPath, id: data.loan.id } }, "/login")
+      })
+      return true
+    }
+    if (!cache.getItem("userId")) {
+      message.warn("当前操作需要完善基本资料", 2, () => {
+        Router.push({ pathname: "/4-me/2-home", query: { href: pathname, as: asPath, id: data.loan.id } }, "/me")
+      })
+      return true
+    }
+    if (!cache.getItem("userJob")) {
+      message.warn("当前操作需要完善其他资料", 2, () => {
+        Router.push({ pathname: "/4-me/3-other-data", query: { href: pathname, as: asPath, id: data.loan.id } }, "/me/other")
+      })
+      return true
+    }
     // type 2 同城  1 极速
     if (type === 2) {
       Router.push(
@@ -93,19 +112,10 @@ export default class extends Component {
       );
     }
     if (type === 1) {
-      if (getCookie("token")) {
-        http.post("loans/top_speed_apply", { id });
-        this.setState(() => ({ showQrcode: true }));
-      } else {
-        Router.push(
-          {
-            pathname: "/4-me/1-login",
-            query: { href: pathname, as: asPath, id }
-          },
-          "/login"
-        );
-      }
+      http.post("loans/top_speed_apply", { id });
+      this.setState(() => ({ showQrcode: true }));
     }
+    return null
   };
   setMyOption = (fee, total) => ({
     color: ["#ff764c", "#7eaeff"],
@@ -162,8 +172,12 @@ export default class extends Component {
               首页
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
-            <WrapLink href="/1-loan/1-home" as="/loan" className="c333 font16">
-              贷款超市
+            <WrapLink
+              href={data && data.loan && data.loan.category === 1 ? "/1-loan/2-home-speed" : "/1-loan/1-home"}
+              as={data && data.loan && data.loan.category === 1 ? "/loan/speed" : "/loan"}
+              className="c333 font16"
+            >
+              { data && data.loan && data.loan.category === 1 ? "极速贷" : "同城贷" }
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
             <span className="c333 font16">
@@ -344,7 +358,7 @@ export default class extends Component {
                       </div>
                     </div>
                     <div style={{ minWidth: "200px" }} className="ml30 font16">
-                      <div className="flex ai-center">
+                      <div className="flex ai-center mb20">
                         <span className="loandetail-globule mr5 bg-main circle" />
                         <span>到账金额：</span>
                         <span className="c-main">
@@ -352,7 +366,7 @@ export default class extends Component {
                             (data && data.loan && data.loan.sum_start)}
                         </span>
                       </div>
-                      <div className="flex ai-center">
+                      <div className="flex ai-center mb20">
                         <span className="loandetail-globule mr5 bg-second circle" />
                         <span>利息和费用：</span>
                         <span className="c-second">
@@ -589,7 +603,7 @@ export default class extends Component {
                             ? "/loan/speed"
                             : "/loan"
                         }?typeloan=${item.id}&typeloanfocus=${index + 1}`}
-                        className="mb20 text-center h34 w110 block c-main bg-inverse loandetail-hot text-overflow-one"
+                        className="mb20 text-center h34 w110 block c-main loandetail-hot text-overflow-one r2"
                       >
                         {item.name}
                       </WrapLink>
