@@ -31,7 +31,7 @@ export default ({ detailed, closeModal }) => (
             content={detailed && detailed.product_name}
           />
           <MeLoanAlertItem
-            title="发布时间"
+            title="申请时间"
             content={detailed && detailed.created_at}
           />
           <MeLoanAlertItem

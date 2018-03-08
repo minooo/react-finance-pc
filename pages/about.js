@@ -276,7 +276,7 @@ export default class extends Component {
               >
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>客服热线</div>
-                  <p key={uuid()}>400-968-8821</p>
+                  <p key={uuid()}>18638515889</p>
                 </div>
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>在线咨询</div>

@@ -84,7 +84,13 @@ export default class extends Component {
       });
   };
   render() {
-    const { cardTypeFocus, cardList, hasSearched, isFetch, loanTypes } = this.state;
+    const {
+      cardTypeFocus,
+      cardList,
+      hasSearched,
+      isFetch,
+      loanTypes
+    } = this.state;
     const { home, err } = this.props;
     if (err) {
       return <ErrorFetch err={err} />;
@@ -134,7 +140,7 @@ export default class extends Component {
             }
           </div>
         </div>
-        <div className="flex jc-between box mt30">
+        <div className="flex jc-between box" style={{ marginTop: "45px" }}>
           {loanTypes.map((item, index) => (
             <HomeType key={uuid()} item={item} index={index} />
           ))}
