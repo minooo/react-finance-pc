@@ -46,8 +46,9 @@ export default class extends Component {
   }
   componentWillReceiveProps() {
     const dia = document.getElementById("bdshare_weixin_qrcode_dialog");
-    if (dia) {
-      dia.style.display = "none";
+    const closeBtn = document.querySelector(".bd_weixin_popup_close")
+    if (dia.style.display !== "none") {
+      closeBtn.click()
     }
     // eslint-disable-next-line
     window._bd_share_main && window._bd_share_main.init();
@@ -69,8 +70,9 @@ export default class extends Component {
   }
   componentWillUnmount() {
     const dia = document.getElementById("bdshare_weixin_qrcode_dialog");
-    if (dia) {
-      dia.style.display = "none";
+    const closeBtn = document.querySelector(".bd_weixin_popup_close")
+    if (dia.style.display !== "none") {
+      closeBtn.click()
     }
     // eslint-disable-next-line
     window._bd_share_main && window._bd_share_main.init();

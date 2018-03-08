@@ -242,13 +242,17 @@ export default class extends Component {
                 value={
                   jobChange
                     ? this.state[`income${job}1`]
-                    : this.state[`income${job}1`] ||
-                      (initMyJob === 2
+                    : this.state[`income${initMyJob}1`] ||
+                      this.state[`income${initMyJob}1`] === ""
+                      ? this.state[`income${initMyJob}1`]
+                      : initMyJob === 2
                         ? initMyMonthlyTurnover
-                        : initMyMonthlyBusinessAccountIncome)
+                        : initMyMonthlyBusinessAccountIncome
                 }
                 maxLength="8"
-                onChange={val => this.onChange(val, `income${job}1`)}
+                onChange={val =>
+                  this.onChange(val, `income${job || initMyJob}1`)
+                }
               />
             </div>
           </div>
@@ -275,10 +279,18 @@ export default class extends Component {
                 value={
                   jobChange
                     ? this.state[`income${job === 1 || job === 4 ? "" : 1}`]
-                    : this.state[`income${job === 1 || job === 4 ? "" : 1}`] ||
-                      (initMyJob === 1 || initMyJob === 4
+                    : this.state[
+                        `income${initMyJob === 1 || initMyJob === 4 ? "" : 1}`
+                      ] ||
+                      this.state[
+                        `income${initMyJob === 1 || initMyJob === 4 ? "" : 1}`
+                      ] === ""
+                      ? this.state[
+                          `income${initMyJob === 1 || initMyJob === 4 ? "" : 1}`
+                        ]
+                      : initMyJob === 1 || initMyJob === 4
                         ? initMyMonthlyIncome
-                        : initMyCashSettlementOperatingIncome)
+                        : initMyCashSettlementOperatingIncome
                 }
                 maxLength="8"
                 onChange={val =>

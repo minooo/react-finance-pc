@@ -40,13 +40,14 @@ export default class extends Component {
           .then(response => {
             this.setState(() => ({ isLoading: false }));
             if (response.code === 200 && response.success) {
+              cache.setItem("userJob", param.identity_status);
+              this.initData();
               message.success("资料保存成功", 2, () => {
-                if (query && query.href) {
+                if (query) {
                   Router.push({ pathname: query.href, query }, query.as)
                 }
+                Router.push("/index", "/")
               });
-              cache.setItem("userJob", param.identity_status);
-              this.initData()
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
