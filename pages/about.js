@@ -270,7 +270,7 @@ export default class extends Component {
                   height: "527px",
                   paddingTop: "60px",
                   paddingBottom: "60px",
-                  boxShadow: "0px 5px 20px 0px rgba(76, 141, 252, 0.25)"
+                  boxShadow: "0px 0px 20px 5px rgba(76, 141, 252, 0.1)"
                 }}
                 className="r2 bg-white flex column ai-center jc-between"
               >
