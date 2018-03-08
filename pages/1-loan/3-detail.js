@@ -644,7 +644,7 @@ export default class extends Component {
                       <HomeRankListItem
                         key={uuid()}
                         item={item}
-                        isrank="true"
+                        isrank
                       />
                     ))}
                 </div>
