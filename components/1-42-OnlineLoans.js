@@ -59,7 +59,7 @@ export default class extends Component {
             </div>
           </div>
           <div className="flex overflow-h">
-            <div className="pr30" style={{ width: "200px" }}>
+            <div className="pr30">
               {onlineLoans.pop &&
                 onlineLoans.pop.length > 0 && (
                   <Fragment>
@@ -119,7 +119,7 @@ export default class extends Component {
                       {onlineLoans.pop.length === 1 ? (
                         <WrapLink
                           style={{ width: "140px" }}
-                          className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
+                          className="flex jc-center ai-center bg-main r100 h36 font18 c-white lh150 pointer home-btn-hover"
                           href={onlineLoans.pop[0].url}
                         >
                           <span className="c-white">免费申请</span>
@@ -127,7 +127,7 @@ export default class extends Component {
                       ) : (
                         <WrapLink
                           style={{ width: "140px" }}
-                          className="flex jc-center ai-center bg-main r100 h36 home-shdow-sm font18 c-white lh150 pointer"
+                          className="flex jc-center ai-center bg-main r100 h36 font18 c-white lh150 pointer home-btn-hover"
                           href={onlineLoans.pop[focus].url}
                         >
                           <span className="c-white">免费申请</span>
@@ -139,7 +139,7 @@ export default class extends Component {
               <div className="text-center lh150 font14 mb15">
                 APP下载，享专属优惠
               </div>
-              <div className="flex jc-between ai-center">
+              <div className="flex jc-around ai-center">
                 <div className="w80 h116 app-bg" />
                 <div className="w90 h90 app-qrcode-bg" />
               </div>
