@@ -10,6 +10,9 @@ export default class extends Component {
     const { pathname } = ctx;
     return { pathname };
   }
+  state = {
+    messageData: null
+  };
   componentDidMount() {
     this.onMessageData();
   }
@@ -18,8 +21,8 @@ export default class extends Component {
       .get("member/message")
       .then(response => {
         if (response.code === 200 && response.success) {
-          const { message } = response.data;
-          this.setState(() => ({ message }));
+          // const { messageData } = response.data;
+          // this.setState(() => ({ messageData }));
         } else {
           Router.replace({ pathname: "/4-me/1-login" }, "/login");
         }
@@ -36,11 +39,12 @@ export default class extends Component {
   };
   render() {
     const { pathname } = this.props;
+    const { messageData } = this.state;
     return (
       <MeSelection pathname={pathname}>
-        {message && message.length > 0 ? (
+        {messageData && messageData.length > 0 ? (
           <MeMessageList
-            message={message}
+            message={messageData}
             onDeletemessages={this.onDeletemessages}
           />
         ) : (
