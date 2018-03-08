@@ -84,22 +84,55 @@ export default class extends Component {
   onApply = (type, url, id, name, start, end) => {
     const { url: { pathname, asPath }, data } = this.props;
     if (!getCookie("token")) {
-      message.warn("当前操作需要登陆", 2, () => {
-        Router.push({ pathname: "/4-me/1-login", query: { href: pathname, as: asPath, id: data.loan.id } }, "/login")
-      })
-      return true
+      message.warn("当前操作需要登录", 2, () => {
+        Router.push(
+          {
+            pathname: "/4-me/1-login",
+            query: {
+              href: pathname,
+              as: asPath,
+              id: data.loan.id,
+              requireData: 1
+            }
+          },
+          "/login"
+        );
+      });
+      return true;
     }
     if (!cache.getItem("userId")) {
       message.warn("当前操作需要完善基本资料", 2, () => {
-        Router.push({ pathname: "/4-me/2-home", query: { href: pathname, as: asPath, id: data.loan.id } }, "/me")
-      })
-      return true
+        Router.push(
+          {
+            pathname: "/4-me/2-home",
+            query: {
+              href: pathname,
+              as: asPath,
+              id: data.loan.id,
+              requireData: 1
+            }
+          },
+          "/me"
+        );
+      });
+      return true;
     }
     if (!cache.getItem("userJob")) {
       message.warn("当前操作需要完善其他资料", 2, () => {
-        Router.push({ pathname: "/4-me/3-other-data", query: { href: pathname, as: asPath, id: data.loan.id } }, "/me/other")
-      })
-      return true
+        Router.push(
+          {
+            pathname: "/4-me/3-other-data",
+            query: {
+              href: pathname,
+              as: asPath,
+              id: data.loan.id,
+              requireData: 1
+            }
+          },
+          "/me/other"
+        );
+      });
+      return true;
     }
     // type 2 同城  1 极速
     if (type === 2) {
@@ -115,7 +148,7 @@ export default class extends Component {
       http.post("loans/top_speed_apply", { id });
       this.setState(() => ({ showQrcode: true }));
     }
-    return null
+    return null;
   };
   setMyOption = (fee, total) => ({
     color: ["#ff764c", "#7eaeff"],
@@ -173,11 +206,21 @@ export default class extends Component {
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
             <WrapLink
-              href={data && data.loan && data.loan.category === 1 ? "/1-loan/2-home-speed" : "/1-loan/1-home"}
-              as={data && data.loan && data.loan.category === 1 ? "/loan/speed" : "/loan"}
+              href={
+                data && data.loan && data.loan.category === 1
+                  ? "/1-loan/2-home-speed"
+                  : "/1-loan/1-home"
+              }
+              as={
+                data && data.loan && data.loan.category === 1
+                  ? "/loan/speed"
+                  : "/loan"
+              }
               className="c333 font16"
             >
-              { data && data.loan && data.loan.category === 1 ? "极速贷" : "同城贷" }
+              {data && data.loan && data.loan.category === 1
+                ? "极速贷"
+                : "同城贷"}
             </WrapLink>
             <div className="crumbs-ico-right-bg ml10 mr10" />
             <span className="c333 font16">

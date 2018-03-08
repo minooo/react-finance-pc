@@ -5,24 +5,42 @@ import { cache, getCookie } from "@utils";
 export default ({ item, index }) => {
   function onGo() {
     if (!getCookie("token")) {
-      message.warn("当前操作需要登陆", 2, () => {
-        Router.push({ pathname: "/4-me/1-login", query: { href: Router.route, as: Router.asPath } }, "/login")
-      })
-      return
+      message.warn("当前操作需要登录", 2, () => {
+        Router.push(
+          {
+            pathname: "/4-me/1-login",
+            query: { href: Router.route, as: Router.asPath, requireData: 1 }
+          },
+          "/login"
+        );
+      });
+      return;
     }
     if (!cache.getItem("userId")) {
       message.warn("当前操作需要完善基本资料", 2, () => {
-        Router.push({ pathname: "/4-me/2-home", query: { href: Router.route, as: Router.asPath } }, "/me")
-      })
-      return
+        Router.push(
+          {
+            pathname: "/4-me/2-home",
+            query: { href: Router.route, as: Router.asPath, requireData: 1 }
+          },
+          "/me"
+        );
+      });
+      return;
     }
     if (!cache.getItem("userJob")) {
       message.warn("当前操作需要完善其他资料", 2, () => {
-        Router.push({ pathname: "/4-me/3-other-data", query: { href: Router.route, as: Router.asPath } }, "/me/other")
-      })
-      return
+        Router.push(
+          {
+            pathname: "/4-me/3-other-data",
+            query: { href: Router.route, as: Router.asPath, requireData: 1 }
+          },
+          "/me/other"
+        );
+      });
+      return;
     }
-    window.open(item.external_links)
+    window.open(item.external_links);
   }
 
   return (
@@ -30,9 +48,9 @@ export default ({ item, index }) => {
       role="button"
       tabIndex="-1"
       style={{ width: "170px" }}
-      className={`flex column ai-center ${(index + 1) % 4 === 0 ? "" : "mr20"} ${
-        index < 4 ? "mb30" : ""
-      }`}
+      className={`flex column ai-center ${
+        (index + 1) % 4 === 0 ? "" : "mr20"
+      } ${index < 4 ? "mb30" : ""}`}
       onClick={onGo}
       onKeyDown={null}
     >
@@ -63,5 +81,5 @@ export default ({ item, index }) => {
         {/* <span className="c-main">{item.apply_num}人</span>申请 */}
       </div>
     </div>
-  )
-}
+  );
+};

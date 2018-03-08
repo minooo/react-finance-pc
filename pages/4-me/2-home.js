@@ -54,14 +54,25 @@ export default class extends Component {
           .then(response => {
             this.setState(() => ({ isLoading: false }));
             if (response.code === 200 && response.success) {
-              message.success("资料保存成功", 2, () => {
-                if (query && query.href) {
-                  Router.push({ pathname: query.href, query }, query.as)
-                }
-              });
               cache.setItem("userName", param.username);
               cache.setItem("userId", param.idNum);
               this.initData();
+              message.success("资料保存成功", 2, () => {
+                if (query) {
+                  if (query.requireData) {
+                    if (!cache.getItem("userJob")) {
+                      Router.push({ pathname: "/4-me/3-other-data", query }, "/me/other")
+                      return
+                    }
+                    Router.push(
+                      { pathname: query.href, query },
+                      query.as
+                    );
+                    return
+                  }
+                }
+                Router.push("/4-me/3-other-data", "/me/other")
+              });
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
@@ -98,7 +109,7 @@ export default class extends Component {
         {user && (
           <MeFormOne
             initNickName={user.base.username || user.base.phone}
-            initName={user.base.name || user.base.phone}
+            initName={user.base.name}
             initAreaName={areaToStr(
               user.base.province_name,
               user.base.city_name,

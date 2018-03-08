@@ -70,7 +70,6 @@ export default class extends Component {
     const {
       nickname,
       name,
-      imageUrl,
       avatar,
       sex,
       age,
@@ -105,10 +104,10 @@ export default class extends Component {
       this.onErrMsg("请选择您的注册站点。");
       return;
     }
-    if (!imageUrl && !initAvatar) {
-      this.onErrMsg("请上传您的头像。");
-      return;
-    }
+    // if (!imageUrl && !initAvatar) {
+    //   this.onErrMsg("请上传您的头像。");
+    //   return;
+    // }
     if (!(age || age === "" ? age : initAge)) {
       this.onErrMsg("请输入您的年龄。");
       return;
@@ -313,7 +312,7 @@ export default class extends Component {
         </div>
 
         {/* 上传头像 */}
-        <div className="flex mb30">
+        <div className="flex mb10">
           <div className="font14 c333 w90 text-right">上传头像:</div>
           <div className="w40" />
           <Upload
@@ -322,7 +321,7 @@ export default class extends Component {
             listType="picture-card"
             className="w120 h120 font20"
             showUploadList={false}
-            action="http://er.duduapp.net/web/common/upload_picture"
+            action={`${window.location.origin}/web/common/upload_picture`}
             beforeUpload={beforeUpload}
             onChange={this.handleChange}
           >

@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import Router from "next/router";
+import { connect } from "react-redux";
 import { Input, Button, Checkbox, message, Alert } from "antd";
+import { getUser, getUserOther } from "@actions";
+import reduxPage from "@reduxPage";
 import { Layout, WrapLink, Btn } from "@components";
 import { http, isMobile, setCookie, cache } from "@utils";
 
+@reduxPage
+@connect(({ user, userOther }) => ({ user, userOther }), {
+  getUser,
+  getUserOther
+})
 export default class extends Component {
   state = {
     tickNum: 60,
@@ -111,7 +119,7 @@ export default class extends Component {
   // 登录
   applyLoan = () => {
     const { mobile, captcha, code, isLongLogin } = this.state;
-    const { url: { query } } = this.props;
+    const { url: { query }, getUser, getUserOther } = this.props;
 
     if (!isMobile(mobile)) {
       this.onErrMsg("您的手机号格式有误，请检查。");
@@ -131,16 +139,63 @@ export default class extends Component {
         http
           .post("/auth/sign", { phone: mobile, code, captcha })
           .then(response => {
-            this.setState(() => ({ isLoading: false }));
             if (response.code === 200 && response.success) {
               const { token } = response.data;
               const time = isLongLogin ? 29 : 1;
               setCookie("token", token, time);
               cache.setItem("userPhone", mobile);
-              Router.push(
-                { pathname: (query && query.href) || "/4-me/2-home", query },
-                (query && query.as) || "/me"
-              );
+              setTimeout(() => {
+                http
+                  .get("member/base_profile")
+                  .then(response => {
+                    if (response.code === 200 && response.success) {
+                      getUser(response.data);
+                      if (response.data && response.data.base) {
+                        cache.setItem("userId", response.data.base.idNum)
+                        cache.setItem("userName", response.data.base.username || response.data.base.phone)
+                      }
+                      http
+                        .get("member/other_profile")
+                        .then(response => {
+                          if (response.code === 200 && response.success) {
+                            getUserOther(response.data);
+                            cache.setItem(
+                              "userJob",
+                              response.data &&
+                                response.data.info &&
+                                response.data.info.identity_status
+                            );
+                            this.setState(() => ({ isLoading: false }), () => {
+                              if (query) {
+                                if (query.requireData) {
+                                  if (!cache.getItem("userId")) {
+                                    Router.push({ pathname: "/4-me/2-home", query }, "/me")
+                                    return
+                                  }
+                                  if (!cache.getItem("userJob")) {
+                                    Router.push({ pathname: "/4-me/3-other-data", query }, "/me/other")
+                                    return
+                                  }
+                                }
+                                Router.push(
+                                  { pathname: (query && query.href) || "/4-me/2-home", query },
+                                  (query && query.as) || "/me"
+                                );
+                                return
+                              }
+                              Router.push("/4-me/2-home", "/me")
+                            });
+                          }
+                        })
+                        .catch(() => {
+                          message.error("抱歉，网络异常，请稍后再试！");
+                        });
+                    }
+                  })
+                  .catch(() => {
+                    message.error("抱歉，网络异常，请稍后再试！");
+                  });
+              }, 10);
             } else {
               message.error(response.msg || "抱歉，请求异常，请稍后再试！");
             }
