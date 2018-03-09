@@ -23,7 +23,7 @@ export default class extends Component {
     return (
       <div className="box flex">
         <div
-          className=" flex column pt25 pl20 pr15 c333  bg-white home-shdow-mid relative mr20"
+          className=" flex column pt25 pl20 pr10 c333  bg-white home-shdow-mid relative mr20"
           style={{ width: "860px", height: "520px" }}
         >
           <div className="home-loan-top">
@@ -34,7 +34,7 @@ export default class extends Component {
               ONLINE EXTREME LOAN
             </div>
           </div>
-          <div className="flex jc-between mb20">
+          <div className="flex jc-between mb15 pr5">
             <div className="font20 c333 lh100 bold">在线极速贷</div>
             <div
               className="flex ai-center relative pointer"
@@ -59,7 +59,7 @@ export default class extends Component {
             </div>
           </div>
           <div className="flex overflow-h">
-            <div className="pr30">
+            <div className="pr30 pt5">
               {onlineLoans.pop &&
                 onlineLoans.pop.length > 0 && (
                   <Fragment>
@@ -144,7 +144,7 @@ export default class extends Component {
                 <div className="w90 h90 app-qrcode-bg" />
               </div>
             </div>
-            <div className="flex equal wrap pl5 overflow-h">
+            <div className="flex equal wrap pl5 pt5 overflow-h pr5">
               {onlineLoans.default &&
                 onlineLoans.default.list &&
                 onlineLoans.default.list.length > 0 &&
