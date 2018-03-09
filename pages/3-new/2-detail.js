@@ -134,6 +134,7 @@ export default class extends Component {
                 【{detail.created_at.substr(0, 10)}】
               </div>
               <div
+                className="c333 font14"
                 dangerouslySetInnerHTML={{
                   __html: detail.content
                 }}
