@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import uuid from "uuid/v4";
 import { message, Pagination } from "antd";
-import { MeSelection, MeloanApplyList, MeLoanAlert, NoData } from "@components";
+import {
+  MeSelection,
+  MeloanApplyList,
+  MeLoanAlert,
+  NoData
+} from "@components";
 import { getCookie, http } from "@utils";
 import Router from "next/router";
 
@@ -15,7 +20,8 @@ export default class extends Component {
     detailed: {},
     visible: false,
     currentPage: 1,
-    lists: []
+    lists: [],
+    isFetch: false
   };
   componentDidMount() {
     const token = getCookie("token");
@@ -29,7 +35,8 @@ export default class extends Component {
   onPageChange = page => {
     this.setState(
       () => ({
-        currentPage: page
+        currentPage: page,
+        isFetch: true
       }),
       () => {
         const { currentPage } = this.state;
@@ -44,6 +51,7 @@ export default class extends Component {
         if (response.code === 200 && response.success) {
           const { data } = response;
           this.setState(() => ({
+            isFetch: false,
             lists: data.lists
           }));
         } else {
@@ -67,9 +75,9 @@ export default class extends Component {
   };
   render() {
     const { pathname } = this.props;
-    const { visible, lists, detailed, currentPage } = this.state;
+    const { visible, lists, detailed, currentPage, isFetch } = this.state;
     return (
-      <MeSelection pathname={pathname}>
+      <MeSelection pathname={pathname} isFetch={isFetch}>
         {/* 先判断有无数据 */}
         {lists && lists.list && lists.list.length > 0 ? (
           <div
