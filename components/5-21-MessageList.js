@@ -2,11 +2,7 @@ import { Icon } from "antd";
 import { Btn } from "@components";
 import uuid from "uuid/v4";
 
-export default ({ message, onDeletemessages }) => (
-  <div style={{ padding: "50px" }}>
-    {message &&
-      message.length > 0 &&
-      message.map(item => (
+export default ({ item, onDeletemessages }) => (
         <div key={uuid()} className="flex jc-between mb25 me-massage-list pl25">
           <div className="c333 font14">{item.content}</div>
           <Btn
@@ -15,6 +11,4 @@ export default ({ message, onDeletemessages }) => (
             onClick={() => onDeletemessages(item.id)}
           />
         </div>
-      ))}
-  </div>
 );

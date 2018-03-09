@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { message } from "antd";
+import { Pagination, message } from "antd";
 import Router from "next/router";
 import { MeMessageList, MeSelection, NoData, LoadingFetch } from "@components";
-import { http } from "@utils";
+import { http, getCookie } from "@utils";
 
 export default class extends Component {
   static async getInitialProps(ctx) {
@@ -12,24 +12,30 @@ export default class extends Component {
   }
   state = {
     isFetch: false,
-    system: null
+    lists: null,
+    currentPage: 1
   };
   componentDidMount() {
-    this.onMessageData();
+    const token = getCookie("token");
+    if (token) {
+      this.onMessageData();
+    } else {
+      message.error("没有登录请登录");
+      Router.replace({ pathname: "/4-me/1-login" }, "/login");
+    }
   }
   onMessageData = () => {
     http
-      .get("member/notify")
+      .get("member/notify", { type: 1 })
       .then(response => {
         if (response.code === 200 && response.success) {
-          const { system } = response.data;
-          this.setState(() => ({ system }));
+          const { lists } = response.data;
+          this.setState(() => ({ lists }));
         } else {
-          Router.replace({ pathname: "/4-me/1-login" }, "/login");
+          message.error(response.msg || "抱歉，请求出错。");
         }
       })
       .catch(() => {
-        Router.replace({ pathname: "/4-me/1-login" }, "/login");
         message.error("抱歉，网络异常，请稍后再试！");
       });
   };
@@ -58,15 +64,29 @@ export default class extends Component {
   };
   render() {
     const { pathname } = this.props;
-    const { isFetch, system } = this.state;
+    const { isFetch, lists, currentPage } = this.state;
     return (
       <MeSelection pathname={pathname}>
         {isFetch && <LoadingFetch />}
-        {system && system.length > 0 ? (
-          <MeMessageList
-            message={system}
-            onDeletemessages={this.onDeletemessages}
-          />
+        {lists && lists.list.length > 0 ? (
+          <div style={{ padding: "50px" }}>
+            {lists.list.map(item => (
+              <MeMessageList
+                item={item}
+                onDeletemessages={this.onDeletemessages}
+              />
+            ))}
+            <div className="pb30 flex jc-center">
+              <Pagination
+                hideOnSinglePage
+                className="pt30"
+                current={currentPage}
+                defaultPageSize={10}
+                total={lists.count}
+                onChange={this.onPageChange}
+              />
+            </div>
+          </div>
         ) : (
           <NoData caption="暂时没有系统消息" />
         )}
