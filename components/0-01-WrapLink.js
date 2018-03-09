@@ -20,18 +20,18 @@ export default class extends PureComponent {
   };
 
   render() {
-    const { href, children, className, as, style, ...rest } = this.props;
+    const { href, children, as, ...rest } = this.props;
     if (isLink(href)) {
       return (
         <Link href={href} as={as}>
-          <a className={className} style={style} {...rest}>
+          <a {...rest}>
             {children}
           </a>
         </Link>
       );
     } else if (isHref(href)) {
       return (
-        <a href={href} className={className} style={style} target="_Blank" {...rest}>
+        <a href={href} target="_Blank" {...rest}>
           {children}
         </a>
       );
@@ -39,8 +39,6 @@ export default class extends PureComponent {
     return (
       <button
         onClick={this.onClick}
-        className={className}
-        style={style}
         {...rest}
       >
         {children}
