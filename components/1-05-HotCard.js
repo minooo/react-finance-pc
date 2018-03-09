@@ -55,7 +55,7 @@ export default ({ item, index }) => {
       onKeyDown={null}
     >
       <div className="img-bg h106 w-100">
-        <img src={item.thumb} className="w-100 h-100" alt="" />
+        <img src={item.images} className="w-100 h-100" alt="" />
       </div>
       <div
         style={{ maxWidth: "100%" }}
