@@ -5,7 +5,7 @@ export default ({ item, index }) => (
     {index < 3 ? (
       <div className="flex ptb15 plr10 c333 home-loanlist-hover">
         <div className="w106 h66">
-          <img src={item.thumb} alt="" className="w-100 h-100" />
+          <img src={item.images} alt="" className="w-100 h-100" />
         </div>
         <div className="flex column equal overflow-h jc-between pl15 ptb5">
           <div className="font16 lh120 text-overflow-one">{item.name}</div>
