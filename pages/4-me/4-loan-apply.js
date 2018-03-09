@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import uuid from "uuid/v4";
-import { message } from "antd";
-import { MeSelection, MeloanApplyList, MeLoanAlert, NoData } from "@components";
-import { http } from "@utils";
+import { message, Pagination } from "antd";
+import {
+  MeSelection,
+  MeloanApplyList,
+  MeLoanAlert,
+  NoData
+} from "@components";
+import { getCookie, http } from "@utils";
 import Router from "next/router";
 
 export default class extends Component {
@@ -14,49 +19,69 @@ export default class extends Component {
   state = {
     detailed: {},
     visible: false,
-    loan_logs: []
+    currentPage: 1,
+    lists: [],
+    isFetch: false
   };
   componentDidMount() {
-    this.initData();
+    const token = getCookie("token");
+    if (token) {
+      this.fetchData(this.state.currentPage);
+    } else {
+      Router.replace({ pathname: "/4-me/1-login" }, "/login");
+      message.error("你还未登录");
+    }
   }
-  initData = () => {
+  onPageChange = page => {
+    this.setState(
+      () => ({
+        currentPage: page,
+        isFetch: true
+      }),
+      () => {
+        const { currentPage } = this.state;
+        this.fetchData(currentPage);
+      }
+    );
+  };
+  fetchData = page => {
     http
-      .get("member/apply_loan_log")
+      .get("member/apply_loan_log", { page })
       .then(response => {
         if (response.code === 200 && response.success) {
           const { data } = response;
           this.setState(() => ({
-            loan_logs: data.loan_logs
+            isFetch: false,
+            lists: data.lists
           }));
         } else {
-          Router.replace({ pathname: "/4-me/1-login" }, "/login");
+          message.error("抱歉，网络异常，请稍后再试！");
         }
       })
       .catch(() => {
-        Router.replace({ pathname: "/4-me/1-login" }, "/login");
         message.error("抱歉，网络异常，请稍后再试！");
       });
   };
-  showModal = pre => {
-    this.setState({
+  showModal = data => {
+    this.setState(() => ({
       visible: true,
-      detailed: pre
-    });
+      detailed: data
+    }));
   };
   closeModal = () => {
-    this.setState({
+    this.setState(() => ({
       visible: false
-    });
+    }));
   };
   render() {
     const { pathname } = this.props;
-    const { visible, loan_logs, detailed } = this.state;
+    const { visible, lists, detailed, currentPage, isFetch } = this.state;
     return (
-      <MeSelection pathname={pathname}>
+      <MeSelection pathname={pathname} isFetch={isFetch}>
         {/* 先判断有无数据 */}
-        {loan_logs && loan_logs.length > 0 ? (
+        {lists && lists.list && lists.list.length > 0 ? (
           <div
-            className="w-100 h-100"
+            className="w-100 h-100 pb30"
             style={{
               paddingTop: "50px",
               paddingLeft: "45px"
@@ -74,7 +99,7 @@ export default class extends Component {
                 <div style={{ width: "190px" }}>申请状态</div>
                 <div className="equal">操作</div>
               </div>
-              {loan_logs.map((item, index) => (
+              {lists.list.map((item, index) => (
                 <MeloanApplyList
                   showModal={this.showModal}
                   index={index}
@@ -82,6 +107,16 @@ export default class extends Component {
                   key={uuid()}
                 />
               ))}
+              <div className="pb30 flex jc-center">
+                <Pagination
+                  hideOnSinglePage
+                  className="pt30"
+                  current={currentPage}
+                  defaultPageSize={10}
+                  total={lists && lists.count ? lists && lists.count : 1}
+                  onChange={this.onPageChange}
+                />
+              </div>
             </div>
 
             {/* 弹出框 */}
