@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { message } from "antd";
 import Router from "next/router";
-import { MeMessageList, MeSelection, NoData } from "@components";
+import { MeMessageList, MeSelection, NoData, LoadingFetch } from "@components";
 import { http } from "@utils";
 
 export default class extends Component {
@@ -11,18 +11,19 @@ export default class extends Component {
     return { pathname };
   }
   state = {
-    messageData: null
+    isFetch: false,
+    system: null
   };
   componentDidMount() {
     this.onMessageData();
   }
   onMessageData = () => {
     http
-      .get("member/message")
+      .get("member/notify")
       .then(response => {
         if (response.code === 200 && response.success) {
-          // const { messageData } = response.data;
-          // this.setState(() => ({ messageData }));
+          const { system } = response.data;
+          this.setState(() => ({ system }));
         } else {
           Router.replace({ pathname: "/4-me/1-login" }, "/login");
         }
@@ -33,18 +34,37 @@ export default class extends Component {
       });
   };
   onDeletemessages = id => {
-    /* eslint-disable */
-    console.log(id);
-    /* eslint-enable */
+    this.setState(() => ({
+      isFetch: true
+    }));
+    http
+      .delete(`member/notify/${id}`, null)
+      .then(response => {
+        // 这里的判断条件根据具体的接口情况而调整
+        if (response.code === 200 && response.success) {
+          this.setState(() => ({ isFetch: false }));
+          message.success("系统消息删除成功");
+          this.onMessageData();
+        } else {
+          message.error(
+            response.msg ? response.msg : "抱歉，请求异常，请稍后再试！"
+          );
+        }
+      })
+      .catch(err => {
+        message.error("网络错误，请稍后再试！");
+        console.info(err);
+      });
   };
   render() {
     const { pathname } = this.props;
-    const { messageData } = this.state;
+    const { isFetch, system } = this.state;
     return (
       <MeSelection pathname={pathname}>
-        {messageData && messageData.length > 0 ? (
+        {isFetch && <LoadingFetch />}
+        {system && system.length > 0 ? (
           <MeMessageList
-            message={messageData}
+            message={system}
             onDeletemessages={this.onDeletemessages}
           />
         ) : (

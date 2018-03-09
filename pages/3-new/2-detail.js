@@ -47,7 +47,7 @@ export default class extends Component {
   componentWillReceiveProps() {
     const dia = document.getElementById("bdshare_weixin_qrcode_dialog");
     const closeBtn = document.querySelector(".bd_weixin_popup_close")
-    if (dia.style.display !== "none") {
+    if (dia && dia.style && dia.style.display !== "none") {
       closeBtn.click()
     }
     // eslint-disable-next-line
@@ -71,7 +71,7 @@ export default class extends Component {
   componentWillUnmount() {
     const dia = document.getElementById("bdshare_weixin_qrcode_dialog");
     const closeBtn = document.querySelector(".bd_weixin_popup_close")
-    if (dia.style.display !== "none") {
+    if (dia && dia.style && dia.style.display !== "none") {
       closeBtn.click()
     }
     // eslint-disable-next-line
@@ -134,6 +134,7 @@ export default class extends Component {
                 【{detail.created_at.substr(0, 10)}】
               </div>
               <div
+                className="c333 font14"
                 dangerouslySetInnerHTML={{
                   __html: detail.content
                 }}
