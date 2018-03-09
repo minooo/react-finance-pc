@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Input, Select, Button, message, Alert } from "antd";
 import { withRouter } from "next/router";
-import { isMobile, isName, http, setCookie } from "@utils";
+import { isMobile, isName, http, setCookie, cache } from "@utils";
 
 @withRouter
 export default class extends Component {
@@ -111,13 +111,25 @@ export default class extends Component {
             if (response.code === 200 && response.success) {
               const { token } = response.data;
               setCookie("token", token, 1); // 有效期1天
-              router.push(
-                {
-                  pathname: "/1-loan/4-apply-loan",
-                  query: { name, money, mobile, genre }
-                },
-                "/loan/apply"
-              );
+              cache.setItem("userPhone", mobile);
+              setTimeout(() => {
+                http
+                  .get("member/base_profile")
+                  .then(response => {
+                    if (response.code === 200 && response.success) {
+                      if (response.data && response.data.base) {
+                        cache.setItem("userName", response.data.base.username || response.data.base.phone)
+                        router.push(
+                          {
+                            pathname: "/1-loan/4-apply-loan",
+                            query: { name, money, mobile, genre }
+                          },
+                          "/loan/apply"
+                        );
+                      }
+                    }
+                  })
+              }, 10)
             } else {
               this.onErrMsg(response.msg || "抱歉，请求出错。");
             }
