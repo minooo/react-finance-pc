@@ -31,7 +31,7 @@ export default class extends Component {
               className="home-loantop-text font14 h20 bold"
               style={{ width: "200px" }}
             >
-              ONLINE EXTREME LOAN
+              ONLINE EXPRESS LOAN
             </div>
           </div>
           <div className="flex jc-between mb20">
