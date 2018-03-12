@@ -48,10 +48,12 @@ export default class extends Component {
     http
       .get("member/apply_loan_log", { page })
       .then(response => {
+        this.setState(() => ({
+          isFetch: false
+        }));
         if (response.code === 200 && response.success) {
           const { data } = response;
           this.setState(() => ({
-            isFetch: false,
             lists: data.lists
           }));
         } else {
