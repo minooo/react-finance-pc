@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Pagination, message } from "antd";
 import Router from "next/router";
-import { MeMessageList, MeSelection, NoData, LoadingFetch } from "@components";
+import uuid from "uuid/v4";
+import { MeMessageList, MeSelection, NoData } from "@components";
 import { http, getCookie } from "@utils";
 
 export default class extends Component {
@@ -24,13 +25,18 @@ export default class extends Component {
       Router.replace({ pathname: "/4-me/1-login" }, "/login");
     }
   }
+  // 获取信息
   onMessageData = currentPage => {
     http
       .get("member/notify", { type: 2, page: currentPage })
       .then(response => {
         if (response.code === 200 && response.success) {
           const { lists } = response.data;
-          this.setState(() => ({ lists }));
+          this.setState(() => ({
+            isFetch: false,
+            lists,
+            currentPage: 1
+          }));
         } else {
           message.error(response.msg || "抱歉，请求出错。");
         }
@@ -39,6 +45,20 @@ export default class extends Component {
         message.error("抱歉，网络异常，请稍后再试！");
       });
   };
+  // 分页
+  onPageChange = page => {
+    this.setState(
+      () => ({
+        isFetch: true,
+        currentPage: page
+      }),
+      () => {
+        const { currentPage } = this.state;
+        this.onMessageData(currentPage);
+      }
+    );
+  };
+  // 删除信息
   onDeletemessages = id => {
     this.setState(() => ({
       isFetch: true
@@ -62,29 +82,16 @@ export default class extends Component {
         console.info(err);
       });
   };
-  // 分页
-  onPageChange = page => {
-    this.setState(
-      () => ({
-        isFetch: true,
-        currentPage: page
-      }),
-      () => {
-        const { currentPage } = this.state;
-        this.onMessageData(currentPage);
-      }
-    );
-  };
   render() {
     const { pathname } = this.props;
     const { lists, isFetch, currentPage } = this.state;
     return (
-      <MeSelection pathname={pathname}>
-        {isFetch && <LoadingFetch />}
+      <MeSelection pathname={pathname} isFetch={isFetch}>
         {lists && lists.list.length > 0 ? (
           <div style={{ padding: "50px" }}>
             {lists.list.map(item => (
               <MeMessageList
+                key={uuid()}
                 item={item}
                 onDeletemessages={this.onDeletemessages}
               />
