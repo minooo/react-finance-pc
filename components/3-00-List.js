@@ -53,7 +53,7 @@ export default ({ item }) => {
       onKeyDown={null}
     >
       <div className="w106 h66 img-bg mr15">
-        <img src={item.thumb} alt="" className="w-100 h-100" />
+        <img src={item.images} alt="" className="w-100 h-100" />
       </div>
       <div
         className="flex column h56 jc-between overflow-h pr20"
