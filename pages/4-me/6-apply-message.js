@@ -34,8 +34,7 @@ export default class extends Component {
           const { lists } = response.data;
           this.setState(() => ({
             isFetch: false,
-            lists,
-            currentPage: 1
+            lists
           }));
         } else {
           message.error(response.msg || "抱歉，请求出错。");
@@ -68,8 +67,10 @@ export default class extends Component {
       .then(response => {
         // 这里的判断条件根据具体的接口情况而调整
         if (response.code === 200 && response.success) {
-          this.setState(() => ({ isFetch: false }));
           message.success("申请信息删除成功");
+          this.setState(() => ({
+            currentPage: 1
+          }));
           this.onMessageData();
         } else {
           message.error(
