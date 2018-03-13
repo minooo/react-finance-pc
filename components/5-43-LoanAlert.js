@@ -5,10 +5,7 @@ import { Btn, AlertBg, MeLoanAlertItem } from "@components";
 export default ({ detailed, closeModal }) => (
   <Fragment>
     <AlertBg />
-    <div
-      className="bg-white absolute z-index100"
-      style={{ left: "0px", bottom: "70px", width: "820px", height: "308px" }}
-    >
+    <div className="z-index100 bg-white me-loanapply-alert">
       {/* 头部 */}
       <div
         className="h62 flex ai-center jc-between"

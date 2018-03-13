@@ -164,11 +164,11 @@ export default class extends Component {
                 rankingList={home.common_city_loans}
               />
             )}
-          <div className="h70" />
+          <div className="h40" />
         </div>
         {/* 第二个背景图 */}
         <div className="home-bg-2">
-          <div className="h70" />
+          <div className="h40" />
           {/* 优惠活动 */}
           <div style={{ height: "580px" }} className="box flex">
             <div
@@ -279,7 +279,9 @@ export default class extends Component {
                   className="font14 c333 text-overflow-one block"
                   title={item.title}
                 >
-                  <span className="c-main">【{index + 1}】 </span>
+                  <span className={`${index > 2 ? "c333" : "c-main"}`}>
+                    【{index + 1}】{" "}
+                  </span>
                   {item.title}
                 </WrapLink>
               ))}

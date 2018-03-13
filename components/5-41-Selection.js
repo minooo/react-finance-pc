@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import uuid from "uuid/v4";
-import { Layout, WrapLink } from "@components";
+import { Layout, WrapLink, LoadingFetch } from "@components";
 
 const selectList = [
   {
@@ -45,8 +45,9 @@ const selectList = [
   }
 ];
 
-export default ({ children, pathname }) => (
+export default ({ children, pathname, isFetch }) => (
   <Layout title="个人中心">
+    {isFetch && <LoadingFetch />}
     <div
       className="w-100 h-100 pt20"
       style={{
@@ -94,11 +95,7 @@ export default ({ children, pathname }) => (
             </Fragment>
           ))}
         </div>
-        <div
-          className="equal overflow-h bg-white relative"
-        >
-          {children}
-        </div>
+        <div className="equal overflow-h bg-white relative">{children}</div>
       </div>
     </div>
   </Layout>
