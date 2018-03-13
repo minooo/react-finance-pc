@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import uuid from "uuid/v4";
 import { message, Pagination } from "antd";
-import {
-  MeSelection,
-  MeloanApplyList,
-  MeLoanAlert,
-  NoData
-} from "@components";
+import { MeSelection, MeloanApplyList, MeLoanAlert, NoData } from "@components";
 import { getCookie, http } from "@utils";
 import Router from "next/router";
 
