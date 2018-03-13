@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Router from "next/router";
 import uuid from "uuid/v4";
 import { message } from "antd";
-import { http } from "@utils";
+import { http, cache } from "@utils";
 import { getUser, getUserOther } from "@actions";
 import reduxPage from "@reduxPage";
 import {
@@ -45,21 +45,31 @@ export default class extends Component {
     focus: 0
   };
   componentDidMount() {
-    const { getUser, getUserOther, user, userOther, url: { query } } = this.props;
+    const { getUser, getUserOther, url: { query } } = this.props;
     if (!query || !query.mobile) {
       Router.replace({ pathname: "/index" }, "/")
+      return
     }
-    if (!user || !userOther) {
-      http
+    http
       .get("member/base_profile")
       .then(response => {
         if (response.code === 200 && response.success) {
           getUser(response.data);
+          if (response.data && response.data.base) {
+            cache.setItem("userId", response.data.base.idNum)
+            cache.setItem("userName", response.data.base.username || response.data.base.phone)
+          }
           http
             .get("member/other_profile")
             .then(response => {
               if (response.code === 200 && response.success) {
                 getUserOther(response.data);
+                cache.setItem(
+                  "userJob",
+                  response.data &&
+                    response.data.info &&
+                    response.data.info.identity_status
+                );
               } else {
                 message.error(response.msg || "抱歉，请求出错。");
               }
@@ -74,7 +84,6 @@ export default class extends Component {
       .catch(() => {
         message.error("抱歉，网络异常，请稍后再试！");
       });
-    }
   }
   onNextOne = param => {
     this.goNext("base", param, 1);
