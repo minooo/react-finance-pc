@@ -13,11 +13,6 @@ const cityFilters = [
     list: [{ name: "不限" }]
   },
   {
-    title: "申请资质",
-    key: "aptitude",
-    list: [{ name: "不限" }]
-  },
-  {
     title: "信用情况",
     key: "credit_condition",
     list: [{ name: "不限" }]
