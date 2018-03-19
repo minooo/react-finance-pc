@@ -245,7 +245,7 @@ export default class extends Component {
                       <div className="l120 font20 bold mr10 text-overflow-one">
                         {data && data.loan && data.loan.name}
                       </div>
-                      {data &&
+                      {/* {data &&
                         data.loan &&
                         data.loan.apply_material_name &&
                         data.loan.apply_material_name.length > 0 &&
@@ -261,7 +261,7 @@ export default class extends Component {
                           >
                             {item}
                           </div>
-                        ))}
+                        ))} */}
                     </div>
                     <div className="lh150 font16 c666 text-overflow-one">
                       {data && data.loan && data.loan.description}
@@ -528,17 +528,16 @@ export default class extends Component {
                         <div className="he18 loandetail-right-icon" />
                         <div className="pl10 font18 bold lh100">申请材料</div>
                       </div>
-                      <div className="pl20 font14 c33">
-                        {data &&
-                          data.loan &&
-                          data.loan.apply_material_name &&
-                          data.loan.apply_material_name.length > 0 &&
-                          data.loan.apply_material_name.map((item, index) => (
-                            <div key={uuid()} className="h30 lh100">
-                              {index + 1}、{item}
-                            </div>
-                          ))}
-                      </div>
+                      <div
+                        className="pl20 font14 c33"
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            (data &&
+                              data.loan &&
+                              data.loan.apply_material_name) ||
+                            "暂无信息"
+                        }}
+                      />
                     </div>
                   )}
                 <div
@@ -684,11 +683,7 @@ export default class extends Component {
                     data.recommend.list &&
                     data.recommend.list.length > 0 &&
                     data.recommend.list.map(item => (
-                      <HomeRankListItem
-                        key={uuid()}
-                        item={item}
-                        isrank
-                      />
+                      <HomeRankListItem key={uuid()} item={item} isrank />
                     ))}
                 </div>
               )}
