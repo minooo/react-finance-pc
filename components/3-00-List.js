@@ -41,7 +41,7 @@ export default ({ item }) => {
       return;
     }
 
-    window.open(item.external_links);
+    window.open(item.pc_outside_link);
   }
   return (
     <div

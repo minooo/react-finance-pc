@@ -1,7 +1,7 @@
 import { WrapLink } from "@components";
 
 export default ({ item, index }) => (
-  <WrapLink href={item.external_links} as="/">
+  <WrapLink href={item.pc_outside_link} as="/">
     {index < 3 ? (
       <div className="flex ptb15 plr10 c333 home-loanlist-hover">
         <div className="w106 h66">
