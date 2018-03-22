@@ -23,14 +23,14 @@ const util = require("util");
 @connect(({ loansHome }) => ({ loansHome }))
 export default class extends Component {
   static async getInitialProps(ctx) {
-    // err req res pathname query asPath isServer
-    const { store, isServer, asPath } = ctx;
+    // err req res pathname query asPath
+    const { store, req, asPath } = ctx;
     if (!store.getState().loansHome) {
       try {
         const { data } = await http.get(
           "common_city_loans/index",
           null,
-          isServer
+          !!req
         );
         store.dispatch(getLoansHome(data));
       } catch (error) {
