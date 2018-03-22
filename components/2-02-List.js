@@ -6,14 +6,10 @@ export default ({ item }) => (
   <WrapLink
     href={
       item.category === 2
-        ? `/1-loan/3-detail/${item.id}`
-        : `/1-loan/6-speed-detail/${item.id}`
+        ? `/1-loan/3-detail?id=${item.id}`
+        : `/1-loan/6-speed-detail?id=${item.id}`
     }
-    as={
-      item.category === 2
-        ? `/loan/${item.id}`
-        : `/loan/speed/${item.id}`
-    }
+    as={item.category === 2 ? `/loan/${item.id}` : `/loan/speed/${item.id}`}
     style={{ height: "126px" }}
     className="flex ai-center plr20 border-bottom transition loan-list-hover bg-white"
   >
