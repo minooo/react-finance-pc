@@ -27,7 +27,11 @@ export default class extends Component {
     const { store, isServer, asPath } = ctx;
     if (!store.getState().loansHome) {
       try {
-        const { data } = await http.get("loans/index", null, isServer);
+        const { data } = await http.get(
+          "common_city_loans/index",
+          null,
+          isServer
+        );
         store.dispatch(getLoansHome(data));
       } catch (error) {
         const err = util.inspect(error);
@@ -51,7 +55,6 @@ export default class extends Component {
     fetchSearchParam: {},
     money_section: 0,
     timelimit: 0,
-
     tabTypes: [
       {
         title: "同城贷",
@@ -153,15 +156,15 @@ export default class extends Component {
   };
   fetchData = (fetchParam, hasSearched, list, count) => {
     http
-      .get("loans/list", fetchParam)
+      .get("common_city_loans/list", fetchParam)
       .then(response => {
         // 这里的判断条件根据具体的接口情况而调整
         this.setState(() => ({ isFetch: false, [hasSearched]: true }));
         if (response.code === 200 && response.success) {
           const listData =
-            response.data && response.data.list && response.data.list.list;
+            response.data && response.data.list && response.data.list.data;
           const countNum =
-            response.data && response.data.list && response.data.list.count;
+            response.data && response.data.list && response.data.list.total;
           this.setState(() => ({ [list]: listData, [count]: countNum }));
         } else {
           message.error(response.msg || "抱歉，请求异常，请稍后再试！");
@@ -276,7 +279,7 @@ export default class extends Component {
                   {((hasCitySearched && searchCityCount > 0) ||
                     (!hasCitySearched &&
                       loansHome.list &&
-                      loansHome.list.count > 0)) &&
+                      loansHome.list.total > 0)) &&
                     loansHome &&
                     loansHome.sort &&
                     loansHome.sort.length > 0 && (
@@ -312,19 +315,18 @@ export default class extends Component {
                         `sorry~没有找到符合您筛选条件的产品,${
                           loansHome &&
                           loansHome.recommend &&
-                          loansHome.recommend.list &&
-                          loansHome.recommend.list.length > 0
+                          loansHome.recommend.length > 0
                             ? "您可以看看以下精选贷款产品"
                             : ""
                         }`
                       )
                     ) : loansHome &&
                     loansHome.list &&
-                    loansHome.list.count > 0 ? (
+                    loansHome.list.total > 0 ? (
                       <Fragment>
                         一共为您找到
                         <span className="c-main plr5">
-                          {loansHome.list.count}
+                          {loansHome.list.total}
                         </span>款产品
                       </Fragment>
                     ) : (
@@ -337,24 +339,24 @@ export default class extends Component {
                   !(searchCityCount > 0) &&
                   loansHome &&
                   loansHome.recommend &&
-                  loansHome.recommend.list &&
-                  loansHome.recommend.list.length > 0 &&
-                  loansHome.recommend.list.map(item => (
+                  loansHome.recommend.length > 0 &&
+                  loansHome.recommend.map(item => (
                     <LoanList key={uuid()} item={item} />
                   ))}
                 {loansHome &&
                   loansHome.list &&
-                  loansHome.list.list &&
-                  loansHome.list.list.length > 0 &&
+                  loansHome.list.data &&
+                  loansHome.list.data.length > 0 &&
                   (hasCitySearched
                     ? searchCityList &&
                       searchCityList.length > 0 &&
                       searchCityList.map(item => (
                         <LoanList key={uuid()} item={item} />
                       ))
-                    : loansHome.list.list.map(item => (
+                    : loansHome.list.data.map(item => (
                         <LoanList key={uuid()} item={item} />
                       )))}
+                {/* 分页 */}
                 <div className="pb30 flex jc-center">
                   <Pagination
                     hideOnSinglePage
@@ -366,8 +368,8 @@ export default class extends Component {
                         ? searchCityCount
                         : loansHome &&
                           loansHome.list &&
-                          loansHome.list.count > 0
-                          ? loansHome.list.count
+                          loansHome.list.total > 0
+                          ? loansHome.list.total
                           : 1
                     }
                     onChange={this.onPageChange}

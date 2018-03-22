@@ -87,6 +87,11 @@ app.prepare().then(() => {
       renderAndCache(ctx, "/1-loan/3-detail", null, { id })
     )
   );
+  server.use(
+    router.get("/loan/speed/:id", (ctx, id) =>
+      renderAndCache(ctx, "/1-loan/6-speed-detail", null, { id })
+    )
+  );
   server.use(router.get("/card", ctx => renderAndCache(ctx, "/2-card/1-home")));
   server.use(router.get("/new", ctx => renderAndCache(ctx, "/3-new/1-home")));
   server.use(
@@ -100,10 +105,24 @@ app.prepare().then(() => {
   server.use(router.get("/login", ctx => renderAndCache(ctx, "/4-me/1-login")));
   server.use(router.get("/about", ctx => renderAndCache(ctx, "/about")));
   server.use(router.get("/me", ctx => renderAndCache(ctx, "/4-me/2-home")));
-  server.use(router.get("/me/other", ctx => renderAndCache(ctx, "/4-me/3-other-data")));
-  server.use(router.get("/me/loan-apply", ctx => renderAndCache(ctx, "/4-me/4-loan-apply")));
-  server.use(router.get("/me/system-message", ctx => renderAndCache(ctx, "/4-me/5-system-message")));
-  server.use(router.get("/me/apply-message", ctx => renderAndCache(ctx, "/4-me/6-apply-message")));
+  server.use(
+    router.get("/me/other", ctx => renderAndCache(ctx, "/4-me/3-other-data"))
+  );
+  server.use(
+    router.get("/me/loan-apply", ctx =>
+      renderAndCache(ctx, "/4-me/4-loan-apply")
+    )
+  );
+  server.use(
+    router.get("/me/system-message", ctx =>
+      renderAndCache(ctx, "/4-me/5-system-message")
+    )
+  );
+  server.use(
+    router.get("/me/apply-message", ctx =>
+      renderAndCache(ctx, "/4-me/6-apply-message")
+    )
+  );
   server.use(router.get("/city", ctx => renderAndCache(ctx, "/city")));
 
   server.use(async ctx => {

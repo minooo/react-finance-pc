@@ -28,11 +28,7 @@ export default class extends Component {
   static async getInitialProps(ctx) {
     const { query: { id }, req } = ctx;
     try {
-      const { data } = await http.get(
-        `common_city_loans/detail/${id}`,
-        null,
-        !!req
-      );
+      const { data } = await http.get(`loans/detail/${id}`, null, !!req);
       return { data };
     } catch (error) {
       const err = util.inspect(error);
