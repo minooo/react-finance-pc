@@ -63,9 +63,7 @@ export default class extends Component {
     this.setState(() => ({
       visible: true,
       detailed: data
-    })).then(
-      (document.getElementsByTagName("body")[0].style.overflow = "hidden")
-    );
+    }));
   };
   closeModal = () => {
     this.setState(() => ({
