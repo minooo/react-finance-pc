@@ -1,11 +1,19 @@
 import { Button } from "antd";
 import { WrapLink } from "@components";
-import { clipBigNum, arrToDateString } from "@utils";
+import { clipBigNum } from "@utils";
 
 export default ({ item }) => (
   <WrapLink
-    href={`/1-loan/3-detail?id=${item.id}`}
-    as={`/loan/${item.id}`}
+    href={
+      item.category === 2
+        ? `/1-loan/3-detail/${item.id}`
+        : `/1-loan/6-speed-detail/${item.id}`
+    }
+    as={
+      item.category === 2
+        ? `/loan/${item.id}`
+        : `/loan/speed/${item.id}`
+    }
     style={{ height: "126px" }}
     className="flex ai-center plr20 border-bottom transition loan-list-hover bg-white"
   >
@@ -34,7 +42,7 @@ export default ({ item }) => (
     </div>
     <div className="h56 flex column jc-between ai-center plr20">
       <div className="font14 c333 lh100 text-overflow-one">
-        {item.timelimit && arrToDateString(item.timelimit)}
+        {item.timelimit}
       </div>
       <div className="font12 c999 lh100 text-overflow-one">贷款期限</div>
     </div>
