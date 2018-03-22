@@ -4,8 +4,14 @@ import { clipBigNum } from "@utils";
 
 export default ({ item, isrank, isRight }) => (
   <WrapLink
-    href={`/1-loan/3-detail?id=${item.id}`}
-    as={`/loan/${item.id}`}
+    href={
+      item.category === 2
+        ? `/1-loan/3-detail/${item.id}`
+        : `/1-loan/6-speed-detail/${item.id}`
+    }
+    as={
+      item.category === 2 ? `/loan/${item.id}` : `/loan/speed/${item.id}`
+    }
     className="block"
   >
     <div
