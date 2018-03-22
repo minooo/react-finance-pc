@@ -6,8 +6,8 @@ export default ({ item }) => (
   <WrapLink
     href={
       item.category === 2
-        ? `/1-loan/3-detail/${item.id}`
-        : `/1-loan/6-speed-detail/${item.id}`
+        ? `/1-loan/3-detail?id=${item.id}`
+        : `/1-loan/6-speed-detail?id=${item.id}`
     }
     as={
       item.category === 2

@@ -83,13 +83,13 @@ app.prepare().then(() => {
     )
   );
   server.use(
-    router.get("/loan/:id", (ctx, id) =>
-      renderAndCache(ctx, "/1-loan/3-detail", null, { id })
+    router.get("/loan/speed/:id", (ctx, id) =>
+      renderAndCache(ctx, "/1-loan/6-speed-detail", null, { id })
     )
   );
   server.use(
-    router.get("/loan/speed/:id", (ctx, id) =>
-      renderAndCache(ctx, "/1-loan/6-speed-detail", null, { id })
+    router.get("/loan/:id", (ctx, id) =>
+      renderAndCache(ctx, "/1-loan/3-detail", null, { id })
     )
   );
   server.use(router.get("/card", ctx => renderAndCache(ctx, "/2-card/1-home")));
