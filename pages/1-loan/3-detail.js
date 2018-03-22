@@ -57,7 +57,6 @@ export default class extends Component {
       this.myChart.setOption(this.setMyOption(initFee, initTatal));
     }
   }
-  // 贷款金额输入
   onMoneyChange = e => {
     const { value } = e.target;
     const reg = /^([1-9][0-9]*)?$/;
@@ -65,7 +64,6 @@ export default class extends Component {
       this.setState(() => ({ moneyVal: value }));
     }
   };
-  // 贷款金额范围
   onMoneyBlur = e => {
     const { data: { loan: { sum_start, sum_end } } } = this.props;
     const { value } = e.target;
@@ -79,7 +77,6 @@ export default class extends Component {
     }
     this.setState(() => ({ finalMoney: finalVal, moneyVal: finalVal }));
   };
-  // 贷款期限选择
   onSelectChange = selectValue => {
     const { data: { loan: { sum_start, interest_rate } } } = this.props;
     const { finalMoney } = this.state;
@@ -88,10 +85,8 @@ export default class extends Component {
     this.myChart.setOption(this.setMyOption(initFee, initTatal));
     this.setState(() => ({ selectValue }));
   };
-  // 申请贷款
   onApply = (type, url, id, name, start, end) => {
     const { url: { pathname, asPath }, data } = this.props;
-    // 判断cookie
     if (!getCookie("token")) {
       message.warn("当前操作需要登录", 2, () => {
         Router.push(

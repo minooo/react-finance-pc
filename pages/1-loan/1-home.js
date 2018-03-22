@@ -27,11 +27,7 @@ export default class extends Component {
     const { store, req, asPath } = ctx;
     if (!store.getState().loansHome) {
       try {
-        const { data } = await http.get(
-          "common_city_loans/index",
-          null,
-          !!req
-        );
+        const { data } = await http.get("common_city_loans/index", null, !!req);
         store.dispatch(getLoansHome(data));
       } catch (error) {
         const err = util.inspect(error);
