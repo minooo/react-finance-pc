@@ -48,9 +48,9 @@ export default class extends Component {
     loanTypes: [
       { name: "芝麻分贷款", description: "有芝麻信用分就能贷", id: 4 },
       { name: "信用卡贷款", description: "有信用卡就能贷", id: 2 },
-      { name: "实名制贷款", description: "手机+身份证就能贷", id: 1 },
       { name: "工薪上班贷", description: "需要征信社保公积金", id: 3 },
-      { name: "无工作贷款", description: "无工作也能贷", id: 5 }
+      { name: "无工作贷款", description: "无工作也能贷", id: 5 },
+      { name: "手机贷款", description: "手机实名认证就能贷", id: 1 },
     ]
   };
   onCardTypeClick = (id, index) => {
