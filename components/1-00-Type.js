@@ -16,7 +16,7 @@ export default ({ item, index }) => (
       className="h100 flex jc-center"
     >
       <img
-        src={`http://public.duduapp.net/finance/pc-static/img/top_speed_type_${index}.png?2`}
+        src={`http://public.duduapp.net/finance/pc-static/img/top_speed_type_${index}.png?3`}
         alt=""
         style={{ maxWidth: "220px", maxHeight: "100px" }}
       />
