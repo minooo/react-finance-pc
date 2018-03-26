@@ -150,7 +150,7 @@ export default class extends Component {
       );
     }
     if (type === 1) {
-      http.post("loans/top_speed_apply", { id });
+      http.get(`loans/top_speed_apply/${id}`);
       this.setState(() => ({ showQrcode: true }));
     }
     return null;

@@ -1,6 +1,6 @@
 import { Button, message } from "antd";
 import Router from "next/router";
-import { cache, getCookie } from "@utils";
+import { http, cache, getCookie } from "@utils";
 
 export default ({ item }) => {
   function onGo() {
@@ -40,7 +40,7 @@ export default ({ item }) => {
       });
       return;
     }
-
+    http.get(`card/apply/${item.id}`);
     window.open(item.pc_outside_link);
   }
   return (
