@@ -197,7 +197,9 @@ export default class extends Component {
                   });
               }, 10);
             } else {
-              message.error(response.msg || "抱歉，请求异常，请稍后再试！");
+              message.error(response.msg || "抱歉，请求异常，请稍后再试！", 3, () => {
+                this.setState(() => ({ isLoading: false }))
+              });
             }
           })
           .catch(err => {
