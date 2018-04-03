@@ -12,7 +12,7 @@
   border-bottom: 3px solid #fff;
 }
 .img-bg {
-  background-color: #f3f3f3;
+  background-color: none;
   background-image: url("../../images/logo_bg.png");
   background-position: center center;
   background-repeat: no-repeat;
@@ -89,10 +89,6 @@
   background: url("../../images/nodata-ico.png") no-repeat;
 }
 // home
-.home-bg-1 {
-  background-image: url("../../images/home_bg_1.png");
-  background-repeat: no-repeat;
-}
 .home-bg-2 {
   background-image: url("../../images/home_bg_2.jpg");
   background-size: cover;

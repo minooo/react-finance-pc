@@ -146,13 +146,12 @@ export default class extends Component {
           ))}
         </div>
         {/* 第一个背景图 */}
-        <div className="home-bg-1">
-          <div className="h80" />
+        <div className="h80" />
           {/* 在线极速贷款 */}
           {home &&
             home.top_speed_loans && (
               <HomeOnlineLoans onlineLoans={home.top_speed_loans} />
-            )}
+          )}
 
           <div className="h80" />
           {/* 同城贷款贷款 */}
@@ -163,9 +162,8 @@ export default class extends Component {
                 citySelection={home.common_city_loans_type}
                 rankingList={home.common_city_loans}
               />
-            )}
-          <div className="h40" />
-        </div>
+          )}
+        <div className="h40" />
         {/* 第二个背景图 */}
         <div className="home-bg-2">
           <div className="h40" />
