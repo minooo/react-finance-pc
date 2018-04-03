@@ -36,7 +36,7 @@ export default class extends Component {
                   className="lh100"
                   style={{ fontSize: "54px", marginBottom: "50px" }}
                 >
-                  嘟嘟e融 V1.0全新上线
+                  嘟嘟e贷 V1.0全新上线
                 </div>
                 <div key={uuid()} className="font36 lh100 flex">
                   <div className="pr30">一站式贷款超市</div>
@@ -451,7 +451,7 @@ export default class extends Component {
               className="font46 c-white lh100"
               style={{ marginTop: "45px" }}
             >
-              下载嘟嘟e融App
+              下载嘟嘟e贷App
             </TweenOne>
             <div key={uuid()} className="flex" style={{ marginTop: "110px" }}>
               <TweenOne

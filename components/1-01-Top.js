@@ -42,7 +42,7 @@ export default class extends Component {
               {city}[切换]
             </WrapLink>
             <span className="c999" style={{ marginRight: "35px" }}>
-              客服热线：18638515889
+              客服热线：0371-60971706&nbsp;/&nbsp;0371-60979140
             </span>
             <span className="c999">招商热线：13693719740</span>
           </div>

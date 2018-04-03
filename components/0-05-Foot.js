@@ -71,7 +71,7 @@ export default () => (
           <div className="flex ai-center">
             <div style={{ height: "132px" }} className=" w72 app-bg" />
             <div className="font14 ml20 c-white">
-              <div className="mb10">嘟嘟e融APP</div>
+              <div className="mb10">嘟嘟e贷APP</div>
               <WrapLink
                 className="c-white"
                 href="/downloadApp"
@@ -84,7 +84,7 @@ export default () => (
           <div className="flex ai-center">
             <div className="w110 h110 code-bg" />
             <div className="font14 ml20 c-white">
-              <div className="mb10">嘟嘟e融手机版</div>
+              <div className="mb10">嘟嘟e贷手机版</div>
               <div>立即扫码</div>
             </div>
           </div>

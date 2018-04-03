@@ -66,7 +66,7 @@ export default class extends Component {
                 style={{ borderLeft: "6px solid #4c8dfc" }}
                 className="font24 bold lh100 pl15 mb30"
               >
-                嘟嘟e融
+                嘟嘟e贷
               </div>
               <div
                 key={uuid()}
@@ -127,7 +127,7 @@ export default class extends Component {
                     style={{ lineHeight: "26px" }}
                     className=" font14 c-white"
                   >
-                    平台汇集中国地区内各银行及小额信用贷款机构、P2P平台等，选择各平台优质贷款产品并展示于嘟嘟e融网站中，用户进入网站后可以更方便的找到各公司的贷款产品并在线申请，解决用户和贷款机构之间的信息不对称性问题，嘟嘟e融提供一站式快捷，直观，灵活的贷款产品服务于客户。
+                    平台汇集中国地区内各银行及小额信用贷款机构、P2P平台等，选择各平台优质贷款产品并展示于嘟嘟e贷网站中，用户进入网站后可以更方便的找到各公司的贷款产品并在线申请，解决用户和贷款机构之间的信息不对称性问题，嘟嘟e贷提供一站式快捷，直观，灵活的贷款产品服务于客户。
                   </p>
                 </div>
               </TweenOne>
@@ -147,7 +147,7 @@ export default class extends Component {
                     style={{ marginBottom: "70px" }}
                     className="about-business-title"
                   >
-                    嘟嘟e融宗旨
+                    嘟嘟e贷宗旨
                   </div>
                   <div
                     key={uuid()}
@@ -172,7 +172,7 @@ export default class extends Component {
                     style={{ marginBottom: "67px" }}
                     className="about-business-title"
                   >
-                    嘟嘟e融目标
+                    嘟嘟e贷目标
                   </div>
                   <div
                     key={uuid()}
@@ -276,7 +276,7 @@ export default class extends Component {
               >
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>客服热线</div>
-                  <p key={uuid()}>18638515889</p>
+                  <p key={uuid()}>0371-60971706&nbsp;/&nbsp;0371-60979140</p>
                 </div>
                 <div key={uuid()} className="about-contact-list">
                   <div key={uuid()}>在线咨询</div>
