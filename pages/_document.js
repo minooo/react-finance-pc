@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
           <meta name="description" content="嘟嘟e贷，一站式专业贷款服务平台！" />
           <link rel="icon" href="http://public.duduapp.net/finance/pc-static/img/favicon.ico" type="image/x-icon" />
           <link rel="stylesheet" href={`${path}/static/styles/antd_min.css?4`} />
-          <link rel="stylesheet" href={`${path}/static/styles/app_min.css?4`} />
+          <link rel="stylesheet" href={`${path}/static/styles/app_min.css?5`} />
           <title>嘟嘟e贷</title>
         </Head>
         <body>
