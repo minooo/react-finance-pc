@@ -40,6 +40,10 @@
   color: #999;
 }
 
+.slick-slide a {
+  display: block!important;
+}
+
 .ant-carousel .slick-slide {
   height: 480px;
   background: #4c8dfc;
